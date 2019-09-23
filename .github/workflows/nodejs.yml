@@ -40,7 +40,7 @@ jobs:
         env:
           CI: true
 
-      - run: git pull --rebase --autostash
+      - run: git pull --rebase --autostash origin master
 
       - name: push
         uses: github-actions-x/commit@v2.0
