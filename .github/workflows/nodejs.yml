@@ -17,21 +17,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, test, start, graph
+
+      - name: npm install
+        run: npm install
+        env:
+          CI: true
+
+      - name: npm test
+        run: npm t
+
+      - name: generate benchmarks
         run: |
-          npm install
-          npm test
           npm -s start > results/benchmarks-${{ matrix.node-version }}.csv
           cp results/benchmarks-${{ matrix.node-version }}.csv benchmarks.csv
           npm -s run graph > results/bar-graph-${{ matrix.node-version }}.svg
           rm benchmarks.csv
         env:
           CI: true
+
       - run: git pull --rebase --autostash
+
       - name: push
         uses: github-actions-x/commit@v2.0
         with:
