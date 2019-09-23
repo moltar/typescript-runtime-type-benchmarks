@@ -35,4 +35,3 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         push-branch: master
         commit-message: 'feat: ${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
-        force-add: 'true'
