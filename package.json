@@ -5,6 +5,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "graph": "vl2vg vega-lite-bar-chart.json | vg2svg",
+    "poststart": "npm run graph",
     "test": "jest"
   },
   "keywords": [],
