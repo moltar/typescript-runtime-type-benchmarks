@@ -10,7 +10,7 @@ Array [
     "property": "long_string",
     "target": DataType {
       "boolean": true,
-      "deeplyNested": DeeplyNestedType {
+      "deeplyNested": Object {
         "bool": false,
         "foo": "bar",
         "num": 1,
@@ -36,7 +36,7 @@ Array [
     "property": "neg_number",
     "target": DataType {
       "boolean": true,
-      "deeplyNested": DeeplyNestedType {
+      "deeplyNested": Object {
         "bool": false,
         "foo": "bar",
         "num": 1,
