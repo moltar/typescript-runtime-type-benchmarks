@@ -23,6 +23,16 @@ jobs:
       run: |
         npm install
         npm test
-        npm start
+        npm -s start > results/benchmarks-${{ matrix.node-version }}.csv
+        cp results/benchmarks-${{ matrix.node-version }}.csv benchmarks.csv
+        npm -s run graph > results/bar-graph-${{ matrix.node-version }}.svg
+        rm benchmarks.csv
       env:
         CI: true
+    - name: push
+      uses: github-actions-x/commit@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: master
+        commit-message: 'feat: ${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
+        force-add: 'true'

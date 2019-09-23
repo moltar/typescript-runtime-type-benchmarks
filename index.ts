@@ -56,7 +56,7 @@ suite
       columns: ['name', 'hz']
     })
 
-    writeFileSync('./benchmarks.csv', csv, { encoding: 'utf8' })
+    process.stdout.write(csv)
   })
   .run({
     async: true
