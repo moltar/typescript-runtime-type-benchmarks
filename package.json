@@ -1,0 +1,36 @@
+{
+  "name": "typescript-runtime-type-benchmarks",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "graph": "vl2vg vega-lite-bar-chart.json | vg2svg",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "benchmark": "2.1.4",
+    "class-transformer": "0.2.3",
+    "class-transformer-validator": "0.7.1",
+    "class-validator": "0.10.0",
+    "csv-stringify": "5.3.3",
+    "fp-ts": "2.0.5",
+    "io-ts": "2.0.1",
+    "reflect-metadata": "0.1.13",
+    "runtypes": "4.0.1",
+    "ts-node": "8.4.1",
+    "typescript": "3.6.3",
+    "vega": "5.6.0",
+    "vega-cli": "5.6.0",
+    "vega-lite": "4.0.0-beta.2"
+  },
+  "devDependencies": {
+    "@types/benchmark": "1.0.31",
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.5",
+    "jest": "24.9.0",
+    "ts-jest": "24.1.0"
+  }
+}

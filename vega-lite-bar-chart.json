@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {
+    "url": "benchmarks.csv"
+  },
+  "mark": "bar",
+  "width": 640,
+  "height": 480,
+  "config": {},
+  "encoding": {
+    "y": {
+      "field": "hz",
+      "type": "quantitative",
+      "title": "hertz (operations / sec)",
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14,
+        "titleFontWeight": 0
+      }
+    },
+    "x": {
+      "field": "name",
+      "type": "nominal",
+      "title": "method / module",
+      "axis": {
+        "labelFontSize": 16,
+        "labelAngle": 30,
+        "titleFontSize": 14
+      }
+    }
+  }
+}
