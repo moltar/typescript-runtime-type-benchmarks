@@ -2,4 +2,4 @@
 
 > Write up coming soon...
 
-![][./bar-graph.svg]
+![Bar Graph](./bar-graph.svg)
