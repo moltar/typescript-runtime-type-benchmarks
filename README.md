@@ -2,4 +2,10 @@
 
 > Write up coming soon...
 
-![Bar Graph](./bar-graph.svg)
+## Node 10.x
+
+![Bar Graph - Node 10.x](./results/bar-graph-10.x.svg)
+
+## Node 12.x
+
+![Bar Graph - Node 12.x](./results/bar-graph-12.x.svg)
