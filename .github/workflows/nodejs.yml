@@ -31,7 +31,7 @@ jobs:
           rm benchmarks.csv
         env:
           CI: true
-      - run: git pull -r
+      - run: git pull --rebase --autostash
       - name: push
         uses: github-actions-x/commit@v2.0
         with:
