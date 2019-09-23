@@ -16,24 +16,24 @@ jobs:
           - 12.x
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, test, start, graph
-      run: |
-        npm install
-        npm test
-        npm -s start > results/benchmarks-${{ matrix.node-version }}.csv
-        cp results/benchmarks-${{ matrix.node-version }}.csv benchmarks.csv
-        npm -s run graph > results/bar-graph-${{ matrix.node-version }}.svg
-        rm benchmarks.csv
-      env:
-        CI: true
-    - name: push
-      uses: github-actions-x/commit@v2.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: master
-        commit-message: 'feat: ${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, test, start, graph
+        run: |
+          npm install
+          npm test
+          npm -s start > results/benchmarks-${{ matrix.node-version }}.csv
+          cp results/benchmarks-${{ matrix.node-version }}.csv benchmarks.csv
+          npm -s run graph > results/bar-graph-${{ matrix.node-version }}.svg
+          rm benchmarks.csv
+        env:
+          CI: true
+      - name: push
+        uses: github-actions-x/commit@v2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: master
+          commit-message: 'feat: ${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
