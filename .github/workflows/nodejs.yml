@@ -40,11 +40,10 @@ jobs:
         env:
           CI: true
 
-      - run: git pull --rebase --autostash origin master
-
       - name: push
-        uses: github-actions-x/commit@v2.0
+        uses: github-actions-x/commit@v2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: master
           commit-message: 'feat: ${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
+          rebase: 'true'
