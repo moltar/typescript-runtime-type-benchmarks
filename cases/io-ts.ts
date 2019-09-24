@@ -30,14 +30,14 @@ export const NegInt: NegIntC = t.brand(
   'NegInt'
 )
 
-const DataType = t.strict({
+const DataType = t.type({
   number: t.Int,
   neg_number: NegInt,
   max_number: t.number,
   string: t.string,
   long_string: LongString,
   boolean: t.boolean,
-  deeplyNested: t.strict({
+  deeplyNested: t.type({
     foo: t.string,
     num: t.number,
     bool: t.boolean
