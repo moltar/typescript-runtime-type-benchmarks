@@ -2,6 +2,10 @@
 
 > Write up coming soon...
 
+Note that, "JSON Encode Decode" method is not truly a runtime type checker,
+but it is included simply for a sort-of benchmark against other JS operations. It encodes and decodes
+the same data object and returns it, without any validation.
+
 ## Node 10.x
 
 ![Bar Graph - Node 10.x](./results/bar-graph-10.x.svg)
