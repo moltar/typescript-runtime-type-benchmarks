@@ -2,6 +2,7 @@
   "name": "typescript-runtime-type-benchmarks",
   "version": "1.0.0",
   "description": "Benchmark Comparison of TypeScript Runtime Type Support Modules",
+  "private": true,
   "scripts": {
     "start": "ts-node index.ts",
     "graph": "vl2vg vega-lite-bar-chart.json | vg2svg | svgo --pretty --quiet -i -",
