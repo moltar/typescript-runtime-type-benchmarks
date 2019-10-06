@@ -1,63 +1,42 @@
-import Benchmark from 'benchmark'
+import { writeFileSync } from 'fs'
+import { join } from 'path'
+import { suite, add, cycle, complete, save } from 'benny'
 import stringify from 'csv-stringify/lib/sync'
+import pkg from './package.json'
 import { DATA } from './data'
 import { caseJsonEncodeDecode, caseRuntypes, caseIoTs, caseClassValidatorSync, caseClassValidatorAsync } from './cases'
-import { writeFileSync } from 'fs'
 
-const suite = new Benchmark.Suite
+const RESULTS_DIR = join(__dirname, 'results')
+const NODE_VERSION = process.env.NODE_VERSION || process.version
 
-suite
-  .add('JSON Encode Decode', {
-    fn: function () {
-      return caseJsonEncodeDecode(DATA)
-    }
-  })
-  .add('runtypes', {
-    fn: function () {
-      return caseRuntypes(DATA)
-    }
-  })
-  .add('io-ts', {
-    fn: function () {
-      return caseIoTs(DATA)
-    }
-  })
-  .add('class-validator sync', {
-    fn: function () {
-      return caseClassValidatorSync(DATA)
-    }
-  })
-  .add('class-validator async', {
-    defer: true,
-    fn: function (deferred: any) {
-      return caseClassValidatorAsync(DATA)
-        .then((res) => {
-          deferred.resolve();
-          return res
-        })
-        .catch((err) => console.error(err))
-    }
-  })
-  .on('complete', function () {
-    const csvArr = suite.map((bench: Benchmark) => {
-      // No type info for name.
-      // @ts-ignore
-      const name: string = bench.name
-      const { hz } = bench
+suite(
+  pkg.name,
 
-      return {
-        name,
-        hz
-      }
+  add('JSON Encode Decode', () => caseJsonEncodeDecode(DATA)),
+  add('runtypes', () => caseRuntypes(DATA)),
+  add('io-ts', () => caseIoTs(DATA)),
+  add('class-validator sync', () => caseClassValidatorSync(DATA)),
+  add('class-validator async', () => caseClassValidatorAsync(DATA)),
+
+  cycle(),
+  complete(),
+
+  complete((res) => {
+    const csvArr = res.results.map(({ name, ops }) => {
+      return { name, ops }
     })
 
     const csv = stringify(csvArr, {
       header: true,
-      columns: ['name', 'hz']
+      columns: ['name', 'ops']
     })
 
-    process.stdout.write(csv)
+    return writeFileSync(join(RESULTS_DIR, `benchmarks-${NODE_VERSION}.csv`), csv, { encoding: 'utf8' })
+  }),
+
+  save({
+    file: `benchmarks-${NODE_VERSION}`,
+    folder: RESULTS_DIR,
+    version: pkg.version,
   })
-  .run({
-    async: true
-  })
+)

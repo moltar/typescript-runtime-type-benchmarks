@@ -39,6 +39,7 @@ jobs:
           rm benchmarks.csv
         env:
           CI: true
+          NODE_VERSION: ${{ matrix.node-version }}
 
       - name: push
         uses: github-actions-x/commit@v2.1
