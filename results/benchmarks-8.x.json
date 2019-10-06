@@ -1,37 +1,37 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2019-10-06T20:25:41.948Z",
+  "date": "2019-10-06T20:44:27.446Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "JSON Encode Decode",
-      "ops": 77639,
-      "margin": 0.68,
-      "percentSlower": 94.14
+      "ops": 83255,
+      "margin": 0.96,
+      "percentSlower": 93.99
     },
     {
       "name": "runtypes",
-      "ops": 1323844,
-      "margin": 3.38,
+      "ops": 1384529,
+      "margin": 4.47,
       "percentSlower": 0
     },
     {
       "name": "io-ts",
-      "ops": 743916,
-      "margin": 0.96,
-      "percentSlower": 43.81
+      "ops": 834462,
+      "margin": 1.42,
+      "percentSlower": 39.73
     },
     {
       "name": "class-validator sync",
-      "ops": 37714,
-      "margin": 1.48,
-      "percentSlower": 97.15
+      "ops": 43616,
+      "margin": 2.43,
+      "percentSlower": 96.85
     },
     {
       "name": "class-validator async",
-      "ops": 20110,
-      "margin": 2.49,
-      "percentSlower": 98.48
+      "ops": 23706,
+      "margin": 2.65,
+      "percentSlower": 98.29
     }
   ],
   "fastest": {
