@@ -1,6 +1,5 @@
 import 'reflect-metadata'
 import { IsNegative, MinLength, ValidateNested } from 'class-validator'
-import { Type } from 'class-transformer'
 import { transformAndValidate, transformAndValidateSync } from 'class-transformer-validator'
 import { Data } from '../data'
 
