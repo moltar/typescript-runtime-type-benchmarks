@@ -34,11 +34,7 @@ jobs:
         run: npm t
 
       - name: generate benchmarks
-        run: |
-          npm start
-          cp results/benchmarks-${{ matrix.node-version }}.csv benchmarks.csv
-          npm -s run graph > results/bar-graph-${{ matrix.node-version }}.svg
-          rm benchmarks.csv
+        run: ./start.sh
         env:
           CI: true
           NODE_VERSION: ${{ matrix.node-version }}

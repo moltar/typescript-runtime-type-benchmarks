@@ -32,6 +32,6 @@ jobs:
         run: npm t
 
       - name: generate benchmarks
-        run: npm start
+        run: ./start.sh
         env:
           CI: true
