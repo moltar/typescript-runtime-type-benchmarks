@@ -1,103 +1,37 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  "date": "2019-10-15T16:14:25.761Z",
-=======
-  "date": "2019-10-15T16:14:43.286Z",
->>>>>>> Stashed changes
-=======
-  "date": "2019-10-15T16:14:50.131Z",
->>>>>>> Stashed changes
+  "date": "2019-10-16T13:52:47.584Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "JSON Encode Decode",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "ops": 100982,
-      "margin": 1.65,
-      "percentSlower": 93.01
+      "ops": 112596,
+      "margin": 1.26,
+      "percentSlower": 93.1
     },
     {
       "name": "runtypes",
-      "ops": 1443838,
+      "ops": 1630843,
       "margin": 1.18,
-=======
-      "ops": 100864,
-      "margin": 1.37,
-      "percentSlower": 93.07
-    },
-    {
-      "name": "runtypes",
-      "ops": 1456261,
-      "margin": 1.19,
->>>>>>> Stashed changes
-=======
-      "ops": 95258,
-      "margin": 1.02,
-      "percentSlower": 93.17
-    },
-    {
-      "name": "runtypes",
-      "ops": 1394713,
-      "margin": 0.82,
->>>>>>> Stashed changes
       "percentSlower": 0
     },
     {
       "name": "io-ts",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "ops": 652423,
-      "margin": 4.76,
-      "percentSlower": 54.81
+      "ops": 746048,
+      "margin": 4.2,
+      "percentSlower": 54.25
     },
     {
       "name": "class-validator sync",
-      "ops": 57728,
-      "margin": 8.28,
-      "percentSlower": 96
+      "ops": 65422,
+      "margin": 3.75,
+      "percentSlower": 95.99
     },
     {
       "name": "class-validator async",
-      "ops": 32106,
-      "margin": 7.24,
-      "percentSlower": 97.78
-=======
-      "ops": 670658,
-      "margin": 4.14,
-      "percentSlower": 53.95
-    },
-    {
-      "name": "class-validator sync",
-      "ops": 58518,
-      "margin": 7.23,
-      "percentSlower": 95.98
-    },
-    {
-      "name": "class-validator async",
-      "ops": 47397,
-      "margin": 2.4,
-      "percentSlower": 96.75
->>>>>>> Stashed changes
-=======
-      "ops": 589530,
-      "margin": 3.89,
-      "percentSlower": 57.73
-    },
-    {
-      "name": "class-validator sync",
-      "ops": 52535,
-      "margin": 3.9,
-      "percentSlower": 96.23
-    },
-    {
-      "name": "class-validator async",
-      "ops": 37480,
-      "margin": 10.15,
-      "percentSlower": 97.31
->>>>>>> Stashed changes
+      "ops": 36471,
+      "margin": 6.42,
+      "percentSlower": 97.76
     }
   ],
   "fastest": {
