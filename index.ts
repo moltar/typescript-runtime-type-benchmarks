@@ -4,7 +4,14 @@ import { suite, add, cycle, complete, save } from 'benny'
 import stringify from 'csv-stringify/lib/sync'
 import pkg from './package.json'
 import { DATA } from './data'
-import { caseJsonEncodeDecode, caseRuntypes, caseIoTs, caseClassValidatorSync, caseClassValidatorAsync } from './cases'
+import {
+  caseJsonEncodeDecode,
+  caseRuntypes,
+  caseIoTs,
+  caseClassValidatorSync,
+  caseClassValidatorAsync,
+  caseTsJsonValidator
+} from './cases'
 
 const RESULTS_DIR = join(__dirname, 'results')
 const NODE_VERSION = process.env.NODE_VERSION || process.version
@@ -17,6 +24,7 @@ suite(
   add('io-ts', () => caseIoTs(DATA)),
   add('class-validator sync', () => caseClassValidatorSync(DATA)),
   add('class-validator async', () => caseClassValidatorAsync(DATA)),
+  add('ts-json-validator', () => caseTsJsonValidator(DATA)),
 
   cycle(),
   complete(),
