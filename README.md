@@ -7,6 +7,7 @@ Compares run time type validation of the following packages:
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [io-ts](https://github.com/gcanti/io-ts)
 * [runtypes](https://github.com/pelotom/runtypes)
+* [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 
 Note that, "JSON Encode Decode" method is not truly a runtime type checker,
 but it is included simply for a sort-of benchmark against other JS operations. It encodes and decodes
