@@ -24,6 +24,5 @@ const parser = new TsjsonParser(
 )
 
 export function caseTsJsonValidator(data: Data) {
-  parser.validate(data)
-  return data
+  return parser.validate(data)
 }
