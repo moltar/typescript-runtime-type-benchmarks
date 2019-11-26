@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ts-json-validator should fail min length test 1`] = `"[{\\"keyword\\":\\"minLength\\",\\"dataPath\\":\\".long_string\\",\\"schemaPath\\":\\"#/properties/long_string/minLength\\",\\"params\\":{\\"limit\\":100},\\"message\\":\\"should NOT be shorter than 100 characters\\"}]"`;
+exports[`ts-json-validator should fail min length test 1`] = `"Invalid"`;
 
-exports[`ts-json-validator should fail negative number test 1`] = `"[{\\"keyword\\":\\"maximum\\",\\"dataPath\\":\\".neg_number\\",\\"schemaPath\\":\\"#/properties/neg_number/maximum\\",\\"params\\":{\\"comparison\\":\\"<=\\",\\"limit\\":0,\\"exclusive\\":false},\\"message\\":\\"should be <= 0\\"}]"`;
+exports[`ts-json-validator should fail negative number test 1`] = `"Invalid"`;
