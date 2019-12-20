@@ -1,10 +1,15 @@
 {
   "name": "typescript-runtime-type-benchmarks",
+<<<<<<< Updated upstream
   "date": "2019-12-20T11:07:50.075Z",
+=======
+  "date": "2019-12-20T11:08:42.172Z",
+>>>>>>> Stashed changes
   "version": "1.0.0",
   "results": [
     {
       "name": "JSON Encode Decode",
+<<<<<<< Updated upstream
       "ops": 98683,
       "margin": 4.51,
       "percentSlower": 93.1
@@ -13,10 +18,21 @@
       "name": "runtypes",
       "ops": 1430481,
       "margin": 1.86,
+=======
+      "ops": 97860,
+      "margin": 3.03,
+      "percentSlower": 93.79
+    },
+    {
+      "name": "runtypes",
+      "ops": 1576983,
+      "margin": 2.11,
+>>>>>>> Stashed changes
       "percentSlower": 0
     },
     {
       "name": "io-ts",
+<<<<<<< Updated upstream
       "ops": 712620,
       "margin": 1.05,
       "percentSlower": 50.18
@@ -38,6 +54,29 @@
       "ops": 304902,
       "margin": 1.39,
       "percentSlower": 78.69
+=======
+      "ops": 663283,
+      "margin": 1.51,
+      "percentSlower": 57.94
+    },
+    {
+      "name": "class-validator sync",
+      "ops": 55935,
+      "margin": 6.65,
+      "percentSlower": 96.45
+    },
+    {
+      "name": "class-validator async",
+      "ops": 43237,
+      "margin": 4.35,
+      "percentSlower": 97.26
+    },
+    {
+      "name": "ts-json-validator",
+      "ops": 337630,
+      "margin": 1,
+      "percentSlower": 78.59
+>>>>>>> Stashed changes
     }
   ],
   "fastest": {
