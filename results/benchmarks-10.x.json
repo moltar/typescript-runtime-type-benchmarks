@@ -1,43 +1,49 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-01-29T08:17:43.460Z",
+  "date": "2020-02-02T10:50:36.431Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "JSON Encode Decode",
-      "ops": 80705,
-      "margin": 1.5,
-      "percentSlower": 94.22
+      "ops": 78183,
+      "margin": 9.41,
+      "percentSlower": 94.9
     },
     {
       "name": "runtypes",
-      "ops": 1395755,
-      "margin": 4.57,
+      "ops": 1532070,
+      "margin": 0.82,
       "percentSlower": 0
     },
     {
       "name": "io-ts",
-      "ops": 698745,
-      "margin": 3.01,
-      "percentSlower": 49.94
+      "ops": 764844,
+      "margin": 0.81,
+      "percentSlower": 50.08
     },
     {
       "name": "class-validator sync",
-      "ops": 63620,
-      "margin": 1.6,
-      "percentSlower": 95.44
+      "ops": 67250,
+      "margin": 0.36,
+      "percentSlower": 95.61
     },
     {
       "name": "class-validator async",
-      "ops": 53601,
-      "margin": 3.79,
-      "percentSlower": 96.16
+      "ops": 58656,
+      "margin": 1.21,
+      "percentSlower": 96.17
     },
     {
       "name": "ts-json-validator",
-      "ops": 219155,
-      "margin": 1.74,
-      "percentSlower": 84.3
+      "ops": 260874,
+      "margin": 0.5,
+      "percentSlower": 82.97
+    },
+    {
+      "name": "toi",
+      "ops": 524001,
+      "margin": 0.57,
+      "percentSlower": 65.8
     }
   ],
   "fastest": {
