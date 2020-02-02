@@ -10,7 +10,8 @@ import {
   caseIoTs,
   caseClassValidatorSync,
   caseClassValidatorAsync,
-  caseTsJsonValidator
+  caseTsJsonValidator,
+  caseToi
 } from './cases'
 
 const RESULTS_DIR = join(__dirname, 'results')
@@ -25,6 +26,7 @@ suite(
   add('class-validator sync', () => caseClassValidatorSync(DATA)),
   add('class-validator async', () => caseClassValidatorAsync(DATA)),
   add('ts-json-validator', () => caseTsJsonValidator(DATA)),
+  add('toi', () => caseToi(DATA)),
 
   cycle(),
   complete(),
