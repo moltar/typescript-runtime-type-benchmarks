@@ -1,63 +1,57 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-02-03T07:55:07.569Z",
+  "date": "2020-02-03T09:16:13.193Z",
   "version": "1.0.0",
   "results": [
     {
-      "name": "JSON Encode Decode",
-      "ops": 106460,
-      "margin": 1.44,
-      "percentSlower": 93.46
+      "name": "class-transformer-validator-async",
+      "ops": 37318,
+      "margin": 20.34,
+      "percentSlower": 97.77
     },
     {
-      "name": "runtypes",
-      "ops": 1627822,
-      "margin": 1.14,
-      "percentSlower": 0
+      "name": "class-transformer-validator-sync",
+      "ops": 64029,
+      "margin": 2.29,
+      "percentSlower": 96.17
     },
     {
       "name": "io-ts",
-      "ops": 730072,
-      "margin": 1.35,
-      "percentSlower": 55.15
+      "ops": 728697,
+      "margin": 1.63,
+      "percentSlower": 56.45
     },
     {
-      "name": "class-validator sync",
-      "ops": 64322,
-      "margin": 6.14,
-      "percentSlower": 96.05
+      "name": "marshal",
+      "ops": 277082,
+      "margin": 1.2,
+      "percentSlower": 83.44
     },
     {
-      "name": "class-validator async",
-      "ops": 48112,
-      "margin": 1.14,
-      "percentSlower": 97.04
-    },
-    {
-      "name": "ts-json-validator",
-      "ops": 326295,
-      "margin": 0.99,
-      "percentSlower": 79.96
+      "name": "runtypes",
+      "ops": 1673073,
+      "margin": 1.68,
+      "percentSlower": 0
     },
     {
       "name": "toi",
-      "ops": 492643,
-      "margin": 0.94,
-      "percentSlower": 69.74
+      "ops": 392897,
+      "margin": 1.4,
+      "percentSlower": 76.52
     },
     {
-      "name": "mashal",
-      "ops": 278609,
-      "margin": 1.21,
-      "percentSlower": 82.88
+      "name": "ts-json-validator",
+      "ops": 330182,
+      "margin": 1.02,
+      "percentSlower": 80.26
     }
   ],
   "fastest": {
     "name": "runtypes",
-    "index": 1
+    "index": 4
   },
   "slowest": {
-    "name": "class-validator async",
-    "index": 4
+    "name": "class-transformer-validator-async",
+    "index": 0
   }
 }
