@@ -1,39 +1,50 @@
 {
   "name": "typescript-runtime-type-benchmarks",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   "date": "2020-02-03T09:27:33.977Z",
 =======
   "date": "2020-02-03T09:32:38.864Z",
+>>>>>>> Stashed changes
+=======
+  "date": "2020-02-03T09:36:55.500Z",
 >>>>>>> Stashed changes
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "ops": 58119,
       "margin": 4.33,
       "percentSlower": 96.36
+=======
+      "ops": 42080,
+      "margin": 13.08,
+      "percentSlower": 97.26
+>>>>>>> Stashed changes
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 67456,
-      "margin": 1.31,
-      "percentSlower": 95.78
+      "ops": 62274,
+      "margin": 3.26,
+      "percentSlower": 95.94
     },
     {
       "name": "io-ts",
-      "ops": 732011,
-      "margin": 0.32,
-      "percentSlower": 54.16
+      "ops": 701194,
+      "margin": 1.28,
+      "percentSlower": 54.32
     },
     {
       "name": "marshal",
-      "ops": 277400,
-      "margin": 0.59,
-      "percentSlower": 82.63
+      "ops": 275297,
+      "margin": 0.94,
+      "percentSlower": 82.07
     },
     {
       "name": "runtypes",
+<<<<<<< Updated upstream
       "ops": 1596966,
       "margin": 0.38,
 =======
@@ -64,10 +75,15 @@
       "ops": 1530850,
       "margin": 0.23,
 >>>>>>> Stashed changes
+=======
+      "ops": 1534989,
+      "margin": 1.66,
+>>>>>>> Stashed changes
       "percentSlower": 0
     },
     {
       "name": "toi",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
       "ops": 401402,
       "margin": 0.52,
@@ -88,6 +104,17 @@
       "ops": 292934,
       "margin": 0.36,
       "percentSlower": 80.86
+>>>>>>> Stashed changes
+=======
+      "ops": 384338,
+      "margin": 1.59,
+      "percentSlower": 74.96
+    },
+    {
+      "name": "ts-json-validator",
+      "ops": 322254,
+      "margin": 0.76,
+      "percentSlower": 79.01
 >>>>>>> Stashed changes
     }
   ],
