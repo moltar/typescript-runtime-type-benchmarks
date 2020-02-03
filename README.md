@@ -6,7 +6,7 @@ Compares run time type validation of the following packages:
 
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [io-ts](https://github.com/gcanti/io-ts)
-* [masrshal](https://github.com/marcj/marshal.ts)
+* [marshal](https://github.com/marcj/marshal.ts)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
