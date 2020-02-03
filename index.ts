@@ -5,13 +5,14 @@ import stringify from 'csv-stringify/lib/sync'
 import pkg from './package.json'
 import { DATA } from './data'
 import {
-  caseJsonEncodeDecode,
-  caseRuntypes,
-  caseIoTs,
-  caseClassValidatorSync,
   caseClassValidatorAsync,
+  caseClassValidatorSync,
+  caseIoTs,
+  caseJsonEncodeDecode,
+  caseMashal,
+  caseRuntypes,
+  caseToi,
   caseTsJsonValidator,
-  caseToi
 } from './cases'
 
 const RESULTS_DIR = join(__dirname, 'results')
@@ -27,6 +28,7 @@ suite(
   add('class-validator async', () => caseClassValidatorAsync(DATA)),
   add('ts-json-validator', () => caseTsJsonValidator(DATA)),
   add('toi', () => caseToi(DATA)),
+  add('mashal', () => caseMashal(DATA)),
 
   cycle(),
   complete(),
