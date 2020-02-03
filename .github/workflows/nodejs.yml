@@ -30,6 +30,9 @@ jobs:
         env:
           CI: true
 
+      - name: lint
+        run: npm run lint
+
       - name: npm test
         run: npm t
 

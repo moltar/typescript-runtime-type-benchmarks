@@ -1,5 +1,5 @@
 import * as toi from '@toi/toi'
-import { Case, ICase } from './abstract'
+import { Case } from './abstract'
 
 const obj = () => toi.required().and(toi.obj.isplain())
 const req = () => toi.required()
@@ -22,7 +22,7 @@ const isValid = obj().and(
   })
 )
 
-export class ToiCase extends Case implements ICase {
+export class ToiCase extends Case implements Case {
   name = 'toi'
 
   validate() {

@@ -1,6 +1,6 @@
 import * as t from 'io-ts'
 import { isRight } from 'fp-ts/lib/Either'
-import { Case, ICase } from './abstract'
+import { Case } from './abstract'
 
 interface NonEmptyStringBrand {
   readonly NonEmptyString: unique symbol
@@ -44,7 +44,7 @@ const DataType = t.type({
   })
 })
 
-export class IoTsCase extends Case implements ICase {
+export class IoTsCase extends Case implements Case {
   name = 'io-ts'
 
   validate() {

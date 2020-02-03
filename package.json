@@ -6,6 +6,8 @@
   "scripts": {
     "start": "ts-node index.ts",
     "graph": "vl2vg vega-lite-bar-chart.json | vg2svg | svgo --pretty --quiet -i -",
+    "lint": "gts check",
+    "lint:fix": "gts fix",
     "test": "jest"
   },
   "keywords": [],
@@ -36,6 +38,7 @@
     "@types/clone": "0.1.30",
     "@types/jest": "24.0.23",
     "@types/node": "12.12.21",
+    "gts": "1.1.2",
     "jest": "24.9.0",
     "ts-jest": "24.2.0"
   }
