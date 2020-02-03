@@ -1,30 +1,30 @@
 import * as t from 'io-ts'
 import { isRight } from 'fp-ts/lib/Either'
-import { Data } from '../data'
+import { Case, ICase } from './abstract'
 
-export interface NonEmptyStringBrand {
+interface NonEmptyStringBrand {
   readonly NonEmptyString: unique symbol
 }
 
-export type NonEmptyString = t.Branded<string, NonEmptyStringBrand>
+type NonEmptyString = t.Branded<string, NonEmptyStringBrand>
 
-export interface NonEmptyStringC extends t.Type<NonEmptyString, string, unknown> { }
+interface NonEmptyStringC extends t.Type<NonEmptyString, string, unknown> { }
 
-export const LongString: NonEmptyStringC = t.brand(
+const LongString: NonEmptyStringC = t.brand(
   t.string,
   (s): s is NonEmptyString => s.length > 100,
   'NonEmptyString'
 )
 
-export interface NegIntBrand {
+interface NegIntBrand {
   readonly NegInt: unique symbol
 }
 
-export type NegInt = t.Branded<number, NegIntBrand>
+type NegInt = t.Branded<number, NegIntBrand>
 
-export interface NegIntC extends t.Type<NegInt, number, unknown> { }
+interface NegIntC extends t.Type<NegInt, number, unknown> { }
 
-export const NegInt: NegIntC = t.brand(
+const NegInt: NegIntC = t.brand(
   t.number,
   (n): n is NegInt => n < 0,
   'NegInt'
@@ -44,10 +44,14 @@ const DataType = t.type({
   })
 })
 
-export function caseIoTs(data: Data) {
-  if (isRight(DataType.decode(data))) {
-    return data
-  }
+export class IoTsCase extends Case implements ICase {
+  name = 'io-ts'
 
-  throw new Error('Invalid')
+  validate() {
+    if (isRight(DataType.decode(this.data))) {
+      return this.data
+    }
+
+    throw new Error('Invalid')
+  }
 }

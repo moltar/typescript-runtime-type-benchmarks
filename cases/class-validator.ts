@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import { IsNegative, MinLength, ValidateNested } from 'class-validator'
 import { transformAndValidate, transformAndValidateSync } from 'class-transformer-validator'
+import { Case, ICase } from './abstract'
 import { Data } from '../data'
 
 type DeeplyNested = Data['deeplyNested']
@@ -29,10 +30,18 @@ class DataType implements Data {
   deeplyNested!: DeeplyNestedType
 }
 
-export function caseClassValidatorSync(data: Data) {
-  return transformAndValidateSync(DataType, data)
+export class ClassValidatorSyncCase extends Case implements ICase {
+  name = 'class-transformer-validator-sync'
+
+  validate() {
+    return transformAndValidateSync(DataType, this.data)
+  }
 }
 
-export function caseClassValidatorAsync(data: Data) {
-  return transformAndValidate(DataType, data)
+export class ClassValidatorAsyncCase extends Case implements ICase {
+  name = 'class-transformer-validator-async'
+
+  validate() {
+    return transformAndValidate(DataType, this.data)
+  }
 }

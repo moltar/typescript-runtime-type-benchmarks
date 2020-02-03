@@ -1,5 +1,5 @@
-import { Boolean, Number, String, Record } from 'runtypes';
-import { Data } from '../data'
+import { Boolean, Number, String, Record } from 'runtypes'
+import { Case, ICase } from './abstract'
 
 const DataType = Record({
   number: Number,
@@ -15,6 +15,10 @@ const DataType = Record({
   })
 })
 
-export function caseRuntypes(data: Data) {
-  return DataType.check(data)
+export class RuntypesCase extends Case implements ICase {
+  name = 'runtypes'
+
+  validate() {
+    return DataType.check(this.data)
+  }
 }

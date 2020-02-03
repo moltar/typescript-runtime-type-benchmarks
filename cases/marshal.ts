@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import { f, validatedPlainToClass, PropertyValidator, PropertyValidatorError } from '@marcj/marshal'
 import { Data } from '../data'
+import { Case, ICase } from './abstract'
 
 class IsNegative implements PropertyValidator {
   validate<T>(value: number) {
@@ -56,6 +57,10 @@ class DataType implements Data {
   deeplyNested!: DeeplyNestedType
 }
 
-export function caseMashal(data: Data) {
-  return validatedPlainToClass(DataType, data)
+export class MarshalCase extends Case implements ICase {
+  name = 'marshal'
+
+  validate() {
+    return validatedPlainToClass(DataType, this.data)
+  }
 }

@@ -1,28 +1,31 @@
 import * as toi from '@toi/toi'
-import { Data } from '../data'
+import { Case, ICase } from './abstract'
 
-const isValid = toi
-  .required()
-  .and(toi.obj.isplain())
-  .and(
-    toi.obj.keys({
-      number: toi.num.is(),
-      neg_number: toi.num.max(0),
-      max_number: toi.num.max(Number.MAX_VALUE),
-      string: toi.str.is(),
-      long_string: toi.str.is().and(toi.str.min(100)),
-      boolean: toi.bool.is(),
-      deeplyNested: toi
-        .required()
-        .and(toi.obj.isplain())
-        .and(toi.obj.keys({
-          foo: toi.str.is(),
-          num: toi.num.is(),
-          bool: toi.bool.is()
-        }))
-    })
-  )
+const obj = () => toi.required().and(toi.obj.isplain())
+const req = () => toi.required()
+const num = () => toi.num.is()
+const str = () => toi.str.is()
 
-export function caseToi(data: Data) {
-  return isValid(data)
+const isValid = obj().and(
+  toi.obj.keys({
+    number: req().and(num()),
+    neg_number: req().and(num().and(toi.num.max(0))),
+    max_number: req().and(num().and(toi.num.max(Number.MAX_VALUE))),
+    string: req().and(str()),
+    long_string: req().and(str().and(toi.str.min(100))),
+    boolean: req().and(toi.bool.is()),
+    deeplyNested: obj().and(toi.obj.keys({
+      foo: req().and(str()),
+      num: req().and(num()),
+      bool: req().and(toi.bool.is())
+    }))
+  })
+)
+
+export class ToiCase extends Case implements ICase {
+  name = 'toi'
+
+  validate() {
+    return isValid(this.data)
+  }
 }

@@ -1,7 +1,16 @@
-export * from './class-validator'
-export * from './io-ts'
-export * from './json-encode-decode'
-export * from './marshal'
-export * from './runtypes'
-export * from './toi'
-export * from './ts-json-validator'
+import { ClassValidatorAsyncCase, ClassValidatorSyncCase } from './class-validator'
+import { IoTsCase } from './io-ts'
+import { MarshalCase } from './marshal'
+import { RuntypesCase } from './runtypes'
+import { ToiCase } from './toi'
+import { TsJsonValidatorCase } from './ts-json-validator'
+
+export default [
+  ClassValidatorAsyncCase,
+  ClassValidatorSyncCase,
+  IoTsCase,
+  MarshalCase,
+  RuntypesCase,
+  ToiCase,
+  TsJsonValidatorCase
+]

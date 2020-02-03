@@ -4,16 +4,9 @@ import { suite, add, cycle, complete, save } from 'benny'
 import stringify from 'csv-stringify/lib/sync'
 import pkg from './package.json'
 import { DATA } from './data'
-import {
-  caseClassValidatorAsync,
-  caseClassValidatorSync,
-  caseIoTs,
-  caseJsonEncodeDecode,
-  caseMashal,
-  caseRuntypes,
-  caseToi,
-  caseTsJsonValidator,
-} from './cases'
+import CaseClasses from './cases'
+
+const caseInstances = CaseClasses.map(CaseClass => new CaseClass(DATA))
 
 const RESULTS_DIR = join(__dirname, 'results')
 const NODE_VERSION = process.env.NODE_VERSION || process.version
@@ -21,14 +14,7 @@ const NODE_VERSION = process.env.NODE_VERSION || process.version
 suite(
   pkg.name,
 
-  add('JSON Encode Decode', () => caseJsonEncodeDecode(DATA)),
-  add('runtypes', () => caseRuntypes(DATA)),
-  add('io-ts', () => caseIoTs(DATA)),
-  add('class-validator sync', () => caseClassValidatorSync(DATA)),
-  add('class-validator async', () => caseClassValidatorAsync(DATA)),
-  add('ts-json-validator', () => caseTsJsonValidator(DATA)),
-  add('toi', () => caseToi(DATA)),
-  add('mashal', () => caseMashal(DATA)),
+  ...caseInstances.map(caseInstance => add(caseInstance.name, () => caseInstance.validate())),
 
   cycle(),
   complete(),

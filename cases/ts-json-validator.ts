@@ -1,5 +1,5 @@
 import { createSchema as S, TsjsonParser } from 'ts-json-validator'
-import { Data } from '../data'
+import { Case, ICase } from './abstract'
 
 const parser = new TsjsonParser(
   S({
@@ -23,9 +23,14 @@ const parser = new TsjsonParser(
   })
 )
 
-export function caseTsJsonValidator(data: Data) {
-  if (parser.validates(data)) {
-    return data
+export class TsJsonValidatorCase extends Case implements ICase {
+  name = 'ts-json-validator'
+
+  validate() {
+    if (parser.validates(this.data)) {
+      return this.data
+    }
+
+    throw new Error('Invalid')
   }
-  throw new Error('Invalid')
 }
