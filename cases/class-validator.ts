@@ -16,13 +16,13 @@ class DataType implements Data {
   number!: number
 
   @IsNegative()
-  neg_number!: number
+  negNumber!: number
 
-  max_number!: number
+  maxNumber!: number
   string!: string
 
   @MinLength(100)
-  long_string!: string
+  longString!: string
 
   boolean!:boolean
 

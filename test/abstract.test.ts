@@ -27,7 +27,7 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, CaseClass) => {
   it('should fail validation when number is not negative', async () => {
     expect.assertions(2)
 
-    data.neg_number = 1
+    data.negNumber = 1
     const c = new CaseClass(data)
 
     let err
@@ -45,7 +45,7 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, CaseClass) => {
   it('should fail validation when string is too short', async () => {
     expect.assertions(2)
 
-    data.long_string = ''
+    data.longString = ''
     const c = new CaseClass(data)
 
     let err

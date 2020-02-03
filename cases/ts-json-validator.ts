@@ -6,10 +6,10 @@ const parser = new TsjsonParser(
     type: 'object',
     properties: {
       number: S({ type: 'number' }),
-      neg_number: S({ type: 'number', maximum: 0 }),
-      max_number: S({ type: 'number' }),
+      negNumber: S({ type: 'number', maximum: 0 }),
+      maxNumber: S({ type: 'number' }),
       string: S({ type: 'string' }),
-      long_string: S({ type: 'string', minLength: 100 }),
+      longString: S({ type: 'string', minLength: 100 }),
       boolean: S({ type: 'boolean' }),
       deeplyNested: S({
         type: 'object',

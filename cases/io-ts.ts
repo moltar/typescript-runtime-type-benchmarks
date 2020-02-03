@@ -32,10 +32,10 @@ const NegInt: NegIntC = t.brand(
 
 const DataType = t.type({
   number: t.Int,
-  neg_number: NegInt,
-  max_number: t.number,
+  negNumber: NegInt,
+  maxNumber: t.number,
   string: t.string,
-  long_string: LongString,
+  longString: LongString,
   boolean: t.boolean,
   deeplyNested: t.type({
     foo: t.string,

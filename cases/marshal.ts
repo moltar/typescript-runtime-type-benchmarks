@@ -39,16 +39,16 @@ class DataType implements Data {
   number!: number
 
   @f.validator(IsNegative)
-  neg_number!: number
+  negNumber!: number
 
   @f
-  max_number!: number
+  maxNumber!: number
 
   @f
   string!: string
 
   @f.validator(MinLengthFactory(100))
-  long_string!: string
+  longString!: string
 
   @f
   boolean!: boolean
