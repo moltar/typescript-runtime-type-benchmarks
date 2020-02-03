@@ -1,10 +1,15 @@
 {
   "name": "typescript-runtime-type-benchmarks",
+<<<<<<< Updated upstream
   "date": "2020-02-03T09:27:33.977Z",
+=======
+  "date": "2020-02-03T09:32:38.864Z",
+>>>>>>> Stashed changes
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
+<<<<<<< Updated upstream
       "ops": 58119,
       "margin": 4.33,
       "percentSlower": 96.36
@@ -31,10 +36,39 @@
       "name": "runtypes",
       "ops": 1596966,
       "margin": 0.38,
+=======
+      "ops": 53535,
+      "margin": 9.9,
+      "percentSlower": 96.5
+    },
+    {
+      "name": "class-transformer-validator-sync",
+      "ops": 65381,
+      "margin": 0.88,
+      "percentSlower": 95.73
+    },
+    {
+      "name": "io-ts",
+      "ops": 708002,
+      "margin": 0.31,
+      "percentSlower": 53.75
+    },
+    {
+      "name": "marshal",
+      "ops": 270209,
+      "margin": 0.46,
+      "percentSlower": 82.35
+    },
+    {
+      "name": "runtypes",
+      "ops": 1530850,
+      "margin": 0.23,
+>>>>>>> Stashed changes
       "percentSlower": 0
     },
     {
       "name": "toi",
+<<<<<<< Updated upstream
       "ops": 401402,
       "margin": 0.52,
       "percentSlower": 74.86
@@ -44,6 +78,17 @@
       "ops": 304049,
       "margin": 0.4,
       "percentSlower": 80.96
+=======
+      "ops": 397594,
+      "margin": 0.46,
+      "percentSlower": 74.03
+    },
+    {
+      "name": "ts-json-validator",
+      "ops": 292934,
+      "margin": 0.36,
+      "percentSlower": 80.86
+>>>>>>> Stashed changes
     }
   ],
   "fastest": {
