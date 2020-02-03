@@ -11,9 +11,7 @@ Compares run time type validation of the following packages:
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 
-Note that, "JSON Encode Decode" method is not truly a runtime type checker,
-but it is included simply for a sort-of benchmark against other JS operations. It encodes and decodes
-the same data object and returns it, without any validation.
+---
 
 ## Node 8.x
 
