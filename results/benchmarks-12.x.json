@@ -1,49 +1,55 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-02-02T10:52:33.631Z",
+  "date": "2020-02-03T07:44:37.493Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "JSON Encode Decode",
-      "ops": 102344,
-      "margin": 5.64,
-      "percentSlower": 93.18
+      "ops": 113597,
+      "margin": 1.3,
+      "percentSlower": 92.88
     },
     {
       "name": "runtypes",
-      "ops": 1500165,
-      "margin": 0.96,
+      "ops": 1596292,
+      "margin": 1.13,
       "percentSlower": 0
     },
     {
       "name": "io-ts",
-      "ops": 676814,
-      "margin": 0.88,
-      "percentSlower": 54.88
+      "ops": 795372,
+      "margin": 1,
+      "percentSlower": 50.17
     },
     {
       "name": "class-validator sync",
-      "ops": 51195,
-      "margin": 12.42,
-      "percentSlower": 96.59
+      "ops": 68991,
+      "margin": 4.23,
+      "percentSlower": 95.68
     },
     {
       "name": "class-validator async",
-      "ops": 38208,
-      "margin": 2.77,
-      "percentSlower": 97.45
+      "ops": 58573,
+      "margin": 3.77,
+      "percentSlower": 96.33
     },
     {
       "name": "ts-json-validator",
-      "ops": 316007,
-      "margin": 0.61,
-      "percentSlower": 78.94
+      "ops": 323243,
+      "margin": 0.64,
+      "percentSlower": 79.75
     },
     {
       "name": "toi",
-      "ops": 456702,
-      "margin": 0.81,
-      "percentSlower": 69.56
+      "ops": 539207,
+      "margin": 0.8,
+      "percentSlower": 66.22
+    },
+    {
+      "name": "mashal",
+      "ops": 288981,
+      "margin": 0.83,
+      "percentSlower": 81.9
     }
   ],
   "fastest": {
