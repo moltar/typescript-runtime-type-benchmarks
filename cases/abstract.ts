@@ -1,16 +1,16 @@
-import clone from 'clone'
-import { Data } from '../data'
+import clone from 'clone';
+import { Data } from '../data';
 
 export abstract class Case implements Case {
-  protected readonly data: Data
+  protected readonly data: Data;
 
   /**
    * Human readable case name.
    */
-  abstract get name(): string
+  abstract get name(): string;
 
   constructor(data: Data) {
-    this.data = Object.freeze(clone(data))
+    this.data = Object.freeze(clone(data));
   }
 
   /**
@@ -18,5 +18,5 @@ export abstract class Case implements Case {
    *
    * Method returns a `Data` object or throws when invalid data is provided.
    */
-  abstract validate(): Promise<Data> | Data
+  abstract validate(): Promise<Data> | Data;
 }

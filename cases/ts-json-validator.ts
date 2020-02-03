@@ -1,5 +1,5 @@
-import { createSchema as S, TsjsonParser } from 'ts-json-validator'
-import { Case } from './abstract'
+import { createSchema as S, TsjsonParser } from 'ts-json-validator';
+import { Case } from './abstract';
 
 const parser = new TsjsonParser(
   S({
@@ -16,21 +16,21 @@ const parser = new TsjsonParser(
         properties: {
           foo: S({ type: 'string' }),
           num: S({ type: 'number' }),
-          bool: S({ type: 'boolean' })
-        }
-      })
+          bool: S({ type: 'boolean' }),
+        },
+      }),
     },
   })
-)
+);
 
 export class TsJsonValidatorCase extends Case implements Case {
-  name = 'ts-json-validator'
+  name = 'ts-json-validator';
 
   validate() {
     if (parser.validates(this.data)) {
-      return this.data
+      return this.data;
     }
 
-    throw new Error('Invalid')
+    throw new Error('Invalid');
   }
 }

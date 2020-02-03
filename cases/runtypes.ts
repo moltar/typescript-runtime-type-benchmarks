@@ -1,7 +1,7 @@
-import { Boolean, Number, String, Record } from 'runtypes'
-import { Case } from './abstract'
+import { Boolean, Number, String, Record } from 'runtypes';
+import { Case } from './abstract';
 
-const DataType = Record({
+const dataType = Record({
   number: Number,
   negNumber: Number.withConstraint(n => n < 0),
   maxNumber: Number,
@@ -11,14 +11,14 @@ const DataType = Record({
   deeplyNested: Record({
     foo: String,
     num: Number,
-    bool: Boolean
-  })
-})
+    bool: Boolean,
+  }),
+});
 
 export class RuntypesCase extends Case implements Case {
-  name = 'runtypes'
+  name = 'runtypes';
 
   validate() {
-    return DataType.check(this.data)
+    return dataType.check(this.data);
   }
 }

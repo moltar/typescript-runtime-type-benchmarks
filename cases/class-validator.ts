@@ -1,47 +1,50 @@
-import 'reflect-metadata'
-import { IsNegative, MinLength, ValidateNested } from 'class-validator'
-import { transformAndValidate, transformAndValidateSync } from 'class-transformer-validator'
-import { Case } from './abstract'
-import { Data } from '../data'
+import 'reflect-metadata';
+import { IsNegative, MinLength, ValidateNested } from 'class-validator';
+import {
+  transformAndValidate,
+  transformAndValidateSync,
+} from 'class-transformer-validator';
+import { Case } from './abstract';
+import { Data } from '../data';
 
-type DeeplyNested = Data['deeplyNested']
+type DeeplyNested = Data['deeplyNested'];
 
 class DeeplyNestedType implements DeeplyNested {
-  foo!: string
-  num!: number
-  bool!: boolean
+  foo!: string;
+  num!: number;
+  bool!: boolean;
 }
 
 class DataType implements Data {
-  number!: number
+  number!: number;
 
   @IsNegative()
-  negNumber!: number
+  negNumber!: number;
 
-  maxNumber!: number
-  string!: string
+  maxNumber!: number;
+  string!: string;
 
   @MinLength(100)
-  longString!: string
+  longString!: string;
 
-  boolean!:boolean
+  boolean!: boolean;
 
   @ValidateNested()
-  deeplyNested!: DeeplyNestedType
+  deeplyNested!: DeeplyNestedType;
 }
 
 export class ClassValidatorSyncCase extends Case implements Case {
-  name = 'class-transformer-validator-sync'
+  name = 'class-transformer-validator-sync';
 
   validate() {
-    return transformAndValidateSync(DataType, this.data)
+    return transformAndValidateSync(DataType, this.data);
   }
 }
 
 export class ClassValidatorAsyncCase extends Case implements Case {
-  name = 'class-transformer-validator-async'
+  name = 'class-transformer-validator-async';
 
   validate() {
-    return transformAndValidate(DataType, this.data)
+    return transformAndValidate(DataType, this.data);
   }
 }

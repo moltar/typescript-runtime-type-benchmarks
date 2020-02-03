@@ -1,66 +1,77 @@
-import 'reflect-metadata'
-import { f, validatedPlainToClass, PropertyValidator, PropertyValidatorError } from '@marcj/marshal'
-import { Data } from '../data'
-import { Case } from './abstract'
+import 'reflect-metadata';
+import {
+  f,
+  validatedPlainToClass,
+  PropertyValidator,
+  PropertyValidatorError,
+} from '@marcj/marshal';
+import { Data } from '../data';
+import { Case } from './abstract';
 
 class IsNegative implements PropertyValidator {
   validate<T>(value: number) {
     if (value > 0) {
-      return new PropertyValidatorError('IsNegative', 'Number must be negative.')
+      return new PropertyValidatorError(
+        'IsNegative',
+        'Number must be negative.'
+      );
     }
   }
 }
 
-function MinLengthFactory (minLength: number) {
+function MinLengthFactory(minLength: number) {
   return class MinLength implements PropertyValidator {
     validate<T>(value: string) {
       if (value.length < minLength) {
-        return new PropertyValidatorError('MinLength', `String must have minimum length of ${minLength}.`)
+        return new PropertyValidatorError(
+          'MinLength',
+          `String must have minimum length of ${minLength}.`
+        );
       }
     }
-  }
+  };
 }
 
-type DeeplyNested = Data['deeplyNested']
+type DeeplyNested = Data['deeplyNested'];
 
 class DeeplyNestedType implements DeeplyNested {
   @f
-  foo!: string
+  foo!: string;
 
   @f
-  num!: number
+  num!: number;
 
   @f
-  bool!: boolean
+  bool!: boolean;
 }
 
 class DataType implements Data {
   @f
-  number!: number
+  number!: number;
 
   @f.validator(IsNegative)
-  negNumber!: number
+  negNumber!: number;
 
   @f
-  maxNumber!: number
+  maxNumber!: number;
 
   @f
-  string!: string
+  string!: string;
 
   @f.validator(MinLengthFactory(100))
-  longString!: string
+  longString!: string;
 
   @f
-  boolean!: boolean
+  boolean!: boolean;
 
   @f.type(DeeplyNestedType)
-  deeplyNested!: DeeplyNestedType
+  deeplyNested!: DeeplyNestedType;
 }
 
 export class MarshalCase extends Case implements Case {
-  name = 'marshal'
+  name = 'marshal';
 
   validate() {
-    return validatedPlainToClass(DataType, this.data)
+    return validatedPlainToClass(DataType, this.data);
   }
 }

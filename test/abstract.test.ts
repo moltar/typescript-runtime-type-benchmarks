@@ -1,62 +1,62 @@
-import clone from 'clone'
-import cases from '../cases/index'
-import { DATA } from '../data'
+import clone from 'clone';
+import { cases } from '../cases/index';
+import { DATA } from '../data';
 
-const CaseClasses = Object.values(cases)
+const caseClasses = Object.values(cases);
 
-type CaseTuple = [string, (typeof CaseClasses)[0]]
+type CaseTuple = [string, typeof caseClasses[0]];
 
-const caseTuples = CaseClasses.map<CaseTuple>((CaseClass) => {
-  return [new CaseClass(DATA).name, CaseClass]
-})
+const caseTuples = caseClasses.map<CaseTuple>(caseClass => {
+  return [new caseClass(DATA).name, caseClass];
+});
 
-const clonedData = () => clone({ ...DATA })
+const clonedData = () => clone({ ...DATA });
 
-describe.each(caseTuples)('Case Class: %s', (_caseName, CaseClass) => {
-  let data = clonedData()
+describe.each(caseTuples)('Case Class: %s', (_caseName, caseClass) => {
+  let data = clonedData();
 
   beforeEach(() => {
-    data = clonedData()
-  })
+    data = clonedData();
+  });
 
   it('should return a validated data object', async () => {
-    const c = new CaseClass(data)
-    expect(await c.validate()).toEqual(DATA)
-  })
+    const c = new caseClass(data);
+    expect(await c.validate()).toEqual(DATA);
+  });
 
   it('should fail validation when number is not negative', async () => {
-    expect.assertions(2)
+    expect.assertions(2);
 
-    data.negNumber = 1
-    const c = new CaseClass(data)
+    data.negNumber = 1;
+    const c = new caseClass(data);
 
-    let err
+    let err;
 
     try {
-      await c.validate()
+      await c.validate();
     } catch (e) {
-      err = e
+      err = e;
     }
 
-    expect(err).toBeTruthy()
-    expect(err).toMatchSnapshot()
-  })
+    expect(err).toBeTruthy();
+    expect(err).toMatchSnapshot();
+  });
 
   it('should fail validation when string is too short', async () => {
-    expect.assertions(2)
+    expect.assertions(2);
 
-    data.longString = ''
-    const c = new CaseClass(data)
+    data.longString = '';
+    const c = new caseClass(data);
 
-    let err
+    let err;
 
     try {
-      await c.validate()
+      await c.validate();
     } catch (e) {
-      err = e
+      err = e;
     }
 
-    expect(err).toBeTruthy()
-    expect(err).toMatchSnapshot()
-  })
-})
+    expect(err).toBeTruthy();
+    expect(err).toMatchSnapshot();
+  });
+});
