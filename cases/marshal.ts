@@ -73,6 +73,7 @@ export class MarshalCase extends Case implements Case {
 
   validate() {
     const errors = validate(DataType, this.data);
+
     if (errors.length === 0) {
       return this.data;
     }
