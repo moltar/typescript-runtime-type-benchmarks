@@ -1,99 +1,54 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-<<<<<<< Updated upstream
-  "date": "2020-02-03T09:30:41.358Z",
-=======
-  "date": "2020-02-03T09:34:53.025Z",
->>>>>>> Stashed changes
+  "date": "2020-02-04T03:46:30.903Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-<<<<<<< Updated upstream
-      "ops": 49435,
-      "margin": 2.05,
-      "percentSlower": 96.75
+      "ops": 66607,
+      "margin": 1.24,
+      "percentSlower": 99.68
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 66712,
-      "margin": 2.14,
-      "percentSlower": 95.61
+      "ops": 72503,
+      "margin": 0.87,
+      "percentSlower": 99.65
     },
     {
       "name": "io-ts",
-      "ops": 744012,
-      "margin": 1.33,
-      "percentSlower": 51.04
+      "ops": 855733,
+      "margin": 0.72,
+      "percentSlower": 95.85
     },
     {
       "name": "marshal",
-      "ops": 268339,
-      "margin": 1.23,
-      "percentSlower": 82.34
-    },
-    {
-      "name": "runtypes",
-      "ops": 1519685,
-      "margin": 1.31,
-=======
-      "ops": 40963,
-      "margin": 2.26,
-      "percentSlower": 96.96
-    },
-    {
-      "name": "class-transformer-validator-sync",
-      "ops": 55323,
-      "margin": 1.39,
-      "percentSlower": 95.89
-    },
-    {
-      "name": "io-ts",
-      "ops": 668964,
-      "margin": 0.74,
-      "percentSlower": 50.3
-    },
-    {
-      "name": "marshal",
-      "ops": 245796,
-      "margin": 0.81,
-      "percentSlower": 81.74
-    },
-    {
-      "name": "runtypes",
-      "ops": 1345994,
-      "margin": 1.55,
->>>>>>> Stashed changes
+      "ops": 20639782,
+      "margin": 1.52,
       "percentSlower": 0
     },
     {
+      "name": "runtypes",
+      "ops": 1729437,
+      "margin": 1.14,
+      "percentSlower": 91.62
+    },
+    {
       "name": "toi",
-<<<<<<< Updated upstream
-      "ops": 368551,
-      "margin": 1.12,
-      "percentSlower": 75.75
+      "ops": 424275,
+      "margin": 0.76,
+      "percentSlower": 97.94
     },
     {
       "name": "ts-json-validator",
-      "ops": 321236,
-      "margin": 1.07,
-      "percentSlower": 78.86
-=======
-      "ops": 368546,
-      "margin": 0.77,
-      "percentSlower": 72.62
-    },
-    {
-      "name": "ts-json-validator",
-      "ops": 258777,
-      "margin": 0.7,
-      "percentSlower": 80.77
->>>>>>> Stashed changes
+      "ops": 211518,
+      "margin": 1.04,
+      "percentSlower": 98.98
     }
   ],
   "fastest": {
-    "name": "runtypes",
-    "index": 4
+    "name": "marshal",
+    "index": 3
   },
   "slowest": {
     "name": "class-transformer-validator-async",
