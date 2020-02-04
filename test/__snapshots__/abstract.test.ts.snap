@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Case Class: ajv should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ajv should fail validation when number is not negative 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ajv should fail validation when prop is missing 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ajv should fail validation when string is too short 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ajv should fail validation when type is wrong 1`] = `[Error: Invalid]`;
+
 exports[`Case Class: class-transformer-validator-async should fail validation when deeply nested type is wrong 1`] = `
 Array [
   ValidationError {
@@ -302,7 +312,7 @@ exports[`Case Class: marshal should fail validation when deeply nested type is w
 
 exports[`Case Class: marshal should fail validation when number is not negative 1`] = `[Error: Invalid]`;
 
-exports[`Case Class: marshal should fail validation when prop is missing 1`] = `[TypeError: Cannot add property boolean, object is not extensible]`;
+exports[`Case Class: marshal should fail validation when prop is missing 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: marshal should fail validation when string is too short 1`] = `[Error: Invalid]`;
 
@@ -337,7 +347,3 @@ exports[`Case Class: ts-json-validator should fail validation when prop is missi
 exports[`Case Class: ts-json-validator should fail validation when string is too short 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: ts-json-validator should fail validation when type is wrong 1`] = `[Error: Invalid]`;
-
-exports[`Case Class: ajv should fail validation when number is not negative 1`] = `[Error: Invalid]`;
-
-exports[`Case Class: ajv should fail validation when string is too short 1`] = `[Error: Invalid]`;
