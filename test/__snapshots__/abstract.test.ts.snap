@@ -108,29 +108,9 @@ exports[`Case Class: io-ts should fail validation when number is not negative 1`
 
 exports[`Case Class: io-ts should fail validation when string is too short 1`] = `[Error: Invalid]`;
 
-exports[`Case Class: marshal should fail validation when number is not negative 1`] = `
-ValidationFailed {
-  "errors": Array [
-    ValidationError {
-      "code": "IsNegative",
-      "message": "Number must be negative.",
-      "path": "negNumber",
-    },
-  ],
-}
-`;
+exports[`Case Class: marshal should fail validation when number is not negative 1`] = `[Error: Invalid]`;
 
-exports[`Case Class: marshal should fail validation when string is too short 1`] = `
-ValidationFailed {
-  "errors": Array [
-    ValidationError {
-      "code": "MinLength",
-      "message": "String must have minimum length of 100.",
-      "path": "longString",
-    },
-  ],
-}
-`;
+exports[`Case Class: marshal should fail validation when string is too short 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: runtypes should fail validation when number is not negative 1`] = `[ValidationError: Failed constraint check]`;
 
