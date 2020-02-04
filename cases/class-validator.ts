@@ -1,5 +1,13 @@
 import 'reflect-metadata';
-import { IsNegative, MinLength, ValidateNested } from 'class-validator';
+import {
+  IsNegative,
+  MinLength,
+  ValidateNested,
+  IsBoolean,
+  IsNumber,
+  IsString,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 import {
   transformAndValidate,
   transformAndValidateSync,
@@ -10,26 +18,37 @@ import { Data } from '../data';
 type DeeplyNested = Data['deeplyNested'];
 
 class DeeplyNestedType implements DeeplyNested {
+  @IsString()
   foo!: string;
+
+  @IsNumber()
   num!: number;
+
+  @IsBoolean()
   bool!: boolean;
 }
 
 class DataType implements Data {
+  @IsNumber()
   number!: number;
 
   @IsNegative()
   negNumber!: number;
 
+  @IsNumber()
   maxNumber!: number;
+
+  @IsString()
   string!: string;
 
   @MinLength(100)
   longString!: string;
 
+  @IsBoolean()
   boolean!: boolean;
 
   @ValidateNested()
+  @Type(() => DeeplyNestedType)
   deeplyNested!: DeeplyNestedType;
 }
 

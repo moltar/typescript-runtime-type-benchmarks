@@ -4,6 +4,15 @@ import { Case } from './abstract';
 const parser = new TsjsonParser(
   S({
     type: 'object',
+    required: [
+      'boolean',
+      'deeplyNested',
+      'longString',
+      'maxNumber',
+      'negNumber',
+      'number',
+      'string',
+    ],
     properties: {
       number: S({ type: 'number' }),
       negNumber: S({ type: 'number', maximum: 0 }),
@@ -13,6 +22,7 @@ const parser = new TsjsonParser(
       boolean: S({ type: 'boolean' }),
       deeplyNested: S({
         type: 'object',
+        required: ['foo', 'bool', 'num'],
         properties: {
           foo: S({ type: 'string' }),
           num: S({ type: 'number' }),

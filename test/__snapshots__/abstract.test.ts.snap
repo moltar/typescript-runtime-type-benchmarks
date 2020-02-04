@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Case Class: class-transformer-validator-async should fail validation when deeply nested type is wrong 1`] = `
+Array [
+  ValidationError {
+    "children": Array [
+      ValidationError {
+        "children": Array [],
+        "constraints": Object {
+          "isBoolean": "bool must be a boolean value",
+        },
+        "property": "bool",
+        "target": DeeplyNestedType {
+          "bool": "foo",
+          "foo": "bar",
+          "num": 1,
+        },
+        "value": "foo",
+      },
+    ],
+    "property": "deeplyNested",
+    "target": DataType {
+      "boolean": true,
+      "deeplyNested": DeeplyNestedType {
+        "bool": "foo",
+        "foo": "bar",
+        "num": 1,
+      },
+      "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vivendum intellegat et qui, ei denique consequuntur vix. Semper aeterno percipit ut his, sea ex utinam referrentur repudiandae. No epicuri hendrerit consetetur sit, sit dicta adipiscing ex, in facete detracto deterruisset duo. Quot populo ad qui. Sit fugit nostrum et. Ad per diam dicant interesset, lorem iusto sensibus ut sed. No dicam aperiam vis. Pri posse graeco definitiones cu, id eam populo quaestio adipiscing, usu quod malorum te. Ex nam agam veri, dicunt efficiantur ad qui, ad legere adversarium sit. Commune platonem mel id, brute adipiscing duo an. Vivendum intellegat et qui, ei denique consequuntur vix. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "maxNumber": 1.7976931348623157e+308,
+      "negNumber": -1,
+      "number": 1,
+      "string": "string",
+    },
+    "value": DeeplyNestedType {
+      "bool": "foo",
+      "foo": "bar",
+      "num": 1,
+    },
+  },
+]
+`;
+
 exports[`Case Class: class-transformer-validator-async should fail validation when number is not negative 1`] = `
 Array [
   ValidationError {
@@ -10,7 +51,7 @@ Array [
     "property": "negNumber",
     "target": DataType {
       "boolean": true,
-      "deeplyNested": Object {
+      "deeplyNested": DeeplyNestedType {
         "bool": false,
         "foo": "bar",
         "num": 1,
@@ -22,6 +63,31 @@ Array [
       "string": "string",
     },
     "value": 1,
+  },
+]
+`;
+
+exports[`Case Class: class-transformer-validator-async should fail validation when prop is missing 1`] = `
+Array [
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "isBoolean": "boolean must be a boolean value",
+    },
+    "property": "boolean",
+    "target": DataType {
+      "deeplyNested": DeeplyNestedType {
+        "bool": false,
+        "foo": "bar",
+        "num": 1,
+      },
+      "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vivendum intellegat et qui, ei denique consequuntur vix. Semper aeterno percipit ut his, sea ex utinam referrentur repudiandae. No epicuri hendrerit consetetur sit, sit dicta adipiscing ex, in facete detracto deterruisset duo. Quot populo ad qui. Sit fugit nostrum et. Ad per diam dicant interesset, lorem iusto sensibus ut sed. No dicam aperiam vis. Pri posse graeco definitiones cu, id eam populo quaestio adipiscing, usu quod malorum te. Ex nam agam veri, dicunt efficiantur ad qui, ad legere adversarium sit. Commune platonem mel id, brute adipiscing duo an. Vivendum intellegat et qui, ei denique consequuntur vix. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "maxNumber": 1.7976931348623157e+308,
+      "negNumber": -1,
+      "number": 1,
+      "string": "string",
+    },
+    "value": undefined,
   },
 ]
 `;
@@ -36,7 +102,7 @@ Array [
     "property": "longString",
     "target": DataType {
       "boolean": true,
-      "deeplyNested": Object {
+      "deeplyNested": DeeplyNestedType {
         "bool": false,
         "foo": "bar",
         "num": 1,
@@ -52,6 +118,73 @@ Array [
 ]
 `;
 
+exports[`Case Class: class-transformer-validator-async should fail validation when type is wrong 1`] = `
+Array [
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "isBoolean": "boolean must be a boolean value",
+    },
+    "property": "boolean",
+    "target": DataType {
+      "boolean": "foo",
+      "deeplyNested": DeeplyNestedType {
+        "bool": false,
+        "foo": "bar",
+        "num": 1,
+      },
+      "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vivendum intellegat et qui, ei denique consequuntur vix. Semper aeterno percipit ut his, sea ex utinam referrentur repudiandae. No epicuri hendrerit consetetur sit, sit dicta adipiscing ex, in facete detracto deterruisset duo. Quot populo ad qui. Sit fugit nostrum et. Ad per diam dicant interesset, lorem iusto sensibus ut sed. No dicam aperiam vis. Pri posse graeco definitiones cu, id eam populo quaestio adipiscing, usu quod malorum te. Ex nam agam veri, dicunt efficiantur ad qui, ad legere adversarium sit. Commune platonem mel id, brute adipiscing duo an. Vivendum intellegat et qui, ei denique consequuntur vix. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "maxNumber": 1.7976931348623157e+308,
+      "negNumber": -1,
+      "number": 1,
+      "string": "string",
+    },
+    "value": "foo",
+  },
+]
+`;
+
+exports[`Case Class: class-transformer-validator-sync should fail validation when deeply nested type is wrong 1`] = `
+Array [
+  ValidationError {
+    "children": Array [
+      ValidationError {
+        "children": Array [],
+        "constraints": Object {
+          "isBoolean": "bool must be a boolean value",
+        },
+        "property": "bool",
+        "target": DeeplyNestedType {
+          "bool": "foo",
+          "foo": "bar",
+          "num": 1,
+        },
+        "value": "foo",
+      },
+    ],
+    "property": "deeplyNested",
+    "target": DataType {
+      "boolean": true,
+      "deeplyNested": DeeplyNestedType {
+        "bool": "foo",
+        "foo": "bar",
+        "num": 1,
+      },
+      "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vivendum intellegat et qui, ei denique consequuntur vix. Semper aeterno percipit ut his, sea ex utinam referrentur repudiandae. No epicuri hendrerit consetetur sit, sit dicta adipiscing ex, in facete detracto deterruisset duo. Quot populo ad qui. Sit fugit nostrum et. Ad per diam dicant interesset, lorem iusto sensibus ut sed. No dicam aperiam vis. Pri posse graeco definitiones cu, id eam populo quaestio adipiscing, usu quod malorum te. Ex nam agam veri, dicunt efficiantur ad qui, ad legere adversarium sit. Commune platonem mel id, brute adipiscing duo an. Vivendum intellegat et qui, ei denique consequuntur vix. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "maxNumber": 1.7976931348623157e+308,
+      "negNumber": -1,
+      "number": 1,
+      "string": "string",
+    },
+    "value": DeeplyNestedType {
+      "bool": "foo",
+      "foo": "bar",
+      "num": 1,
+    },
+  },
+]
+`;
+
 exports[`Case Class: class-transformer-validator-sync should fail validation when number is not negative 1`] = `
 Array [
   ValidationError {
@@ -62,7 +195,7 @@ Array [
     "property": "negNumber",
     "target": DataType {
       "boolean": true,
-      "deeplyNested": Object {
+      "deeplyNested": DeeplyNestedType {
         "bool": false,
         "foo": "bar",
         "num": 1,
@@ -78,6 +211,31 @@ Array [
 ]
 `;
 
+exports[`Case Class: class-transformer-validator-sync should fail validation when prop is missing 1`] = `
+Array [
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "isBoolean": "boolean must be a boolean value",
+    },
+    "property": "boolean",
+    "target": DataType {
+      "deeplyNested": DeeplyNestedType {
+        "bool": false,
+        "foo": "bar",
+        "num": 1,
+      },
+      "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vivendum intellegat et qui, ei denique consequuntur vix. Semper aeterno percipit ut his, sea ex utinam referrentur repudiandae. No epicuri hendrerit consetetur sit, sit dicta adipiscing ex, in facete detracto deterruisset duo. Quot populo ad qui. Sit fugit nostrum et. Ad per diam dicant interesset, lorem iusto sensibus ut sed. No dicam aperiam vis. Pri posse graeco definitiones cu, id eam populo quaestio adipiscing, usu quod malorum te. Ex nam agam veri, dicunt efficiantur ad qui, ad legere adversarium sit. Commune platonem mel id, brute adipiscing duo an. Vivendum intellegat et qui, ei denique consequuntur vix. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "maxNumber": 1.7976931348623157e+308,
+      "negNumber": -1,
+      "number": 1,
+      "string": "string",
+    },
+    "value": undefined,
+  },
+]
+`;
+
 exports[`Case Class: class-transformer-validator-sync should fail validation when string is too short 1`] = `
 Array [
   ValidationError {
@@ -88,7 +246,7 @@ Array [
     "property": "longString",
     "target": DataType {
       "boolean": true,
-      "deeplyNested": Object {
+      "deeplyNested": DeeplyNestedType {
         "bool": false,
         "foo": "bar",
         "num": 1,
@@ -104,26 +262,82 @@ Array [
 ]
 `;
 
+exports[`Case Class: class-transformer-validator-sync should fail validation when type is wrong 1`] = `
+Array [
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "isBoolean": "boolean must be a boolean value",
+    },
+    "property": "boolean",
+    "target": DataType {
+      "boolean": "foo",
+      "deeplyNested": DeeplyNestedType {
+        "bool": false,
+        "foo": "bar",
+        "num": 1,
+      },
+      "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vivendum intellegat et qui, ei denique consequuntur vix. Semper aeterno percipit ut his, sea ex utinam referrentur repudiandae. No epicuri hendrerit consetetur sit, sit dicta adipiscing ex, in facete detracto deterruisset duo. Quot populo ad qui. Sit fugit nostrum et. Ad per diam dicant interesset, lorem iusto sensibus ut sed. No dicam aperiam vis. Pri posse graeco definitiones cu, id eam populo quaestio adipiscing, usu quod malorum te. Ex nam agam veri, dicunt efficiantur ad qui, ad legere adversarium sit. Commune platonem mel id, brute adipiscing duo an. Vivendum intellegat et qui, ei denique consequuntur vix. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "maxNumber": 1.7976931348623157e+308,
+      "negNumber": -1,
+      "number": 1,
+      "string": "string",
+    },
+    "value": "foo",
+  },
+]
+`;
+
+exports[`Case Class: io-ts should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
+
 exports[`Case Class: io-ts should fail validation when number is not negative 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: io-ts should fail validation when prop is missing 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: io-ts should fail validation when string is too short 1`] = `[Error: Invalid]`;
 
+exports[`Case Class: io-ts should fail validation when type is wrong 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: marshal should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
+
 exports[`Case Class: marshal should fail validation when number is not negative 1`] = `[Error: Invalid]`;
 
+exports[`Case Class: marshal should fail validation when prop is missing 1`] = `[TypeError: Cannot add property boolean, object is not extensible]`;
+
 exports[`Case Class: marshal should fail validation when string is too short 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: marshal should fail validation when type is wrong 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: runtypes should fail validation when deeply nested type is wrong 1`] = `[ValidationError: Expected boolean, but was string]`;
+
+exports[`Case Class: runtypes should fail validation when number is not negative 1`] = `[ValidationError: Failed constraint check]`;
+
+exports[`Case Class: runtypes should fail validation when prop is missing 1`] = `[ValidationError: Expected boolean, but was undefined]`;
+
+exports[`Case Class: runtypes should fail validation when string is too short 1`] = `[ValidationError: Failed constraint check]`;
+
+exports[`Case Class: runtypes should fail validation when type is wrong 1`] = `[ValidationError: Expected boolean, but was string]`;
+
+exports[`Case Class: toi should fail validation when deeply nested type is wrong 1`] = `[Error: value does not match structure]`;
+
+exports[`Case Class: toi should fail validation when number is not negative 1`] = `[Error: value does not match structure]`;
+
+exports[`Case Class: toi should fail validation when prop is missing 1`] = `[Error: value does not match structure]`;
+
+exports[`Case Class: toi should fail validation when string is too short 1`] = `[Error: value does not match structure]`;
+
+exports[`Case Class: toi should fail validation when type is wrong 1`] = `[Error: value does not match structure]`;
+
+exports[`Case Class: ts-json-validator should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ts-json-validator should fail validation when number is not negative 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ts-json-validator should fail validation when prop is missing 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ts-json-validator should fail validation when string is too short 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: ts-json-validator should fail validation when type is wrong 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: ajv should fail validation when number is not negative 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: ajv should fail validation when string is too short 1`] = `[Error: Invalid]`;
-
-exports[`Case Class: runtypes should fail validation when number is not negative 1`] = `[ValidationError: Failed constraint check]`;
-
-exports[`Case Class: runtypes should fail validation when string is too short 1`] = `[ValidationError: Failed constraint check]`;
-
-exports[`Case Class: toi should fail validation when number is not negative 1`] = `[Error: value does not match structure]`;
-
-exports[`Case Class: toi should fail validation when string is too short 1`] = `[Error: value does not match structure]`;
-
-exports[`Case Class: ts-json-validator should fail validation when number is not negative 1`] = `[Error: Invalid]`;
-
-exports[`Case Class: ts-json-validator should fail validation when string is too short 1`] = `[Error: Invalid]`;
