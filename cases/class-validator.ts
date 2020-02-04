@@ -7,6 +7,7 @@ import {
   IsNumber,
   IsString,
 } from 'class-validator';
+import { Type } from 'class-transformer'
 import {
   transformAndValidate,
   transformAndValidateSync,
@@ -47,6 +48,7 @@ class DataType implements Data {
   boolean!: boolean;
 
   @ValidateNested()
+  @Type(() => DeeplyNestedType)
   deeplyNested!: DeeplyNestedType;
 }
 
