@@ -7,6 +7,7 @@ import { MarshalCase } from './marshal';
 import { RuntypesCase } from './runtypes';
 import { ToiCase } from './toi';
 import { TsJsonValidatorCase } from './ts-json-validator';
+import {AjvCase} from "./ajv";
 
 export const cases = [
   ClassValidatorAsyncCase,
@@ -16,4 +17,5 @@ export const cases = [
   RuntypesCase,
   ToiCase,
   TsJsonValidatorCase,
+  AjvCase,
 ];
