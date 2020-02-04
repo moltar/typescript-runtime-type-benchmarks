@@ -7,7 +7,7 @@ import {
   IsNumber,
   IsString,
 } from 'class-validator';
-import { Type } from 'class-transformer'
+import { Type } from 'class-transformer';
 import {
   transformAndValidate,
   transformAndValidateSync,

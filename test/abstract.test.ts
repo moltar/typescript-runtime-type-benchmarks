@@ -46,8 +46,26 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, caseClass) => {
   it('should fail validation when deeply nested type is wrong', async () => {
     expect.assertions(2);
 
-    Object.assign(data.deeplyNested, { bool: 'foo' })
+    Object.assign(data.deeplyNested, { bool: 'foo' });
 
+    const c = new caseClass(data);
+
+    let err;
+
+    try {
+      await c.validate();
+    } catch (e) {
+      err = e;
+    }
+
+    expect(err).toBeTruthy();
+    expect(err).toMatchSnapshot();
+  });
+
+  it('should fail validation when prop is missing', async () => {
+    expect.assertions(2);
+
+    delete data.boolean;
     const c = new caseClass(data);
 
     let err;
