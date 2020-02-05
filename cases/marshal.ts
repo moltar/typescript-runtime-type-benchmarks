@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {
   f,
-  validate,
+  validatedPlainToClass,
   PropertyValidator,
   PropertyValidatorError,
 } from '@marcj/marshal';
@@ -72,12 +72,6 @@ export class MarshalCase extends Case implements Case {
   name = 'marshal';
 
   validate() {
-    const errors = validate(DataType, this.data);
-
-    if (errors.length === 0) {
-      return this.data;
-    }
-
-    throw new Error('Invalid');
+    return validatedPlainToClass(DataType, this.data);
   }
 }
