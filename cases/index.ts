@@ -1,6 +1,6 @@
 import {
   ClassValidatorAsyncCase,
-  ClassValidatorSyncCase
+  ClassValidatorSyncCase,
 } from './class-validator';
 import { IoTsCase } from './io-ts';
 import { MarshalCase } from './marshal';
