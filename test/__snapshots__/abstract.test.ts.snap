@@ -244,6 +244,65 @@ exports[`Case Class: ts-json-validator should fail validation when prop is missi
 
 exports[`Case Class: ts-json-validator should fail validation when type is wrong 1`] = `[Error: Invalid]`;
 
+exports[`Case Class: ts-utils should fail validation when deeply nested type is wrong 1`] = `
+DecodeError {
+  "expected": [Function],
+  "key": Array [
+    TypedObject {
+      "name": "Data",
+      "type": "TypedObject",
+    },
+    ObjectKey {
+      "name": "deeplyNested",
+      "type": "ObjectKey",
+    },
+    TypedObject {
+      "name": "DeeplyNested",
+      "type": "TypedObject",
+    },
+    ObjectKey {
+      "name": "bool",
+      "type": "ObjectKey",
+    },
+  ],
+  "val": "foo",
+}
+`;
+
+exports[`Case Class: ts-utils should fail validation when prop is missing 1`] = `
+DecodeError {
+  "expected": [Function],
+  "key": Array [
+    TypedObject {
+      "name": "Data",
+      "type": "TypedObject",
+    },
+    ObjectKey {
+      "name": "boolean",
+      "type": "ObjectKey",
+    },
+  ],
+  "val": undefined,
+}
+`;
+
+exports[`Case Class: ts-utils should fail validation when type is wrong 1`] = `
+DecodeError {
+  "expected": [Function],
+  "key": Array [
+    TypedObject {
+      "name": "Data",
+      "type": "TypedObject",
+    },
+    ObjectKey {
+      "name": "boolean",
+      "type": "ObjectKey",
+    },
+  ],
+  "val": "foo",
+}
+`;
+
 exports[`Case Class: zod should fail validation when deeply nested type is wrong 1`] = `[Error: deeplyNested: bool: Non-boolean type: string]`;
 
 exports[`Case Class: zod should fail validation when prop is missing 1`] = `[Error: boolean: Non-boolean type: undefined]`;

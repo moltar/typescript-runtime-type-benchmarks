@@ -7,6 +7,7 @@ import { MarshalCase } from './marshal';
 import { RuntypesCase } from './runtypes';
 import { ToiCase } from './toi';
 import { TsJsonValidatorCase } from './ts-json-validator';
+import { TsUtilsCase } from "./ts-utils";
 import { ZodCase } from './zod';
 
 export const cases = [
@@ -17,5 +18,6 @@ export const cases = [
   RuntypesCase,
   ToiCase,
   TsJsonValidatorCase,
+  TsUtilsCase,
   ZodCase,
 ];
