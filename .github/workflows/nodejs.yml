@@ -1,5 +1,8 @@
 name: Node CI
 
+env:
+  CI: "true"
+
 on:
   push:
     branches:
@@ -26,8 +29,6 @@ jobs:
 
       - name: npm install
         run: npm install
-        env:
-          CI: true
 
       - name: lint
         run: npm run lint
@@ -38,7 +39,6 @@ jobs:
       - name: generate benchmarks
         run: ./start.sh
         env:
-          CI: true
           NODE_VERSION: ${{ matrix.node-version }}
 
       - name: push

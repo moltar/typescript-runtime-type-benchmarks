@@ -1,5 +1,8 @@
 name: Pull Requests
 
+env:
+  CI: true
+
 on:
   - pull_request
 
@@ -24,13 +27,10 @@ jobs:
 
       - name: npm install
         run: npm install
-        env:
-          CI: true
+
 
       - name: npm test
         run: npm t
 
       - name: generate benchmarks
         run: ./start.sh
-        env:
-          CI: true
