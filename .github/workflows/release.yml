@@ -6,7 +6,13 @@ env:
 on:
   push:
     branches:
-    - master
+      - master
+    paths:
+      - "cases/*.ts"
+      - "*.ts"
+      - package.json
+      - package-lock.json
+      - vega-lite-bar-chart.json
 
 jobs:
   build:
