@@ -30,6 +30,3 @@ jobs:
 
       - name: npm test
         run: npm t
-
-      - name: generate benchmarks
-        run: ./start.sh
