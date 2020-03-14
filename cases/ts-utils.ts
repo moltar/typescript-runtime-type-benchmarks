@@ -2,12 +2,12 @@ import { object, number, boolean, string } from '@ailabs/ts-utils/dist/decoder';
 import { Case } from './abstract';
 
 const dataType = object('Data', {
-  number: number,
+  number,
   negNumber: number,
   maxNumber: number,
-  string: string,
+  string,
   longString: string,
-  boolean: boolean,
+  boolean,
   deeplyNested: object('DeeplyNested', {
     foo: string,
     num: number,
