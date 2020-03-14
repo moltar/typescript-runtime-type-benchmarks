@@ -1,7 +1,7 @@
 name: Pull Requests
 
 env:
-  CI: true
+  CI: "true"
 
 on:
   - pull_request
@@ -26,8 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: npm install
-        run: npm install
-
+        run: npm ci
 
       - name: npm test
         run: npm t
