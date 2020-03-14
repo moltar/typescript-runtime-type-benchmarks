@@ -8,6 +8,7 @@
 * [runtypes](https://github.com/pelotom/runtypes)
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
+* [zod](https://github.com/vriad/zod)
 
 ## Criteria
 
