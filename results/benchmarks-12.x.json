@@ -1,61 +1,61 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-03-14T15:39:34.313Z",
+  "date": "2020-03-14T17:40:28.050Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-      "ops": 39692,
-      "margin": 15.92,
-      "percentSlower": 99.89
+      "ops": 34635,
+      "margin": 2.36,
+      "percentSlower": 99.9
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 46682,
-      "margin": 1.72,
-      "percentSlower": 99.87
+      "ops": 44142,
+      "margin": 1.15,
+      "percentSlower": 99.88
     },
     {
       "name": "io-ts",
-      "ops": 1957054,
-      "margin": 0.5,
-      "percentSlower": 94.51
+      "ops": 1996393,
+      "margin": 1.72,
+      "percentSlower": 94.47
     },
     {
       "name": "marshal",
-      "ops": 4172749,
-      "margin": 1.01,
-      "percentSlower": 88.29
+      "ops": 3985930,
+      "margin": 0.7,
+      "percentSlower": 88.95
     },
     {
       "name": "runtypes",
-      "ops": 1925317,
-      "margin": 0.48,
-      "percentSlower": 94.6
+      "ops": 733725,
+      "margin": 0.87,
+      "percentSlower": 97.97
     },
     {
       "name": "toi",
-      "ops": 416141,
-      "margin": 0.65,
-      "percentSlower": 98.83
+      "ops": 426824,
+      "margin": 0.7,
+      "percentSlower": 98.82
     },
     {
       "name": "ts-json-validator",
-      "ops": 35643346,
-      "margin": 0.98,
+      "ops": 36078254,
+      "margin": 0.55,
       "percentSlower": 0
     },
     {
       "name": "ts-utils",
-      "ops": 119530,
-      "margin": 1.3,
-      "percentSlower": 99.66
+      "ops": 126131,
+      "margin": 1.14,
+      "percentSlower": 99.65
     },
     {
       "name": "zod",
-      "ops": 1684174,
-      "margin": 0.45,
-      "percentSlower": 95.27
+      "ops": 1498014,
+      "margin": 1.02,
+      "percentSlower": 95.85
     }
   ],
   "fastest": {
