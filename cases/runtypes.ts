@@ -3,10 +3,10 @@ import { Case } from './abstract';
 
 const dataType = Record({
   number: Number,
-  negNumber: Number.withConstraint(n => n < 0),
+  negNumber: Number,
   maxNumber: Number,
   string: String,
-  longString: String.withConstraint(s => s.length > 100),
+  longString: String,
   boolean: Boolean,
   deeplyNested: Record({
     foo: String,

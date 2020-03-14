@@ -9,10 +9,10 @@ const str = () => toi.str.is();
 const isValid = obj().and(
   toi.obj.keys({
     number: req().and(num()),
-    negNumber: req().and(num().and(toi.num.max(0))),
-    maxNumber: req().and(num().and(toi.num.max(Number.MAX_VALUE))),
+    negNumber: req().and(num()),
+    maxNumber: req().and(num()),
     string: req().and(str()),
-    longString: req().and(str().and(toi.str.min(100))),
+    longString: req().and(str()),
     boolean: req().and(toi.bool.is()),
     deeplyNested: obj().and(
       toi.obj.keys({

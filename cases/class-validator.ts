@@ -41,7 +41,7 @@ class DataType implements Data {
   @IsString()
   string!: string;
 
-  @MinLength(100)
+  @IsString()
   longString!: string;
 
   @IsBoolean()

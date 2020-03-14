@@ -79,40 +79,4 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, caseClass) => {
     expect(err).toBeTruthy();
     expect(err).toMatchSnapshot();
   });
-
-  it('should fail validation when number is not negative', async () => {
-    expect.assertions(2);
-
-    data.negNumber = 1;
-    const c = new caseClass(data);
-
-    let err;
-
-    try {
-      await c.validate();
-    } catch (e) {
-      err = e;
-    }
-
-    expect(err).toBeTruthy();
-    expect(err).toMatchSnapshot();
-  });
-
-  it('should fail validation when string is too short', async () => {
-    expect.assertions(2);
-
-    data.longString = '';
-    const c = new caseClass(data);
-
-    let err;
-
-    try {
-      await c.validate();
-    } catch (e) {
-      err = e;
-    }
-
-    expect(err).toBeTruthy();
-    expect(err).toMatchSnapshot();
-  });
 });

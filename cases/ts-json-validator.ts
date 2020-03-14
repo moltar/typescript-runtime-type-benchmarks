@@ -15,10 +15,10 @@ const parser = new TsjsonParser(
     ],
     properties: {
       number: S({ type: 'number' }),
-      negNumber: S({ type: 'number', maximum: 0 }),
+      negNumber: S({ type: 'number' }),
       maxNumber: S({ type: 'number' }),
       string: S({ type: 'string' }),
-      longString: S({ type: 'string', minLength: 100 }),
+      longString: S({ type: 'string' }),
       boolean: S({ type: 'boolean' }),
       deeplyNested: S({
         type: 'object',
