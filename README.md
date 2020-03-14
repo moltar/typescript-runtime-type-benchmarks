@@ -50,10 +50,10 @@ const res = isMyDataValid(data)
 
 ## Benchmark Results
 
-### Node 10.x ([JSON](./results/benchmarks-10.x.json), [CSV](./results/benchmarks-10.x.csv), [SVG](./results/benchmarks-10.x.svg))
+### Node 10.x ([JSON](./results/benchmarks-10.x.json), [CSV](./results/benchmarks-10.x.csv), [SVG](./results/bar-graph-10.x.svg))
 
 ![Bar Graph - Node 10.x](./results/bar-graph-10.x.svg)
 
-### Node 12.x ([JSON](./results/benchmarks-12.x.json), [CSV](./results/benchmarks-12.x.csv), [SVG](./results/benchmarks-12.x.svg))
+### Node 12.x ([JSON](./results/benchmarks-12.x.json), [CSV](./results/benchmarks-12.x.csv), [SVG](./results/bar-graph-12.x.svg))
 
 ![Bar Graph - Node 12.x](./results/bar-graph-12.x.svg)
