@@ -13,10 +13,6 @@ Compares run time type validation of the following packages:
 
 ---
 
-## Node 8.x
-
-![Bar Graph - Node 8.x](./results/bar-graph-8.x.svg)
-
 ## Node 10.x
 
 ![Bar Graph - Node 10.x](./results/bar-graph-10.x.svg)
