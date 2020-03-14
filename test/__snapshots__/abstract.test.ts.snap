@@ -298,15 +298,65 @@ exports[`Case Class: io-ts should fail validation when string is too short 1`] =
 
 exports[`Case Class: io-ts should fail validation when type is wrong 1`] = `[Error: Invalid]`;
 
-exports[`Case Class: marshal should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
+exports[`Case Class: marshal should fail validation when deeply nested type is wrong 1`] = `
+ValidationFailed {
+  "errors": Array [
+    ValidationError {
+      "code": "invalid_boolean",
+      "message": "No Boolean given",
+      "path": "deeplyNested.bool",
+    },
+  ],
+}
+`;
 
-exports[`Case Class: marshal should fail validation when number is not negative 1`] = `[Error: Invalid]`;
+exports[`Case Class: marshal should fail validation when number is not negative 1`] = `
+ValidationFailed {
+  "errors": Array [
+    ValidationError {
+      "code": "IsNegative",
+      "message": "Number must be negative.",
+      "path": "negNumber",
+    },
+  ],
+}
+`;
 
-exports[`Case Class: marshal should fail validation when prop is missing 1`] = `[TypeError: Cannot add property boolean, object is not extensible]`;
+exports[`Case Class: marshal should fail validation when prop is missing 1`] = `
+ValidationFailed {
+  "errors": Array [
+    ValidationError {
+      "code": "required",
+      "message": "Required value is undefined or null",
+      "path": "boolean",
+    },
+  ],
+}
+`;
 
-exports[`Case Class: marshal should fail validation when string is too short 1`] = `[Error: Invalid]`;
+exports[`Case Class: marshal should fail validation when string is too short 1`] = `
+ValidationFailed {
+  "errors": Array [
+    ValidationError {
+      "code": "MinLength",
+      "message": "String must have minimum length of 100.",
+      "path": "longString",
+    },
+  ],
+}
+`;
 
-exports[`Case Class: marshal should fail validation when type is wrong 1`] = `[Error: Invalid]`;
+exports[`Case Class: marshal should fail validation when type is wrong 1`] = `
+ValidationFailed {
+  "errors": Array [
+    ValidationError {
+      "code": "invalid_boolean",
+      "message": "No Boolean given",
+      "path": "boolean",
+    },
+  ],
+}
+`;
 
 exports[`Case Class: runtypes should fail validation when deeply nested type is wrong 1`] = `[ValidationError: Expected boolean, but was string]`;
 
