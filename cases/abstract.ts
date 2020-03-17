@@ -2,7 +2,8 @@ import clone from 'clone';
 import { Data } from '../data';
 
 export abstract class Case implements Case {
-  protected readonly data: unknown;
+  // tslint:disable-next-line no-any
+  protected readonly data: any;
 
   /**
    * Human readable case name.

@@ -19,7 +19,6 @@ export class FunvalCase extends Case implements Case {
   name = 'funval';
 
   validate() {
-    // tslint:disable-next-line no-any
-    return validator(this.data as any);
+    return validator(this.data);
   }
 }
