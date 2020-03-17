@@ -1,66 +1,72 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-03-16T08:23:00.541Z",
+  "date": "2020-03-17T17:00:01.575Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-      "ops": 23125,
-      "margin": 27.19,
-      "percentSlower": 99.92
+      "ops": 31564,
+      "margin": 6.47,
+      "percentSlower": 99.91
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 34628,
-      "margin": 6.65,
-      "percentSlower": 99.88
+      "ops": 34450,
+      "margin": 6.91,
+      "percentSlower": 99.9
+    },
+    {
+      "name": "funval",
+      "ops": 752852,
+      "margin": 1.09,
+      "percentSlower": 97.75
     },
     {
       "name": "io-ts",
-      "ops": 2100617,
-      "margin": 0.85,
-      "percentSlower": 92.93
+      "ops": 2169165,
+      "margin": 1.25,
+      "percentSlower": 93.51
     },
     {
       "name": "marshal",
-      "ops": 4182223,
-      "margin": 0.98,
-      "percentSlower": 85.92
+      "ops": 4346982,
+      "margin": 1.2,
+      "percentSlower": 86.99
     },
     {
       "name": "runtypes",
-      "ops": 710522,
-      "margin": 0.74,
-      "percentSlower": 97.61
+      "ops": 710305,
+      "margin": 1.5,
+      "percentSlower": 97.87
     },
     {
       "name": "toi",
-      "ops": 419542,
-      "margin": 0.76,
-      "percentSlower": 98.59
+      "ops": 434352,
+      "margin": 0.94,
+      "percentSlower": 98.7
     },
     {
       "name": "ts-json-validator",
-      "ops": 29703157,
-      "margin": 1.01,
+      "ops": 33414449,
+      "margin": 0.95,
       "percentSlower": 0
     },
     {
       "name": "ts-utils",
-      "ops": 134288,
-      "margin": 1.36,
-      "percentSlower": 99.55
+      "ops": 118223,
+      "margin": 17.28,
+      "percentSlower": 99.65
     },
     {
       "name": "zod",
-      "ops": 1635541,
-      "margin": 1.01,
-      "percentSlower": 94.49
+      "ops": 1584306,
+      "margin": 0.94,
+      "percentSlower": 95.26
     }
   ],
   "fastest": {
     "name": "ts-json-validator",
-    "index": 6
+    "index": 7
   },
   "slowest": {
     "name": "class-transformer-validator-async",
