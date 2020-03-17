@@ -2,6 +2,7 @@ import {
   ClassValidatorAsyncCase,
   ClassValidatorSyncCase,
 } from './class-validator';
+import { FunvalCase } from "./funval";
 import { IoTsCase } from './io-ts';
 import { MarshalCase } from './marshal';
 import { RuntypesCase } from './runtypes';
@@ -13,6 +14,7 @@ import { ZodCase } from './zod';
 export const cases = [
   ClassValidatorAsyncCase,
   ClassValidatorSyncCase,
+  FunvalCase,
   IoTsCase,
   MarshalCase,
   RuntypesCase,

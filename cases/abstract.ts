@@ -18,5 +18,5 @@ export abstract class Case implements Case {
    *
    * Method returns a `Data` object or throws when invalid data is provided.
    */
-  abstract validate(): Promise<Data> | Data;
+  abstract validate(): PromiseLike<Data> | Data;
 }

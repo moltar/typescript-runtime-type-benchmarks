@@ -3,6 +3,7 @@
 ## Packages Compared
 
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
+* [funval](https://github.com/neuledge/funval)
 * [io-ts](https://github.com/gcanti/io-ts)
 * [marshal](https://github.com/marcj/marshal.ts)
 * [runtypes](https://github.com/pelotom/runtypes)
