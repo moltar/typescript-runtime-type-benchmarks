@@ -56,7 +56,11 @@ export class ClassValidatorSyncCase extends Case implements Case {
   name = 'class-transformer-validator-sync';
 
   validate() {
-    return transformAndValidateSync(DataType, this.data);
+    // We cast the data as some "unknown" object, to make sure that it does not bias the validator
+    // We are not using "any" type here, because that confuses "class-validator", as it can also
+    // work on arrays, and it returns ambiguous "Foo | Foo[]" type if it doesn't know if input was
+    // an array or not.
+    return transformAndValidateSync(DataType, this.data as {});
   }
 }
 
@@ -64,6 +68,6 @@ export class ClassValidatorAsyncCase extends Case implements Case {
   name = 'class-transformer-validator-async';
 
   validate() {
-    return transformAndValidate(DataType, this.data);
+    return transformAndValidate(DataType, this.data as {});
   }
 }
