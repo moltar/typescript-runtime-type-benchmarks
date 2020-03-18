@@ -5,6 +5,7 @@ import {
 import { FunvalCase } from "./funval";
 import { IoTsCase } from './io-ts';
 import { MarshalCase } from './marshal';
+import { PurifyCase } from "./purify-ts";
 import { RuntypesCase } from './runtypes';
 import { ToiCase } from './toi';
 import { TsJsonValidatorCase } from './ts-json-validator';
@@ -17,6 +18,7 @@ export const cases = [
   FunvalCase,
   IoTsCase,
   MarshalCase,
+  PurifyCase,
   RuntypesCase,
   ToiCase,
   TsJsonValidatorCase,
