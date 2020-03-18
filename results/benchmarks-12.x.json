@@ -1,72 +1,78 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-03-18T11:45:31.460Z",
+  "date": "2020-03-18T13:19:16.429Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-      "ops": 41821,
-      "margin": 17.47,
-      "percentSlower": 99.89
+      "ops": 28383,
+      "margin": 13.07,
+      "percentSlower": 99.92
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 50820,
-      "margin": 0.84,
-      "percentSlower": 99.87
+      "ops": 39990,
+      "margin": 1.17,
+      "percentSlower": 99.89
     },
     {
       "name": "funval",
-      "ops": 896466,
-      "margin": 1.28,
+      "ops": 811195,
+      "margin": 0.84,
       "percentSlower": 97.75
     },
     {
       "name": "io-ts",
-      "ops": 3014319,
-      "margin": 0.86,
-      "percentSlower": 92.42
+      "ops": 2785914,
+      "margin": 0.96,
+      "percentSlower": 92.27
     },
     {
       "name": "marshal",
-      "ops": 4523472,
-      "margin": 1.38,
-      "percentSlower": 88.63
+      "ops": 3990055,
+      "margin": 1.28,
+      "percentSlower": 88.94
+    },
+    {
+      "name": "purify-ts",
+      "ops": 749640,
+      "margin": 0.86,
+      "percentSlower": 97.92
     },
     {
       "name": "runtypes",
-      "ops": 769144,
-      "margin": 1.13,
-      "percentSlower": 98.07
+      "ops": 729343,
+      "margin": 0.89,
+      "percentSlower": 97.98
     },
     {
       "name": "toi",
-      "ops": 456000,
-      "margin": 1.06,
-      "percentSlower": 98.85
+      "ops": 427549,
+      "margin": 0.83,
+      "percentSlower": 98.81
     },
     {
       "name": "ts-json-validator",
-      "ops": 39787901,
-      "margin": 1.17,
+      "ops": 36062662,
+      "margin": 0.93,
       "percentSlower": 0
     },
     {
       "name": "ts-utils",
-      "ops": 127336,
-      "margin": 1.7,
-      "percentSlower": 99.68
+      "ops": 121423,
+      "margin": 1.38,
+      "percentSlower": 99.66
     },
     {
       "name": "zod",
-      "ops": 1766119,
-      "margin": 1.15,
-      "percentSlower": 95.56
+      "ops": 1502224,
+      "margin": 1.35,
+      "percentSlower": 95.83
     }
   ],
   "fastest": {
     "name": "ts-json-validator",
-    "index": 7
+    "index": 8
   },
   "slowest": {
     "name": "class-transformer-validator-async",
