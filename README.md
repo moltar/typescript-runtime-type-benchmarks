@@ -6,6 +6,7 @@
 * [funval](https://github.com/neuledge/funval)
 * [io-ts](https://github.com/gcanti/io-ts)
 * [marshal](https://github.com/marcj/marshal.ts)
+* [purify-ts](https://github.com/gigobyte/purify)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
