@@ -1,67 +1,67 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-03-17T17:00:01.575Z",
+  "date": "2020-03-18T11:43:25.654Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-      "ops": 31564,
-      "margin": 6.47,
-      "percentSlower": 99.91
+      "ops": 44249,
+      "margin": 16.14,
+      "percentSlower": 99.88
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 34450,
-      "margin": 6.91,
-      "percentSlower": 99.9
+      "ops": 51535,
+      "margin": 1.57,
+      "percentSlower": 99.87
     },
     {
       "name": "funval",
-      "ops": 752852,
-      "margin": 1.09,
-      "percentSlower": 97.75
+      "ops": 881783,
+      "margin": 1.95,
+      "percentSlower": 97.69
     },
     {
       "name": "io-ts",
-      "ops": 2169165,
-      "margin": 1.25,
-      "percentSlower": 93.51
+      "ops": 2570304,
+      "margin": 1.53,
+      "percentSlower": 93.28
     },
     {
       "name": "marshal",
-      "ops": 4346982,
-      "margin": 1.2,
-      "percentSlower": 86.99
+      "ops": 5580089,
+      "margin": 1.17,
+      "percentSlower": 85.41
     },
     {
       "name": "runtypes",
-      "ops": 710305,
-      "margin": 1.5,
-      "percentSlower": 97.87
+      "ops": 913372,
+      "margin": 1.07,
+      "percentSlower": 97.61
     },
     {
       "name": "toi",
-      "ops": 434352,
-      "margin": 0.94,
-      "percentSlower": 98.7
+      "ops": 533818,
+      "margin": 1.45,
+      "percentSlower": 98.6
     },
     {
       "name": "ts-json-validator",
-      "ops": 33414449,
-      "margin": 0.95,
+      "ops": 38241493,
+      "margin": 1.27,
       "percentSlower": 0
     },
     {
       "name": "ts-utils",
-      "ops": 118223,
-      "margin": 17.28,
-      "percentSlower": 99.65
+      "ops": 147322,
+      "margin": 16.96,
+      "percentSlower": 99.61
     },
     {
       "name": "zod",
-      "ops": 1584306,
-      "margin": 0.94,
-      "percentSlower": 95.26
+      "ops": 1914273,
+      "margin": 1.95,
+      "percentSlower": 94.99
     }
   ],
   "fastest": {
