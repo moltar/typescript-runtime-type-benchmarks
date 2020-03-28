@@ -5,6 +5,7 @@
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [funval](https://github.com/neuledge/funval)
 * [io-ts](https://github.com/gcanti/io-ts)
+* [json-decoder](https://github.com/venil7/json-decoder)
 * [marshal](https://github.com/marcj/marshal.ts)
 * [purify-ts](https://github.com/gigobyte/purify)
 * [runtypes](https://github.com/pelotom/runtypes)

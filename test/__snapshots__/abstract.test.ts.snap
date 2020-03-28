@@ -196,6 +196,12 @@ exports[`Case Class: io-ts should fail validation when prop is missing 1`] = `[E
 
 exports[`Case Class: io-ts should fail validation when type is wrong 1`] = `[Error: Invalid]`;
 
+exports[`Case Class: json-decoder should fail validation when deeply nested type is wrong 1`] = `[Error: deeplyNested: bool: expected boolean, got string]`;
+
+exports[`Case Class: json-decoder should fail validation when prop is missing 1`] = `[Error: boolean: expected boolean, got undefined]`;
+
+exports[`Case Class: json-decoder should fail validation when type is wrong 1`] = `[Error: boolean: expected boolean, got string]`;
+
 exports[`Case Class: marshal should fail validation when deeply nested type is wrong 1`] = `
 ValidationFailed {
   "errors": Array [
