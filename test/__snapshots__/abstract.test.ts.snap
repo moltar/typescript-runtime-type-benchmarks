@@ -321,8 +321,8 @@ DecodeError {
 }
 `;
 
-exports[`Case Class: zod should fail validation when deeply nested type is wrong 1`] = `[Error: deeplyNested: bool: Non-boolean type: string]`;
+exports[`Case Class: zod should fail validation when deeply nested type is wrong 1`] = `[Error: \`deeplyNested.bool\`: Non-boolean type: string]`;
 
-exports[`Case Class: zod should fail validation when prop is missing 1`] = `[Error: boolean: Non-boolean type: undefined]`;
+exports[`Case Class: zod should fail validation when prop is missing 1`] = `[Error: \`boolean\`: Non-boolean type: undefined]`;
 
-exports[`Case Class: zod should fail validation when type is wrong 1`] = `[Error: boolean: Non-boolean type: string]`;
+exports[`Case Class: zod should fail validation when type is wrong 1`] = `[Error: \`boolean\`: Non-boolean type: string]`;
