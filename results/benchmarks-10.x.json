@@ -1,78 +1,78 @@
 {
   "name": "typescript-runtime-type-benchmarks",
-  "date": "2020-03-29T18:50:02.389Z",
+  "date": "2020-03-29T21:42:45.115Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-      "ops": 28386,
-      "margin": 13.99,
-      "percentSlower": 99.91
+      "ops": 30120,
+      "margin": 1.52,
+      "percentSlower": 99.9
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 35453,
-      "margin": 1.14,
+      "ops": 35908,
+      "margin": 1.39,
       "percentSlower": 99.88
     },
     {
       "name": "funval",
-      "ops": 678161,
-      "margin": 1.22,
-      "percentSlower": 97.79
+      "ops": 719328,
+      "margin": 1.83,
+      "percentSlower": 97.69
     },
     {
       "name": "io-ts",
-      "ops": 2037146,
-      "margin": 0.73,
-      "percentSlower": 93.37
+      "ops": 2073339,
+      "margin": 1.23,
+      "percentSlower": 93.34
     },
     {
       "name": "json-decoder",
-      "ops": 679216,
-      "margin": 4.21,
-      "percentSlower": 97.79
+      "ops": 698044,
+      "margin": 4.67,
+      "percentSlower": 97.76
     },
     {
       "name": "marshal",
-      "ops": 4112383,
-      "margin": 1.35,
-      "percentSlower": 86.62
+      "ops": 4045618,
+      "margin": 1.66,
+      "percentSlower": 86.99
     },
     {
       "name": "purify-ts",
-      "ops": 730255,
-      "margin": 3.73,
-      "percentSlower": 97.62
+      "ops": 762585,
+      "margin": 1.16,
+      "percentSlower": 97.55
     },
     {
       "name": "runtypes",
-      "ops": 703412,
-      "margin": 0.88,
-      "percentSlower": 97.71
+      "ops": 730914,
+      "margin": 4.77,
+      "percentSlower": 97.65
     },
     {
       "name": "toi",
-      "ops": 411275,
-      "margin": 0.97,
-      "percentSlower": 98.66
+      "ops": 447640,
+      "margin": 1.59,
+      "percentSlower": 98.56
     },
     {
       "name": "ts-json-validator",
-      "ops": 30741909,
-      "margin": 1.32,
+      "ops": 31108141,
+      "margin": 1.35,
       "percentSlower": 0
     },
     {
       "name": "ts-utils",
-      "ops": 132205,
-      "margin": 1.4,
-      "percentSlower": 99.57
+      "ops": 122392,
+      "margin": 12.37,
+      "percentSlower": 99.61
     },
     {
       "name": "zod",
-      "ops": 63985,
-      "margin": 2.21,
+      "ops": 64893,
+      "margin": 2.04,
       "percentSlower": 99.79
     }
   ],
