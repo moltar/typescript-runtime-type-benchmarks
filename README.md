@@ -7,6 +7,7 @@
 * [io-ts](https://github.com/gcanti/io-ts)
 * [json-decoder](https://github.com/venil7/json-decoder)
 * [marshal](https://github.com/marcj/marshal.ts)
+* [myzod](https://github.com/davidmdm/myzod)
 * [purify-ts](https://github.com/gigobyte/purify)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [toi](https://github.com/hf/toi)

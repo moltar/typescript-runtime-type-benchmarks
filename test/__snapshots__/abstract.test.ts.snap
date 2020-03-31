@@ -238,6 +238,12 @@ ValidationFailed {
 }
 `;
 
+exports[`Case Class: myzod should fail validation when deeply nested type is wrong 1`] = `[MyZodError: error parsing object at path: "deeplyNested.bool" - expected type to be boolean but got string]`;
+
+exports[`Case Class: myzod should fail validation when prop is missing 1`] = `[MyZodError: error parsing object at path: "boolean" - expected type to be boolean but got undefined]`;
+
+exports[`Case Class: myzod should fail validation when type is wrong 1`] = `[MyZodError: error parsing object at path: "boolean" - expected type to be boolean but got string]`;
+
 exports[`Case Class: purify-ts should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: purify-ts should fail validation when prop is missing 1`] = `[Error: Invalid]`;

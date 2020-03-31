@@ -6,6 +6,7 @@ import { FunvalCase } from "./funval";
 import { IoTsCase } from './io-ts';
 import { JsonDecoderCase } from './json-decoder'
 import { MarshalCase } from './marshal';
+import { MyzodCase } from './myzod';
 import { PurifyCase } from "./purify-ts";
 import { RuntypesCase } from './runtypes';
 import { ToiCase } from './toi';
@@ -20,6 +21,7 @@ export const cases = [
   IoTsCase,
   JsonDecoderCase,
   MarshalCase,
+  MyzodCase,
   PurifyCase,
   RuntypesCase,
   ToiCase,
