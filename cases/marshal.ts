@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {
   f,
-  validatedPlainToClass
+  jitValidate
 } from '@marcj/marshal';
 import { Data } from '../data';
 import { Case } from './abstract';
@@ -43,10 +43,18 @@ class DataType implements Data {
   deeplyNested!: DeeplyNestedType;
 }
 
+const validator = jitValidate(DataType);
+
 export class MarshalCase extends Case implements Case {
   name = 'marshal';
 
   validate() {
-    return validatedPlainToClass(DataType, this.data);
+    const errors = validator(this.data);
+
+    if (errors.length === 0) {
+      return this.data;
+    }
+
+    throw new Error('Invalid');
   }
 }

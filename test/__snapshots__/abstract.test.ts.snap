@@ -202,41 +202,11 @@ exports[`Case Class: json-decoder should fail validation when prop is missing 1`
 
 exports[`Case Class: json-decoder should fail validation when type is wrong 1`] = `[Error: boolean: expected boolean, got string]`;
 
-exports[`Case Class: marshal should fail validation when deeply nested type is wrong 1`] = `
-ValidationFailed {
-  "errors": Array [
-    ValidationError {
-      "code": "invalid_boolean",
-      "message": "No Boolean given",
-      "path": "deeplyNested.bool",
-    },
-  ],
-}
-`;
+exports[`Case Class: marshal should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
 
-exports[`Case Class: marshal should fail validation when prop is missing 1`] = `
-ValidationFailed {
-  "errors": Array [
-    ValidationError {
-      "code": "required",
-      "message": "Required value is undefined or null",
-      "path": "boolean",
-    },
-  ],
-}
-`;
+exports[`Case Class: marshal should fail validation when prop is missing 1`] = `[Error: Invalid]`;
 
-exports[`Case Class: marshal should fail validation when type is wrong 1`] = `
-ValidationFailed {
-  "errors": Array [
-    ValidationError {
-      "code": "invalid_boolean",
-      "message": "No Boolean given",
-      "path": "boolean",
-    },
-  ],
-}
-`;
+exports[`Case Class: marshal should fail validation when type is wrong 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: myzod should fail validation when deeply nested type is wrong 1`] = `[MyZodError: error parsing object at path: "deeplyNested.bool" - expected type to be boolean but got string]`;
 
