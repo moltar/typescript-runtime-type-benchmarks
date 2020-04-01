@@ -11,20 +11,20 @@ const dataType = Codec.interface({
   deeplyNested: Codec.interface({
     foo: string,
     num: number,
-    bool: boolean
-  })
+    bool: boolean,
+  }),
 });
 
 export class PurifyCase extends Case implements Case {
   name = 'purify-ts';
 
   validate() {
-    const { data } = this
+    const { data } = this;
 
     if (dataType.decode(data).isRight()) {
       return data;
     }
 
-    throw new Error("Invalid");
+    throw new Error('Invalid');
   }
 }

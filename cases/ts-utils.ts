@@ -19,6 +19,6 @@ export class TsUtilsCase extends Case implements Case {
   name = 'ts-utils';
 
   validate() {
-    return dataType(this.data).toPromise()
+    return dataType(this.data).toPromise();
   }
 }

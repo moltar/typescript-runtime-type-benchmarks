@@ -1,4 +1,9 @@
-import { objectDecoder, stringDecoder, numberDecoder, boolDecoder } from 'json-decoder';
+import {
+  objectDecoder,
+  stringDecoder,
+  numberDecoder,
+  boolDecoder,
+} from 'json-decoder';
 import { Case } from './abstract';
 
 const dataType = objectDecoder({
@@ -22,9 +27,9 @@ export class JsonDecoderCase extends Case implements Case {
     const res = dataType.decode(this.data);
 
     if (res.type === 'ERR') {
-      throw new Error(res.message)
+      throw new Error(res.message);
     }
 
-    return res.value
+    return res.value;
   }
 }

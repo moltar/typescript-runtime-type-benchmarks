@@ -37,7 +37,7 @@ export class TsJsonValidatorCase extends Case implements Case {
   name = 'ts-json-validator';
 
   validate() {
-    const { data } = this
+    const { data } = this;
 
     if (parser.validates(data)) {
       return data;

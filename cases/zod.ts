@@ -19,6 +19,6 @@ export class ZodCase extends Case implements Case {
   name = 'zod';
 
   validate() {
-    return dataType.parse(this.data)
+    return dataType.parse(this.data);
   }
 }

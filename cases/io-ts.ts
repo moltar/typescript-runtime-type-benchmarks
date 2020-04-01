@@ -19,7 +19,7 @@ export class IoTsCase extends Case implements Case {
   name = 'io-ts';
 
   validate() {
-    const { data } = this
+    const { data } = this;
 
     if (dataType.is(data)) {
       return data;

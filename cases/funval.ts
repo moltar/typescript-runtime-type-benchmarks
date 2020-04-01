@@ -13,7 +13,7 @@ const validator = Schema({
     num: Integer,
     bool: Bool,
   }),
-})
+});
 
 export class FunvalCase extends Case implements Case {
   name = 'funval';

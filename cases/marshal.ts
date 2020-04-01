@@ -1,11 +1,7 @@
 import 'reflect-metadata';
-import {
-  f,
-  validatedPlainToClass
-} from '@marcj/marshal';
+import { f, validatedPlainToClass } from '@marcj/marshal';
 import { Data } from '../data';
 import { Case } from './abstract';
-
 
 type DeeplyNested = Data['deeplyNested'];
 
