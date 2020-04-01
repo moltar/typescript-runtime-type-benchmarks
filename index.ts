@@ -1,46 +1,101 @@
-import { writeFileSync } from 'fs';
+import { writeFile } from 'fs';
 import { join } from 'path';
 import { suite, add, cycle, complete, save } from 'benny';
 import stringify from 'csv-stringify/lib/sync';
 import pkg from './package.json';
+import { graph } from './graph';
 import { DATA } from './data';
 import { cases } from './cases';
+import { Case } from './cases/abstract';
+import { TsJsonValidatorCase } from './cases/ts-json-validator';
 
-const caseInstances = cases.map(caseClass => new caseClass(DATA));
+const caseInstances: Case[] = cases.map(caseClass => new caseClass(DATA));
 
 const RESULTS_DIR = join(__dirname, 'results');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
 
-suite(
-  pkg.name,
+async function main() {
+  await suiteDataTypeValidation();
+  await suiteDataTypeValidationSansTsJsonValidator();
+}
+main();
 
-  ...caseInstances.map(caseInstance =>
-    add(caseInstance.name, () => caseInstance.validate())
-  ),
+/**
+ * Benchmarking suite that performs data type validation only.
+ *
+ * https://en.wikipedia.org/wiki/Data_validation#Data-type_check
+ */
+async function suiteDataTypeValidation() {
+  await run('data-type', caseInstances, 'validate');
+}
 
-  cycle(),
-  complete(),
+/**
+ * Benchmarking suite that performs data type validation only, but skips ts-json-validator
+ * because it is such an outlier and it is difficult to look at the performance of other packages.
+ *
+ * https://en.wikipedia.org/wiki/Data_validation#Data-type_check
+ */
+async function suiteDataTypeValidationSansTsJsonValidator() {
+  const cases = caseInstances.filter(
+    caseInstance => !(caseInstance instanceof TsJsonValidatorCase)
+  );
 
-  complete(res => {
-    const csvArr = res.results.map(({ name, ops }) => {
-      return { name, ops };
-    });
+  await run('data-type-sans-ts-json-validator', cases, 'validate');
+}
 
-    const csv = stringify(csvArr, {
-      header: true,
-      columns: ['name', 'ops'],
-    });
+async function run(name: string, cases: Case[], methodName: keyof Case) {
+  const fns = cases.map(caseInstance =>
+    add(caseInstance.name, () => {
+      const method = caseInstance[methodName];
 
-    return writeFileSync(
-      join(RESULTS_DIR, `benchmarks-${NODE_VERSION}.csv`),
-      csv,
-      { encoding: 'utf8' }
+      if (typeof method === 'function') {
+        return method.bind(caseInstance)();
+      } else {
+        throw new Error(`${methodName} is not a callable method.`);
+      }
+    })
+  );
+
+  return suite(
+    name,
+
+    // benchmark functions
+    ...fns,
+
+    cycle(),
+    complete(),
+
+    // saves CSV and SVG
+    complete(async res => {
+      const csvArr = res.results.map(({ name, ops }) => {
+        return { name, ops };
+      });
+
+      const csv = stringify(csvArr, {
+        header: true,
+        columns: ['name', 'ops'],
+      });
+      const csvFilename = join(RESULTS_DIR, `${name}-${NODE_VERSION}.csv`);
+      await saveFile(csvFilename, csv);
+
+      const svg = await graph(csvFilename);
+      const svgFilename = join(RESULTS_DIR, `${name}-${NODE_VERSION}.svg`);
+      await saveFile(svgFilename, svg);
+    }),
+
+    // saves raw JSON results
+    save({
+      file: `${name}-${NODE_VERSION}`,
+      folder: RESULTS_DIR,
+      version: pkg.version,
+    })
+  );
+}
+
+function saveFile(filename: string, content: string) {
+  return new Promise((resolve, reject) => {
+    return writeFile(filename, content, { encoding: 'utf8' }, err =>
+      err ? reject(err) : resolve()
     );
-  }),
-
-  save({
-    file: `benchmarks-${NODE_VERSION}`,
-    folder: RESULTS_DIR,
-    version: pkg.version,
-  })
-);
+  });
+}
