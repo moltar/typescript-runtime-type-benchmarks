@@ -61,6 +61,8 @@ jobs:
 
       - name: push
         uses: github-actions-x/commit@v2.1
+        ## prevents forked repos from comitting results in PRs
+        if: github.repository == 'moltar/typescript-runtime-type-benchmarks'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: master
