@@ -19,10 +19,10 @@ export class PurifyCase extends Case implements Case {
   name = 'purify-ts';
 
   validate() {
-    const { data } = this;
+    const decodedData = dataType.decode(this.data);
 
-    if (dataType.decode(data).isRight()) {
-      return data;
+    if (decodedData.isRight()) {
+      return decodedData.extract();
     }
 
     throw new Error('Invalid');
