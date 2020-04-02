@@ -40,7 +40,7 @@ jobs:
       - name: install
         run: npm ci
 
-      - name: test
+      - name: lint
         run: npm run lint
 
       - name: test
