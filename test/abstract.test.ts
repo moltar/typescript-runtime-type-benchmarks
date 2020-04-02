@@ -1,6 +1,7 @@
 import clone from 'clone';
+import { assert, IsExact } from 'conditional-type-checks';
 import { cases } from '../cases/index';
-import { DATA } from '../data';
+import { DATA, Data } from '../data';
 
 const caseClasses = Object.values(cases);
 
@@ -17,6 +18,19 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, caseClass) => {
 
   beforeEach(() => {
     data = clonedData();
+  });
+
+  it('should validate type', () => {
+    expect.assertions(1);
+
+    const c = new caseClass(data);
+
+    // testing return types of all validation methods
+    assert<IsExact<ReturnType<typeof c.validate>, PromiseLike<Data> | Data>>(
+      true
+    );
+
+    expect(c).toBeTruthy()
   });
 
   it('should return a validated data object', async () => {
