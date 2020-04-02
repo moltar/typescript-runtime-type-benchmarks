@@ -30,7 +30,7 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, caseClass) => {
       true
     );
 
-    expect(c).toBeTruthy()
+    expect(c).toBeTruthy();
   });
 
   it('should return a validated data object', async () => {
