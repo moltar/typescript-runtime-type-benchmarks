@@ -62,9 +62,9 @@ const res = isMyDataValid(data)
 
 ![Bar Graph - Node 10.x](./results/data-type-10.x.svg)
 
-#### Node 12.x ([JSON](./results/data-type-12.14.json), [CSV](./results/data-type-12.14.csv), [SVG](./results/data-type-12.14.svg))
+#### Node 12.x ([JSON](./results/data-type-12.14.0.json), [CSV](./results/data-type-12.14.0.csv), [SVG](./results/data-type-12.14.0.svg))
 
-![Bar Graph - Node 12.x](./results/data-type-12.14.svg)
+![Bar Graph - Node 12.x](./results/data-type-12.14.0.svg)
 
 #### Node 13.x ([JSON](./results/data-type-13.x.json), [CSV](./results/data-type-13.x.csv), [SVG](./results/data-type-13.x.svg))
 
@@ -79,9 +79,9 @@ This benchmark run includes all of the above packages, but excludes `ts-json-val
 
 ![Bar Graph - Node 10.x](./results/data-type-sans-ts-json-validator-and-quartet-10.x.svg)
 
-#### Node 12.x ([JSON](./results/data-type-sans-ts-json-validator-and-quartet-12.14.json), [CSV](./results/data-type-sans-ts-json-validator-and-quartet-12.14.csv), [SVG](./results/data-type-sans-ts-json-validator-and-quartet-12.14.svg))
+#### Node 12.x ([JSON](./results/data-type-sans-ts-json-validator-and-quartet-12.x.json), [CSV](./results/data-type-sans-ts-json-validator-and-quartet-12.x.csv), [SVG](./results/data-type-sans-ts-json-validator-and-quartet-12.x.svg))
 
-![Bar Graph - Node 12.x](./results/data-type-sans-ts-json-validator-and-quartet-12.14.svg)
+![Bar Graph - Node 12.x](./results/data-type-sans-ts-json-validator-and-quartet-12.x.svg)
 
 #### Node 13.x ([JSON](./results/data-type-sans-ts-json-validator-and-quartet-13.x.json), [CSV](./results/data-type-sans-ts-json-validator-and-quartet-13.x.csv), [SVG](./results/data-type-sans-ts-json-validator-and-quartet-13.x.svg))
 
