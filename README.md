@@ -62,9 +62,9 @@ const res = isMyDataValid(data)
 
 ![Bar Graph - Node 10.x](./results/data-type-10.x.svg)
 
-#### Node 12.x ([JSON](./results/data-type-12.14.0.json), [CSV](./results/data-type-12.14.0.csv), [SVG](./results/data-type-12.14.0.svg))
+#### Node 12.x ([JSON](./results/data-type-v12.14.0.json), [CSV](./results/data-type-v12.14.0.csv), [SVG](./results/data-type-v12.14.0.svg))
 
-![Bar Graph - Node 12.x](./results/data-type-12.14.0.svg)
+![Bar Graph - Node 12.x](./results/data-type-v12.14.0.svg)
 
 #### Node 13.x ([JSON](./results/data-type-13.x.json), [CSV](./results/data-type-13.x.csv), [SVG](./results/data-type-13.x.svg))
 
