@@ -9,6 +9,7 @@
 * [marshal](https://github.com/marcj/marshal.ts)
 * [myzod](https://github.com/davidmdm/myzod)
 * [purify-ts](https://github.com/gigobyte/purify)
+* [quartet](https://github.com/whiteand/ts-quartet)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
@@ -71,17 +72,17 @@ const res = isMyDataValid(data)
 
 ### Data Type Checks Sans `ts-json-validator`
 
-Because `ts-json-validator` is so performant it makes it difficult to see the benchmarks for other packages.
-This benchmark run includes all of the above packages, but excludes `ts-json-validator`.
+Because `ts-json-validator` and `quartet` are so performant it makes it difficult to see the benchmarks for other packages.
+This benchmark run includes all of the above packages, but excludes `ts-json-validator` and `quartet`.
 
-#### Node 10.x ([JSON](./results/data-type-sans-ts-json-validator-10.x.json), [CSV](./results/data-type-sans-ts-json-validator-10.x.csv), [SVG](./results/data-type-sans-ts-json-validator-10.x.svg))
+#### Node 10.x ([JSON](./results/data-type-sans-ts-json-validator-and-quartet-10.x.json), [CSV](./results/data-type-sans-ts-json-validator-and-quartet-10.x.csv), [SVG](./results/data-type-sans-ts-json-validator-and-quartet-10.x.svg))
 
-![Bar Graph - Node 10.x](./results/data-type-sans-ts-json-validator-10.x.svg)
+![Bar Graph - Node 10.x](./results/data-type-sans-ts-json-validator-and-quartet-10.x.svg)
 
-#### Node 12.x ([JSON](./results/data-type-sans-ts-json-validator-12.x.json), [CSV](./results/data-type-sans-ts-json-validator-12.x.csv), [SVG](./results/data-type-sans-ts-json-validator-12.x.svg))
+#### Node 12.x ([JSON](./results/data-type-sans-ts-json-validator-and-quartet-12.x.json), [CSV](./results/data-type-sans-ts-json-validator-and-quartet-12.x.csv), [SVG](./results/data-type-sans-ts-json-validator-and-quartet-12.x.svg))
 
-![Bar Graph - Node 12.x](./results/data-type-sans-ts-json-validator-12.x.svg)
+![Bar Graph - Node 12.x](./results/data-type-sans-ts-json-validator-and-quartet-12.x.svg)
 
-#### Node 13.x ([JSON](./results/data-type-sans-ts-json-validator-13.x.json), [CSV](./results/data-type-sans-ts-json-validator-13.x.csv), [SVG](./results/data-type-sans-ts-json-validator-13.x.svg))
+#### Node 13.x ([JSON](./results/data-type-sans-ts-json-validator-and-quartet-13.x.json), [CSV](./results/data-type-sans-ts-json-validator-and-quartet-13.x.csv), [SVG](./results/data-type-sans-ts-json-validator-and-quartet-13.x.svg))
 
-![Bar Graph - Node 13.x](./results/data-type-sans-ts-json-validator-13.x.svg)
+![Bar Graph - Node 13.x](./results/data-type-sans-ts-json-validator-and-quartet-13.x.svg)

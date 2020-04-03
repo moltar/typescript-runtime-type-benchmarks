@@ -8,6 +8,7 @@ import { DATA } from './data';
 import { cases } from './cases';
 import { Case } from './cases/abstract';
 import { TsJsonValidatorCase } from './cases/ts-json-validator';
+import { QuartetCase } from './cases/quartet';
 
 const caseInstances: Case[] = cases.map(caseClass => new caseClass(DATA));
 
@@ -16,7 +17,7 @@ const NODE_VERSION = process.env.NODE_VERSION || process.version;
 
 async function main() {
   await suiteDataTypeValidation();
-  await suiteDataTypeValidationSansTsJsonValidator();
+  await suiteDataTypeValidationSansTsJsonValidatorAndQuartet();
 }
 main();
 
@@ -30,17 +31,17 @@ async function suiteDataTypeValidation() {
 }
 
 /**
- * Benchmarking suite that performs data type validation only, but skips ts-json-validator
- * because it is such an outlier and it is difficult to look at the performance of other packages.
+ * Benchmarking suite that performs data type validation only, but skips ts-json-validator and quartet
+ * because they are such an outlier and it is difficult to look at the performance of other packages.
  *
  * https://en.wikipedia.org/wiki/Data_validation#Data-type_check
  */
-async function suiteDataTypeValidationSansTsJsonValidator() {
+async function suiteDataTypeValidationSansTsJsonValidatorAndQuartet() {
   const cases = caseInstances.filter(
-    caseInstance => !(caseInstance instanceof TsJsonValidatorCase)
+    caseInstance => !(caseInstance instanceof TsJsonValidatorCase || caseInstance instanceof QuartetCase)
   );
 
-  await run('data-type-sans-ts-json-validator', cases, 'validate');
+  await run('data-type-sans-ts-json-validator-and-quartet', cases, 'validate');
 }
 
 async function run(name: string, cases: Case[], methodName: keyof Case) {
