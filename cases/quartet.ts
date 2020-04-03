@@ -1,6 +1,6 @@
-import { v } from "quartet";
-import { Case } from "./abstract";
-import { Data } from "../data";
+import { v } from 'quartet';
+import { Case } from './abstract';
+import { Data } from '../data';
 
 const checkData = v<Data>({
   number: v.safeInteger,
@@ -12,12 +12,12 @@ const checkData = v<Data>({
   deeplyNested: {
     foo: v.string,
     num: v.number,
-    bool: v.boolean
-  }
+    bool: v.boolean,
+  },
 });
 
 export class QuartetCase extends Case implements Case {
-  name = "quartet";
+  name = 'quartet';
 
   validate() {
     const { data } = this;
@@ -26,6 +26,6 @@ export class QuartetCase extends Case implements Case {
       return data;
     }
 
-    throw new Error("Invalid");
+    throw new Error('Invalid');
   }
 }

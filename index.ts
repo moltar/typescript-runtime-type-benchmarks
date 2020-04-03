@@ -38,7 +38,11 @@ async function suiteDataTypeValidation() {
  */
 async function suiteDataTypeValidationSansTsJsonValidatorAndQuartet() {
   const cases = caseInstances.filter(
-    caseInstance => !(caseInstance instanceof TsJsonValidatorCase || caseInstance instanceof QuartetCase)
+    caseInstance =>
+      !(
+        caseInstance instanceof TsJsonValidatorCase ||
+        caseInstance instanceof QuartetCase
+      )
   );
 
   await run('data-type-sans-ts-json-validator-and-quartet', cases, 'validate');
