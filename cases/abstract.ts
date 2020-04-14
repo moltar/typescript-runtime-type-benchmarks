@@ -2,7 +2,7 @@ import clone from 'clone';
 import { Data } from '../data';
 
 export abstract class Case implements Case {
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected readonly data: any;
 
   /**

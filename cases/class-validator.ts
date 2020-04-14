@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import {
   IsNegative,
-  MinLength,
   ValidateNested,
   IsBoolean,
   IsNumber,

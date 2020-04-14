@@ -1,4 +1,5 @@
 import clone from 'clone';
+// eslint-disable-next-line node/no-unpublished-import
 import { assert, IsExact } from 'conditional-type-checks';
 import { cases } from '../cases/index';
 import { DATA, Data } from '../data';
