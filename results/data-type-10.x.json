@@ -1,105 +1,111 @@
 {
   "name": "data-type",
-  "date": "2020-04-22T02:05:58.226Z",
+  "date": "2020-04-22T02:27:07.192Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-      "ops": 20757,
-      "margin": 31.52,
-      "percentSlower": 99.98
+      "ops": 21589,
+      "margin": 36.36,
+      "percentSlower": 99.96
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 31352,
-      "margin": 9.27,
-      "percentSlower": 99.97
+      "ops": 31990,
+      "margin": 1.34,
+      "percentSlower": 99.94
     },
     {
       "name": "funval",
-      "ops": 714162,
-      "margin": 1.5,
-      "percentSlower": 99.27
+      "ops": 641765,
+      "margin": 1.07,
+      "percentSlower": 98.89
     },
     {
       "name": "io-ts",
-      "ops": 2091806,
-      "margin": 0.67,
-      "percentSlower": 97.87
+      "ops": 1992525,
+      "margin": 0.81,
+      "percentSlower": 96.54
+    },
+    {
+      "name": "jointz",
+      "ops": 175030,
+      "margin": 0.94,
+      "percentSlower": 99.7
     },
     {
       "name": "json-decoder",
-      "ops": 707512,
-      "margin": 4.07,
-      "percentSlower": 99.28
+      "ops": 665728,
+      "margin": 0.94,
+      "percentSlower": 98.84
     },
     {
       "name": "marshal",
-      "ops": 4321428,
-      "margin": 0.77,
-      "percentSlower": 95.61
+      "ops": 3811811,
+      "margin": 1.37,
+      "percentSlower": 93.38
     },
     {
       "name": "myzod",
-      "ops": 1191800,
-      "margin": 0.87,
-      "percentSlower": 98.79
+      "ops": 1264453,
+      "margin": 0.96,
+      "percentSlower": 97.8
     },
     {
       "name": "purify-ts",
-      "ops": 738963,
-      "margin": 4.24,
-      "percentSlower": 99.25
+      "ops": 684653,
+      "margin": 0.8,
+      "percentSlower": 98.81
     },
     {
       "name": "quartet",
-      "ops": 98372016,
-      "margin": 0.63,
+      "ops": 57604737,
+      "margin": 6.03,
       "percentSlower": 0
     },
     {
       "name": "runtypes",
-      "ops": 721804,
-      "margin": 0.53,
-      "percentSlower": 99.27
+      "ops": 669764,
+      "margin": 0.8,
+      "percentSlower": 98.84
     },
     {
       "name": "toi",
-      "ops": 432015,
-      "margin": 3.94,
-      "percentSlower": 99.56
+      "ops": 413081,
+      "margin": 0.78,
+      "percentSlower": 99.28
     },
     {
       "name": "ts-json-validator",
-      "ops": 32077261,
-      "margin": 0.53,
-      "percentSlower": 67.39
+      "ops": 22378912,
+      "margin": 1.18,
+      "percentSlower": 61.15
     },
     {
       "name": "ts-utils",
-      "ops": 131465,
-      "margin": 1.2,
-      "percentSlower": 99.87
+      "ops": 84260,
+      "margin": 19.56,
+      "percentSlower": 99.85
     },
     {
       "name": "yup",
-      "ops": 15897,
-      "margin": 0.67,
+      "ops": 11831,
+      "margin": 1.25,
       "percentSlower": 99.98
     },
     {
       "name": "zod",
-      "ops": 66485,
-      "margin": 0.57,
-      "percentSlower": 99.93
+      "ops": 59264,
+      "margin": 3.21,
+      "percentSlower": 99.9
     }
   ],
   "fastest": {
     "name": "quartet",
-    "index": 8
+    "index": 9
   },
   "slowest": {
     "name": "yup",
-    "index": 13
+    "index": 14
   }
 }
