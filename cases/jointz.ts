@@ -7,11 +7,11 @@ const dataType = jointz.object({
   maxNumber: jointz.number(),
   string: jointz.string(),
   longString: jointz.string(),
-  boolean: jointz.,
+  boolean: jointz.any(),
   deeplyNested: jointz.object({
     foo: jointz.string(),
     num: jointz.number(),
-    bool: jointz.bool(),
+    bool: jointz.any(),
   }),
 });
 
