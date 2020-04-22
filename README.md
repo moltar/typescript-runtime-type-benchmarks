@@ -5,6 +5,7 @@
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [funval](https://github.com/neuledge/funval)
 * [io-ts](https://github.com/gcanti/io-ts)
+* [jointz](https://github.com/moodysalem/jointz)
 * [json-decoder](https://github.com/venil7/json-decoder)
 * [marshal](https://github.com/marcj/marshal.ts)
 * [myzod](https://github.com/davidmdm/myzod)
