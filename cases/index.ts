@@ -4,6 +4,7 @@ import {
 } from './class-validator';
 import { FunvalCase } from './funval';
 import { IoTsCase } from './io-ts';
+import { JointzCase } from './jointz';
 import { JsonDecoderCase } from './json-decoder';
 import { MarshalCase } from './marshal';
 import { MyzodCase } from './myzod';
@@ -21,6 +22,7 @@ export const cases = [
   ClassValidatorSyncCase,
   FunvalCase,
   IoTsCase,
+  JointzCase,
   JsonDecoderCase,
   MarshalCase,
   MyzodCase,
