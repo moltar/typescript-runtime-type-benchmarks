@@ -1,10 +1,15 @@
 {
   "name": "data-type-sans-outliers",
+<<<<<<< Updated upstream
   "date": "2020-04-22T02:37:14.165Z",
+=======
+  "date": "2020-04-22T02:40:13.981Z",
+>>>>>>> Stashed changes
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
+<<<<<<< Updated upstream
       "ops": 36644,
       "margin": 0.7,
       "percentSlower": 99
@@ -43,10 +48,51 @@
       "name": "marshal",
       "ops": 3657793,
       "margin": 0.48,
+=======
+      "ops": 19403,
+      "margin": 4.61,
+      "percentSlower": 99.41
+    },
+    {
+      "name": "class-transformer-validator-sync",
+      "ops": 22187,
+      "margin": 4.84,
+      "percentSlower": 99.33
+    },
+    {
+      "name": "funval",
+      "ops": 626067,
+      "margin": 1.77,
+      "percentSlower": 80.97
+    },
+    {
+      "name": "io-ts",
+      "ops": 2241948,
+      "margin": 1.23,
+      "percentSlower": 31.85
+    },
+    {
+      "name": "jointz",
+      "ops": 164662,
+      "margin": 1.34,
+      "percentSlower": 94.99
+    },
+    {
+      "name": "json-decoder",
+      "ops": 621468,
+      "margin": 1.93,
+      "percentSlower": 81.11
+    },
+    {
+      "name": "marshal",
+      "ops": 3289777,
+      "margin": 1.81,
+>>>>>>> Stashed changes
       "percentSlower": 0
     },
     {
       "name": "myzod",
+<<<<<<< Updated upstream
       "ops": 1040237,
       "margin": 0.67,
       "percentSlower": 71.56
@@ -86,6 +132,47 @@
       "ops": 52122,
       "margin": 3.7,
       "percentSlower": 98.58
+=======
+      "ops": 1150322,
+      "margin": 1.47,
+      "percentSlower": 65.03
+    },
+    {
+      "name": "purify-ts",
+      "ops": 664827,
+      "margin": 2.04,
+      "percentSlower": 79.79
+    },
+    {
+      "name": "runtypes",
+      "ops": 642250,
+      "margin": 1.55,
+      "percentSlower": 80.48
+    },
+    {
+      "name": "toi",
+      "ops": 346578,
+      "margin": 2.13,
+      "percentSlower": 89.47
+    },
+    {
+      "name": "ts-utils",
+      "ops": 110517,
+      "margin": 2.12,
+      "percentSlower": 96.64
+    },
+    {
+      "name": "yup",
+      "ops": 10948,
+      "margin": 1.65,
+      "percentSlower": 99.67
+    },
+    {
+      "name": "zod",
+      "ops": 42036,
+      "margin": 1.6,
+      "percentSlower": 98.72
+>>>>>>> Stashed changes
     }
   ],
   "fastest": {
