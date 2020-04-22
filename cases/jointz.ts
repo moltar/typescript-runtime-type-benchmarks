@@ -19,6 +19,12 @@ export class JointzCase extends Case implements Case {
   name = 'jointz';
 
   validate() {
-    return dataType.parse(this.data);
+    const { data } = this;
+
+    if (dataType.isValid(data)) {
+      return data;
+    }
+
+    throw dataType.validate(data);
   }
 }
