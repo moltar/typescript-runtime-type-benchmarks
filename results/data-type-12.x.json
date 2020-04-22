@@ -1,200 +1,103 @@
 {
   "name": "data-type",
-<<<<<<< Updated upstream
-  "date": "2020-04-22T02:31:07.456Z",
-=======
-  "date": "2020-04-22T02:34:54.345Z",
->>>>>>> Stashed changes
+  "date": "2020-04-22T04:52:11.846Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "class-transformer-validator-async",
-<<<<<<< Updated upstream
-      "ops": 24383,
-      "margin": 25.87,
-      "percentSlower": 99.92
+      "ops": 21568,
+      "margin": 37.65,
+      "percentSlower": 99.93
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 31816,
-      "margin": 4.98,
+      "ops": 30842,
+      "margin": 5.79,
       "percentSlower": 99.9
     },
     {
       "name": "funval",
-      "ops": 782512,
-      "margin": 0.99,
-      "percentSlower": 97.57
+      "ops": 745523,
+      "margin": 0.43,
+      "percentSlower": 97.46
     },
     {
       "name": "io-ts",
-      "ops": 2508715,
-      "margin": 1.2,
-      "percentSlower": 92.22
+      "ops": 2494194,
+      "margin": 0.67,
+      "percentSlower": 91.51
     },
     {
       "name": "jointz",
-      "ops": 184825,
-      "margin": 0.96,
-      "percentSlower": 99.43
+      "ops": 179138,
+      "margin": 0.78,
+      "percentSlower": 99.39
     },
     {
       "name": "json-decoder",
-      "ops": 728216,
-      "margin": 1.07,
-      "percentSlower": 97.74
-    },
-    {
-      "name": "marshal",
-      "ops": 3941105,
-      "margin": 1.05,
-      "percentSlower": 87.78
-    },
-    {
-      "name": "myzod",
-      "ops": 1386785,
-      "margin": 1.35,
-      "percentSlower": 95.7
-    },
-    {
-      "name": "purify-ts",
-      "ops": 746592,
-      "margin": 1.13,
+      "ops": 678868,
+      "margin": 0.71,
       "percentSlower": 97.69
     },
     {
-      "name": "quartet",
-      "ops": 32264419,
-      "margin": 0.91,
-=======
-      "ops": 51261,
-      "margin": 2.94,
-      "percentSlower": 99.88
-    },
-    {
-      "name": "class-transformer-validator-sync",
-      "ops": 55846,
-      "margin": 1.51,
-      "percentSlower": 99.86
-    },
-    {
-      "name": "funval",
-      "ops": 1084862,
-      "margin": 1.4,
-      "percentSlower": 97.36
-    },
-    {
-      "name": "io-ts",
-      "ops": 3403082,
-      "margin": 1.3,
-      "percentSlower": 91.7
-    },
-    {
-      "name": "jointz",
-      "ops": 247881,
-      "margin": 1.51,
-      "percentSlower": 99.4
-    },
-    {
-      "name": "json-decoder",
-      "ops": 988466,
-      "margin": 1.52,
-      "percentSlower": 97.59
-    },
-    {
       "name": "marshal",
-      "ops": 5029403,
-      "margin": 1.24,
-      "percentSlower": 87.74
+      "ops": 3147624,
+      "margin": 0.69,
+      "percentSlower": 89.29
     },
     {
       "name": "myzod",
-      "ops": 1663282,
-      "margin": 1.37,
-      "percentSlower": 95.94
+      "ops": 1185480,
+      "margin": 0.51,
+      "percentSlower": 95.96
     },
     {
       "name": "purify-ts",
-      "ops": 1039682,
-      "margin": 1.05,
-      "percentSlower": 97.47
+      "ops": 711812,
+      "margin": 0.59,
+      "percentSlower": 97.58
     },
     {
       "name": "quartet",
-      "ops": 41016345,
-      "margin": 1.48,
->>>>>>> Stashed changes
+      "ops": 29377322,
+      "margin": 0.48,
       "percentSlower": 0
     },
     {
       "name": "runtypes",
-<<<<<<< Updated upstream
-      "ops": 706396,
-      "margin": 1.58,
-      "percentSlower": 97.81
+      "ops": 680372,
+      "margin": 0.67,
+      "percentSlower": 97.68
     },
     {
       "name": "toi",
-      "ops": 410959,
-      "margin": 0.62,
-      "percentSlower": 98.73
+      "ops": 396020,
+      "margin": 0.54,
+      "percentSlower": 98.65
     },
     {
       "name": "ts-json-validator",
-      "ops": 18038419,
-      "margin": 1.74,
-      "percentSlower": 44.09
+      "ops": 17841787,
+      "margin": 0.49,
+      "percentSlower": 39.27
     },
     {
       "name": "ts-utils",
-      "ops": 133369,
-      "margin": 1.3,
-=======
-      "ops": 957531,
-      "margin": 1.24,
-      "percentSlower": 97.67
-    },
-    {
-      "name": "toi",
-      "ops": 560464,
-      "margin": 1.13,
-      "percentSlower": 98.63
-    },
-    {
-      "name": "ts-json-validator",
-      "ops": 25822563,
-      "margin": 1.45,
-      "percentSlower": 37.04
-    },
-    {
-      "name": "ts-utils",
-      "ops": 167042,
-      "margin": 1.35,
->>>>>>> Stashed changes
+      "ops": 119330,
+      "margin": 0.8,
       "percentSlower": 99.59
     },
     {
       "name": "yup",
-<<<<<<< Updated upstream
-      "ops": 16036,
-      "margin": 1.53,
-=======
-      "ops": 20326,
-      "margin": 1.08,
->>>>>>> Stashed changes
+      "ops": 14139,
+      "margin": 7.34,
       "percentSlower": 99.95
     },
     {
       "name": "zod",
-<<<<<<< Updated upstream
-      "ops": 59920,
-      "margin": 1.16,
-      "percentSlower": 99.81
-=======
-      "ops": 73333,
-      "margin": 0.93,
+      "ops": 52391,
+      "margin": 0.74,
       "percentSlower": 99.82
->>>>>>> Stashed changes
     }
   ],
   "fastest": {
