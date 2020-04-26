@@ -1,12 +1,11 @@
 import clone from 'clone';
-// eslint-disable-next-line node/no-unpublished-import
-import { assert, IsExact } from 'conditional-type-checks';
+import { expectTypeOf } from 'expect-type';
 import { cases } from '../cases/index';
-import { DATA, Data } from '../data';
+import { DATA } from '../data';
 
 const caseClasses = Object.values(cases);
 
-type CaseTuple = [string, typeof caseClasses[0]];
+type CaseTuple = [string, typeof caseClasses[number]];
 
 const caseTuples = caseClasses.map<CaseTuple>(caseClass => {
   return [new caseClass(DATA).name, caseClass];
@@ -21,15 +20,14 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, caseClass) => {
     data = clonedData();
   });
 
-  it('should validate type', () => {
+  it('should validate type', async () => {
     expect.assertions(1);
 
     const c = new caseClass(data);
 
-    // testing return types of all validation methods
-    assert<IsExact<ReturnType<typeof c.validate>, PromiseLike<Data> | Data>>(
-      true
-    );
+    const res = await c.validate();
+
+    expectTypeOf(res).toMatchTypeOf(DATA);
 
     expect(c).toBeTruthy();
   });
