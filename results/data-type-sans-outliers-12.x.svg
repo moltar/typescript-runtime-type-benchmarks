@@ -1,15 +1,15 @@
 <svg class="marks" width="1001" height="820" xmlns="http://www.w3.org/2000/svg">
     <path fill="#fff" d="M0 0h1001v820H0z"/>
-    <g class="mark-group role-frame root">
-        <path class="background" d="M116.5 11.5h880v600h-880z" fill="none" stroke="#ddd"/>
-        <g class="mark-group role-axis">
-            <path class="background" d="M116.5 11.5z" pointer-events="none" fill="none"/>
+    <g class="mark-group role-frame root" aria-roledescription="group mark container">
+        <path class="background" aria-hidden="true" d="M116.5 11.5h880v600h-880z" fill="none" stroke="#ddd"/>
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a linear scale with values from 0 to 4,000,000">
+            <path class="background" aria-hidden="true" d="M116.5 11.5z" pointer-events="none" fill="none"/>
             <g class="mark-rule role-axis-grid" pointer-events="none" fill="none" stroke="#ddd">
                 <path d="M116.5 611.5h880M116.5 581.5h880M116.5 551.5h880M116.5 521.5h880M116.5 491.5h880M116.5 461.5h880M116.5 431.5h880M116.5 401.5h880M116.5 371.5h880M116.5 341.5h880M116.5 311.5h880M116.5 281.5h880M116.5 251.5h880M116.5 221.5h880M116.5 191.5h880M116.5 161.5h880M116.5 131.5h880M116.5 101.5h880M116.5 71.5h880M116.5 41.5h880M116.5 11.5h880"/>
             </g>
         </g>
-        <g class="mark-group role-axis">
-            <path class="background" d="M116.5 611.5z" pointer-events="none" fill="none"/>
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'module' for a discrete scale with 14 values: class-transformer-validator-async, class-transformer-validator-sync, funval, io-ts, jointz, ending with zod">
+            <path class="background" aria-hidden="true" d="M116.5 611.5z" pointer-events="none" fill="none"/>
             <g class="mark-rule role-axis-tick" pointer-events="none" fill="none" stroke="#888">
                 <path d="M147.5 611.5v5M210.5 611.5v5M273.5 611.5v5M336.5 611.5v5M398.5 611.5v5M461.5 611.5v5M524.5 611.5v5M587.5 611.5v5M650.5 611.5v5M713.5 611.5v5M776.5 611.5v5M838.5 611.5v5M901.5 611.5v5M964.5 611.5v5"/>
             </g>
@@ -62,8 +62,8 @@
                 module
             </text>
         </g>
-        <g class="mark-group role-axis">
-            <path class="background" d="M116.5 11.5z" pointer-events="none" fill="none"/>
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 4,000,000">
+            <path class="background" aria-hidden="true" d="M116.5 11.5z" pointer-events="none" fill="none"/>
             <g class="mark-rule role-axis-tick" pointer-events="none" fill="none" stroke="#888">
                 <path d="M116.5 611.5h-5M116.5 581.5h-5M116.5 551.5h-5M116.5 521.5h-5M116.5 491.5h-5M116.5 461.5h-5M116.5 431.5h-5M116.5 401.5h-5M116.5 371.5h-5M116.5 341.5h-5M116.5 311.5h-5M116.5 281.5h-5M116.5 251.5h-5M116.5 221.5h-5M116.5 191.5h-5M116.5 161.5h-5M116.5 131.5h-5M116.5 101.5h-5M116.5 71.5h-5M116.5 41.5h-5M116.5 11.5h-5"/>
             </g>
@@ -137,8 +137,8 @@
                 operations / sec
             </text>
         </g>
-        <g class="mark-rect role-mark marks" fill="#4c78a8">
-            <path d="M119.143 605.164h56.571V611h-56.571zM182 604.732h56.571V611H182zM244.857 493.894h56.572V611h-56.572zM307.714 232.065h56.572V611h-56.572zM370.571 397.119h56.572V611H370.57zM433.429 503.284H490V611h-56.571zM496.286 36.205h56.571V611h-56.571zM559.143 400.048h56.571V611h-56.571zM622 493.674h56.571V611H622zM684.857 497.085h56.572V611h-56.572zM747.714 546.495h56.572V611h-56.572zM810.571 596.445h56.572V611H810.57zM873.429 608.723H930V611h-56.571zM936.286 602.908h56.571V611h-56.571z"/>
+        <g class="mark-rect role-mark marks" aria-roledescription="rect mark container" fill="#4c78a8">
+            <path d="M119.143 607.236h56.571V611h-56.571zM182 606.773h56.571V611H182zM244.857 492.288h56.572V611h-56.572zM307.714 214.355h56.572V611h-56.572zM370.571 382.898h56.572V611H370.57zM433.429 508.34H490V611h-56.571zM496.286 83.757h56.571V611h-56.571zM559.143 420.988h56.571V611h-56.571zM622 496.707h56.571V611H622zM684.857 497.136h56.572V611h-56.572zM747.714 544.186h56.572V611h-56.572zM810.571 590.682h56.572V611H810.57zM873.429 608.901H930V611h-56.571zM936.286 603.269h56.571V611h-56.571z"/>
         </g>
     </g>
 </svg>
