@@ -2,7 +2,7 @@ import {
   ClassValidatorAsyncCase,
   ClassValidatorSyncCase,
 } from './class-validator';
-import { FunvalCase } from './funval';
+import { ComputedTypesCase } from './computed-types';
 import { IoTsCase } from './io-ts';
 import { JointzCase } from './jointz';
 import { JsonDecoderCase } from './json-decoder';
@@ -20,7 +20,7 @@ import { ZodCase } from './zod';
 export const cases = [
   ClassValidatorAsyncCase,
   ClassValidatorSyncCase,
-  FunvalCase,
+  ComputedTypesCase,
   IoTsCase,
   JointzCase,
   JsonDecoderCase,
