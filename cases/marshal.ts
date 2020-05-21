@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import {f, validatesFactory} from '@marcj/marshal';
+import { f, validatesFactory } from '@marcj/marshal';
 import { Data } from '../data';
 import { Case } from './abstract';
 
