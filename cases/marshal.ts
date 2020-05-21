@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { f, validatedPlainToClass } from '@marcj/marshal';
+import {f, validatesFactory} from '@marcj/marshal';
 import { Data } from '../data';
 import { Case } from './abstract';
 
@@ -39,10 +39,18 @@ class DataType implements Data {
   deeplyNested!: DeeplyNestedType;
 }
 
+const checkData = validatesFactory(DataType);
+
 export class MarshalCase extends Case implements Case {
   name = 'marshal';
 
   validate() {
-    return validatedPlainToClass(DataType, this.data);
+    const { data } = this;
+
+    if (checkData(data)) {
+      return data;
+    }
+
+    throw new Error('Invalid');
   }
 }
