@@ -1,4 +1,4 @@
-# 📊 Benchmark Comparison of Packages with Runtime Validation and Typescript Support
+# 📊 Benchmark Comparison of Packages with Runtime Validation and TypeScript Support
 
 ## Packages Compared
 
