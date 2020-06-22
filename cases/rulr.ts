@@ -2,6 +2,7 @@ import { object, number, string, boolean } from 'rulr';
 import { Case } from './abstract';
 
 const dataType = object({
+  bail: true,
   required: {
     number,
     negNumber: number,
@@ -10,6 +11,7 @@ const dataType = object({
     longString: string,
     boolean: boolean,
     deeplyNested: object({
+      bail: true,
       required: {
         foo: string,
         num: number,
