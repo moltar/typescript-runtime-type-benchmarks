@@ -73,11 +73,11 @@ const res = isMyDataValid(data)
 
 ![Bar Graph - Node 13.x](./results/data-type-13.x.svg)
 
-### Data Type Checks Sans `ts-json-validator`
+### Data Type Checks Sans Outliers
 
 Because some packages are so performant it makes it difficult to see the benchmarks for other packages.
 
-This benchmark run includes all of the above packages, but excludes `ts-json-validator` and `quartet`.
+This benchmark run includes all of the above packages, but excludes `marshal`, `ts-json-validator` and `quartet`.
 
 #### Node 10.x ([JSON](./results/data-type-sans-outliers-10.x.json), [CSV](./results/data-type-sans-outliers-10.x.csv), [SVG](./results/data-type-sans-outliers-10.x.svg))
 
