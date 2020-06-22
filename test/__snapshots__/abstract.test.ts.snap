@@ -272,6 +272,12 @@ exports[`Case Class: quartet should fail validation when prop is missing 1`] = `
 
 exports[`Case Class: quartet should fail validation when type is wrong 1`] = `[Error: Invalid]`;
 
+exports[`Case Class: rulr should fail validation when deeply nested type is wrong 1`] = `[ValidationErrors: deeplyNested.bool: expected boolean]`;
+
+exports[`Case Class: rulr should fail validation when prop is missing 1`] = `[ValidationErrors: boolean: expected boolean]`;
+
+exports[`Case Class: rulr should fail validation when type is wrong 1`] = `[ValidationErrors: boolean: expected boolean]`;
+
 exports[`Case Class: runtypes should fail validation when deeply nested type is wrong 1`] = `[ValidationError: Expected boolean, but was string]`;
 
 exports[`Case Class: runtypes should fail validation when prop is missing 1`] = `[ValidationError: Expected boolean, but was undefined]`;

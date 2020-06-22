@@ -10,6 +10,7 @@ import { MarshalCase } from './marshal';
 import { MyzodCase } from './myzod';
 import { PurifyCase } from './purify-ts';
 import { QuartetCase } from './quartet';
+import { RulrCase } from './rulr';
 import { RuntypesCase } from './runtypes';
 import { ToiCase } from './toi';
 import { TsJsonValidatorCase } from './ts-json-validator';
@@ -28,6 +29,7 @@ export const cases = [
   MyzodCase,
   PurifyCase,
   QuartetCase,
+  RulrCase,
   RuntypesCase,
   ToiCase,
   TsJsonValidatorCase,
