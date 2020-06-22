@@ -11,6 +11,7 @@
 * [myzod](https://github.com/davidmdm/myzod)
 * [purify-ts](https://github.com/gigobyte/purify)
 * [quartet](https://github.com/whiteand/ts-quartet)
+* [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
