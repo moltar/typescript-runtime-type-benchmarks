@@ -45,11 +45,7 @@ export async function graph(filename: string): Promise<string> {
 
   const svg = await view.toSVG();
 
-  // Pending issue resolution:
-  // https://github.com/vega/vega/issues/2640
-  // https://github.com/svg/svgo/issues/1252
-  // const optimizeSvg = await svgo.optimize(svg);
-  // return optimizeSvg.data;
+  const optimizeSvg = await svgo.optimize(svg);
 
-  return svg;
+  return optimizeSvg.data;
 }
