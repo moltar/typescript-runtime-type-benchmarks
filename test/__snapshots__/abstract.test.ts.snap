@@ -278,11 +278,11 @@ exports[`Case Class: rulr should fail validation when prop is missing 1`] = `[In
 
 exports[`Case Class: rulr should fail validation when type is wrong 1`] = `[InvalidBooleanError: expected boolean]`;
 
-exports[`Case Class: runtypes should fail validation when deeply nested type is wrong 1`] = `[ValidationError: Expected boolean, but was string]`;
+exports[`Case Class: runtypes should fail validation when deeply nested type is wrong 1`] = `[ValidationError: Expected boolean, but was string in deeplyNested.bool]`;
 
-exports[`Case Class: runtypes should fail validation when prop is missing 1`] = `[ValidationError: Expected boolean, but was undefined]`;
+exports[`Case Class: runtypes should fail validation when prop is missing 1`] = `[ValidationError: Expected boolean, but was undefined in boolean]`;
 
-exports[`Case Class: runtypes should fail validation when type is wrong 1`] = `[ValidationError: Expected boolean, but was string]`;
+exports[`Case Class: runtypes should fail validation when type is wrong 1`] = `[ValidationError: Expected boolean, but was string in boolean]`;
 
 exports[`Case Class: toi should fail validation when deeply nested type is wrong 1`] = `[Error: value does not match structure]`;
 
