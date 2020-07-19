@@ -184,11 +184,11 @@ Array [
 ]
 `;
 
-exports[`Case Class: computed-types should fail validation when deeply nested type is wrong 1`] = `[TypeError: deeplyNested: deeplyNested.bool: Expect value to be "boolean"]`;
+exports[`Case Class: computed-types should fail validation when deeply nested type is wrong 1`] = `[ValidationError: deeplyNested: deeplyNested.bool: Expect value to be "boolean"]`;
 
-exports[`Case Class: computed-types should fail validation when prop is missing 1`] = `[TypeError: boolean: Expect value to be "boolean"]`;
+exports[`Case Class: computed-types should fail validation when prop is missing 1`] = `[ValidationError: boolean: Expect value to be "boolean"]`;
 
-exports[`Case Class: computed-types should fail validation when type is wrong 1`] = `[TypeError: boolean: Expect value to be "boolean"]`;
+exports[`Case Class: computed-types should fail validation when type is wrong 1`] = `[ValidationError: boolean: Expect value to be "boolean"]`;
 
 exports[`Case Class: io-ts should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
 
