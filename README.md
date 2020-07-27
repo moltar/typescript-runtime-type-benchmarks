@@ -13,6 +13,7 @@
 * [quartet](https://github.com/whiteand/ts-quartet)
 * [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
+* [simple-runtypes](https://github.com/hoeck/simple-runtypes)
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
