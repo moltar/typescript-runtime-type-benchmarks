@@ -12,6 +12,7 @@ import { PurifyCase } from './purify-ts';
 import { QuartetCase } from './quartet';
 import { RulrCase } from './rulr';
 import { RuntypesCase } from './runtypes';
+import { SimpleRuntypesCase } from './simple-runtypes';
 import { ToiCase } from './toi';
 import { TsJsonValidatorCase } from './ts-json-validator';
 import { TsUtilsCase } from './ts-utils';
@@ -31,6 +32,7 @@ export const cases = [
   QuartetCase,
   RulrCase,
   RuntypesCase,
+  SimpleRuntypesCase,
   ToiCase,
   TsJsonValidatorCase,
   TsUtilsCase,
