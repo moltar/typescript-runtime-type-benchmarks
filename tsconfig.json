@@ -1,6 +1,8 @@
 {
   "extends": "tsconfigs/nodejs-module",
   "compilerOptions": {
+    "lib": ["ES2015"],
+    "target": "ES2015",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
