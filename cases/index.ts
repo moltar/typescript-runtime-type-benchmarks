@@ -1,3 +1,4 @@
+import { BuenoCase } from './bueno';
 import {
   ClassValidatorAsyncCase,
   ClassValidatorSyncCase,
@@ -20,6 +21,7 @@ import { YupCase } from './yup';
 import { ZodCase } from './zod';
 
 export const cases = [
+  BuenoCase,
   ClassValidatorAsyncCase,
   ClassValidatorSyncCase,
   ComputedTypesCase,

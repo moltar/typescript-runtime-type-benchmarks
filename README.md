@@ -2,6 +2,7 @@
 
 ## Packages Compared
 
+* [bueno](https://github.com/philipnilsson/bueno)
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [computed-types](https://github.com/neuledge/computed-types)
 * [io-ts](https://github.com/gcanti/io-ts)

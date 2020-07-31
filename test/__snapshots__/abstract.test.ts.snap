@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Case Class: bueno should fail validation when deeply nested type is wrong 1`] = `[Error: DeeplyNested.bool must be true or false]`;
+
+exports[`Case Class: bueno should fail validation when prop is missing 1`] = `[Error: Boolean must be true or false]`;
+
+exports[`Case Class: bueno should fail validation when type is wrong 1`] = `[Error: Boolean must be true or false]`;
+
 exports[`Case Class: class-transformer-validator-async should fail validation when deeply nested type is wrong 1`] = `
 Array [
   ValidationError {
