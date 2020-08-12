@@ -5,7 +5,7 @@
         <g class="mark-group role-axis" aria-hidden="true">
             <path class="background" aria-hidden="true" d="M116.5 11.5z" pointer-events="none"/>
             <g class="mark-rule role-axis-grid" pointer-events="none" stroke="#ddd">
-                <path d="M116.5 611.5h880M116.5 561.5h880M116.5 511.5h880M116.5 461.5h880M116.5 411.5h880M116.5 361.5h880M116.5 311.5h880M116.5 261.5h880M116.5 211.5h880M116.5 161.5h880M116.5 111.5h880M116.5 61.5h880M116.5 11.5h880"/>
+                <path d="M116.5 611.5h880M116.5 565.5h880M116.5 519.5h880M116.5 473.5h880M116.5 426.5h880M116.5 380.5h880M116.5 334.5h880M116.5 288.5h880M116.5 242.5h880M116.5 196.5h880M116.5 149.5h880M116.5 103.5h880M116.5 57.5h880M116.5 11.5h880"/>
             </g>
         </g>
         <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'module' for a discrete scale with 16 values: bueno, class-transformer-validator-async, class-transformer-validator-sync, computed-types, io-ts, ending with zod">
@@ -68,50 +68,53 @@
                 module
             </text>
         </g>
-        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 2,400,000">
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 2,600,000">
             <path class="background" aria-hidden="true" d="M116.5 11.5z" pointer-events="none"/>
             <g class="mark-rule role-axis-tick" pointer-events="none" stroke="#888">
-                <path d="M116.5 611.5h-5M116.5 561.5h-5M116.5 511.5h-5M116.5 461.5h-5M116.5 411.5h-5M116.5 361.5h-5M116.5 311.5h-5M116.5 261.5h-5M116.5 211.5h-5M116.5 161.5h-5M116.5 111.5h-5M116.5 61.5h-5M116.5 11.5h-5"/>
+                <path d="M116.5 611.5h-5M116.5 565.5h-5M116.5 519.5h-5M116.5 473.5h-5M116.5 426.5h-5M116.5 380.5h-5M116.5 334.5h-5M116.5 288.5h-5M116.5 242.5h-5M116.5 196.5h-5M116.5 149.5h-5M116.5 103.5h-5M116.5 57.5h-5M116.5 11.5h-5"/>
             </g>
             <g class="mark-text role-axis-label" pointer-events="none" text-anchor="end" font-family="sans-serif" font-size="12" fill="#000">
                 <text transform="translate(109.5 615.5)">
                     0
                 </text>
-                <text transform="translate(109.5 565.5)">
+                <text transform="translate(109.5 569.346)">
                     200,000
                 </text>
-                <text transform="translate(109.5 515.5)">
+                <text transform="translate(109.5 523.192)">
                     400,000
                 </text>
-                <text transform="translate(109.5 465.5)">
+                <text transform="translate(109.5 477.038)">
                     600,000
                 </text>
-                <text transform="translate(109.5 415.5)">
+                <text transform="translate(109.5 430.885)">
                     800,000
                 </text>
-                <text transform="translate(109.5 365.5)">
+                <text transform="translate(109.5 384.73)">
                     1,000,000
                 </text>
-                <text transform="translate(109.5 315.5)">
+                <text transform="translate(109.5 338.577)">
                     1,200,000
                 </text>
-                <text transform="translate(109.5 265.5)">
+                <text transform="translate(109.5 292.423)">
                     1,400,000
                 </text>
-                <text transform="translate(109.5 215.5)">
+                <text transform="translate(109.5 246.27)">
                     1,600,000
                 </text>
-                <text transform="translate(109.5 165.5)">
+                <text transform="translate(109.5 200.115)">
                     1,800,000
                 </text>
-                <text transform="translate(109.5 115.5)">
+                <text transform="translate(109.5 153.962)">
                     2,000,000
                 </text>
-                <text transform="translate(109.5 65.5)">
+                <text transform="translate(109.5 107.808)">
                     2,200,000
                 </text>
-                <text transform="translate(109.5 15.5)">
+                <text transform="translate(109.5 61.654)">
                     2,400,000
+                </text>
+                <text transform="translate(109.5 15.5)">
+                    2,600,000
                 </text>
             </g>
             <path stroke="#888" d="M116.5 611.5v-600" pointer-events="none"/>
@@ -120,22 +123,22 @@
             </text>
         </g>
         <g class="mark-rect role-mark marks" aria-roledescription="rect mark container" fill="#4c78a8">
-            <path aria-label="operations / sec: 145478; module: bueno" aria-roledescription="bar" d="M118.75 574.63h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 30292; module: class-transformer-validator-async" aria-roledescription="bar" d="M173.75 603.427h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 40039; module: class-transformer-validator-sync" aria-roledescription="bar" d="M228.75 600.99h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 632891; module: computed-types" aria-roledescription="bar" d="M283.75 452.777h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 2270483; module: io-ts" aria-roledescription="bar" d="M338.75 43.38h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 1230677; module: jointz" aria-roledescription="bar" d="M393.75 303.33h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 704235; module: json-decoder" aria-roledescription="bar" d="M448.75 434.941h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 1137491; module: myzod" aria-roledescription="bar" d="M503.75 326.627h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 681995; module: purify-ts" aria-roledescription="bar" d="M558.75 440.501h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 671941; module: rulr" aria-roledescription="bar" d="M613.75 443.015h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 679681; module: runtypes" aria-roledescription="bar" d="M668.75 441.08h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 1441789; module: simple-runtypes" aria-roledescription="bar" d="M723.75 250.553h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 396818; module: toi" aria-roledescription="bar" d="M778.75 511.796h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 127708; module: ts-utils" aria-roledescription="bar" d="M833.75 579.073h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 14281; module: yup" aria-roledescription="bar" d="M888.75 607.43h49.5V611h-49.5z"/>
-            <path aria-label="operations / sec: 7341; module: zod" aria-roledescription="bar" d="M943.75 609.165h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 136804; module: bueno" aria-roledescription="bar" d="M118.75 579.43h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 23993; module: class-transformer-validator-async" aria-roledescription="bar" d="M173.75 605.463h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 30746; module: class-transformer-validator-sync" aria-roledescription="bar" d="M228.75 603.905h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 559004; module: computed-types" aria-roledescription="bar" d="M283.75 482h49.5v129h-49.5z"/>
+            <path aria-label="operations / sec: 2425576; module: io-ts" aria-roledescription="bar" d="M338.75 51.252h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 1360612; module: jointz" aria-roledescription="bar" d="M393.75 297.013h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 677812; module: json-decoder" aria-roledescription="bar" d="M448.75 454.582h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 1239159; module: myzod" aria-roledescription="bar" d="M503.75 325.04h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 705987; module: purify-ts" aria-roledescription="bar" d="M558.75 448.08h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 615272; module: rulr" aria-roledescription="bar" d="M613.75 469.014h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 650940; module: runtypes" aria-roledescription="bar" d="M668.75 460.783h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 1542514; module: simple-runtypes" aria-roledescription="bar" d="M723.75 255.035h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 384540; module: toi" aria-roledescription="bar" d="M778.75 522.26h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 110966; module: ts-utils" aria-roledescription="bar" d="M833.75 585.392h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 11998; module: yup" aria-roledescription="bar" d="M888.75 608.231h49.5V611h-49.5z"/>
+            <path aria-label="operations / sec: 7452; module: zod" aria-roledescription="bar" d="M943.75 609.28h49.5V611h-49.5z"/>
         </g>
     </g>
 </svg>
