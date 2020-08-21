@@ -296,6 +296,12 @@ exports[`Case Class: simple-runtypes should fail validation when prop is missing
 
 exports[`Case Class: simple-runtypes should fail validation when type is wrong 1`] = `[RuntypeError: expected a boolean]`;
 
+exports[`Case Class: superstruct should fail validation when deeply nested type is wrong 1`] = `[TypeError: Expected a value of type \`boolean\` but received \`"foo"\`.]`;
+
+exports[`Case Class: superstruct should fail validation when prop is missing 1`] = `[TypeError: Expected a value of type \`boolean\` but received \`undefined\`.]`;
+
+exports[`Case Class: superstruct should fail validation when type is wrong 1`] = `[TypeError: Expected a value of type \`boolean\` but received \`"foo"\`.]`;
+
 exports[`Case Class: toi should fail validation when deeply nested type is wrong 1`] = `[Error: value does not match structure]`;
 
 exports[`Case Class: toi should fail validation when prop is missing 1`] = `[Error: value does not match structure]`;

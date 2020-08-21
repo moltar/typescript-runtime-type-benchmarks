@@ -14,6 +14,7 @@ import { QuartetCase } from './quartet';
 import { RulrCase } from './rulr';
 import { RuntypesCase } from './runtypes';
 import { SimpleRuntypesCase } from './simple-runtypes';
+import { SuperstructCase } from './superstruct';
 import { ToiCase } from './toi';
 import { TsJsonValidatorCase } from './ts-json-validator';
 import { TsUtilsCase } from './ts-utils';
@@ -35,6 +36,7 @@ export const cases = [
   RulrCase,
   RuntypesCase,
   SimpleRuntypesCase,
+  SuperstructCase,
   ToiCase,
   TsJsonValidatorCase,
   TsUtilsCase,
