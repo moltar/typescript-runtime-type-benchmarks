@@ -4,6 +4,7 @@ import {
   ClassValidatorSyncCase,
 } from './class-validator';
 import { ComputedTypesCase } from './computed-types';
+import { DecodersCase } from './decoders';
 import { IoTsCase } from './io-ts';
 import { JointzCase } from './jointz';
 import { JsonDecoderCase } from './json-decoder';
@@ -26,6 +27,7 @@ export const cases = [
   ClassValidatorAsyncCase,
   ClassValidatorSyncCase,
   ComputedTypesCase,
+  DecodersCase,
   IoTsCase,
   JointzCase,
   JsonDecoderCase,

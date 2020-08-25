@@ -196,6 +196,59 @@ exports[`Case Class: computed-types should fail validation when prop is missing 
 
 exports[`Case Class: computed-types should fail validation when type is wrong 1`] = `[ValidationError: boolean: Expect value to be "boolean"]`;
 
+exports[`Case Class: decoders should fail validation when deeply nested type is wrong 1`] = `
+[Decoding error: 
+{
+  "number": 1,
+  "negNumber": -1,
+  "maxNumber": 1.7976931348623157e+308,
+  "string": "string",
+  "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e..." [truncated],
+  "boolean": true,
+  "deeplyNested": {
+    "foo": "bar",
+    "num": 1,
+    "bool": "foo",
+            ^^^^^ Must be boolean
+  },
+}]
+`;
+
+exports[`Case Class: decoders should fail validation when prop is missing 1`] = `
+[Decoding error: 
+{
+  "number": 1,
+  "negNumber": -1,
+  "maxNumber": 1.7976931348623157e+308,
+  "string": "string",
+  "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e..." [truncated],
+  "deeplyNested": {
+    "foo": "bar",
+    "num": 1,
+    "bool": false,
+  },
+}
+^ Missing key: "boolean"]
+`;
+
+exports[`Case Class: decoders should fail validation when type is wrong 1`] = `
+[Decoding error: 
+{
+  "number": 1,
+  "negNumber": -1,
+  "maxNumber": 1.7976931348623157e+308,
+  "string": "string",
+  "longString": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e..." [truncated],
+  "boolean": "foo",
+             ^^^^^ Must be boolean
+  "deeplyNested": {
+    "foo": "bar",
+    "num": 1,
+    "bool": false,
+  },
+}]
+`;
+
 exports[`Case Class: io-ts should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: io-ts should fail validation when prop is missing 1`] = `[Error: Invalid]`;
