@@ -12,7 +12,6 @@
 * [marshal](https://github.com/marcj/marshal.ts)
 * [myzod](https://github.com/davidmdm/myzod)
 * [purify-ts](https://github.com/gigobyte/purify)
-* [quartet](https://github.com/whiteand/ts-quartet)
 * [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)

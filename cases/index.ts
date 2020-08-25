@@ -11,7 +11,6 @@ import { JsonDecoderCase } from './json-decoder';
 import { MarshalCase } from './marshal';
 import { MyzodCase } from './myzod';
 import { PurifyCase } from './purify-ts';
-import { QuartetCase } from './quartet';
 import { RulrCase } from './rulr';
 import { RuntypesCase } from './runtypes';
 import { SimpleRuntypesCase } from './simple-runtypes';
@@ -34,7 +33,6 @@ export const cases = [
   MarshalCase,
   MyzodCase,
   PurifyCase,
-  QuartetCase,
   RulrCase,
   RuntypesCase,
   SimpleRuntypesCase,
