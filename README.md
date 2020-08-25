@@ -80,7 +80,7 @@ const res = isMyDataValid(data)
 
 Because some packages are so performant it makes it difficult to see the benchmarks for other packages.
 
-This benchmark run includes all of the above packages, but excludes `marshal`, `ts-json-validator` and `quartet`.
+This benchmark run includes all of the above packages, but excludes `marshal` and `ts-json-validator`.
 
 #### Node 10.x ([JSON](./results/data-type-sans-outliers-10.x.json), [CSV](./results/data-type-sans-outliers-10.x.csv), [SVG](./results/data-type-sans-outliers-10.x.svg))
 

@@ -8,7 +8,6 @@ import { DATA } from './data';
 import { cases } from './cases';
 import { Case } from './cases/abstract';
 import { TsJsonValidatorCase } from './cases/ts-json-validator';
-import { QuartetCase } from './cases/quartet';
 import { MarshalCase } from './cases/marshal';
 
 const caseInstances: Case[] = cases.map(caseClass => new caseClass(DATA));
@@ -40,8 +39,7 @@ async function suiteDataTypeValidation() {
 async function suiteDataTypeValidationSansOutliers() {
   const cases = caseInstances
     .filter(caseInstance => !(caseInstance instanceof MarshalCase))
-    .filter(caseInstance => !(caseInstance instanceof TsJsonValidatorCase))
-    .filter(caseInstance => !(caseInstance instanceof QuartetCase));
+    .filter(caseInstance => !(caseInstance instanceof TsJsonValidatorCase));
 
   await run('data-type-sans-outliers', cases, 'validate');
 }
