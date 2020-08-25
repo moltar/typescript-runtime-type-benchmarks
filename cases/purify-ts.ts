@@ -1,4 +1,4 @@
-import { Codec, string, number, boolean } from 'purify-ts/Codec';
+import { Codec, string, number, boolean } from 'purify-ts';
 import { Case } from './abstract';
 
 const dataType = Codec.interface({
