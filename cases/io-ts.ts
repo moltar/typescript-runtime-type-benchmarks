@@ -1,4 +1,6 @@
 import * as t from 'io-ts';
+import { pipe } from 'fp-ts/function';
+import { fold } from 'fp-ts/Either';
 import { Case } from './abstract';
 
 const dataType = t.type({
@@ -19,12 +21,14 @@ export class IoTsCase extends Case implements Case {
   name = 'io-ts';
 
   validate() {
-    const { data } = this;
-
-    if (dataType.is(data)) {
-      return data;
-    }
-
-    throw new Error('Invalid');
+    return pipe(
+      dataType.decode(this.data),
+      fold(
+        errors => {
+          throw errors;
+        },
+        a => a
+      )
+    );
   }
 }
