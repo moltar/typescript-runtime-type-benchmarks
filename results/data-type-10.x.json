@@ -1,132 +1,132 @@
 {
   "name": "data-type",
-  "date": "2020-08-31T14:11:47.530Z",
+  "date": "2020-09-01T01:15:45.982Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "bueno",
-      "ops": 157651,
-      "margin": 1.34,
-      "percentSlower": 99.25
+      "ops": 136389,
+      "margin": 0.68,
+      "percentSlower": 99.24
     },
     {
       "name": "class-transformer-validator-async",
-      "ops": 39512,
-      "margin": 16.39,
+      "ops": 33869,
+      "margin": 14.33,
       "percentSlower": 99.81
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 47424,
-      "margin": 1.63,
+      "ops": 41239,
+      "margin": 0.76,
       "percentSlower": 99.77
     },
     {
       "name": "computed-types",
-      "ops": 827901,
-      "margin": 1.53,
-      "percentSlower": 96.04
+      "ops": 698574,
+      "margin": 0.58,
+      "percentSlower": 96.12
     },
     {
       "name": "decoders",
-      "ops": 239172,
-      "margin": 1.1,
-      "percentSlower": 98.86
+      "ops": 213811,
+      "margin": 0.63,
+      "percentSlower": 98.81
     },
     {
       "name": "io-ts",
-      "ops": 1000151,
-      "margin": 1.06,
-      "percentSlower": 95.22
+      "ops": 876441,
+      "margin": 0.88,
+      "percentSlower": 95.13
     },
     {
       "name": "jointz",
-      "ops": 955519,
-      "margin": 1.31,
-      "percentSlower": 95.43
+      "ops": 806570,
+      "margin": 0.84,
+      "percentSlower": 95.52
     },
     {
       "name": "json-decoder",
-      "ops": 817537,
-      "margin": 1.59,
-      "percentSlower": 96.09
+      "ops": 710588,
+      "margin": 0.72,
+      "percentSlower": 96.05
     },
     {
       "name": "marshal",
-      "ops": 20914160,
-      "margin": 1.14,
-      "percentSlower": 0
+      "ops": 16341226,
+      "margin": 1.76,
+      "percentSlower": 9.24
     },
     {
       "name": "myzod",
-      "ops": 1295924,
-      "margin": 1.49,
-      "percentSlower": 93.8
+      "ops": 1209316,
+      "margin": 0.65,
+      "percentSlower": 93.28
     },
     {
       "name": "purify-ts",
-      "ops": 807906,
-      "margin": 1.53,
-      "percentSlower": 96.14
+      "ops": 725138,
+      "margin": 0.68,
+      "percentSlower": 95.97
     },
     {
       "name": "rulr",
-      "ops": 693381,
-      "margin": 0.97,
-      "percentSlower": 96.68
+      "ops": 636332,
+      "margin": 0.73,
+      "percentSlower": 96.47
     },
     {
       "name": "runtypes",
-      "ops": 757703,
-      "margin": 6.51,
+      "ops": 651896,
+      "margin": 6.64,
       "percentSlower": 96.38
     },
     {
       "name": "simple-runtypes",
-      "ops": 1496720,
-      "margin": 1.38,
-      "percentSlower": 92.84
+      "ops": 1239356,
+      "margin": 1.04,
+      "percentSlower": 93.12
     },
     {
       "name": "superstruct",
-      "ops": 75884,
-      "margin": 1.4,
-      "percentSlower": 99.64
+      "ops": 72424,
+      "margin": 0.95,
+      "percentSlower": 99.6
     },
     {
       "name": "toi",
-      "ops": 429456,
-      "margin": 0.74,
-      "percentSlower": 97.95
+      "ops": 429904,
+      "margin": 0.76,
+      "percentSlower": 97.61
     },
     {
       "name": "ts-json-validator",
-      "ops": 18685857,
-      "margin": 0.92,
-      "percentSlower": 10.65
+      "ops": 18004361,
+      "margin": 0.67,
+      "percentSlower": 0
     },
     {
       "name": "ts-utils",
-      "ops": 133856,
-      "margin": 1.28,
-      "percentSlower": 99.36
+      "ops": 132260,
+      "margin": 1.2,
+      "percentSlower": 99.27
     },
     {
       "name": "yup",
-      "ops": 15046,
-      "margin": 7.56,
-      "percentSlower": 99.93
+      "ops": 15801,
+      "margin": 0.72,
+      "percentSlower": 99.91
     },
     {
       "name": "zod",
-      "ops": 11077,
-      "margin": 1,
-      "percentSlower": 99.95
+      "ops": 10015,
+      "margin": 1.27,
+      "percentSlower": 99.94
     }
   ],
   "fastest": {
-    "name": "marshal",
-    "index": 8
+    "name": "ts-json-validator",
+    "index": 16
   },
   "slowest": {
     "name": "zod",
