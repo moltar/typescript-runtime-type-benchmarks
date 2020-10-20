@@ -62,7 +62,7 @@ jobs:
           NODE_VERSION: ${{ matrix.node-version }}
 
       - name: push
-        uses: github-actions-x/commit@v2.1
+        uses: github-actions-x/commit@v2.7
         ## prevents forked repos from comitting results in PRs
         if: github.repository == 'moltar/typescript-runtime-type-benchmarks'
         with:
