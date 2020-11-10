@@ -76,6 +76,10 @@ const res = isMyDataValid(data)
 
 ![Bar Graph - Node 13.x](./results/data-type-13.x.svg)
 
+#### Node 14.x ([JSON](./results/data-type-14.x.json), [CSV](./results/data-type-14.x.csv), [SVG](./results/data-type-14.x.svg))
+
+![Bar Graph - Node 14.x](./results/data-type-14.x.svg)
+
 ### Data Type Checks Sans Outliers
 
 Because some packages are so performant it makes it difficult to see the benchmarks for other packages.
@@ -93,3 +97,7 @@ This benchmark run includes all of the above packages, but excludes `marshal` an
 #### Node 13.x ([JSON](./results/data-type-sans-outliers-13.x.json), [CSV](./results/data-type-sans-outliers-13.x.csv), [SVG](./results/data-type-sans-outliers-13.x.svg))
 
 ![Bar Graph - Node 13.x](./results/data-type-sans-outliers-13.x.svg)
+
+#### Node 14.x ([JSON](./results/data-type-sans-outliers-14.x.json), [CSV](./results/data-type-sans-outliers-14.x.csv), [SVG](./results/data-type-sans-outliers-14.x.svg))
+
+![Bar Graph - Node 14.x](./results/data-type-sans-outliers-14.x.svg)
