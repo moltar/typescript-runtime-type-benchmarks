@@ -79,7 +79,9 @@ describe.each(caseTuples)('Case Class: %s', (_caseName, caseClass) => {
   it('should fail validation when prop is missing', async () => {
     expect.assertions(2);
 
+    // @ts-expect-error fixes "the operand of a 'delete' operator must be optional" error
     delete data.boolean;
+
     const c = new caseClass(data);
 
     let err;
