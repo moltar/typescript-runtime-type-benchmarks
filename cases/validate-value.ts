@@ -1,4 +1,5 @@
-import { Value } from 'validate-value';
+import { isTypeOf, Value } from 'validate-value';
+import { Data } from '../data';
 import { Case } from './abstract';
 
 const dataType = new Value({
@@ -37,7 +38,7 @@ export class ValidateValueCase extends Case implements Case {
   validate() {
     const { data } = this;
 
-    if (dataType.isValid(data)) {
+    if (isTypeOf<Data>(data, dataType.schema)) {
       return data;
     }
 
