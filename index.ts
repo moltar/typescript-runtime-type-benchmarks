@@ -94,7 +94,7 @@ async function run(name: string, cases: Case[], methodName: keyof Case) {
 }
 
 function saveFile(filename: string, content: string) {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     return writeFile(filename, content, { encoding: 'utf8' }, err =>
       err ? reject(err) : resolve()
     );
