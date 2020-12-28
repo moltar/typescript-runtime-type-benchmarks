@@ -869,6 +869,12 @@ DecodeError {
 }
 `;
 
+exports[`Case Class: validate-value should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: validate-value should fail validation when prop is missing 1`] = `[Error: Invalid]`;
+
+exports[`Case Class: validate-value should fail validation when type is wrong 1`] = `[Error: Invalid]`;
+
 exports[`Case Class: yup should fail validation when deeply nested type is wrong 1`] = `[ValidationError: deeplyNested.bool must be a \`boolean\` type, but the final value was: \`"foo"\`.]`;
 
 exports[`Case Class: yup should fail validation when prop is missing 1`] = `[ValidationError: boolean is a required field]`;
