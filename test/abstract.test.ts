@@ -1,4 +1,5 @@
 // eslint-disable-next-line node/no-unpublished-import
+import { expectTypeOf } from 'expect-type';
 import clone from 'clone';
 import { cases } from '../cases/index';
 import { DATA } from '../data';
