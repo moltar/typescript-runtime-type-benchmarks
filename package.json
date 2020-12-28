@@ -12,6 +12,7 @@
     "lint": "gts check",
     "lint:fix": "gts fix",
     "start": "ts-node index.ts",
+    "test:build": "tsc --noEmit",
     "test": "jest"
   },
   "dependencies": {
