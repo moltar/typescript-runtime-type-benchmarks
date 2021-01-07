@@ -3,7 +3,7 @@ import { Data } from '../data';
 
 export abstract class Case implements Case {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected readonly data: any;
+  protected readonly data: Data;
 
   /**
    * Human readable case name.
