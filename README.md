@@ -1,5 +1,9 @@
 # 📊 Benchmark Comparison of Packages with Runtime Validation and TypeScript Support
 
+
+> ⚠️ Note: Until [#497](https://github.com/moltar/typescript-runtime-type-benchmarks/issues/497) is resolved, some of the benchmarks in this repo are comparing apples-to-oranges due to the different APIs provided by validation libraries. Libraries which provide more functionality (like transformations, coercions, detailed errors) might be penalized for slower performance for those extra features.
+
+
 ## Packages Compared
 
 * [bueno](https://github.com/philipnilsson/bueno)
