@@ -1,12 +1,8 @@
 import { View, parse } from 'vega';
 import { compile } from 'vega-lite';
-import SVGO from 'svgo';
-
-const svgo = new SVGO({
-  js2svg: {
-    pretty: true,
-  },
-});
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { optimize } from 'svgo';
 
 export async function graph(filename: string): Promise<string> {
   const vegaSpec = compile({
@@ -45,7 +41,11 @@ export async function graph(filename: string): Promise<string> {
 
   const svg = await view.toSVG();
 
-  const optimizeSvg = await svgo.optimize(svg);
+  const optimizeSvg = await optimize(svg, {
+    js2svg: {
+      pretty: true,
+    },
+  });
 
   return optimizeSvg.data;
 }
