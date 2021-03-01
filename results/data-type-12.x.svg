@@ -2,134 +2,71 @@
     <path fill="#fff" d="M0 0h1011v820H0z"/>
     <g class="mark-group role-frame root" aria-roledescription="group mark container" fill="none" stroke-miterlimit="10">
         <path class="background" aria-hidden="true" d="M126.5 11.5h880v600h-880z" stroke="#ddd"/>
-        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a linear scale with values from 0 to 12,000,000">
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a linear scale with values from 0 to 16,000,000">
             <path class="background" aria-hidden="true" d="M126.5 11.5z" pointer-events="none"/>
             <g class="mark-rule role-axis-grid" pointer-events="none" stroke="#ddd">
-                <path d="M126.5 611.5h880M126.5 561.5h880M126.5 511.5h880M126.5 461.5h880M126.5 411.5h880M126.5 361.5h880M126.5 311.5h880M126.5 261.5h880M126.5 211.5h880M126.5 161.5h880M126.5 111.5h880M126.5 61.5h880M126.5 11.5h880"/>
+                <path d="M126.5 611.5h880M126.5 574.5h880M126.5 536.5h880M126.5 499.5h880M126.5 461.5h880M126.5 424.5h880M126.5 386.5h880M126.5 349.5h880M126.5 311.5h880M126.5 274.5h880M126.5 236.5h880M126.5 199.5h880M126.5 161.5h880M126.5 124.5h880M126.5 86.5h880M126.5 49.5h880M126.5 11.5h880"/>
             </g>
         </g>
-        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'module' for a discrete scale with 19 values: bueno, class-transformer-validator-async, class-transformer-validator-sync, computed-types, decoders, ending with zod">
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'module' for a discrete scale with 20 values: bueno, class-transformer-validator-async, class-transformer-validator-sync, computed-types, decoders, ending with zod">
             <path class="background" aria-hidden="true" d="M126.5 611.5z" pointer-events="none"/>
             <g class="mark-rule role-axis-tick" pointer-events="none" stroke="#888">
-                <path d="M149.5 611.5v5M195.5 611.5v5M241.5 611.5v5M288.5 611.5v5M334.5 611.5v5M380.5 611.5v5M427.5 611.5v5M473.5 611.5v5M519.5 611.5v5M566.5 611.5v5M612.5 611.5v5M658.5 611.5v5M704.5 611.5v5M751.5 611.5v5M797.5 611.5v5M843.5 611.5v5M890.5 611.5v5M936.5 611.5v5M982.5 611.5v5"/>
+                <path d="M148.5 611.5v5M192.5 611.5v5M236.5 611.5v5M280.5 611.5v5M324.5 611.5v5M368.5 611.5v5M412.5 611.5v5M456.5 611.5v5M500.5 611.5v5M544.5 611.5v5M588.5 611.5v5M632.5 611.5v5M676.5 611.5v5M720.5 611.5v5M764.5 611.5v5M808.5 611.5v5M852.5 611.5v5M896.5 611.5v5M940.5 611.5v5M984.5 611.5v5"/>
             </g>
             <g class="mark-text role-axis-label" pointer-events="none" font-family="sans-serif" font-size="14" fill="#000">
-                <text transform="rotate(90 -236.671 381.829)">
-                    bueno
-                </text>
-                <text transform="rotate(90 -213.513 404.987)">
-                    class-transform…
-                </text>
-                <text transform="rotate(90 -190.355 428.145)">
-                    class-transform…
-                </text>
-                <text transform="rotate(90 -167.197 451.303)">
-                    computed-types
-                </text>
-                <text transform="rotate(90 -144.04 474.46)">
-                    decoders
-                </text>
-                <text transform="rotate(90 -120.882 497.618)">
-                    io-ts
-                </text>
-                <text transform="rotate(90 -97.724 520.776)">
-                    jointz
-                </text>
-                <text transform="rotate(90 -74.566 543.934)">
-                    json-decoder
-                </text>
-                <text transform="rotate(90 -51.408 567.092)">
-                    marshal
-                </text>
-                <text transform="rotate(90 -28.25 590.25)">
-                    myzod
-                </text>
-                <text transform="rotate(90 -5.092 613.408)">
-                    purify-ts
-                </text>
-                <text transform="rotate(90 18.066 636.566)">
-                    runtypes
-                </text>
-                <text transform="rotate(90 41.224 659.724)">
-                    simple-runtypes
-                </text>
-                <text transform="rotate(90 64.382 682.882)">
-                    superstruct
-                </text>
-                <text transform="rotate(90 87.54 706.04)">
-                    toi
-                </text>
-                <text transform="rotate(90 110.697 729.197)">
-                    ts-json-validat…
-                </text>
-                <text transform="rotate(90 133.855 752.355)">
-                    ts-utils
-                </text>
-                <text transform="rotate(90 157.013 775.513)">
-                    yup
-                </text>
-                <text transform="rotate(90 180.171 798.671)">
-                    zod
-                </text>
+                <text transform="rotate(90 -237.25 381.25)">bueno</text>
+                <text transform="rotate(90 -215.25 403.25)">class-transform…</text>
+                <text transform="rotate(90 -193.25 425.25)">class-transform…</text>
+                <text transform="rotate(90 -171.25 447.25)">computed-types</text>
+                <text transform="rotate(90 -149.25 469.25)">decoders</text>
+                <text transform="rotate(90 -127.25 491.25)">io-ts</text>
+                <text transform="rotate(90 -105.25 513.25)">jointz</text>
+                <text transform="rotate(90 -83.25 535.25)">json-decoder</text>
+                <text transform="rotate(90 -61.25 557.25)">marshal</text>
+                <text transform="rotate(90 -39.25 579.25)">myzod</text>
+                <text transform="rotate(90 -17.25 601.25)">purify-ts</text>
+                <text transform="rotate(90 4.75 623.25)">rulr</text>
+                <text transform="rotate(90 26.75 645.25)">runtypes</text>
+                <text transform="rotate(90 48.75 667.25)">simple-runtypes</text>
+                <text transform="rotate(90 70.75 689.25)">superstruct</text>
+                <text transform="rotate(90 92.75 711.25)">toi</text>
+                <text transform="rotate(90 114.75 733.25)">ts-json-validat…</text>
+                <text transform="rotate(90 136.75 755.25)">ts-utils</text>
+                <text transform="rotate(90 158.75 777.25)">yup</text>
+                <text transform="rotate(90 180.75 799.25)">zod</text>
             </g>
             <path stroke="#888" d="M126.5 611.5h880" pointer-events="none"/>
-            <text text-anchor="middle" transform="translate(566.5 812.5)" font-family="sans-serif" font-size="14" fill="#000" pointer-events="none">
-                module
-            </text>
+            <text text-anchor="middle" transform="translate(566.5 812.5)" font-family="sans-serif" font-size="14" fill="#000" pointer-events="none">module</text>
         </g>
-        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 12,000,000">
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 16,000,000">
             <path class="background" aria-hidden="true" d="M126.5 11.5z" pointer-events="none"/>
             <g class="mark-rule role-axis-tick" pointer-events="none" stroke="#888">
-                <path d="M126.5 611.5h-5M126.5 561.5h-5M126.5 511.5h-5M126.5 461.5h-5M126.5 411.5h-5M126.5 361.5h-5M126.5 311.5h-5M126.5 261.5h-5M126.5 211.5h-5M126.5 161.5h-5M126.5 111.5h-5M126.5 61.5h-5M126.5 11.5h-5"/>
+                <path d="M126.5 611.5h-5M126.5 574.5h-5M126.5 536.5h-5M126.5 499.5h-5M126.5 461.5h-5M126.5 424.5h-5M126.5 386.5h-5M126.5 349.5h-5M126.5 311.5h-5M126.5 274.5h-5M126.5 236.5h-5M126.5 199.5h-5M126.5 161.5h-5M126.5 124.5h-5M126.5 86.5h-5M126.5 49.5h-5M126.5 11.5h-5"/>
             </g>
             <g class="mark-text role-axis-label" pointer-events="none" text-anchor="end" font-family="sans-serif" font-size="12" fill="#000">
-                <text transform="translate(119.5 615.5)">
-                    0
-                </text>
-                <text transform="translate(119.5 565.5)">
-                    1,000,000
-                </text>
-                <text transform="translate(119.5 515.5)">
-                    2,000,000
-                </text>
-                <text transform="translate(119.5 465.5)">
-                    3,000,000
-                </text>
-                <text transform="translate(119.5 415.5)">
-                    4,000,000
-                </text>
-                <text transform="translate(119.5 365.5)">
-                    5,000,000
-                </text>
-                <text transform="translate(119.5 315.5)">
-                    6,000,000
-                </text>
-                <text transform="translate(119.5 265.5)">
-                    7,000,000
-                </text>
-                <text transform="translate(119.5 215.5)">
-                    8,000,000
-                </text>
-                <text transform="translate(119.5 165.5)">
-                    9,000,000
-                </text>
-                <text transform="translate(119.5 115.5)">
-                    10,000,000
-                </text>
-                <text transform="translate(119.5 65.5)">
-                    11,000,000
-                </text>
-                <text transform="translate(119.5 15.5)">
-                    12,000,000
-                </text>
+                <text transform="translate(119.5 615.5)">0</text>
+                <text transform="translate(119.5 578)">1,000,000</text>
+                <text transform="translate(119.5 540.5)">2,000,000</text>
+                <text transform="translate(119.5 503)">3,000,000</text>
+                <text transform="translate(119.5 465.5)">4,000,000</text>
+                <text transform="translate(119.5 428)">5,000,000</text>
+                <text transform="translate(119.5 390.5)">6,000,000</text>
+                <text transform="translate(119.5 353)">7,000,000</text>
+                <text transform="translate(119.5 315.5)">8,000,000</text>
+                <text transform="translate(119.5 278)">9,000,000</text>
+                <text transform="translate(119.5 240.5)">10,000,000</text>
+                <text transform="translate(119.5 203)">11,000,000</text>
+                <text transform="translate(119.5 165.5)">12,000,000</text>
+                <text transform="translate(119.5 128)">13,000,000</text>
+                <text transform="translate(119.5 90.5)">14,000,000</text>
+                <text transform="translate(119.5 53)">15,000,000</text>
+                <text transform="translate(119.5 15.5)">16,000,000</text>
             </g>
             <path stroke="#888" d="M126.5 611.5v-600" pointer-events="none"/>
-            <text text-anchor="middle" transform="rotate(-90 164 147.5)" font-family="sans-serif" font-size="14" fill="#000" pointer-events="none">
-                operations / sec
-            </text>
+            <text text-anchor="middle" transform="rotate(-90 164 147.5)" font-family="sans-serif" font-size="14" fill="#000" pointer-events="none">operations / sec</text>
         </g>
         <g class="mark-rect role-mark marks" aria-roledescription="rect mark container" fill="#4c78a8">
-            <path d="M128.316 603.369H170V611h-41.684zM174.632 609.289h41.684V611h-41.684zM220.947 609.056h41.685V611h-41.685zM267.263 579.686h41.684V611h-41.684zM313.579 600.861h41.684V611H313.58zM359.895 561.167h41.684V611h-41.684zM406.21 541.714h41.685V611H406.21zM452.526 576.038h41.685V611h-41.685zM498.842 62.042h41.684V611h-41.684zM545.158 550.626h41.684V611h-41.684zM591.474 575.662h41.684V611h-41.684zM637.79 573.42h41.684V611h-41.685zM684.105 536.181h41.684V611h-41.684zM730.421 608.251h41.684V611h-41.684zM776.737 591.207h41.684V611h-41.684zM823.053 37.548h41.684V611h-41.684zM869.368 604.967h41.685V611h-41.685zM915.684 610.286h41.684V611h-41.684zM962 610.595h41.684V611H962z"/>
+            <path d="M128.2 604.822h39.6V611h-39.6zM172.2 609.967h39.6V611h-39.6zM216.2 609.65h39.6V611h-39.6zM260.2 585.326h39.6V611h-39.6zM304.2 603.114h39.6V611h-39.6zM348.2 570.182h39.6V611h-39.6zM392.2 551.39h39.6V611h-39.6zM436.2 581.563h39.6V611h-39.6zM480.2 145.402h39.6V611h-39.6zM524.2 557.943h39.6V611h-39.6zM568.2 581.152h39.6V611h-39.6zM612.2 583.462h39.6V611h-39.6zM656.2 583.367h39.6V611h-39.6zM700.2 546.011h39.6V611h-39.6zM744.2 608.847h39.6V611h-39.6zM788.2 594.297h39.6V611h-39.6zM832.2 19.56h39.6V611h-39.6zM876.2 606.073h39.6V611h-39.6zM920.2 610.56h39.6v.44h-39.6zM964.2 610.646h39.6V611h-39.6z"/>
         </g>
     </g>
 </svg>
