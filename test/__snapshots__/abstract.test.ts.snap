@@ -875,6 +875,12 @@ DecodeError {
 }
 `;
 
+exports[`Case Class: valita should fail validation when deeply nested type is wrong 1`] = `[ValitaError: invalid_type at .deeplyNested.bool (expected boolean)]`;
+
+exports[`Case Class: valita should fail validation when prop is missing 1`] = `[ValitaError: missing_key at . (missing key "boolean")]`;
+
+exports[`Case Class: valita should fail validation when type is wrong 1`] = `[ValitaError: invalid_type at .boolean (expected boolean)]`;
+
 exports[`Case Class: yup should fail validation when deeply nested type is wrong 1`] = `[ValidationError: deeplyNested.bool must be a \`boolean\` type, but the final value was: \`"foo"\`.]`;
 
 exports[`Case Class: yup should fail validation when prop is missing 1`] = `[ValidationError: boolean is a required field]`;
