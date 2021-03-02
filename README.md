@@ -23,6 +23,7 @@
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
+* [valita](https://github.com/badrap/valita)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
 
