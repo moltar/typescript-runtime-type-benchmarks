@@ -1,129 +1,135 @@
 {
   "name": "data-type-sans-outliers",
-  "date": "2021-03-22T02:52:56.491Z",
+  "date": "2021-03-22T13:13:07.767Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "bueno",
-      "ops": 133681,
-      "margin": 7.31,
-      "percentSlower": 95.83
+      "ops": 140527,
+      "margin": 0.58,
+      "percentSlower": 95.02
     },
     {
       "name": "class-transformer-validator-async",
-      "ops": 26096,
-      "margin": 10.43,
-      "percentSlower": 99.19
+      "ops": 32871,
+      "margin": 0.96,
+      "percentSlower": 98.84
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 30714,
-      "margin": 1.5,
-      "percentSlower": 99.04
+      "ops": 36664,
+      "margin": 0.52,
+      "percentSlower": 98.7
     },
     {
       "name": "computed-types",
-      "ops": 617086,
-      "margin": 1.23,
-      "percentSlower": 80.73
+      "ops": 614060,
+      "margin": 0.37,
+      "percentSlower": 78.24
     },
     {
       "name": "decoders",
-      "ops": 176848,
-      "margin": 6.07,
-      "percentSlower": 94.48
+      "ops": 186699,
+      "margin": 0.49,
+      "percentSlower": 93.38
     },
     {
       "name": "io-ts",
-      "ops": 892780,
-      "margin": 1.2,
-      "percentSlower": 72.12
+      "ops": 955608,
+      "margin": 0.36,
+      "percentSlower": 66.14
     },
     {
       "name": "jointz",
-      "ops": 1314771,
-      "margin": 1.01,
-      "percentSlower": 58.94
+      "ops": 1277062,
+      "margin": 0.24,
+      "percentSlower": 54.75
     },
     {
       "name": "json-decoder",
-      "ops": 722833,
-      "margin": 0.94,
-      "percentSlower": 77.43
+      "ops": 642278,
+      "margin": 0.47,
+      "percentSlower": 77.24
     },
     {
       "name": "myzod",
-      "ops": 1200611,
-      "margin": 4.26,
-      "percentSlower": 62.51
+      "ops": 1104714,
+      "margin": 0.34,
+      "percentSlower": 60.86
     },
     {
       "name": "purify-ts",
-      "ops": 711879,
-      "margin": 1.2,
-      "percentSlower": 77.77
+      "ops": 647363,
+      "margin": 0.52,
+      "percentSlower": 77.06
     },
     {
       "name": "rulr",
-      "ops": 669716,
-      "margin": 1.29,
-      "percentSlower": 79.09
+      "ops": 632219,
+      "margin": 0.59,
+      "percentSlower": 77.6
     },
     {
       "name": "runtypes",
-      "ops": 672650,
-      "margin": 0.78,
-      "percentSlower": 78.99
+      "ops": 602825,
+      "margin": 0.27,
+      "percentSlower": 78.64
     },
     {
       "name": "simple-runtypes",
-      "ops": 1567566,
-      "margin": 0.97,
-      "percentSlower": 51.05
+      "ops": 1442832,
+      "margin": 0.5,
+      "percentSlower": 48.87
     },
     {
       "name": "superstruct",
-      "ops": 50129,
-      "margin": 8.27,
-      "percentSlower": 98.43
+      "ops": 51346,
+      "margin": 0.72,
+      "percentSlower": 98.18
     },
     {
       "name": "toi",
-      "ops": 409759,
-      "margin": 1.21,
-      "percentSlower": 87.2
+      "ops": 392604,
+      "margin": 0.21,
+      "percentSlower": 86.09
     },
     {
       "name": "ts-utils",
-      "ops": 126932,
-      "margin": 1.35,
-      "percentSlower": 96.04
+      "ops": 120460,
+      "margin": 1.12,
+      "percentSlower": 95.73
+    },
+    {
+      "name": "@typeofweb/schema",
+      "ops": 760097,
+      "margin": 0.84,
+      "percentSlower": 73.07
     },
     {
       "name": "valita",
-      "ops": 3202288,
-      "margin": 0.99,
+      "ops": 2822162,
+      "margin": 0.31,
       "percentSlower": 0
     },
     {
       "name": "yup",
-      "ops": 10766,
-      "margin": 21.57,
-      "percentSlower": 99.66
+      "ops": 10157,
+      "margin": 21.91,
+      "percentSlower": 99.64
     },
     {
       "name": "zod",
-      "ops": 5738,
-      "margin": 1.16,
-      "percentSlower": 99.82
+      "ops": 8646,
+      "margin": 0.56,
+      "percentSlower": 99.69
     }
   ],
   "fastest": {
     "name": "valita",
-    "index": 16
+    "index": 17
   },
   "slowest": {
     "name": "zod",
-    "index": 18
+    "index": 19
   }
 }
