@@ -1,129 +1,135 @@
 {
   "name": "data-type-sans-outliers",
-  "date": "2021-03-22T02:47:43.989Z",
+  "date": "2021-03-22T13:07:48.747Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "bueno",
-      "ops": 144533,
-      "margin": 1.35,
-      "percentSlower": 95.27
+      "ops": 128793,
+      "margin": 15.22,
+      "percentSlower": 95.22
     },
     {
       "name": "class-transformer-validator-async",
-      "ops": 24274,
-      "margin": 15.67,
-      "percentSlower": 99.21
+      "ops": 33478,
+      "margin": 1.14,
+      "percentSlower": 98.76
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 30523,
-      "margin": 1.04,
-      "percentSlower": 99
+      "ops": 35741,
+      "margin": 1.08,
+      "percentSlower": 98.67
     },
     {
       "name": "computed-types",
-      "ops": 619420,
-      "margin": 0.72,
-      "percentSlower": 79.72
+      "ops": 588696,
+      "margin": 1.07,
+      "percentSlower": 78.16
     },
     {
       "name": "decoders",
-      "ops": 189811,
-      "margin": 1.17,
-      "percentSlower": 93.79
+      "ops": 170032,
+      "margin": 1.22,
+      "percentSlower": 93.69
     },
     {
       "name": "io-ts",
-      "ops": 891830,
-      "margin": 1.12,
-      "percentSlower": 70.81
+      "ops": 939391,
+      "margin": 1.02,
+      "percentSlower": 65.15
     },
     {
       "name": "jointz",
-      "ops": 1409400,
-      "margin": 0.73,
-      "percentSlower": 53.87
+      "ops": 1293904,
+      "margin": 0.99,
+      "percentSlower": 52
     },
     {
       "name": "json-decoder",
-      "ops": 675517,
-      "margin": 0.99,
-      "percentSlower": 77.89
+      "ops": 646237,
+      "margin": 1.2,
+      "percentSlower": 76.03
     },
     {
       "name": "myzod",
-      "ops": 1161273,
-      "margin": 0.89,
-      "percentSlower": 61.99
+      "ops": 1108228,
+      "margin": 0.3,
+      "percentSlower": 58.89
     },
     {
       "name": "purify-ts",
-      "ops": 630864,
-      "margin": 1.42,
-      "percentSlower": 79.35
+      "ops": 629366,
+      "margin": 1.76,
+      "percentSlower": 76.65
     },
     {
       "name": "rulr",
-      "ops": 648261,
-      "margin": 1.09,
-      "percentSlower": 78.78
+      "ops": 622667,
+      "margin": 1.13,
+      "percentSlower": 76.9
     },
     {
       "name": "runtypes",
-      "ops": 685782,
-      "margin": 0.96,
-      "percentSlower": 77.55
+      "ops": 623833,
+      "margin": 1.07,
+      "percentSlower": 76.86
     },
     {
       "name": "simple-runtypes",
-      "ops": 1539825,
-      "margin": 1.09,
-      "percentSlower": 49.6
+      "ops": 1389844,
+      "margin": 1.01,
+      "percentSlower": 48.45
     },
     {
       "name": "superstruct",
-      "ops": 49863,
-      "margin": 0.88,
-      "percentSlower": 98.37
+      "ops": 51805,
+      "margin": 0.92,
+      "percentSlower": 98.08
     },
     {
       "name": "toi",
-      "ops": 404401,
-      "margin": 0.59,
-      "percentSlower": 86.76
+      "ops": 394587,
+      "margin": 1.05,
+      "percentSlower": 85.36
     },
     {
       "name": "ts-utils",
-      "ops": 117789,
-      "margin": 0.96,
-      "percentSlower": 96.14
+      "ops": 117576,
+      "margin": 0.98,
+      "percentSlower": 95.64
+    },
+    {
+      "name": "@typeofweb/schema",
+      "ops": 656049,
+      "margin": 0.7,
+      "percentSlower": 75.66
     },
     {
       "name": "valita",
-      "ops": 3055080,
-      "margin": 1.14,
+      "ops": 2695850,
+      "margin": 1.19,
       "percentSlower": 0
     },
     {
       "name": "yup",
-      "ops": 9285,
-      "margin": 26.23,
-      "percentSlower": 99.7
+      "ops": 14135,
+      "margin": 0.97,
+      "percentSlower": 99.48
     },
     {
       "name": "zod",
-      "ops": 8699,
-      "margin": 1.37,
-      "percentSlower": 99.72
+      "ops": 6831,
+      "margin": 1.11,
+      "percentSlower": 99.75
     }
   ],
   "fastest": {
     "name": "valita",
-    "index": 16
+    "index": 17
   },
   "slowest": {
     "name": "zod",
-    "index": 18
+    "index": 19
   }
 }
