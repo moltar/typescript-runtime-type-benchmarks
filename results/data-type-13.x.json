@@ -1,133 +1,133 @@
 {
   "name": "data-type",
-  "date": "2021-03-21T18:33:08.646Z",
+  "date": "2021-03-22T02:51:11.094Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "bueno",
-      "ops": 152076,
-      "margin": 1.17,
-      "percentSlower": 99.21
+      "ops": 139917,
+      "margin": 1.84,
+      "percentSlower": 99.23
     },
     {
       "name": "class-transformer-validator-async",
-      "ops": 25746,
-      "margin": 19.15,
+      "ops": 23701,
+      "margin": 17.4,
       "percentSlower": 99.87
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 34282,
-      "margin": 1.29,
+      "ops": 32523,
+      "margin": 1.17,
       "percentSlower": 99.82
     },
     {
       "name": "computed-types",
-      "ops": 678276,
-      "margin": 1.57,
-      "percentSlower": 96.48
+      "ops": 659929,
+      "margin": 1.22,
+      "percentSlower": 96.37
     },
     {
       "name": "decoders",
-      "ops": 208504,
-      "margin": 0.94,
-      "percentSlower": 98.92
+      "ops": 197896,
+      "margin": 1.4,
+      "percentSlower": 98.91
     },
     {
       "name": "io-ts",
-      "ops": 1027116,
-      "margin": 1.54,
-      "percentSlower": 94.67
+      "ops": 983169,
+      "margin": 1.29,
+      "percentSlower": 94.59
     },
     {
       "name": "jointz",
-      "ops": 1470427,
-      "margin": 1.09,
-      "percentSlower": 92.38
+      "ops": 1389649,
+      "margin": 0.91,
+      "percentSlower": 92.35
     },
     {
       "name": "json-decoder",
-      "ops": 775381,
-      "margin": 1.25,
-      "percentSlower": 95.98
+      "ops": 724902,
+      "margin": 1.3,
+      "percentSlower": 96.01
     },
     {
       "name": "marshal",
-      "ops": 13385515,
-      "margin": 1.1,
-      "percentSlower": 30.59
+      "ops": 11173857,
+      "margin": 1.43,
+      "percentSlower": 38.48
     },
     {
       "name": "myzod",
-      "ops": 1262570,
-      "margin": 0.83,
-      "percentSlower": 93.45
+      "ops": 1173789,
+      "margin": 0.73,
+      "percentSlower": 93.54
     },
     {
       "name": "purify-ts",
-      "ops": 741510,
-      "margin": 0.85,
-      "percentSlower": 96.15
+      "ops": 647755,
+      "margin": 0.87,
+      "percentSlower": 96.43
     },
     {
       "name": "rulr",
-      "ops": 697049,
-      "margin": 0.96,
-      "percentSlower": 96.39
+      "ops": 645915,
+      "margin": 0.98,
+      "percentSlower": 96.44
     },
     {
       "name": "runtypes",
-      "ops": 708980,
-      "margin": 0.99,
+      "ops": 668586,
+      "margin": 1.36,
       "percentSlower": 96.32
     },
     {
       "name": "simple-runtypes",
-      "ops": 1689958,
-      "margin": 1.63,
-      "percentSlower": 91.24
+      "ops": 1568269,
+      "margin": 1.12,
+      "percentSlower": 91.37
     },
     {
       "name": "superstruct",
-      "ops": 54386,
-      "margin": 1.17,
+      "ops": 50148,
+      "margin": 1.61,
       "percentSlower": 99.72
     },
     {
       "name": "toi",
-      "ops": 424325,
-      "margin": 0.79,
-      "percentSlower": 97.8
+      "ops": 406992,
+      "margin": 1.27,
+      "percentSlower": 97.76
     },
     {
       "name": "ts-json-validator",
-      "ops": 19284790,
-      "margin": 1.09,
+      "ops": 18162767,
+      "margin": 1.32,
       "percentSlower": 0
     },
     {
       "name": "ts-utils",
-      "ops": 132152,
-      "margin": 1.24,
-      "percentSlower": 99.31
+      "ops": 123652,
+      "margin": 1.1,
+      "percentSlower": 99.32
     },
     {
       "name": "valita",
-      "ops": 3431883,
-      "margin": 1.03,
-      "percentSlower": 82.2
+      "ops": 3180202,
+      "margin": 1.08,
+      "percentSlower": 82.49
     },
     {
       "name": "yup",
-      "ops": 8917,
-      "margin": 39.67,
-      "percentSlower": 99.95
+      "ops": 8142,
+      "margin": 41.78,
+      "percentSlower": 99.96
     },
     {
       "name": "zod",
-      "ops": 8545,
-      "margin": 1.1,
-      "percentSlower": 99.96
+      "ops": 8473,
+      "margin": 1.14,
+      "percentSlower": 99.95
     }
   ],
   "fastest": {
@@ -135,7 +135,7 @@
     "index": 16
   },
   "slowest": {
-    "name": "zod",
-    "index": 20
+    "name": "yup",
+    "index": 19
   }
 }
