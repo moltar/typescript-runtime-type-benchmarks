@@ -18,6 +18,7 @@ import { SuperstructCase } from './superstruct';
 import { ToiCase } from './toi';
 import { TsJsonValidatorCase } from './ts-json-validator';
 import { TsUtilsCase } from './ts-utils';
+import { TypeOfWebSchemaCase } from './typeofweb-schema';
 import { ValitaCase } from './valita';
 import { YupCase } from './yup';
 import { ZodCase } from './zod';
@@ -41,6 +42,7 @@ export const cases = [
   ToiCase,
   TsJsonValidatorCase,
   TsUtilsCase,
+  TypeOfWebSchemaCase,
   ValitaCase,
   YupCase,
   ZodCase,
