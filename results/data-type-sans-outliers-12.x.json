@@ -1,127 +1,127 @@
 {
   "name": "data-type-sans-outliers",
-  "date": "2021-03-22T23:25:29.590Z",
+  "date": "2021-03-23T22:55:21.137Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "bueno",
-      "ops": 143698,
-      "margin": 9.78,
-      "percentSlower": 95.97
+      "ops": 145618,
+      "margin": 0.93,
+      "percentSlower": 95.37
     },
     {
       "name": "class-transformer-validator-async",
-      "ops": 26069,
-      "margin": 9.12,
-      "percentSlower": 99.27
+      "ops": 25627,
+      "margin": 6.22,
+      "percentSlower": 99.18
     },
     {
       "name": "class-transformer-validator-sync",
-      "ops": 30148,
-      "margin": 1.4,
-      "percentSlower": 99.16
+      "ops": 30621,
+      "margin": 1.33,
+      "percentSlower": 99.03
     },
     {
       "name": "computed-types",
-      "ops": 669715,
-      "margin": 1.04,
-      "percentSlower": 81.23
+      "ops": 621109,
+      "margin": 0.84,
+      "percentSlower": 80.24
     },
     {
       "name": "decoders",
-      "ops": 196431,
-      "margin": 7.6,
-      "percentSlower": 94.5
+      "ops": 183383,
+      "margin": 1.12,
+      "percentSlower": 94.17
     },
     {
       "name": "io-ts",
-      "ops": 981695,
-      "margin": 1.54,
-      "percentSlower": 72.49
+      "ops": 916280,
+      "margin": 1.01,
+      "percentSlower": 70.85
     },
     {
       "name": "jointz",
-      "ops": 1580992,
-      "margin": 1.03,
-      "percentSlower": 55.7
+      "ops": 1191002,
+      "margin": 0.71,
+      "percentSlower": 62.11
     },
     {
       "name": "json-decoder",
-      "ops": 745896,
-      "margin": 1.44,
-      "percentSlower": 79.1
+      "ops": 655918,
+      "margin": 0.95,
+      "percentSlower": 79.14
     },
     {
       "name": "myzod",
-      "ops": 1213197,
-      "margin": 5.24,
-      "percentSlower": 66
+      "ops": 1109815,
+      "margin": 1.04,
+      "percentSlower": 64.7
     },
     {
       "name": "purify-ts",
-      "ops": 726989,
-      "margin": 1.2,
-      "percentSlower": 79.63
+      "ops": 633603,
+      "margin": 0.82,
+      "percentSlower": 79.85
     },
     {
       "name": "rulr",
-      "ops": 690794,
-      "margin": 1.22,
-      "percentSlower": 80.64
+      "ops": 637700,
+      "margin": 1.06,
+      "percentSlower": 79.71
     },
     {
       "name": "runtypes",
-      "ops": 727926,
-      "margin": 1.16,
-      "percentSlower": 79.6
+      "ops": 674420,
+      "margin": 0.91,
+      "percentSlower": 78.55
     },
     {
       "name": "simple-runtypes",
-      "ops": 1650450,
-      "margin": 1.05,
-      "percentSlower": 53.75
+      "ops": 1488128,
+      "margin": 0.96,
+      "percentSlower": 52.66
     },
     {
       "name": "superstruct",
-      "ops": 49434,
-      "margin": 9.75,
-      "percentSlower": 98.61
+      "ops": 48300,
+      "margin": 0.84,
+      "percentSlower": 98.46
     },
     {
       "name": "toi",
-      "ops": 437108,
-      "margin": 1.16,
-      "percentSlower": 87.75
+      "ops": 387163,
+      "margin": 1.02,
+      "percentSlower": 87.68
     },
     {
       "name": "ts-utils",
-      "ops": 129101,
-      "margin": 0.98,
-      "percentSlower": 96.38
+      "ops": 116714,
+      "margin": 1.21,
+      "percentSlower": 96.29
     },
     {
       "name": "@typeofweb/schema",
-      "ops": 899739,
+      "ops": 783731,
       "margin": 0.95,
-      "percentSlower": 74.79
+      "percentSlower": 75.07
     },
     {
       "name": "valita",
-      "ops": 3568543,
-      "margin": 0.77,
+      "ops": 3143671,
+      "margin": 0.84,
       "percentSlower": 0
     },
     {
       "name": "yup",
-      "ops": 10525,
-      "margin": 19.94,
-      "percentSlower": 99.71
+      "ops": 8917,
+      "margin": 21.34,
+      "percentSlower": 99.72
     },
     {
       "name": "zod",
-      "ops": 7979,
-      "margin": 1.19,
-      "percentSlower": 99.78
+      "ops": 8995,
+      "margin": 0.95,
+      "percentSlower": 99.71
     }
   ],
   "fastest": {
@@ -129,7 +129,7 @@
     "index": 17
   },
   "slowest": {
-    "name": "zod",
-    "index": 19
+    "name": "yup",
+    "index": 18
   }
 }
