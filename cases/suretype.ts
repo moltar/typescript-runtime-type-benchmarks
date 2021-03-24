@@ -17,14 +17,12 @@ const dataSchema = v.object({
     .required(),
 });
 
-const isData = compile(dataSchema, { simple: true });
+const ensureData = compile(dataSchema, { ensure: true });
 
 export class SuretypeCase extends Case implements Case {
   name = 'suretype';
 
   validate() {
-    if (isData(this.data)) {
-      return this.data;
-    }
+    return ensureData(this.data);
   }
 }
