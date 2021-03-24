@@ -20,6 +20,7 @@
 * [runtypes](https://github.com/pelotom/runtypes)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
+* [suretype](https://github.com/grantila/suretype)
 * [toi](https://github.com/hf/toi)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
