@@ -810,6 +810,12 @@ exports[`Case Class: superstruct should fail validation when prop is missing 1`]
 
 exports[`Case Class: superstruct should fail validation when type is wrong 1`] = `[TypeError: Expected a value of type \`boolean\` but received \`"foo"\`.]`;
 
+exports[`Case Class: suretype should fail validation when deeply nested type is wrong 1`] = `[Error]`;
+
+exports[`Case Class: suretype should fail validation when prop is missing 1`] = `[Error]`;
+
+exports[`Case Class: suretype should fail validation when type is wrong 1`] = `[Error]`;
+
 exports[`Case Class: toi should fail validation when deeply nested type is wrong 1`] = `[Error: value does not match structure]`;
 
 exports[`Case Class: toi should fail validation when prop is missing 1`] = `[Error: value does not match structure]`;
