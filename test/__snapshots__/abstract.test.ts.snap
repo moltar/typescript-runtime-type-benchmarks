@@ -822,6 +822,12 @@ exports[`Case Class: toi should fail validation when prop is missing 1`] = `[Err
 
 exports[`Case Class: toi should fail validation when type is wrong 1`] = `[Error: value does not match structure]`;
 
+exports[`Case Class: ts-interface-checker should fail validation when deeply nested type is wrong 1`] = `[Error: value.deeplyNested.bool is not a boolean]`;
+
+exports[`Case Class: ts-interface-checker should fail validation when prop is missing 1`] = `[Error: value.boolean is missing]`;
+
+exports[`Case Class: ts-interface-checker should fail validation when type is wrong 1`] = `[Error: value.boolean is not a boolean]`;
+
 exports[`Case Class: ts-json-validator should fail validation when deeply nested type is wrong 1`] = `[Error: Invalid]`;
 
 exports[`Case Class: ts-json-validator should fail validation when prop is missing 1`] = `[Error: Invalid]`;
