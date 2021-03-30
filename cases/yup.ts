@@ -2,15 +2,15 @@ import * as yup from 'yup';
 import { Case } from './abstract';
 
 const dataType = yup.object({
-  number: yup.number(),
-  negNumber: yup.number(),
-  maxNumber: yup.number(),
-  string: yup.string(),
-  longString: yup.string(),
+  number: yup.number().required(),
+  negNumber: yup.number().required(),
+  maxNumber: yup.number().required(),
+  string: yup.string().required(),
+  longString: yup.string().required(),
   boolean: yup.bool().required(),
   deeplyNested: yup.object({
-    foo: yup.string(),
-    num: yup.number(),
+    foo: yup.string().required(),
+    num: yup.number().required(),
     bool: yup.bool().required(),
   }),
 });
