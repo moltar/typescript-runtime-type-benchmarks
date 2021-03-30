@@ -3,20 +3,21 @@ import { Case } from './abstract';
 import { Data } from '../data';
 
 const dataType = t.iface([], {
-  number: "number",
-  negNumber: "number",
-  maxNumber: "number",
-  string: "string",
-  longString: "string",
-  boolean: "boolean",
+  number: 'number',
+  negNumber: 'number',
+  maxNumber: 'number',
+  string: 'string',
+  longString: 'string',
+  boolean: 'boolean',
   deeplyNested: t.iface([], {
-    foo: "string",
-    num: "number",
-    bool: "boolean",
+    foo: 'string',
+    num: 'number',
+    bool: 'boolean',
   }),
 });
 
-const dataTypeChecker = t.createCheckers({dataType}).dataType as t.CheckerT<Data>;
+const suite = { dataType };
+const dataTypeChecker = t.createCheckers(suite).dataType as t.CheckerT<Data>;
 
 export class TsInterfaceCheckerCase extends Case implements Case {
   name = 'ts-interface-checker';
