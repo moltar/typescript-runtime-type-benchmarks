@@ -9,11 +9,14 @@ import { cases } from './cases';
 import { Case } from './cases/abstract';
 import { TsJsonValidatorCase } from './cases/ts-json-validator';
 import { MarshalCase } from './cases/marshal';
+import { SuretypeCase } from './cases/suretype';
 
 const caseInstances: Case[] = cases.map(caseClass => new caseClass(DATA));
 
 const RESULTS_DIR = join(__dirname, 'results');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
+
+const OUTLIERS = [MarshalCase, TsJsonValidatorCase, SuretypeCase];
 
 async function main() {
   await suiteDataTypeValidation();
@@ -37,9 +40,9 @@ async function suiteDataTypeValidation() {
  * https://en.wikipedia.org/wiki/Data_validation#Data-type_check
  */
 async function suiteDataTypeValidationSansOutliers() {
-  const cases = caseInstances
-    .filter(caseInstance => !(caseInstance instanceof MarshalCase))
-    .filter(caseInstance => !(caseInstance instanceof TsJsonValidatorCase));
+  const cases = caseInstances.filter(caseInstance =>
+    OUTLIERS.some(OutlierCase => caseInstance instanceof OutlierCase)
+  );
 
   await run('data-type-sans-outliers', cases, 'validate');
 }
