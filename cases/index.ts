@@ -17,6 +17,7 @@ import { SimpleRuntypesCase } from './simple-runtypes';
 import { SuperstructCase } from './superstruct';
 import { SuretypeCase } from './suretype';
 import { ToiCase } from './toi';
+import { TsInterfaceCheckerCase } from './ts-interface-checker';
 import { TsJsonValidatorCase } from './ts-json-validator';
 import { TsUtilsCase } from './ts-utils';
 import { TypeOfWebSchemaCase } from './typeofweb-schema';
@@ -42,6 +43,7 @@ export const cases = [
   SuperstructCase,
   SuretypeCase,
   ToiCase,
+  TsInterfaceCheckerCase,
   TsJsonValidatorCase,
   TsUtilsCase,
   TypeOfWebSchemaCase,
