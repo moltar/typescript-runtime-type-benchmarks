@@ -1,4 +1,4 @@
-import { object, string, number, boolean, coerce } from 'superstruct';
+import { object, string, number, boolean, assert } from 'superstruct';
 import { Case } from './abstract';
 
 const dataType = object({
@@ -19,6 +19,7 @@ export class SuperstructCase extends Case implements Case {
   name = 'superstruct';
 
   validate() {
-    return coerce(this.data, dataType);
+    assert(this.data, dataType);
+    return this.data;
   }
 }
