@@ -40,8 +40,9 @@ async function suiteDataTypeValidation() {
  * https://en.wikipedia.org/wiki/Data_validation#Data-type_check
  */
 async function suiteDataTypeValidationSansOutliers() {
-  const cases = caseInstances.filter(caseInstance =>
-    OUTLIERS.some(OutlierCase => caseInstance instanceof OutlierCase)
+  const cases = caseInstances.filter(
+    caseInstance =>
+      !OUTLIERS.some(OutlierCase => caseInstance instanceof OutlierCase)
   );
 
   await run('data-type-sans-outliers', cases, 'validate');
