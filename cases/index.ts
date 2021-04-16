@@ -24,6 +24,7 @@ import { TypeOfWebSchemaCase } from './typeofweb-schema';
 import { ValitaCase } from './valita';
 import { YupCase } from './yup';
 import { ZodCase } from './zod';
+import { MojoTechJsonTypeValidationCase } from './mojotech-json-type-validation';
 
 export const cases = [
   BuenoCase,
@@ -50,4 +51,5 @@ export const cases = [
   ValitaCase,
   YupCase,
   ZodCase,
+  MojoTechJsonTypeValidationCase,
 ];

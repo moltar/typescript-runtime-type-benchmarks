@@ -29,6 +29,7 @@
 * [valita](https://github.com/badrap/valita)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
+* [mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
 
 ## Criteria
 
