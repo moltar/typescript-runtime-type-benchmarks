@@ -14,6 +14,7 @@
 * [jointz](https://github.com/moodysalem/jointz)
 * [json-decoder](https://github.com/venil7/json-decoder)
 * [marshal](https://github.com/marcj/marshal.ts)
+* [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
 * [myzod](https://github.com/davidmdm/myzod)
 * [purify-ts](https://github.com/gigobyte/purify)
 * [rulr](https://github.com/ryansmith94/rulr)
@@ -29,7 +30,6 @@
 * [valita](https://github.com/badrap/valita)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
-* [mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
 
 ## Criteria
 

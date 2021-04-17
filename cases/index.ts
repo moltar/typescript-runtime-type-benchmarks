@@ -9,6 +9,7 @@ import { IoTsCase } from './io-ts';
 import { JointzCase } from './jointz';
 import { JsonDecoderCase } from './json-decoder';
 import { MarshalCase } from './marshal';
+import { MojoTechJsonTypeValidationCase } from './mojotech-json-type-validation';
 import { MyzodCase } from './myzod';
 import { PurifyCase } from './purify-ts';
 import { RulrCase } from './rulr';
@@ -24,7 +25,6 @@ import { TypeOfWebSchemaCase } from './typeofweb-schema';
 import { ValitaCase } from './valita';
 import { YupCase } from './yup';
 import { ZodCase } from './zod';
-import { MojoTechJsonTypeValidationCase } from './mojotech-json-type-validation';
 
 export const cases = [
   BuenoCase,
@@ -36,6 +36,7 @@ export const cases = [
   JointzCase,
   JsonDecoderCase,
   MarshalCase,
+  MojoTechJsonTypeValidationCase,
   MyzodCase,
   PurifyCase,
   RulrCase,
@@ -51,5 +52,4 @@ export const cases = [
   ValitaCase,
   YupCase,
   ZodCase,
-  MojoTechJsonTypeValidationCase,
 ];
