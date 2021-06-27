@@ -1,4 +1,4 @@
-import { writeFile } from 'fs';
+import { writeFile, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { suite, add, cycle, complete, save } from 'benny';
 import stringify from 'csv-stringify/lib/sync';
@@ -7,46 +7,29 @@ import { graph } from './graph';
 import { DATA } from './data';
 import { cases } from './cases';
 import { Case } from './cases/abstract';
-import { TsJsonValidatorCase } from './cases/ts-json-validator';
-import { MarshalCase } from './cases/marshal';
-import { SuretypeCase } from './cases/suretype';
 
 const caseInstances: Case[] = cases.map(caseClass => new caseClass(DATA));
 
 const RESULTS_DIR = join(__dirname, 'results');
+const DOCS_DIR = join(__dirname, 'docs');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
+const BENCHMARKS = ['validate' as const, 'validateStrict' as const];
 
-const OUTLIERS = [MarshalCase, TsJsonValidatorCase, SuretypeCase];
+// const OUTLIERS = [MarshalCase, TsJsonValidatorCase, SuretypeCase];
 
 async function main() {
-  await suiteDataTypeValidation();
-  await suiteDataTypeValidationSansOutliers();
+  for (let name of BENCHMARKS) {
+    await run(
+      name,
+      caseInstances.filter(c => c[name]),
+      name
+    );
+  }
+
+  aggregateResults();
 }
+
 main();
-
-/**
- * Benchmarking suite that performs data type validation only.
- *
- * https://en.wikipedia.org/wiki/Data_validation#Data-type_check
- */
-async function suiteDataTypeValidation() {
-  await run('data-type', caseInstances, 'validate');
-}
-
-/**
- * Benchmarking suite that performs data type validation only, but skips outliers
- * because it is difficult to look at the performance of other packages.
- *
- * https://en.wikipedia.org/wiki/Data_validation#Data-type_check
- */
-async function suiteDataTypeValidationSansOutliers() {
-  const cases = caseInstances.filter(
-    caseInstance =>
-      !OUTLIERS.some(OutlierCase => caseInstance instanceof OutlierCase)
-  );
-
-  await run('data-type-sans-outliers', cases, 'validate');
-}
 
 async function run(name: string, cases: Case[], methodName: keyof Case) {
   const fns = cases.map(caseInstance =>
@@ -80,17 +63,17 @@ async function run(name: string, cases: Case[], methodName: keyof Case) {
         header: true,
         columns: ['name', 'ops'],
       });
-      const csvFilename = join(RESULTS_DIR, `${name}-${NODE_VERSION}.csv`);
+      const csvFilename = join(RESULTS_DIR, getResultFileName(name, '.csv'));
       await saveFile(csvFilename, csv);
 
       const svg = await graph(csvFilename);
-      const svgFilename = join(RESULTS_DIR, `${name}-${NODE_VERSION}.svg`);
+      const svgFilename = join(RESULTS_DIR, getResultFileName(name, '.svg'));
       await saveFile(svgFilename, svg);
     }),
 
     // saves raw JSON results
     save({
-      file: `${name}-${NODE_VERSION}`,
+      file: getResultFileName(name, ''),
       folder: RESULTS_DIR,
       version: pkg.version,
     })
@@ -103,4 +86,68 @@ function saveFile(filename: string, content: string) {
       err ? reject(err) : resolve()
     );
   });
+}
+
+function getResultFileName(
+  benchmarkName: string,
+  suffix: '.json' | '.svg' | '.csv' | ''
+) {
+  return `${benchmarkName}-${NODE_VERSION}${suffix}`;
+}
+
+function getNodeMajorVersion() {
+  let majorVersion: number = 0;
+
+  majorVersion = parseInt(NODE_VERSION);
+
+  if (!isNaN(majorVersion)) {
+    return majorVersion;
+  }
+
+  majorVersion = parseInt(NODE_VERSION.slice(1));
+
+  if (!isNaN(majorVersion)) {
+    return majorVersion;
+  }
+
+  return majorVersion;
+}
+
+// combine all benchmarks into a single file for this node version
+function aggregateResults() {
+  const majorVersion = getNodeMajorVersion();
+
+  const results: {
+    name: string;
+    benchmark: string;
+    nodeVersion: string;
+    ops: number;
+    margin: number;
+  }[] = [];
+
+  BENCHMARKS.forEach(name => {
+    const data = JSON.parse(
+      readFileSync(
+        join(RESULTS_DIR, getResultFileName(name, '.json'))
+      ).toString()
+    );
+
+    data.results.forEach((r: any) =>
+      results.push({
+        name: r.name,
+        benchmark: name,
+        nodeVersion: NODE_VERSION,
+        ops: r.ops,
+        margin: r.margin,
+      })
+    );
+  });
+
+  writeFileSync(
+    join(DOCS_DIR, 'results', `node-${majorVersion}.json`),
+
+    JSON.stringify({
+      results,
+    })
+  );
 }

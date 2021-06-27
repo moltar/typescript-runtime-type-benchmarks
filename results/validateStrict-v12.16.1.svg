@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="marks" width="1001" height="820">
+    <path fill="#fff" d="M0 0h1001v820H0z"/>
+    <g class="mark-group role-frame root" aria-roledescription="group mark container" fill="none" stroke-miterlimit="10">
+        <path class="background" aria-hidden="true" d="M116.5 11.5h880v600h-880z" stroke="#ddd"/>
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a linear scale with values from 0 to 2,400,000">
+            <path class="background" aria-hidden="true" d="M116.5 11.5z" pointer-events="none"/>
+            <g class="mark-rule role-axis-grid" pointer-events="none" stroke="#ddd">
+                <path d="M116.5 611.5h880M116.5 561.5h880M116.5 511.5h880M116.5 461.5h880M116.5 411.5h880M116.5 361.5h880M116.5 311.5h880M116.5 261.5h880M116.5 211.5h880M116.5 161.5h880M116.5 111.5h880M116.5 61.5h880M116.5 11.5h880"/>
+            </g>
+        </g>
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'module' for a discrete scale with 3 values: simple-runtypes, ts-interface-checker, valita">
+            <path class="background" aria-hidden="true" d="M116.5 611.5z" pointer-events="none"/>
+            <g class="mark-rule role-axis-tick" pointer-events="none" stroke="#888">
+                <path d="M262.5 611.5v5M556.5 611.5v5M849.5 611.5v5"/>
+            </g>
+            <g class="mark-text role-axis-label" pointer-events="none" font-family="sans-serif" font-size="14" fill="#000">
+                <text transform="rotate(90 -179.917 438.583)">simple-runtypes</text>
+                <text transform="rotate(90 -33.25 585.25)">ts-interface-ch…</text>
+                <text transform="rotate(90 113.417 731.917)">valita</text>
+            </g>
+            <path stroke="#888" d="M116.5 611.5h880" class="mark-rule role-axis-domain" pointer-events="none"/>
+            <text text-anchor="middle" transform="translate(556.5 812.5)" font-family="sans-serif" font-size="14" fill="#000" class="mark-text role-axis-title" pointer-events="none">module</text>
+        </g>
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 2,400,000">
+            <path class="background" aria-hidden="true" d="M116.5 11.5z" pointer-events="none"/>
+            <g class="mark-rule role-axis-tick" pointer-events="none" stroke="#888">
+                <path d="M116.5 611.5h-5M116.5 561.5h-5M116.5 511.5h-5M116.5 461.5h-5M116.5 411.5h-5M116.5 361.5h-5M116.5 311.5h-5M116.5 261.5h-5M116.5 211.5h-5M116.5 161.5h-5M116.5 111.5h-5M116.5 61.5h-5M116.5 11.5h-5"/>
+            </g>
+            <g class="mark-text role-axis-label" pointer-events="none" text-anchor="end" font-family="sans-serif" font-size="12" fill="#000">
+                <text transform="translate(109.5 615.5)">0</text>
+                <text transform="translate(109.5 565.5)">200,000</text>
+                <text transform="translate(109.5 515.5)">400,000</text>
+                <text transform="translate(109.5 465.5)">600,000</text>
+                <text transform="translate(109.5 415.5)">800,000</text>
+                <text transform="translate(109.5 365.5)">1,000,000</text>
+                <text transform="translate(109.5 315.5)">1,200,000</text>
+                <text transform="translate(109.5 265.5)">1,400,000</text>
+                <text transform="translate(109.5 215.5)">1,600,000</text>
+                <text transform="translate(109.5 165.5)">1,800,000</text>
+                <text transform="translate(109.5 115.5)">2,000,000</text>
+                <text transform="translate(109.5 65.5)">2,200,000</text>
+                <text transform="translate(109.5 15.5)">2,400,000</text>
+            </g>
+            <path stroke="#888" d="M116.5 611.5v-600" class="mark-rule role-axis-domain" pointer-events="none"/>
+            <text text-anchor="middle" transform="rotate(-90 164 147.5)" font-family="sans-serif" font-size="14" fill="#000" class="mark-text role-axis-title" pointer-events="none">operations / sec</text>
+        </g>
+        <g class="mark-rect role-mark marks" aria-roledescription="rect mark container" fill="#4c78a8">
+            <path d="M130.667 166.488h264V611h-264zM424 185.232h264V611H424zM717.333 51.669h264V611h-264z"/>
+        </g>
+    </g>
+</svg>

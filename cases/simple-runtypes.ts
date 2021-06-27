@@ -15,10 +15,14 @@ const checkData = rt.record({
   }),
 });
 
-export class SimpleRuntypesCase extends Case implements Case {
+export class SimpleRuntypesCase extends Case {
   name = 'simple-runtypes';
 
-  validate() {
+  validate = () => {
     return checkData(this.data);
-  }
+  };
+
+  validateStrict = () => {
+    return checkData(this.data);
+  };
 }

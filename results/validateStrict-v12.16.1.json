@@ -1,0 +1,33 @@
+{
+  "name": "validateStrict",
+  "date": "2021-06-28T10:57:19.286Z",
+  "version": "1.0.0",
+  "results": [
+    {
+      "name": "simple-runtypes",
+      "ops": 1778047,
+      "margin": 1.01,
+      "percentSlower": 20.53
+    },
+    {
+      "name": "ts-interface-checker",
+      "ops": 1703072,
+      "margin": 2.35,
+      "percentSlower": 23.88
+    },
+    {
+      "name": "valita",
+      "ops": 2237325,
+      "margin": 1.15,
+      "percentSlower": 0
+    }
+  ],
+  "fastest": {
+    "name": "valita",
+    "index": 2
+  },
+  "slowest": {
+    "name": "ts-interface-checker",
+    "index": 1
+  }
+}
