@@ -18,7 +18,11 @@ const dataType = v.object({
 export class ValitaCase extends Case implements Case {
   name = 'valita';
 
-  validate() {
+  validate = () => {
     return dataType.parse(this.data);
-  }
+  };
+
+  validateStrict = () => {
+    return dataType.parse(this.data, { mode: 'strict' });
+  };
 }

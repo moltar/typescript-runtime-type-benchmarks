@@ -1,0 +1,18 @@
+<html>
+    <body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+        <script src="https://unpkg.com/samd@0/dist/samd.js" crossorigin></script>
+        <script src="https://unpkg.com/vega@5.19" crossorigin></script>
+        <script src="https://unpkg.com/vega-lite@4.11" crossorigin></script>
+        <script src="https://unpkg.com/preact@10" crossorigin></script>
+        <script src="dist/app.js"></script>
+
+        <script>
+            define('preact', () => preact)
+            require(['app']);
+        </script>
+    </body>
+</html>

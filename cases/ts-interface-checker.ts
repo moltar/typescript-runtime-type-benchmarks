@@ -22,7 +22,7 @@ const dataTypeChecker = t.createCheckers(suite).dataType as t.CheckerT<Data>;
 export class TsInterfaceCheckerCase extends Case implements Case {
   name = 'ts-interface-checker';
 
-  validate() {
+  validate = () => {
     const { data } = this;
 
     if (dataTypeChecker.test(data)) {
@@ -33,5 +33,15 @@ export class TsInterfaceCheckerCase extends Case implements Case {
     // typescript type guard like .test() above.
     dataTypeChecker.check(data);
     throw new Error('Invalid');
-  }
+  };
+
+  validateStrict = () => {
+    const { data } = this;
+
+    // Calling .check() provides a more helpful error, but does not (at the moment) include a
+    // typescript type guard like .test() above.
+    dataTypeChecker.strictCheck(data);
+
+    return data;
+  };
 }

@@ -1,0 +1,33 @@
+{
+  "name": "validate",
+  "date": "2021-06-28T10:57:02.920Z",
+  "version": "1.0.0",
+  "results": [
+    {
+      "name": "simple-runtypes",
+      "ops": 1696632,
+      "margin": 2.66,
+      "percentSlower": 50.72
+    },
+    {
+      "name": "ts-interface-checker",
+      "ops": 2539195,
+      "margin": 1.07,
+      "percentSlower": 26.24
+    },
+    {
+      "name": "valita",
+      "ops": 3442531,
+      "margin": 3.65,
+      "percentSlower": 0
+    }
+  ],
+  "fastest": {
+    "name": "valita",
+    "index": 2
+  },
+  "slowest": {
+    "name": "simple-runtypes",
+    "index": 0
+  }
+}

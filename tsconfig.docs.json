@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "module": "AMD",
+    "target": "ES3",
+    "lib": ["ES2015", "DOM"],
+    "outFile": "docs/dist/app.js",
+    "rootDir": "docs"
+  },
+  "include": ["docs"]
+}
