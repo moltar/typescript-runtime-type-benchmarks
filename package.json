@@ -13,8 +13,7 @@
     "lint:fix": "gts fix",
     "start": "ts-node index.ts",
     "test:build": "tsc --noEmit",
-    "test": "jest",
-    "snapshot": "jest --updateSnapshot"
+    "test": "jest"
   },
   "dependencies": {
     "@ailabs/ts-utils": "1.3.2",
