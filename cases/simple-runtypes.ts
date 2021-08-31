@@ -1,5 +1,5 @@
 import * as rt from 'simple-runtypes';
-import { Case } from './abstract';
+import { register } from '../benchmarks';
 
 const checkData = rt.record({
   number: rt.integer(),
@@ -15,14 +15,10 @@ const checkData = rt.record({
   }),
 });
 
-export class SimpleRuntypesCase extends Case {
-  name = 'simple-runtypes';
+register('simple-runtypes', 'validate', data => {
+  return checkData(data);
+});
 
-  validate = () => {
-    return checkData(this.data);
-  };
-
-  validateStrict = () => {
-    return checkData(this.data);
-  };
-}
+register('simple-runtypes', 'validateStrict', data => {
+  return checkData(data);
+});

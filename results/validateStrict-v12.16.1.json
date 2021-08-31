@@ -1,33 +1,27 @@
 {
   "name": "validateStrict",
-  "date": "2021-06-28T10:57:19.286Z",
+  "date": "2021-08-31T13:53:14.405Z",
   "version": "1.0.0",
   "results": [
     {
       "name": "simple-runtypes",
-      "ops": 1778047,
-      "margin": 1.01,
-      "percentSlower": 20.53
-    },
-    {
-      "name": "ts-interface-checker",
-      "ops": 1703072,
-      "margin": 2.35,
-      "percentSlower": 23.88
+      "ops": 1635440,
+      "margin": 4.35,
+      "percentSlower": 21.4
     },
     {
       "name": "valita",
-      "ops": 2237325,
-      "margin": 1.15,
+      "ops": 2080709,
+      "margin": 3.49,
       "percentSlower": 0
     }
   ],
   "fastest": {
     "name": "valita",
-    "index": 2
+    "index": 1
   },
   "slowest": {
-    "name": "ts-interface-checker",
-    "index": 1
+    "name": "simple-runtypes",
+    "index": 0
   }
 }

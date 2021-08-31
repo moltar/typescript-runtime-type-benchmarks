@@ -1,4 +1,4 @@
-import { Case } from './abstract';
+import { register } from '../benchmarks';
 import * as v from '@badrap/valita';
 
 const dataType = v.object({
@@ -15,14 +15,10 @@ const dataType = v.object({
   }),
 });
 
-export class ValitaCase extends Case implements Case {
-  name = 'valita';
+register('valita', 'validate', data => {
+  return dataType.parse(data);
+});
 
-  validate = () => {
-    return dataType.parse(this.data);
-  };
-
-  validateStrict = () => {
-    return dataType.parse(this.data, { mode: 'strict' });
-  };
-}
+register('valita', 'validateStrict', data => {
+  return dataType.parse(data, { mode: 'strict' });
+});
