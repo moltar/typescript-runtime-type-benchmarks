@@ -1,5 +1,5 @@
 import { Boolean, Number, String, Record } from 'runtypes';
-import { Case } from './abstract';
+import { register } from '../benchmarks';
 
 const dataType = Record({
   number: Number,
@@ -15,10 +15,6 @@ const dataType = Record({
   }),
 });
 
-export class RuntypesCase extends Case implements Case {
-  name = 'runtypes';
-
-  validate() {
-    return dataType.check(this.data);
-  }
-}
+register('runtypes', 'validate', data => {
+  return dataType.check(data);
+});
