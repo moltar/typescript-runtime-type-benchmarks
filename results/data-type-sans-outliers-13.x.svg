@@ -2,10 +2,10 @@
     <path fill="#fff" d="M0 0h1001v820H0z"/>
     <g class="mark-group role-frame root" aria-roledescription="group mark container" fill="none" stroke-miterlimit="10">
         <path class="background" aria-hidden="true" d="M116.5 11.5h880v600h-880Z" stroke="#ddd"/>
-        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a linear scale with values from 0 to 3,000,000">
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a linear scale with values from 0 to 4,000,000">
             <path class="background" aria-hidden="true" d="M116.5 11.5Z" pointer-events="none"/>
             <g class="mark-rule role-axis-grid" pointer-events="none" stroke="#ddd">
-                <path d="M116.5 611.5h880M116.5 571.5h880M116.5 531.5h880M116.5 491.5h880M116.5 451.5h880M116.5 411.5h880M116.5 371.5h880M116.5 331.5h880M116.5 291.5h880M116.5 251.5h880M116.5 211.5h880M116.5 171.5h880M116.5 131.5h880M116.5 91.5h880M116.5 51.5h880M116.5 11.5h880"/>
+                <path d="M116.5 611.5h880M116.5 581.5h880M116.5 551.5h880M116.5 521.5h880M116.5 491.5h880M116.5 461.5h880M116.5 431.5h880M116.5 401.5h880M116.5 371.5h880M116.5 341.5h880M116.5 311.5h880M116.5 281.5h880M116.5 251.5h880M116.5 221.5h880M116.5 191.5h880M116.5 161.5h880M116.5 131.5h880M116.5 101.5h880M116.5 71.5h880M116.5 41.5h880M116.5 11.5h880"/>
             </g>
         </g>
         <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'module' for a discrete scale with 22 values: @mojotech/json-type-validation, @typeofweb/schema, bueno, class-transformer-validator-async, class-transformer-validator-sync, ending with zod">
@@ -40,34 +40,39 @@
             <path stroke="#888" d="M116.5 611.5h880" class="mark-rule role-axis-domain" pointer-events="none"/>
             <text text-anchor="middle" transform="translate(556.5 812.5)" font-family="sans-serif" font-size="14" fill="#000" class="mark-text role-axis-title" pointer-events="none">module</text>
         </g>
-        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 3,000,000">
+        <g class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis titled 'operations / sec' for a linear scale with values from 0 to 4,000,000">
             <path class="background" aria-hidden="true" d="M116.5 11.5Z" pointer-events="none"/>
             <g class="mark-rule role-axis-tick" pointer-events="none" stroke="#888">
-                <path d="M116.5 611.5h-5M116.5 571.5h-5M116.5 531.5h-5M116.5 491.5h-5M116.5 451.5h-5M116.5 411.5h-5M116.5 371.5h-5M116.5 331.5h-5M116.5 291.5h-5M116.5 251.5h-5M116.5 211.5h-5M116.5 171.5h-5M116.5 131.5h-5M116.5 91.5h-5M116.5 51.5h-5M116.5 11.5h-5"/>
+                <path d="M116.5 611.5h-5M116.5 581.5h-5M116.5 551.5h-5M116.5 521.5h-5M116.5 491.5h-5M116.5 461.5h-5M116.5 431.5h-5M116.5 401.5h-5M116.5 371.5h-5M116.5 341.5h-5M116.5 311.5h-5M116.5 281.5h-5M116.5 251.5h-5M116.5 221.5h-5M116.5 191.5h-5M116.5 161.5h-5M116.5 131.5h-5M116.5 101.5h-5M116.5 71.5h-5M116.5 41.5h-5M116.5 11.5h-5"/>
             </g>
             <g class="mark-text role-axis-label" pointer-events="none" text-anchor="end" font-family="sans-serif" font-size="12" fill="#000">
                 <text transform="translate(109.5 615.5)">0</text>
-                <text transform="translate(109.5 575.5)">200,000</text>
-                <text transform="translate(109.5 535.5)">400,000</text>
-                <text transform="translate(109.5 495.5)">600,000</text>
-                <text transform="translate(109.5 455.5)">800,000</text>
-                <text transform="translate(109.5 415.5)">1,000,000</text>
-                <text transform="translate(109.5 375.5)">1,200,000</text>
-                <text transform="translate(109.5 335.5)">1,400,000</text>
-                <text transform="translate(109.5 295.5)">1,600,000</text>
-                <text transform="translate(109.5 255.5)">1,800,000</text>
-                <text transform="translate(109.5 215.5)">2,000,000</text>
-                <text transform="translate(109.5 175.5)">2,200,000</text>
-                <text transform="translate(109.5 135.5)">2,400,000</text>
-                <text transform="translate(109.5 95.5)">2,600,000</text>
-                <text transform="translate(109.5 55.5)">2,800,000</text>
-                <text transform="translate(109.5 15.5)">3,000,000</text>
+                <text transform="translate(109.5 585.5)">200,000</text>
+                <text transform="translate(109.5 555.5)">400,000</text>
+                <text transform="translate(109.5 525.5)">600,000</text>
+                <text transform="translate(109.5 495.5)">800,000</text>
+                <text transform="translate(109.5 465.5)">1,000,000</text>
+                <text transform="translate(109.5 435.5)">1,200,000</text>
+                <text transform="translate(109.5 405.5)">1,400,000</text>
+                <text transform="translate(109.5 375.5)">1,600,000</text>
+                <text transform="translate(109.5 345.5)">1,800,000</text>
+                <text transform="translate(109.5 315.5)">2,000,000</text>
+                <text transform="translate(109.5 285.5)">2,200,000</text>
+                <text transform="translate(109.5 255.5)">2,400,000</text>
+                <text transform="translate(109.5 225.5)">2,600,000</text>
+                <text transform="translate(109.5 195.5)">2,800,000</text>
+                <text transform="translate(109.5 165.5)">3,000,000</text>
+                <text transform="translate(109.5 135.5)">3,200,000</text>
+                <text transform="translate(109.5 105.5)">3,400,000</text>
+                <text transform="translate(109.5 75.5)">3,600,000</text>
+                <text transform="translate(109.5 45.5)">3,800,000</text>
+                <text transform="translate(109.5 15.5)">4,000,000</text>
             </g>
             <path stroke="#888" d="M116.5 611.5v-600" class="mark-rule role-axis-domain" pointer-events="none"/>
             <text text-anchor="middle" transform="rotate(-90 164 147.5)" font-family="sans-serif" font-size="14" fill="#000" class="mark-text role-axis-title" pointer-events="none">operations / sec</text>
         </g>
         <g class="mark-rect role-mark marks" aria-roledescription="rect mark container" fill="#4c78a8">
-            <path d="M198 582.282h36V611h-36ZM238 605.983h36V611h-36ZM278 604.414h36V611h-36ZM318 484.156h36V611h-36ZM358 572.421h36V611h-36ZM398 420.598h36V611h-36ZM438 337.757h36V611h-36ZM478 476.424h36V611h-36ZM118 366.855h36V611h-36ZM518 364.129h36V611h-36ZM558 467.932h36V611h-36ZM598 480.945h36V611h-36ZM638 475.553h36V611h-36ZM678 299.77h36V611h-36ZM718 594.537h36V611h-36ZM758 529.374h36V611h-36ZM798 251.652h36V611h-36ZM838 585.979h36V611h-36ZM158 444.211h36V611h-36ZM878 18.992h36V611h-36ZM918 606.904h36V611h-36ZM958 532.598h36V611h-36Z"/>
+            <path d="M198 585.83h36V611h-36ZM238 606.614h36V611h-36ZM278 605.471h36V611h-36ZM318 501.171h36V611h-36ZM358 577.234h36V611h-36ZM398 446.445h36V611h-36ZM438 374.023h36V611h-36ZM478 494.352h36V611h-36ZM118 401.001h36V611h-36ZM518 402.102h36V611h-36ZM558 498.052h36V611h-36ZM598 493.167h36V611h-36ZM638 495.025h36V611h-36ZM678 347.741h36V611h-36ZM718 596.706h36V611h-36ZM758 539.69h36V611h-36ZM798 267.367h36V611h-36ZM838 599.3h36V611h-36ZM158 482.39h36V611h-36ZM878 81.794h36V611h-36ZM918 608.5h36v2.5h-36ZM958 540.484h36V611h-36Z"/>
         </g>
     </g>
 </svg>
