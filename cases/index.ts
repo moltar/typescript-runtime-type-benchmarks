@@ -22,6 +22,7 @@ import { TsInterfaceCheckerCase } from './ts-interface-checker';
 import { TsJsonValidatorCase } from './ts-json-validator';
 import { TsUtilsCase } from './ts-utils';
 import { TypeOfWebSchemaCase } from './typeofweb-schema';
+import { TypedCase } from './typed';
 import { ValitaCase } from './valita';
 import { YupCase } from './yup';
 import { ZodCase } from './zod';
@@ -49,6 +50,7 @@ export const cases = [
   TsJsonValidatorCase,
   TsUtilsCase,
   TypeOfWebSchemaCase,
+  TypedCase,
   ValitaCase,
   YupCase,
   ZodCase,
