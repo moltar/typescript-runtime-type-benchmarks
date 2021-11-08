@@ -1,34 +1,36 @@
 # 📊 Benchmark Comparison of Packages with Runtime Validation and TypeScript Support
 
+
 > ⚠️ Note: Until [#497](https://github.com/moltar/typescript-runtime-type-benchmarks/issues/497) is resolved, some of the benchmarks in this repo are comparing apples-to-oranges due to the different APIs provided by validation libraries. Libraries which provide more functionality (like transformations, coercions, detailed errors) might be penalized for slower performance for those extra features.
+
 
 ## Packages Compared
 
-- [bueno](https://github.com/philipnilsson/bueno)
-- [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
-- [computed-types](https://github.com/neuledge/computed-types)
-- [decoders](https://github.com/nvie/decoders)
-- [io-ts](https://github.com/gcanti/io-ts)
-- [jointz](https://github.com/moodysalem/jointz)
-- [json-decoder](https://github.com/venil7/json-decoder)
-- [marshal](https://github.com/marcj/marshal.ts)
-- [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
-- [myzod](https://github.com/davidmdm/myzod)
-- [purify-ts](https://github.com/gigobyte/purify)
-- [rulr](https://github.com/ryansmith94/rulr)
-- [runtypes](https://github.com/pelotom/runtypes)
-- [simple-runtypes](https://github.com/hoeck/simple-runtypes)
-- [superstruct](https://github.com/ianstormtaylor/superstruct)
-- [suretype](https://github.com/grantila/suretype)
-- [toi](https://github.com/hf/toi)
-- [ts-interface-checker](https://github.com/gristlabs/ts-interface-checker)
-- [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
-- [ts-utils](https://github.com/ai-labs-team/ts-utils)
-- [typed](https://github.com/brielov/typed)
-- [@typeofweb/schema](https://github.com/typeofweb/schema)
-- [valita](https://github.com/badrap/valita)
-- [yup](https://github.com/jquense/yup)
-- [zod](https://github.com/vriad/zod)
+* [bueno](https://github.com/philipnilsson/bueno)
+* [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
+* [computed-types](https://github.com/neuledge/computed-types)
+* [decoders](https://github.com/nvie/decoders)
+* [io-ts](https://github.com/gcanti/io-ts)
+* [jointz](https://github.com/moodysalem/jointz)
+* [json-decoder](https://github.com/venil7/json-decoder)
+* [marshal](https://github.com/marcj/marshal.ts)
+* [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
+* [myzod](https://github.com/davidmdm/myzod)
+* [purify-ts](https://github.com/gigobyte/purify)
+* [rulr](https://github.com/ryansmith94/rulr)
+* [runtypes](https://github.com/pelotom/runtypes)
+* [simple-runtypes](https://github.com/hoeck/simple-runtypes)
+* [superstruct](https://github.com/ianstormtaylor/superstruct)
+* [suretype](https://github.com/grantila/suretype)
+* [toi](https://github.com/hf/toi)
+* [ts-interface-checker](https://github.com/gristlabs/ts-interface-checker)
+* [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
+* [ts-utils](https://github.com/ai-labs-team/ts-utils)
+* [typed](https://github.com/brielov/typed)
+* [@typeofweb/schema](https://github.com/typeofweb/schema)
+* [valita](https://github.com/badrap/valita)
+* [yup](https://github.com/jquense/yup)
+* [zod](https://github.com/vriad/zod)
 
 ## Criteria
 
@@ -43,29 +45,29 @@ E.g. if `string` was expected, but a `number` was provided, the validator should
 It has a validator function or method that returns a valid type casted value or throws.
 
 ```ts
-const data: any = {};
+const data: any = {}
 
 // `res` is now type casted to the right type
-const res = isValid(data);
+const res = isValid(data)
 ```
 
 Or it has a type guard function that in a truthy block type casts the value.
 
 ```ts
-const data: any = {};
+const data: any = {}
 
 function isMyDataValid(data: any) {
   // isValidGuard is the type guard function provided by the package
   if (isValidGuard(data)) {
     // data here is "guarded" and therefore inferred to be of the right type
-    return data;
+    return data
   }
 
-  throw new Error('Invalid!');
+  throw new Error('Invalid!')
 }
 
 // `res` is now type casted to the right type
-const res = isMyDataValid(data);
+const res = isMyDataValid(data)
 ```
 
 ## Benchmark Results
