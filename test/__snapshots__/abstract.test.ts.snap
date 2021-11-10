@@ -957,7 +957,7 @@ DecodeError {
 
 exports[`Case Class: valita should fail validation when deeply nested type is wrong 1`] = `[ValitaError: invalid_type at .deeplyNested.bool (expected boolean)]`;
 
-exports[`Case Class: valita should fail validation when prop is missing 1`] = `[ValitaError: missing_key at . (missing key "boolean")]`;
+exports[`Case Class: valita should fail validation when prop is missing 1`] = `[ValitaError: missing_value at .boolean (missing value)]`;
 
 exports[`Case Class: valita should fail validation when type is wrong 1`] = `[ValitaError: invalid_type at .boolean (expected boolean)]`;
 
