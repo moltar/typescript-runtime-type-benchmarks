@@ -1,56 +1,49 @@
 import 'reflect-metadata';
 import { f, validatesFactory } from '@marcj/marshal';
-import { Data } from '../data';
-import { Case } from './abstract';
+import { createCase } from '../benchmarks';
 
-type DeeplyNested = Data['deeplyNested'];
+createCase('marshal', 'validateLoose', () => {
+  class DeeplyNestedType {
+    @f
+    foo!: string;
 
-class DeeplyNestedType implements DeeplyNested {
-  @f
-  foo!: string;
+    @f
+    num!: number;
 
-  @f
-  num!: number;
+    @f
+    bool!: boolean;
+  }
 
-  @f
-  bool!: boolean;
-}
+  class DataType {
+    @f
+    number!: number;
 
-class DataType implements Data {
-  @f
-  number!: number;
+    @f
+    negNumber!: number;
 
-  @f
-  negNumber!: number;
+    @f
+    maxNumber!: number;
 
-  @f
-  maxNumber!: number;
+    @f
+    string!: string;
 
-  @f
-  string!: string;
+    @f
+    longString!: string;
 
-  @f
-  longString!: string;
+    @f
+    boolean!: boolean;
 
-  @f
-  boolean!: boolean;
+    @f.type(DeeplyNestedType)
+    deeplyNested!: DeeplyNestedType;
+  }
 
-  @f.type(DeeplyNestedType)
-  deeplyNested!: DeeplyNestedType;
-}
+  const checkData = validatesFactory(DataType);
 
-const checkData = validatesFactory(DataType);
-
-export class MarshalCase extends Case implements Case {
-  name = 'marshal';
-
-  validate() {
-    const { data } = this;
-
+  return (data: any) => {
     if (checkData(data)) {
       return data;
     }
 
     throw new Error('Invalid');
-  }
-}
+  };
+});

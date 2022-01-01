@@ -1,8 +1,8 @@
-import { View, parse } from 'vega';
-import { compile } from 'vega-lite';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { optimize } from 'svgo';
+import { parse, View } from 'vega';
+import { compile } from 'vega-lite';
 
 export async function graph(filename: string): Promise<string> {
   const vegaSpec = compile({

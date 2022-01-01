@@ -1,24 +1,52 @@
 import myzod from 'myzod';
-import { Case } from './abstract';
+import { createCase } from '../benchmarks';
 
-const dataType = myzod.object({
-  number: myzod.number(),
-  negNumber: myzod.number(),
-  maxNumber: myzod.number(),
-  string: myzod.string(),
-  longString: myzod.string(),
-  boolean: myzod.boolean(),
-  deeplyNested: myzod.object({
-    foo: myzod.string(),
-    num: myzod.number(),
-    bool: myzod.boolean(),
-  }),
+createCase('myzod', 'validateStrict', () => {
+  const dataType = myzod.object({
+    number: myzod.number(),
+    negNumber: myzod.number(),
+    maxNumber: myzod.number(),
+    string: myzod.string(),
+    longString: myzod.string(),
+    boolean: myzod.boolean(),
+    deeplyNested: myzod.object({
+      foo: myzod.string(),
+      num: myzod.number(),
+      bool: myzod.boolean(),
+    }),
+  });
+
+  return data => {
+    return dataType.parse(data);
+  };
 });
 
-export class MyzodCase extends Case implements Case {
-  name = 'myzod';
+createCase('myzod', 'validate', () => {
+  const dataType = myzod.object(
+    {
+      number: myzod.number(),
+      negNumber: myzod.number(),
+      maxNumber: myzod.number(),
+      string: myzod.string(),
+      longString: myzod.string(),
+      boolean: myzod.boolean(),
+      deeplyNested: myzod.object(
+        {
+          foo: myzod.string(),
+          num: myzod.number(),
+          bool: myzod.boolean(),
+        },
+        {
+          allowUnknown: true,
+        }
+      ),
+    },
+    {
+      allowUnknown: true,
+    }
+  );
 
-  validate() {
-    return dataType.parse(this.data);
-  }
-}
+  return data => {
+    return dataType.parse(data);
+  };
+});

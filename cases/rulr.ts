@@ -1,30 +1,28 @@
 import { object, number, string, boolean } from 'rulr';
-import { Case } from './abstract';
+import { createCase } from '../benchmarks';
 
-const dataType = object({
-  bail: true,
-  required: {
-    number,
-    negNumber: number,
-    maxNumber: number,
-    string,
-    longString: string,
-    boolean: boolean,
-    deeplyNested: object({
-      bail: true,
-      required: {
-        foo: string,
-        num: number,
-        bool: boolean,
-      },
-    }),
-  },
+createCase('rulr', 'validate', () => {
+  const dataType = object({
+    bail: true,
+    required: {
+      number,
+      negNumber: number,
+      maxNumber: number,
+      string,
+      longString: string,
+      boolean: boolean,
+      deeplyNested: object({
+        bail: true,
+        required: {
+          foo: string,
+          num: number,
+          bool: boolean,
+        },
+      }),
+    },
+  });
+
+  return data => {
+    return dataType(data);
+  };
 });
-
-export class RulrCase extends Case implements Case {
-  name = 'rulr';
-
-  validate() {
-    return dataType(this.data);
-  }
-}

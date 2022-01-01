@@ -1,28 +1,26 @@
 import * as t from 'io-ts';
 import { pipe } from 'fp-ts/function';
 import { fold } from 'fp-ts/Either';
-import { Case } from './abstract';
+import { createCase } from '../benchmarks';
 
-const dataType = t.type({
-  number: t.Int,
-  negNumber: t.number,
-  maxNumber: t.number,
-  string: t.string,
-  longString: t.string,
-  boolean: t.boolean,
-  deeplyNested: t.type({
-    foo: t.string,
-    num: t.number,
-    bool: t.boolean,
-  }),
-});
+createCase('io-ts', 'validateLoose', () => {
+  const dataType = t.type({
+    number: t.Int,
+    negNumber: t.number,
+    maxNumber: t.number,
+    string: t.string,
+    longString: t.string,
+    boolean: t.boolean,
+    deeplyNested: t.type({
+      foo: t.string,
+      num: t.number,
+      bool: t.boolean,
+    }),
+  });
 
-export class IoTsCase extends Case implements Case {
-  name = 'io-ts';
-
-  validate() {
+  return data => {
     return pipe(
-      dataType.decode(this.data),
+      dataType.decode(data),
       fold(
         errors => {
           throw errors;
@@ -30,5 +28,5 @@ export class IoTsCase extends Case implements Case {
         a => a
       )
     );
-  }
-}
+  };
+});
