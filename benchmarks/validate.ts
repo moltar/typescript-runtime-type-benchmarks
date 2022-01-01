@@ -1,6 +1,6 @@
 import { Benchmark } from './helpers/types';
 
-const validateData = Object.freeze({
+export const validateData = Object.freeze({
   number: 1,
   negNumber: -1,
   maxNumber: Number.MAX_VALUE,
@@ -15,8 +15,15 @@ const validateData = Object.freeze({
   },
 });
 
-type Fn = (data: typeof validateData) => void;
+type Fn = (data: unknown) => void;
 
+/**
+ * Validate and ignore unknown keys, removing them from the result.
+ *
+ * When validating untrusted data, unknown keys should always be removed to
+ * not result in unwanted parameters or the `__proto__` attribute being
+ * maliciously passed to internal functions.
+ */
 export class Validate extends Benchmark<Fn> {
   run() {
     this.fn(validateData);
@@ -28,7 +35,42 @@ export class Validate extends Benchmark<Fn> {
         expect(this.fn(validateData)).toEqual(validateData);
       });
 
-      test(`should err on invalid data`, () => {
+      test(`should validate with unknown attributes but remove them from the validated result`, () => {
+        const dataWithExtraKeys = {
+          ...validateData,
+          extraAttribute: 'foo',
+        };
+
+        expect(this.fn(dataWithExtraKeys)).toEqual(validateData);
+      });
+
+      // some libraries define the strict / non-strict validation as an
+      // option to the record/object/type type so we need to test the
+      // nested extra attribute explicitely so we know our runtype has
+      // been constructed correctly
+      test(`should validate with unknown attributes but remove them from the validated result (nested)`, () => {
+        const dataWithExtraNestedKeys = {
+          ...validateData,
+          deeplyNested: {
+            ...validateData.deeplyNested,
+            extraNestedAttribute: 'bar',
+          },
+        };
+
+        expect(this.fn(dataWithExtraNestedKeys)).toEqual(validateData);
+      });
+
+      test(`should throw on missing attributes`, () => {
+        const data: any = {
+          ...validateData,
+        };
+
+        delete data.number;
+
+        expect(() => this.fn(data)).toThrow();
+      });
+
+      test(`should throw on data with an invalid attribute`, () => {
         expect(() =>
           this.fn({
             ...validateData,

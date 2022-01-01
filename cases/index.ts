@@ -1,31 +1,24 @@
-// import { BuenoCase } from './bueno';
-// import {
-//   ClassValidatorAsyncCase,
-//   ClassValidatorSyncCase,
-// } from './class-validator';
-// import { ComputedTypesCase } from './computed-types';
-// import { DecodersCase } from './decoders';
-// import { IoTsCase } from './io-ts';
-// import { JointzCase } from './jointz';
-// import { JsonDecoderCase } from './json-decoder';
-// import { MarshalCase } from './marshal';
-// import { MojoTechJsonTypeValidationCase } from './mojotech-json-type-validation';
-// import { MyzodCase } from './myzod';
-// import { PurifyCase } from './purify-ts';
-// import { RulrCase } from './rulr';
-// import { RuntypesCase } from './runtypes';
-// import { SimpleRuntypesCase } from './simple-runtypes';
-// import { SuperstructCase } from './superstruct';
-// import { SuretypeCase } from './suretype';
-// import { ToiCase } from './toi';
-// import { TsInterfaceCheckerCase } from './ts-interface-checker';
-// import { TsJsonValidatorCase } from './ts-json-validator';
-// import { TsUtilsCase } from './ts-utils';
-// import { TypeOfWebSchemaCase } from './typeofweb-schema';
-// import { ValitaCase } from './valita';
-// import { YupCase } from './yup';
-// import { ZodCase } from './zod';
-
-import './simple-runtypes';
-import './valita';
+import './bueno';
+import './class-validator';
+import './computed-types';
+import './decoders';
+import './io-ts';
+import './jointz';
+import './json-decoder';
+import './marshal';
+import './mojotech-json-type-validation';
+import './myzod';
+import './purify-ts';
+import './rulr';
 import './runtypes';
+import './simple-runtypes';
+import './superstruct';
+import './suretype';
+import './toi';
+import './ts-interface-checker';
+import './ts-json-validator';
+import './ts-utils';
+import './typeofweb-schema';
+import './yup';
+import './zod';
+import './valita';

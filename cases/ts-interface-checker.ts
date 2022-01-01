@@ -1,30 +1,25 @@
 import * as t from 'ts-interface-checker';
-import { Case } from './abstract';
-import { Data } from '../data';
+import { createCase } from '../benchmarks';
 
-const dataType = t.iface([], {
-  number: 'number',
-  negNumber: 'number',
-  maxNumber: 'number',
-  string: 'string',
-  longString: 'string',
-  boolean: 'boolean',
-  deeplyNested: t.iface([], {
-    foo: 'string',
-    num: 'number',
-    bool: 'boolean',
-  }),
-});
+createCase('ts-interface-checker', 'validateLoose', () => {
+  const dataType = t.iface([], {
+    number: 'number',
+    negNumber: 'number',
+    maxNumber: 'number',
+    string: 'string',
+    longString: 'string',
+    boolean: 'boolean',
+    deeplyNested: t.iface([], {
+      foo: 'string',
+      num: 'number',
+      bool: 'boolean',
+    }),
+  });
 
-const suite = { dataType };
-const dataTypeChecker = t.createCheckers(suite).dataType as t.CheckerT<Data>;
+  const suite = { dataType };
+  const dataTypeChecker = t.createCheckers(suite).dataType as t.CheckerT<any>;
 
-export class TsInterfaceCheckerCase extends Case implements Case {
-  name = 'ts-interface-checker';
-
-  validate = () => {
-    const { data } = this;
-
+  return data => {
     if (dataTypeChecker.test(data)) {
       return data;
     }
@@ -34,14 +29,4 @@ export class TsInterfaceCheckerCase extends Case implements Case {
     dataTypeChecker.check(data);
     throw new Error('Invalid');
   };
-
-  validateStrict = () => {
-    const { data } = this;
-
-    // Calling .check() provides a more helpful error, but does not (at the moment) include a
-    // typescript type guard like .test() above.
-    dataTypeChecker.strictCheck(data);
-
-    return data;
-  };
-}
+});

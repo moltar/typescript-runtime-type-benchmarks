@@ -1,24 +1,28 @@
 import { object, number, boolean, string } from '@ailabs/ts-utils/dist/decoder';
-import { Case } from './abstract';
+import { createCase } from '../benchmarks';
 
-const dataType = object('Data', {
-  number,
-  negNumber: number,
-  maxNumber: number,
-  string,
-  longString: string,
-  boolean,
-  deeplyNested: object('DeeplyNested', {
-    foo: string,
-    num: number,
-    bool: boolean,
-  }),
+createCase('ts-utils', 'validate', () => {
+  const dataType = object('Data', {
+    number,
+    negNumber: number,
+    maxNumber: number,
+    string,
+    longString: string,
+    boolean,
+    deeplyNested: object('DeeplyNested', {
+      foo: string,
+      num: number,
+      bool: boolean,
+    }),
+  });
+
+  return data => {
+    const res = dataType(data);
+
+    if (res.error()) {
+      throw res.error();
+    }
+
+    return res.toMaybe().value();
+  };
 });
-
-export class TsUtilsCase extends Case implements Case {
-  name = 'ts-utils';
-
-  validate() {
-    return dataType(this.data).toPromise();
-  }
-}

@@ -1,5 +1,5 @@
-import { register } from '../benchmarks';
 import * as v from '@badrap/valita';
+import { addCase } from '../benchmarks';
 
 const dataType = v.object({
   number: v.number(),
@@ -15,10 +15,14 @@ const dataType = v.object({
   }),
 });
 
-register('valita', 'validate', data => {
-  return dataType.parse(data);
+addCase('valita', 'validateLoose', data => {
+  return dataType.parse(data, { mode: 'passthrough' });
 });
 
-register('valita', 'validateStrict', data => {
+addCase('valita', 'validate', data => {
+  return dataType.parse(data, { mode: 'strip' });
+});
+
+addCase('valita', 'validateStrict', data => {
   return dataType.parse(data, { mode: 'strict' });
 });

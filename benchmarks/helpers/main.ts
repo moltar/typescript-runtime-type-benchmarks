@@ -1,11 +1,11 @@
-import { writeFile, readdirSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import { suite, add, cycle, complete, save } from 'benny';
+import { add, complete, cycle, save, suite } from 'benny';
 import stringify from 'csv-stringify/lib/sync';
+import { readFileSync, writeFile, writeFileSync } from 'fs';
+import { join } from 'path';
 import pkg from '../../package.json';
 import { graph } from './graph';
+import { availableBenchmarks, getRegisteredBenchmarks } from './register';
 import { BenchmarkCase } from './types';
-import { getRegisteredBenchmarks, availableBenchmarks } from './register';
 
 const RESULTS_DIR = join(__dirname, '../../results');
 const DOCS_DIR = join(__dirname, '../../docs');

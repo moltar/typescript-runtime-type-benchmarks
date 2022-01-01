@@ -4,26 +4,24 @@ import {
   object,
   boolean,
 } from '@mojotech/json-type-validation';
-import { Case } from './abstract';
+import { createCase } from '../benchmarks';
 
-const dataType = object({
-  number: number(),
-  negNumber: number(),
-  maxNumber: number(),
-  string: string(),
-  longString: string(),
-  boolean: boolean(),
-  deeplyNested: object({
-    foo: string(),
-    num: number(),
-    bool: boolean(),
-  }),
+createCase('@mojotech/json-type-validation', 'validate', () => {
+  const dataType = object({
+    number: number(),
+    negNumber: number(),
+    maxNumber: number(),
+    string: string(),
+    longString: string(),
+    boolean: boolean(),
+    deeplyNested: object({
+      foo: string(),
+      num: number(),
+      bool: boolean(),
+    }),
+  });
+
+  return data => {
+    return dataType.runWithException(data);
+  };
 });
-
-export class MojoTechJsonTypeValidationCase extends Case implements Case {
-  name = '@mojotech/json-type-validation';
-
-  validate() {
-    return dataType.runWithException(this.data);
-  }
-}

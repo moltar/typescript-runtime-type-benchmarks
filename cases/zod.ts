@@ -1,24 +1,70 @@
 import * as z from 'zod';
-import { Case } from './abstract';
+import { createCase } from '../benchmarks';
 
-const dataType = z.object({
-  number: z.number(),
-  negNumber: z.number(),
-  maxNumber: z.number(),
-  string: z.string(),
-  longString: z.string(),
-  boolean: z.boolean(),
-  deeplyNested: z.object({
-    foo: z.string(),
-    num: z.number(),
-    bool: z.boolean(),
-  }),
+createCase('zod', 'validate', () => {
+  const dataType = z.object({
+    number: z.number(),
+    negNumber: z.number(),
+    maxNumber: z.number(),
+    string: z.string(),
+    longString: z.string(),
+    boolean: z.boolean(),
+    deeplyNested: z.object({
+      foo: z.string(),
+      num: z.number(),
+      bool: z.boolean(),
+    }),
+  });
+
+  return data => {
+    return dataType.parse(data);
+  };
 });
 
-export class ZodCase extends Case implements Case {
-  name = 'zod';
+createCase('zod', 'validateStrict', () => {
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .strict(),
+    })
+    .strict();
 
-  validate() {
-    return dataType.parse(this.data);
-  }
-}
+  return data => {
+    return dataType.parse(data);
+  };
+});
+
+createCase('zod', 'validateLoose', () => {
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .passthrough(),
+    })
+    .passthrough();
+
+  return data => {
+    return dataType.parse(data);
+  };
+});

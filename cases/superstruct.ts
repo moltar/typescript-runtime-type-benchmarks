@@ -1,25 +1,85 @@
-import { object, string, number, boolean, assert } from 'superstruct';
-import { Case } from './abstract';
+import {
+  object,
+  string,
+  number,
+  boolean,
+  assert,
+  type,
+  mask,
+  validate,
+  create,
+} from 'superstruct';
+import { createCase } from '../benchmarks';
 
-const dataType = object({
-  number: number(),
-  negNumber: number(),
-  maxNumber: number(),
-  string: string(),
-  longString: string(),
-  boolean: boolean(),
-  deeplyNested: object({
-    foo: string(),
-    num: number(),
-    bool: boolean(),
-  }),
+createCase(
+  'superstruct',
+  'validate',
+  () => {
+    const dataType = type({
+      number: number(),
+      negNumber: number(),
+      maxNumber: number(),
+      string: string(),
+      longString: string(),
+      boolean: boolean(),
+      deeplyNested: type({
+        foo: string(),
+        num: number(),
+        bool: boolean(),
+      }),
+    });
+
+    return data => {
+      assert(data, dataType);
+
+      return mask(data, dataType);
+    };
+  },
+  // can't get the `mask` stuff to work - its documented to remove any
+  // additional attributes that `type` ignored
+  { disabled: true }
+);
+
+createCase('superstruct', 'validateLoose', () => {
+  const dataType = type({
+    number: number(),
+    negNumber: number(),
+    maxNumber: number(),
+    string: string(),
+    longString: string(),
+    boolean: boolean(),
+    deeplyNested: type({
+      foo: string(),
+      num: number(),
+      bool: boolean(),
+    }),
+  });
+
+  return data => {
+    assert(data, dataType);
+
+    return data;
+  };
 });
 
-export class SuperstructCase extends Case implements Case {
-  name = 'superstruct';
+createCase('superstruct', 'validateStrict', () => {
+  const dataType = object({
+    number: number(),
+    negNumber: number(),
+    maxNumber: number(),
+    string: string(),
+    longString: string(),
+    boolean: boolean(),
+    deeplyNested: object({
+      foo: string(),
+      num: number(),
+      bool: boolean(),
+    }),
+  });
 
-  validate() {
-    assert(this.data, dataType);
-    return this.data;
-  }
-}
+  return data => {
+    assert(data, dataType);
+
+    return data;
+  };
+});
