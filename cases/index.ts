@@ -25,6 +25,7 @@ import { TypeOfWebSchemaCase } from './typeofweb-schema';
 import { ValitaCase } from './valita';
 import { YupCase } from './yup';
 import { ZodCase } from './zod';
+import { AjvCase } from './ajv';
 
 export const cases = [
   BuenoCase,
@@ -52,4 +53,5 @@ export const cases = [
   ValitaCase,
   YupCase,
   ZodCase,
+  AjvCase
 ];
