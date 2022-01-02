@@ -2,7 +2,7 @@ import { Component, Fragment, h, render } from 'preact';
 import * as vegaLite from 'vega-lite';
 import * as vega from 'vega';
 
-const NODE_VERSIONS = [10, 12, 13, 14];
+const NODE_VERSIONS = [12, 14, 16, 17];
 
 interface BenchmarkResult {
   name: string;
@@ -29,10 +29,68 @@ const COLORS = [
 ];
 
 // create a stable color list
-const BENCHMARKS = ['validate', 'validateStrict'].map((name, i) => ({
-  name,
-  color: COLORS[i],
-}));
+const BENCHMARKS = [
+  { name: 'validate', label: 'Safe Validation', color: COLORS[0], order: '0' },
+  {
+    name: 'validateStrict',
+    label: 'Strict Validation',
+    color: COLORS[4],
+    order: '1',
+  },
+  {
+    name: 'validateLoose',
+    label: 'Unsafe Validation',
+    color: COLORS[1],
+    order: '2',
+  },
+];
+const BENCHMARKS_ORDER = Object.fromEntries(
+  BENCHMARKS.map((b, idx) => [b.name, b.order])
+);
+
+function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
+  if (!values.length) {
+    return [];
+  }
+
+  const nodeVersion = values[0].nodeVersion;
+
+  if (!values.every(v => v.nodeVersion === nodeVersion)) {
+    throw new Error('normalizeValues: expected same node version on results');
+  }
+
+  const existingValues: { [name: string]: BenchmarkResult[] } = {};
+
+  values.forEach(r => {
+    if (existingValues[r.name]) {
+      existingValues[r.name].push(r);
+    } else {
+      existingValues[r.name] = [r];
+    }
+  });
+
+  const normalized: BenchmarkResult[] = [];
+
+  Object.entries(existingValues).forEach(([name, results]) => {
+    normalized.push(...results);
+
+    const missingBenchmarks = BENCHMARKS.map(b => b.name).filter(
+      n => !results.find(r => r.name === n)
+    );
+
+    missingBenchmarks.forEach(benchmark => {
+      normalized.push({
+        benchmark,
+        name,
+        margin: 0,
+        nodeVersion,
+        ops: 0,
+      });
+    });
+  });
+
+  return normalized;
+}
 
 async function graph(
   selectedBenchmarks: typeof BENCHMARKS,
@@ -44,42 +102,46 @@ async function graph(
 
   const vegaSpec = vegaLite.compile({
     data: {
-      values: values.filter(b => selectedBenchmarkIndex.has(b.benchmark)),
+      values: values
+        .filter(b => selectedBenchmarkIndex.has(b.benchmark))
+        .map(b => ({
+          ...b,
+          benchmark: `${BENCHMARKS_ORDER[b.benchmark]}-${b.benchmark}`,
+        })),
     },
-    height: 400,
+    width: 600,
+    height: { step: 15 },
     mark: 'bar',
     encoding: {
-      column: {
+      row: {
         field: 'name',
         type: 'nominal',
         title: null,
-        spacing: 10,
+        spacing: 0,
         header: {
-          labelAngle: -90,
-          labelAlign: 'right',
+          labelAngle: 0,
+          labelOrient: 'left',
           labelAnchor: 'middle',
-          labelOrient: 'top',
-          labelFontSize: 12,
+          labelAlign: 'left',
         },
       },
-      y: {
+      x: {
         field: 'ops',
         type: 'quantitative',
-        title: 'operations / sec',
+        title: ['operations / sec', '(better ⯈)'],
         axis: {
+          orient: 'top',
+          offset: 10,
           labelFontSize: 12,
           titleFontSize: 14,
           titleFontWeight: 'normal',
         },
       },
-      x: {
+      y: {
         field: 'benchmark',
         type: 'nominal',
-        title: null,
-        axis: {
-          labelFontSize: 14,
-          labelAngle: 90,
-        },
+        title: 'Benchmark',
+        axis: null,
       },
       color: {
         field: 'benchmark',
@@ -170,12 +232,12 @@ class App extends Component<
     NODE_VERSIONS.forEach(v => {
       fetch(`results/node-${v}.json`)
         .then(response => response.json())
-        .then(data =>
+        .then(data => {
           this.setState(state => ({
             ...state,
-            values: [...state.values, ...data.results],
-          }))
-        )
+            values: [...state.values, ...normalizePartialValues(data.results)],
+          }));
+        })
         .catch(err => {
           console.info(`no data for node ${v}`);
         });
@@ -185,10 +247,38 @@ class App extends Component<
   render() {
     return (
       <div>
-        <h1 style={{ marginBottom: '3rem' }}>
+        <h1>Runtype Benchmarks</h1>
+        <p>
           Benchmark Comparison of Packages with Runtime Validation and
           TypeScript Support
-        </h1>
+        </p>
+
+        <div style={{ display: 'flex', margin: '1rem 0' }}>
+          <div style={{ width: '33%' }}>
+            <label>Benchmarks:</label>
+            <div>
+              {BENCHMARKS.map(b => {
+                return (
+                  <Checkbox
+                    id={b.name}
+                    color={b.color}
+                    checked={this.state.selectedBenchmarks[b.name] ?? false}
+                    label={b.label}
+                    onChange={checked =>
+                      this.setState(state => ({
+                        ...state,
+                        selectedBenchmarks: {
+                          ...this.state.selectedBenchmarks,
+                          [b.name]: checked,
+                        },
+                      }))
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
 
         <Graph
           benchmarks={BENCHMARKS.filter(
@@ -196,30 +286,6 @@ class App extends Component<
           )}
           values={this.state.values}
         />
-
-        <div style={{ display: 'flex', margin: '1rem' }}>
-          <div style={{ width: '33%' }}>
-            {BENCHMARKS.map(b => {
-              return (
-                <Checkbox
-                  id={b.name}
-                  color={b.color}
-                  checked={this.state.selectedBenchmarks[b.name] ?? false}
-                  label={b.name}
-                  onChange={checked =>
-                    this.setState(state => ({
-                      ...state,
-                      selectedBenchmarks: {
-                        ...this.state.selectedBenchmarks,
-                        [b.name]: checked,
-                      },
-                    }))
-                  }
-                />
-              );
-            })}
-          </div>
-        </div>
       </div>
     );
   }

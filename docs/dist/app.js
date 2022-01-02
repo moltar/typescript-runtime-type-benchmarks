@@ -79,17 +79,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (require, exports, preact_1, vegaLite, vega) {
     "use strict";
     exports.__esModule = true;
     vegaLite = __importStar(vegaLite);
     vega = __importStar(vega);
-    var NODE_VERSIONS = [10, 12, 13, 14];
+    var NODE_VERSIONS = [12, 14, 16, 17];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
         '#8dd3c7',
@@ -106,10 +110,56 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         '#ffed6f',
     ];
     // create a stable color list
-    var BENCHMARKS = ['validate', 'validateStrict'].map(function (name, i) { return ({
-        name: name,
-        color: COLORS[i]
-    }); });
+    var BENCHMARKS = [
+        { name: 'validate', label: 'Safe Validation', color: COLORS[0], order: '0' },
+        {
+            name: 'validateStrict',
+            label: 'Strict Validation',
+            color: COLORS[4],
+            order: '1'
+        },
+        {
+            name: 'validateLoose',
+            label: 'Unsafe Validation',
+            color: COLORS[1],
+            order: '2'
+        },
+    ];
+    var BENCHMARKS_ORDER = Object.fromEntries(BENCHMARKS.map(function (b, idx) { return [b.name, b.order]; }));
+    function normalizePartialValues(values) {
+        if (!values.length) {
+            return [];
+        }
+        var nodeVersion = values[0].nodeVersion;
+        if (!values.every(function (v) { return v.nodeVersion === nodeVersion; })) {
+            throw new Error('normalizeValues: expected same node version on results');
+        }
+        var existingValues = {};
+        values.forEach(function (r) {
+            if (existingValues[r.name]) {
+                existingValues[r.name].push(r);
+            }
+            else {
+                existingValues[r.name] = [r];
+            }
+        });
+        var normalized = [];
+        Object.entries(existingValues).forEach(function (_a) {
+            var name = _a[0], results = _a[1];
+            normalized.push.apply(normalized, results);
+            var missingBenchmarks = BENCHMARKS.map(function (b) { return b.name; }).filter(function (n) { return !results.find(function (r) { return r.name === n; }); });
+            missingBenchmarks.forEach(function (benchmark) {
+                normalized.push({
+                    benchmark: benchmark,
+                    name: name,
+                    margin: 0,
+                    nodeVersion: nodeVersion,
+                    ops: 0
+                });
+            });
+        });
+        return normalized;
+    }
     function graph(selectedBenchmarks, values) {
         return __awaiter(this, void 0, void 0, function () {
             var selectedBenchmarkIndex, vegaSpec, view, svg;
@@ -119,42 +169,43 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                         selectedBenchmarkIndex = new Map(selectedBenchmarks.map(function (b) { return [b.name, b]; }));
                         vegaSpec = vegaLite.compile({
                             data: {
-                                values: values.filter(function (b) { return selectedBenchmarkIndex.has(b.benchmark); })
+                                values: values
+                                    .filter(function (b) { return selectedBenchmarkIndex.has(b.benchmark); })
+                                    .map(function (b) { return (__assign(__assign({}, b), { benchmark: "".concat(BENCHMARKS_ORDER[b.benchmark], "-").concat(b.benchmark) })); })
                             },
-                            height: 400,
+                            width: 600,
+                            height: { step: 15 },
                             mark: 'bar',
                             encoding: {
-                                column: {
+                                row: {
                                     field: 'name',
                                     type: 'nominal',
                                     title: null,
-                                    spacing: 10,
+                                    spacing: 0,
                                     header: {
-                                        labelAngle: -90,
-                                        labelAlign: 'right',
+                                        labelAngle: 0,
+                                        labelOrient: 'left',
                                         labelAnchor: 'middle',
-                                        labelOrient: 'top',
-                                        labelFontSize: 12
+                                        labelAlign: 'left'
                                     }
                                 },
-                                y: {
+                                x: {
                                     field: 'ops',
                                     type: 'quantitative',
-                                    title: 'operations / sec',
+                                    title: ['operations / sec', '(better ⯈)'],
                                     axis: {
+                                        orient: 'top',
+                                        offset: 10,
                                         labelFontSize: 12,
                                         titleFontSize: 14,
                                         titleFontWeight: 'normal'
                                     }
                                 },
-                                x: {
+                                y: {
                                     field: 'benchmark',
                                     type: 'nominal',
-                                    title: null,
-                                    axis: {
-                                        labelFontSize: 14,
-                                        labelAngle: 90
-                                    }
+                                    title: 'Benchmark',
+                                    axis: null
                                 },
                                 color: {
                                     field: 'benchmark',
@@ -204,14 +255,14 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         };
         Graph.prototype.render = function () {
             this.createGraph();
-            return (preact_1.h("div", { style: { height: '650px' }, dangerouslySetInnerHTML: { __html: this.state.svg } }));
+            return ((0, preact_1.h)("div", { style: { height: '650px' }, dangerouslySetInnerHTML: { __html: this.state.svg } }));
         };
         return Graph;
     }(preact_1.Component));
     function Checkbox(props) {
-        return (preact_1.h("div", { style: { display: 'flex', backgroundColor: props.color } },
-            preact_1.h("input", { id: props.id, type: "checkbox", name: props.id, checked: props.checked, onInput: function () { return props.onChange(!props.checked); } }),
-            preact_1.h("label", { style: { width: '100%' }, "for": props.id }, props.label)));
+        return ((0, preact_1.h)("div", { style: { display: 'flex', backgroundColor: props.color } },
+            (0, preact_1.h)("input", { id: props.id, type: "checkbox", name: props.id, checked: props.checked, onInput: function () { return props.onChange(!props.checked); } }),
+            (0, preact_1.h)("label", { style: { width: '100%' }, "for": props.id }, props.label)));
     }
     var App = /** @class */ (function (_super) {
         __extends(App, _super);
@@ -229,33 +280,36 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         App.prototype.componentDidMount = function () {
             var _this = this;
             NODE_VERSIONS.forEach(function (v) {
-                fetch("results/node-" + v + ".json")
+                fetch("results/node-".concat(v, ".json"))
                     .then(function (response) { return response.json(); })
                     .then(function (data) {
-                    return _this.setState(function (state) { return (__assign(__assign({}, state), { values: __spreadArray(__spreadArray([], state.values), data.results) })); });
+                    _this.setState(function (state) { return (__assign(__assign({}, state), { values: __spreadArray(__spreadArray([], state.values, true), normalizePartialValues(data.results), true) })); });
                 })["catch"](function (err) {
-                    console.info("no data for node " + v);
+                    console.info("no data for node ".concat(v));
                 });
             });
         };
         App.prototype.render = function () {
             var _this = this;
-            return (preact_1.h("div", null,
-                preact_1.h("h1", { style: { marginBottom: '3rem' } }, "Benchmark Comparison of Packages with Runtime Validation and TypeScript Support"),
-                preact_1.h(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), values: this.state.values }),
-                preact_1.h("div", { style: { display: 'flex', margin: '1rem' } },
-                    preact_1.h("div", { style: { width: '33%' } }, BENCHMARKS.map(function (b) {
-                        var _a;
-                        return (preact_1.h(Checkbox, { id: b.name, color: b.color, checked: (_a = _this.state.selectedBenchmarks[b.name]) !== null && _a !== void 0 ? _a : false, label: b.name, onChange: function (checked) {
-                                return _this.setState(function (state) {
-                                    var _a;
-                                    return (__assign(__assign({}, state), { selectedBenchmarks: __assign(__assign({}, _this.state.selectedBenchmarks), (_a = {}, _a[b.name] = checked, _a)) }));
-                                });
-                            } }));
-                    })))));
+            return ((0, preact_1.h)("div", null,
+                (0, preact_1.h)("h1", null, "Runtype Benchmarks"),
+                (0, preact_1.h)("p", null, "Benchmark Comparison of Packages with Runtime Validation and TypeScript Support"),
+                (0, preact_1.h)("div", { style: { display: 'flex', margin: '1rem 0' } },
+                    (0, preact_1.h)("div", { style: { width: '33%' } },
+                        (0, preact_1.h)("label", null, "Benchmarks:"),
+                        (0, preact_1.h)("div", null, BENCHMARKS.map(function (b) {
+                            var _a;
+                            return ((0, preact_1.h)(Checkbox, { id: b.name, color: b.color, checked: (_a = _this.state.selectedBenchmarks[b.name]) !== null && _a !== void 0 ? _a : false, label: b.label, onChange: function (checked) {
+                                    return _this.setState(function (state) {
+                                        var _a;
+                                        return (__assign(__assign({}, state), { selectedBenchmarks: __assign(__assign({}, _this.state.selectedBenchmarks), (_a = {}, _a[b.name] = checked, _a)) }));
+                                    });
+                                } }));
+                        })))),
+                (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), values: this.state.values })));
         };
         return App;
     }(preact_1.Component));
-    preact_1.render(preact_1.h(App, null), document.body);
+    (0, preact_1.render)((0, preact_1.h)(App, null), document.body);
 });
 //# sourceMappingURL=app.js.map
