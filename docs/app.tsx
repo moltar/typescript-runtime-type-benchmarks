@@ -2,7 +2,9 @@ import { Component, Fragment, h, render } from 'preact';
 import * as vegaLite from 'vega-lite';
 import * as vega from 'vega';
 
-const NODE_VERSIONS = [12, 14, 16, 17];
+// which results are attempted to load
+// the first is selected automatically
+const NODE_VERSIONS = [17, 16, 14, 12];
 
 interface BenchmarkResult {
   name: string;
@@ -15,7 +17,7 @@ interface BenchmarkResult {
 // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
 const COLORS = [
   '#8dd3c7',
-  '#ffffb3',
+  // '#ffffb3', not this one .. looks to bright to me
   '#bebada',
   '#fb8072',
   '#80b1d3',
@@ -34,13 +36,13 @@ const BENCHMARKS = [
   {
     name: 'validateStrict',
     label: 'Strict Validation',
-    color: COLORS[4],
+    color: COLORS[1],
     order: '1',
   },
   {
     name: 'validateLoose',
     label: 'Unsafe Validation',
-    color: COLORS[1],
+    color: COLORS[2],
     order: '2',
   },
 ];
@@ -92,25 +94,56 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
   return normalized;
 }
 
+function getNodeMajorVersionNumber(nodeVersion: string): number {
+  const match = nodeVersion.match(/v([0-9]+)\./);
+
+  return parseInt(match[1]);
+}
+
 async function graph(
   selectedBenchmarks: typeof BENCHMARKS,
-  values: BenchmarkResult[]
+  selectedNodeJsVersions: string[],
+  benchmarkResults: BenchmarkResult[]
 ) {
-  const selectedBenchmarkIndex = new Map(
-    selectedBenchmarks.map(b => [b.name, b])
-  );
+  const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
+  const selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
+
+  const values = benchmarkResults
+    .filter(
+      b =>
+        selectedBenchmarkSet.has(b.benchmark) &&
+        selectedNodeJsVersionsSet.has(b.nodeVersion)
+    )
+    .map(b => ({
+      ...b,
+      // artificical benchmark name to make sure its always sorted by
+      // benchmark and node-version
+      benchmark: [
+        BENCHMARKS_ORDER[b.benchmark],
+        NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.nodeVersion)),
+        b.nodeVersion,
+        b.benchmark,
+      ].join('-'),
+    }));
+
+  const nodeJsVersionCount = new Set(values.map(v => v.nodeVersion)).size;
+
+  // build a color map so that each benchmark has the same color in different
+  // node-versions
+  const colorScaleRange = [];
+
+  selectedBenchmarks.forEach(b => {
+    for (let i = 0; i < nodeJsVersionCount; i++) {
+      colorScaleRange.push(b.color);
+    }
+  });
 
   const vegaSpec = vegaLite.compile({
     data: {
-      values: values
-        .filter(b => selectedBenchmarkIndex.has(b.benchmark))
-        .map(b => ({
-          ...b,
-          benchmark: `${BENCHMARKS_ORDER[b.benchmark]}-${b.benchmark}`,
-        })),
+      values,
     },
     width: 600,
-    height: { step: 15 },
+    height: { step: 15 / nodeJsVersionCount },
     mark: 'bar',
     encoding: {
       row: {
@@ -141,28 +174,31 @@ async function graph(
         field: 'benchmark',
         type: 'nominal',
         title: 'Benchmark',
-        axis: null,
+        axis: null, // to debug the bars: axis: {labelFontSize: 3},
       },
       color: {
         field: 'benchmark',
         type: 'nominal',
         legend: null,
         scale: {
-          range: selectedBenchmarks.map(b => b.color),
+          range: colorScaleRange,
         },
       },
     },
   });
 
   const view = new vega.View(vega.parse(vegaSpec.spec), { renderer: 'none' });
-
   const svg = await view.toSVG();
 
   return svg;
 }
 
 class Graph extends Component<
-  { benchmarks: typeof BENCHMARKS; values: BenchmarkResult[] },
+  {
+    benchmarks: typeof BENCHMARKS;
+    nodeJsVersions: string[];
+    values: BenchmarkResult[];
+  },
   { svg?: string }
 > {
   prevProps: any;
@@ -174,7 +210,11 @@ class Graph extends Component<
 
     this.prevProps = this.props;
     this.setState({
-      svg: await graph(this.props.benchmarks, this.props.values),
+      svg: await graph(
+        this.props.benchmarks,
+        this.props.nodeJsVersions,
+        this.props.values
+      ),
     });
   }
 
@@ -193,7 +233,7 @@ class Graph extends Component<
 function Checkbox(props: {
   id: string;
   label: string;
-  color: string;
+  color?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
 }) {
@@ -217,6 +257,7 @@ class App extends Component<
   {},
   {
     selectedBenchmarks: { [key: string]: boolean };
+    selectedNodeJsVersions: { [key: string]: boolean };
     values: BenchmarkResult[];
   }
 > {
@@ -225,16 +266,36 @@ class App extends Component<
       (acc, b) => ({ ...acc, [b.name]: true }),
       {}
     ),
+    selectedNodeJsVersions: {},
     values: [],
   };
 
+  getNodeJsVersions() {
+    const versionsSet = new Set(this.state.values.map(v => v.nodeVersion));
+    const res: string[] = [];
+
+    versionsSet.forEach(v => res.push(v));
+
+    return res;
+  }
+
   componentDidMount() {
-    NODE_VERSIONS.forEach(v => {
+    NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)
         .then(response => response.json())
         .then(data => {
           this.setState(state => ({
             ...state,
+
+            // select the first node versions benchmark automatically
+            selectedNodeJsVersions:
+              i === 0
+                ? {
+                    ...state.selectedNodeJsVersions,
+                    [data.results[0].nodeVersion]: true,
+                  }
+                : state.selectedNodeJsVersions,
+
             values: [...state.values, ...normalizePartialValues(data.results)],
           }));
         })
@@ -254,7 +315,7 @@ class App extends Component<
         </p>
 
         <div style={{ display: 'flex', margin: '1rem 0' }}>
-          <div style={{ width: '33%' }}>
+          <div style={{ width: '12rem', marginRight: '1rem' }}>
             <label>Benchmarks:</label>
             <div>
               {BENCHMARKS.map(b => {
@@ -278,12 +339,39 @@ class App extends Component<
               })}
             </div>
           </div>
+
+          <div style={{ width: '12rem' }}>
+            <label>Node.js Versions:</label>
+            <div>
+              {this.getNodeJsVersions().map(v => {
+                return (
+                  <Checkbox
+                    id={v}
+                    checked={this.state.selectedNodeJsVersions[v] ?? false}
+                    label={v}
+                    onChange={checked =>
+                      this.setState(state => ({
+                        ...state,
+                        selectedNodeJsVersions: {
+                          ...this.state.selectedNodeJsVersions,
+                          [v]: checked,
+                        },
+                      }))
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         <Graph
           benchmarks={BENCHMARKS.filter(
             b => this.state.selectedBenchmarks[b.name]
           )}
+          nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
+            .filter(([k, v]) => v)
+            .map(([k, v]) => k)}
           values={this.state.values}
         />
       </div>

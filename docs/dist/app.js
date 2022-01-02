@@ -93,11 +93,13 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
     exports.__esModule = true;
     vegaLite = __importStar(vegaLite);
     vega = __importStar(vega);
-    var NODE_VERSIONS = [12, 14, 16, 17];
+    // which results are attempted to load
+    // the first is selected automatically
+    var NODE_VERSIONS = [17, 16, 14, 12];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
         '#8dd3c7',
-        '#ffffb3',
+        // '#ffffb3', not this one .. looks to bright to me
         '#bebada',
         '#fb8072',
         '#80b1d3',
@@ -115,13 +117,13 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         {
             name: 'validateStrict',
             label: 'Strict Validation',
-            color: COLORS[4],
+            color: COLORS[1],
             order: '1'
         },
         {
             name: 'validateLoose',
             label: 'Unsafe Validation',
-            color: COLORS[1],
+            color: COLORS[2],
             order: '2'
         },
     ];
@@ -160,21 +162,45 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         });
         return normalized;
     }
-    function graph(selectedBenchmarks, values) {
+    function getNodeMajorVersionNumber(nodeVersion) {
+        var match = nodeVersion.match(/v([0-9]+)\./);
+        return parseInt(match[1]);
+    }
+    function graph(selectedBenchmarks, selectedNodeJsVersions, benchmarkResults) {
         return __awaiter(this, void 0, void 0, function () {
-            var selectedBenchmarkIndex, vegaSpec, view, svg;
+            var selectedBenchmarkSet, selectedNodeJsVersionsSet, values, nodeJsVersionCount, colorScaleRange, vegaSpec, view, svg;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        selectedBenchmarkIndex = new Map(selectedBenchmarks.map(function (b) { return [b.name, b]; }));
+                        selectedBenchmarkSet = new Set(selectedBenchmarks.map(function (b) { return b.name; }));
+                        selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
+                        values = benchmarkResults
+                            .filter(function (b) {
+                            return selectedBenchmarkSet.has(b.benchmark) &&
+                                selectedNodeJsVersionsSet.has(b.nodeVersion);
+                        })
+                            .map(function (b) { return (__assign(__assign({}, b), { 
+                            // artificical benchmark name to make sure its always sorted by
+                            // benchmark and node-version
+                            benchmark: [
+                                BENCHMARKS_ORDER[b.benchmark],
+                                NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.nodeVersion)),
+                                b.nodeVersion,
+                                b.benchmark,
+                            ].join('-') })); });
+                        nodeJsVersionCount = new Set(values.map(function (v) { return v.nodeVersion; })).size;
+                        colorScaleRange = [];
+                        selectedBenchmarks.forEach(function (b) {
+                            for (var i = 0; i < nodeJsVersionCount; i++) {
+                                colorScaleRange.push(b.color);
+                            }
+                        });
                         vegaSpec = vegaLite.compile({
                             data: {
                                 values: values
-                                    .filter(function (b) { return selectedBenchmarkIndex.has(b.benchmark); })
-                                    .map(function (b) { return (__assign(__assign({}, b), { benchmark: "".concat(BENCHMARKS_ORDER[b.benchmark], "-").concat(b.benchmark) })); })
                             },
                             width: 600,
-                            height: { step: 15 },
+                            height: { step: 15 / nodeJsVersionCount },
                             mark: 'bar',
                             encoding: {
                                 row: {
@@ -212,7 +238,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                     type: 'nominal',
                                     legend: null,
                                     scale: {
-                                        range: selectedBenchmarks.map(function (b) { return b.color; })
+                                        range: colorScaleRange
                                     }
                                 }
                             }
@@ -244,7 +270,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                             this.prevProps = this.props;
                             _a = this.setState;
                             _b = {};
-                            return [4 /*yield*/, graph(this.props.benchmarks, this.props.values)];
+                            return [4 /*yield*/, graph(this.props.benchmarks, this.props.nodeJsVersions, this.props.values)];
                         case 1:
                             _a.apply(this, [(_b.svg = _c.sent(),
                                     _b)]);
@@ -273,17 +299,30 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                     var _a;
                     return (__assign(__assign({}, acc), (_a = {}, _a[b.name] = true, _a)));
                 }, {}),
+                selectedNodeJsVersions: {},
                 values: []
             };
             return _this;
         }
+        App.prototype.getNodeJsVersions = function () {
+            var versionsSet = new Set(this.state.values.map(function (v) { return v.nodeVersion; }));
+            var res = [];
+            versionsSet.forEach(function (v) { return res.push(v); });
+            return res;
+        };
         App.prototype.componentDidMount = function () {
             var _this = this;
-            NODE_VERSIONS.forEach(function (v) {
+            NODE_VERSIONS.forEach(function (v, i) {
                 fetch("results/node-".concat(v, ".json"))
                     .then(function (response) { return response.json(); })
                     .then(function (data) {
-                    _this.setState(function (state) { return (__assign(__assign({}, state), { values: __spreadArray(__spreadArray([], state.values, true), normalizePartialValues(data.results), true) })); });
+                    _this.setState(function (state) {
+                        var _a;
+                        return (__assign(__assign({}, state), { 
+                            // select the first node versions benchmark automatically
+                            selectedNodeJsVersions: i === 0
+                                ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].nodeVersion] = true, _a)) : state.selectedNodeJsVersions, values: __spreadArray(__spreadArray([], state.values, true), normalizePartialValues(data.results), true) }));
+                    });
                 })["catch"](function (err) {
                     console.info("no data for node ".concat(v));
                 });
@@ -295,7 +334,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                 (0, preact_1.h)("h1", null, "Runtype Benchmarks"),
                 (0, preact_1.h)("p", null, "Benchmark Comparison of Packages with Runtime Validation and TypeScript Support"),
                 (0, preact_1.h)("div", { style: { display: 'flex', margin: '1rem 0' } },
-                    (0, preact_1.h)("div", { style: { width: '33%' } },
+                    (0, preact_1.h)("div", { style: { width: '12rem', marginRight: '1rem' } },
                         (0, preact_1.h)("label", null, "Benchmarks:"),
                         (0, preact_1.h)("div", null, BENCHMARKS.map(function (b) {
                             var _a;
@@ -305,8 +344,27 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                         return (__assign(__assign({}, state), { selectedBenchmarks: __assign(__assign({}, _this.state.selectedBenchmarks), (_a = {}, _a[b.name] = checked, _a)) }));
                                     });
                                 } }));
+                        }))),
+                    (0, preact_1.h)("div", { style: { width: '12rem' } },
+                        (0, preact_1.h)("label", null, "Node.js Versions:"),
+                        (0, preact_1.h)("div", null, this.getNodeJsVersions().map(function (v) {
+                            var _a;
+                            return ((0, preact_1.h)(Checkbox, { id: v, checked: (_a = _this.state.selectedNodeJsVersions[v]) !== null && _a !== void 0 ? _a : false, label: v, onChange: function (checked) {
+                                    return _this.setState(function (state) {
+                                        var _a;
+                                        return (__assign(__assign({}, state), { selectedNodeJsVersions: __assign(__assign({}, _this.state.selectedNodeJsVersions), (_a = {}, _a[v] = checked, _a)) }));
+                                    });
+                                } }));
                         })))),
-                (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), values: this.state.values })));
+                (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), nodeJsVersions: Object.entries(this.state.selectedNodeJsVersions)
+                        .filter(function (_a) {
+                        var k = _a[0], v = _a[1];
+                        return v;
+                    })
+                        .map(function (_a) {
+                        var k = _a[0], v = _a[1];
+                        return k;
+                    }), values: this.state.values })));
         };
         return App;
     }(preact_1.Component));
