@@ -53,5 +53,5 @@ export const cases = [
   ValitaCase,
   YupCase,
   ZodCase,
-  AjvCase
+  AjvCase,
 ];
