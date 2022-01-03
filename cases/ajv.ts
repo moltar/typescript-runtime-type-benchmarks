@@ -1,48 +1,45 @@
-import Ajv from "ajv"
+import Ajv from 'ajv';
 import { Case } from './abstract';
+import { Data } from '../data';
 
 const ajv = new Ajv();
 const schema = {
-  $id: "AjvTest",
-  $schema: "http://json-schema.org/draft-07/schema#",
-  type: "object",
+  $id: 'AjvTest',
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  type: 'object',
   properties: {
     number: {
-      type: "number"
+      type: 'number',
     },
     negNumber: {
-      type: "number"
+      type: 'number',
     },
     maxNumber: {
-      type: "number"
+      type: 'number',
     },
     string: {
-      type: "string"
+      type: 'string',
     },
     longString: {
-      type: "string"
+      type: 'string',
     },
     boolean: {
-      type: "boolean"
+      type: 'boolean',
     },
     deeplyNested: {
-      type: "object",
+      type: 'object',
       properties: {
         foo: {
-          type: "string"
+          type: 'string',
         },
         num: {
-          type: "number"
+          type: 'number',
         },
         bool: {
-          type: "boolean"
-        }
+          type: 'boolean',
+        },
       },
-      required: [
-        'foo',
-        'num',
-        'bool'
-      ]
+      required: ['foo', 'num', 'bool'],
     },
   },
   required: [
@@ -52,18 +49,18 @@ const schema = {
     'string',
     'longString',
     'boolean',
-    'deeplyNested'
-  ]
-}
-const validate = ajv.compile(schema)
+    'deeplyNested',
+  ],
+};
+const validate = ajv.compile(schema);
 
 export class AjvCase extends Case implements Case {
   name = 'ajv';
 
   validate() {
-    if(!validate(this.data)) {
-      throw new Error(JSON.stringify(ajv.errors, null,4))
+    if (!validate(this.data)) {
+      throw new Error(JSON.stringify(ajv.errors, null, 4));
     }
-    return this.data;
+    return this.data as Data;
   }
 }
