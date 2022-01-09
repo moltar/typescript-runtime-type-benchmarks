@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { f, validatesFactory } from '@marcj/marshal';
 import { createCase } from '../benchmarks';
 
-createCase('marshal', 'validateLoose', () => {
+createCase('marshal', 'assertLoose', () => {
   class DeeplyNestedType {
     @f
     foo!: string;
@@ -41,7 +41,7 @@ createCase('marshal', 'validateLoose', () => {
 
   return (data: any) => {
     if (checkData(data)) {
-      return data;
+      return true;
     }
 
     throw new Error('Invalid');

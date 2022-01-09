@@ -1,7 +1,7 @@
 import { object, number, string, boolean } from 'rulr';
 import { createCase } from '../benchmarks';
 
-createCase('rulr', 'validate', () => {
+createCase('rulr', 'parseSafe', () => {
   const dataType = object({
     bail: true,
     required: {

@@ -99,7 +99,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
         '#8dd3c7',
-        // '#ffffb3', not this one .. looks to bright to me
+        // '#ffffb3', not this one .. looks too bright to me
         '#bebada',
         '#fb8072',
         '#80b1d3',
@@ -113,17 +113,23 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
     ];
     // create a stable color list
     var BENCHMARKS = [
-        { name: 'validate', label: 'Safe Validation', color: COLORS[0], order: '0' },
+        { name: 'parseSafe', label: 'Safe Parsing', color: COLORS[0], order: '0' },
         {
-            name: 'validateStrict',
-            label: 'Strict Validation',
+            name: 'parseStrict',
+            label: 'Strict Parsing',
             color: COLORS[1],
             order: '1'
         },
         {
-            name: 'validateLoose',
-            label: 'Unsafe Validation',
+            name: 'assertLoose',
+            label: 'Loose Assertion',
             color: COLORS[2],
+            order: '2'
+        },
+        {
+            name: 'assertStrict',
+            label: 'Loose Assertion',
+            color: COLORS[3],
             order: '2'
         },
     ];
@@ -202,6 +208,22 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                             width: 600,
                             height: { step: 15 / nodeJsVersionCount },
                             mark: 'bar',
+                            layer: [
+                                /* {
+                                 *   mark: 'bar',
+                                 * }, */
+                                {
+                                    mark: {
+                                        type: 'text',
+                                        align: 'left',
+                                        baseline: 'middle',
+                                        dx: 3
+                                    },
+                                    encoding: {
+                                        text: { field: 'ops', type: 'quantitative' }
+                                    }
+                                },
+                            ],
                             encoding: {
                                 row: {
                                     field: 'name',
@@ -218,7 +240,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                 x: {
                                     field: 'ops',
                                     type: 'quantitative',
-                                    title: ['operations / sec', '(better ⯈)'],
+                                    title: ['operations / sec', '(better ▶)'],
                                     axis: {
                                         orient: 'top',
                                         offset: 10,
@@ -281,7 +303,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         };
         Graph.prototype.render = function () {
             this.createGraph();
-            return ((0, preact_1.h)("div", { style: { height: '650px' }, dangerouslySetInnerHTML: { __html: this.state.svg } }));
+            return ((0, preact_1.h)("div", { style: { marginBottom: '1rem' }, dangerouslySetInnerHTML: { __html: this.state.svg } }));
         };
         return Graph;
     }(preact_1.Component));
@@ -289,6 +311,19 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         return ((0, preact_1.h)("div", { style: { display: 'flex', backgroundColor: props.color } },
             (0, preact_1.h)("input", { id: props.id, type: "checkbox", name: props.id, checked: props.checked, onInput: function () { return props.onChange(!props.checked); } }),
             (0, preact_1.h)("label", { style: { width: '100%' }, "for": props.id }, props.label)));
+    }
+    function BenchmarkDescription(props) {
+        return ((0, preact_1.h)("div", { style: { marginBotton: '1rem' } },
+            (0, preact_1.h)("h4", null,
+                (0, preact_1.h)("span", { style: {
+                        backgroundColor: props.color,
+                        display: 'inline-block',
+                        width: '2rem',
+                        marginRight: '0.5rem'
+                    } }, "\u00A0"),
+                props.name,
+                ' '),
+            props.children));
     }
     var App = /** @class */ (function (_super) {
         __extends(App, _super);
@@ -357,6 +392,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                 } }));
                         })))),
                 (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), nodeJsVersions: Object.entries(this.state.selectedNodeJsVersions)
+                        .sort()
                         .filter(function (_a) {
                         var k = _a[0], v = _a[1];
                         return v;
@@ -364,7 +400,24 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                         .map(function (_a) {
                         var k = _a[0], v = _a[1];
                         return k;
-                    }), values: this.state.values })));
+                    }), values: this.state.values }),
+                (0, preact_1.h)("div", null,
+                    (0, preact_1.h)(BenchmarkDescription, { name: "Safe Parsing", color: BENCHMARKS.find(function (x) { return x.name === 'parseSafe'; }).color },
+                        (0, preact_1.h)("p", null,
+                            "Check the input object against a schema and return it.",
+                            (0, preact_1.h)("br", null),
+                            "Raise an error if the input object does not conform to the schema, e.g. an attribute is a number instead of a string or an attribute is missing completely.",
+                            (0, preact_1.h)("br", null),
+                            "Any extra keys in the input object that are not defined in the schema must be removed.")),
+                    (0, preact_1.h)(BenchmarkDescription, { name: "Strict Parsing", color: BENCHMARKS.find(function (x) { return x.name === 'parseStrict'; }).color },
+                        (0, preact_1.h)("p", null, "Like safe parsing but raise an error if input objects contain extra keys.")),
+                    (0, preact_1.h)(BenchmarkDescription, { name: "Loose Assertion", color: BENCHMARKS.find(function (x) { return x.name === 'assertLoose'; }).color },
+                        (0, preact_1.h)("p", null,
+                            "Check the input object against a schema and raise an exception if it does not match.",
+                            (0, preact_1.h)("br", null),
+                            "No errors are raised when encountering extra keys.")),
+                    (0, preact_1.h)(BenchmarkDescription, { name: "Strict Assertion", color: BENCHMARKS.find(function (x) { return x.name === 'assertStrict'; }).color },
+                        (0, preact_1.h)("p", null, "Like loose assertion but raise an error if input objects or nested input objects contain extra keys.")))));
         };
         return App;
     }(preact_1.Component));

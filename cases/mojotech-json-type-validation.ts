@@ -6,7 +6,7 @@ import {
 } from '@mojotech/json-type-validation';
 import { createCase } from '../benchmarks';
 
-createCase('@mojotech/json-type-validation', 'validate', () => {
+createCase('@mojotech/json-type-validation', 'parseSafe', () => {
   const dataType = object({
     number: number(),
     negNumber: number(),

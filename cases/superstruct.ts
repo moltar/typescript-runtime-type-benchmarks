@@ -9,77 +9,63 @@ import {
   validate,
   create,
 } from 'superstruct';
-import { createCase } from '../benchmarks';
+import { addCase } from '../benchmarks';
 
-createCase(
+const dataTypeSafe = type({
+  number: number(),
+  negNumber: number(),
+  maxNumber: number(),
+  string: string(),
+  longString: string(),
+  boolean: boolean(),
+  deeplyNested: type({
+    foo: string(),
+    num: number(),
+    bool: boolean(),
+  }),
+});
+
+const dataTypeStrict = object({
+  number: number(),
+  negNumber: number(),
+  maxNumber: number(),
+  string: string(),
+  longString: string(),
+  boolean: boolean(),
+  deeplyNested: object({
+    foo: string(),
+    num: number(),
+    bool: boolean(),
+  }),
+});
+
+addCase(
   'superstruct',
-  'validate',
-  () => {
-    const dataType = type({
-      number: number(),
-      negNumber: number(),
-      maxNumber: number(),
-      string: string(),
-      longString: string(),
-      boolean: boolean(),
-      deeplyNested: type({
-        foo: string(),
-        num: number(),
-        bool: boolean(),
-      }),
-    });
+  'parseSafe',
+  data => {
+    assert(data, dataTypeSafe);
 
-    return data => {
-      assert(data, dataType);
-
-      return mask(data, dataType);
-    };
+    return mask(data, dataTypeSafe);
   },
   // can't get the `mask` stuff to work - its documented to remove any
   // additional attributes that `type` ignored
   { disabled: true }
 );
 
-createCase('superstruct', 'validateLoose', () => {
-  const dataType = type({
-    number: number(),
-    negNumber: number(),
-    maxNumber: number(),
-    string: string(),
-    longString: string(),
-    boolean: boolean(),
-    deeplyNested: type({
-      foo: string(),
-      num: number(),
-      bool: boolean(),
-    }),
-  });
+addCase('superstruct', 'parseStrict', data => {
+  assert(data, dataTypeStrict);
 
-  return data => {
-    assert(data, dataType);
-
-    return data;
-  };
+  return data;
 });
 
-createCase('superstruct', 'validateStrict', () => {
-  const dataType = object({
-    number: number(),
-    negNumber: number(),
-    maxNumber: number(),
-    string: string(),
-    longString: string(),
-    boolean: boolean(),
-    deeplyNested: object({
-      foo: string(),
-      num: number(),
-      bool: boolean(),
-    }),
-  });
+addCase('superstruct', 'assertLoose', data => {
+  assert(data, dataTypeSafe);
 
-  return data => {
-    assert(data, dataType);
+  return true;
+});
 
-    return data;
-  };
+addCase('superstruct', 'assertStrict', data => {
+  assert(data, dataTypeStrict);
+
+  return true;
 });

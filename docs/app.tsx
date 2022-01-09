@@ -1,4 +1,4 @@
-import { Component, Fragment, h, render } from 'preact';
+import { Component, Fragment, h, render, ComponentChildren } from 'preact';
 import * as vegaLite from 'vega-lite';
 import * as vega from 'vega';
 
@@ -17,7 +17,7 @@ interface BenchmarkResult {
 // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
 const COLORS = [
   '#8dd3c7',
-  // '#ffffb3', not this one .. looks to bright to me
+  // '#ffffb3', not this one .. looks too bright to me
   '#bebada',
   '#fb8072',
   '#80b1d3',
@@ -32,17 +32,23 @@ const COLORS = [
 
 // create a stable color list
 const BENCHMARKS = [
-  { name: 'validate', label: 'Safe Validation', color: COLORS[0], order: '0' },
+  { name: 'parseSafe', label: 'Safe Parsing', color: COLORS[0], order: '0' },
   {
-    name: 'validateStrict',
-    label: 'Strict Validation',
+    name: 'parseStrict',
+    label: 'Strict Parsing',
     color: COLORS[1],
     order: '1',
   },
   {
-    name: 'validateLoose',
-    label: 'Unsafe Validation',
+    name: 'assertLoose',
+    label: 'Loose Assertion',
     color: COLORS[2],
+    order: '2',
+  },
+  {
+    name: 'assertStrict',
+    label: 'Loose Assertion',
+    color: COLORS[3],
     order: '2',
   },
 ];
@@ -145,6 +151,22 @@ async function graph(
     width: 600,
     height: { step: 15 / nodeJsVersionCount },
     mark: 'bar',
+    layer: [
+      /* {
+       *   mark: 'bar',
+       * }, */
+      {
+        mark: {
+          type: 'text',
+          align: 'left',
+          baseline: 'middle',
+          dx: 3,
+        },
+        encoding: {
+          text: { field: 'ops', type: 'quantitative' },
+        },
+      },
+    ],
     encoding: {
       row: {
         field: 'name',
@@ -161,7 +183,7 @@ async function graph(
       x: {
         field: 'ops',
         type: 'quantitative',
-        title: ['operations / sec', '(better ⯈)'],
+        title: ['operations / sec', '(better ▶)'],
         axis: {
           orient: 'top',
           offset: 10,
@@ -223,7 +245,7 @@ class Graph extends Component<
 
     return (
       <div
-        style={{ height: '650px' }}
+        style={{ marginBottom: '1rem' }}
         dangerouslySetInnerHTML={{ __html: this.state.svg }}
       />
     );
@@ -249,6 +271,31 @@ function Checkbox(props: {
       <label style={{ width: '100%' }} for={props.id}>
         {props.label}
       </label>
+    </div>
+  );
+}
+
+function BenchmarkDescription(props: {
+  name: string;
+  color: string;
+  children?: ComponentChildren;
+}) {
+  return (
+    <div style={{ marginBotton: '1rem' }}>
+      <h4>
+        <span
+          style={{
+            backgroundColor: props.color,
+            display: 'inline-block',
+            width: '2rem',
+            marginRight: '0.5rem',
+          }}
+        >
+          &nbsp;
+        </span>
+        {props.name}{' '}
+      </h4>
+      {props.children}
     </div>
   );
 }
@@ -309,6 +356,7 @@ class App extends Component<
     return (
       <div>
         <h1>Runtype Benchmarks</h1>
+
         <p>
           Benchmark Comparison of Packages with Runtime Validation and
           TypeScript Support
@@ -370,10 +418,61 @@ class App extends Component<
             b => this.state.selectedBenchmarks[b.name]
           )}
           nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
+            .sort()
             .filter(([k, v]) => v)
             .map(([k, v]) => k)}
           values={this.state.values}
         />
+
+        <div>
+          <BenchmarkDescription
+            name="Safe Parsing"
+            color={BENCHMARKS.find(x => x.name === 'parseSafe').color}
+          >
+            <p>
+              Check the input object against a schema and return it.
+              <br />
+              Raise an error if the input object does not conform to the schema,
+              e.g. an attribute is a number instead of a string or an attribute
+              is missing completely.
+              <br />
+              Any extra keys in the input object that are not defined in the
+              schema must be removed.
+            </p>
+          </BenchmarkDescription>
+
+          <BenchmarkDescription
+            name="Strict Parsing"
+            color={BENCHMARKS.find(x => x.name === 'parseStrict').color}
+          >
+            <p>
+              Like safe parsing but raise an error if input objects contain
+              extra keys.
+            </p>
+          </BenchmarkDescription>
+
+          <BenchmarkDescription
+            name="Loose Assertion"
+            color={BENCHMARKS.find(x => x.name === 'assertLoose').color}
+          >
+            <p>
+              Check the input object against a schema and raise an exception if
+              it does not match.
+              <br />
+              No errors are raised when encountering extra keys.
+            </p>
+          </BenchmarkDescription>
+
+          <BenchmarkDescription
+            name="Strict Assertion"
+            color={BENCHMARKS.find(x => x.name === 'assertStrict').color}
+          >
+            <p>
+              Like loose assertion but raise an error if input objects or nested
+              input objects contain extra keys.
+            </p>
+          </BenchmarkDescription>
+        </div>
       </div>
     );
   }

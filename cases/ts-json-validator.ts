@@ -1,7 +1,7 @@
 import { createSchema as S, TsjsonParser } from 'ts-json-validator';
 import { createCase } from '../benchmarks';
 
-createCase('ts-json-validator', 'validateLoose', () => {
+createCase('ts-json-validator', 'assertLoose', () => {
   const parser = new TsjsonParser(
     S({
       type: 'object',
@@ -36,7 +36,7 @@ createCase('ts-json-validator', 'validateLoose', () => {
 
   return data => {
     if (parser.validates(data)) {
-      return data;
+      return true;
     }
 
     throw new Error('Invalid');

@@ -6,7 +6,7 @@ import {
 } from 'json-decoder';
 import { createCase } from '../benchmarks';
 
-createCase('json-decoder', 'validate', () => {
+createCase('json-decoder', 'parseSafe', () => {
   const dataType = objectDecoder({
     number: numberDecoder,
     negNumber: numberDecoder,

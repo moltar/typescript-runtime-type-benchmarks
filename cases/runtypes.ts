@@ -1,7 +1,7 @@
 import { Boolean, Number, String, Record } from 'runtypes';
 import { createCase } from '../benchmarks';
 
-createCase('runtypes', 'validateLoose', () => {
+createCase('runtypes', 'assertLoose', () => {
   const dataType = Record({
     number: Number,
     negNumber: Number,
@@ -17,6 +17,8 @@ createCase('runtypes', 'validateLoose', () => {
   });
 
   return data => {
-    return dataType.check(data);
+    dataType.check(data);
+
+    return true;
   };
 });

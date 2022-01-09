@@ -1,15 +1,17 @@
-import { Validate } from '../validate';
-import { ValidateLoose } from '../validateLoose';
-import { ValidateStrict } from '../validateStrict';
+import { AssertLoose } from '../assertLoose';
+import { AssertStrict } from '../assertStrict';
+import { ParseSafe } from '../parseSafe';
+import { ParseStrict } from '../parseStrict';
 import { BenchmarkCase } from './types';
 
 /**
  * Map of all benchmarks.
  */
 export const availableBenchmarks = {
-  validate: Validate,
-  validateStrict: ValidateStrict,
-  validateLoose: ValidateLoose,
+  parseSafe: ParseSafe,
+  parseStrict: ParseStrict,
+  assertLoose: AssertLoose,
+  assertStrict: AssertStrict,
 };
 
 type AvailableBenchmarks = typeof availableBenchmarks;

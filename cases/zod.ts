@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { createCase } from '../benchmarks';
 
-createCase('zod', 'validate', () => {
+createCase('zod', 'parseSafe', () => {
   const dataType = z.object({
     number: z.number(),
     negNumber: z.number(),
@@ -21,7 +21,7 @@ createCase('zod', 'validate', () => {
   };
 });
 
-createCase('zod', 'validateStrict', () => {
+createCase('zod', 'parseStrict', () => {
   const dataType = z
     .object({
       number: z.number(),
@@ -45,7 +45,7 @@ createCase('zod', 'validateStrict', () => {
   };
 });
 
-createCase('zod', 'validateLoose', () => {
+createCase('zod', 'assertLoose', () => {
   const dataType = z
     .object({
       number: z.number(),
@@ -65,6 +65,34 @@ createCase('zod', 'validateLoose', () => {
     .passthrough();
 
   return data => {
-    return dataType.parse(data);
+    dataType.parse(data);
+
+    return true;
+  };
+});
+
+createCase('zod', 'assertStrict', () => {
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .strict(),
+    })
+    .strict();
+
+  return data => {
+    dataType.parse(data);
+
+    return true;
   };
 });

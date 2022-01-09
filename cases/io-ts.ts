@@ -1,9 +1,9 @@
 import * as t from 'io-ts';
 import { pipe } from 'fp-ts/function';
-import { fold } from 'fp-ts/Either';
+import { fold, isRight } from 'fp-ts/Either';
 import { createCase } from '../benchmarks';
 
-createCase('io-ts', 'validateLoose', () => {
+createCase('io-ts', 'assertLoose', () => {
   const dataType = t.type({
     number: t.Int,
     negNumber: t.number,
@@ -25,7 +25,7 @@ createCase('io-ts', 'validateLoose', () => {
         errors => {
           throw errors;
         },
-        a => a
+        a => true
       )
     );
   };

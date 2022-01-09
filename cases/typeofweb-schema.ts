@@ -1,7 +1,7 @@
 import { object, number, string, validate, boolean } from '@typeofweb/schema';
 import { createCase } from '../benchmarks';
 
-createCase('@typeofweb/schema', 'validateLoose', () => {
+createCase('@typeofweb/schema', 'assertLoose', () => {
   const dataType = object(
     {
       number: number(),
@@ -25,11 +25,13 @@ createCase('@typeofweb/schema', 'validateLoose', () => {
   const validator = validate(dataType);
 
   return data => {
-    return validator(data);
+    validator(data);
+
+    return true;
   };
 });
 
-createCase('@typeofweb/schema', 'validateStrict', () => {
+createCase('@typeofweb/schema', 'parseStrict', () => {
   const dataType = object({
     number: number(),
     negNumber: number(),
