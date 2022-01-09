@@ -1,7 +1,7 @@
 import { object, number, boolean, string } from '@ailabs/ts-utils/dist/decoder';
 import { createCase } from '../benchmarks';
 
-createCase('ts-utils', 'validate', () => {
+createCase('ts-utils', 'parseSafe', () => {
   const dataType = object('Data', {
     number,
     negNumber: number,

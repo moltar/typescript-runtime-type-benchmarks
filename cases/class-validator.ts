@@ -10,7 +10,7 @@ import {
 import 'reflect-metadata';
 import { createCase } from '../benchmarks';
 
-createCase('class-transformer-validator-sync', 'validateLoose', () => {
+createCase('class-transformer-validator-sync', 'assertLoose', () => {
   class DeeplyNestedType {
     @IsString()
     foo!: string;
@@ -51,6 +51,8 @@ createCase('class-transformer-validator-sync', 'validateLoose', () => {
     // We are not using "any" type here, because that confuses "class-validator", as it can also
     // work on arrays, and it returns ambiguous "Foo | Foo[]" type if it doesn't know if input was
     // an array or not.
-    return transformAndValidateSync(DataType, data as {});
+    transformAndValidateSync(DataType, data as {});
+
+    return true;
   };
 });

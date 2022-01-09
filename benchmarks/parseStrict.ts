@@ -1,12 +1,12 @@
 import { Benchmark } from './helpers/types';
-import { validateData } from './validate';
+import { validateData } from './parseSafe';
 
-type Fn = (data: unknown) => void;
+type Fn = (data: unknown) => typeof validateData;
 
 /**
- * Like validate but throw on unknown (extra) keys in objects.
+ * Like parseSafe but throw on unknown (extra) keys in objects.
  */
-export class ValidateStrict extends Benchmark<Fn> {
+export class ParseStrict extends Benchmark<Fn> {
   run() {
     this.fn(validateData);
   }

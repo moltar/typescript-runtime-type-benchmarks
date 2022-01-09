@@ -15,7 +15,7 @@ export const validateData = Object.freeze({
   },
 });
 
-type Fn = (data: unknown) => void;
+type Fn = (data: unknown) => typeof validateData;
 
 /**
  * Validate and ignore unknown keys, removing them from the result.
@@ -24,7 +24,7 @@ type Fn = (data: unknown) => void;
  * not result in unwanted parameters or the `__proto__` attribute being
  * maliciously passed to internal functions.
  */
-export class Validate extends Benchmark<Fn> {
+export class ParseSafe extends Benchmark<Fn> {
   run() {
     this.fn(validateData);
   }

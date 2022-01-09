@@ -1,7 +1,7 @@
 import { v, compile } from 'suretype';
 import { createCase } from '../benchmarks';
 
-createCase('suretype', 'validateLoose', () => {
+createCase('suretype', 'assertLoose', () => {
   const dataSchema = v.object({
     number: v.number().required(),
     negNumber: v.number().required(),
@@ -21,6 +21,8 @@ createCase('suretype', 'validateLoose', () => {
   const ensureData = compile(dataSchema, { ensure: true });
 
   return data => {
-    return ensureData(data);
+    ensureData(data);
+
+    return true;
   };
 });

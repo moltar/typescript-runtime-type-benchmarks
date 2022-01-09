@@ -1,42 +1,44 @@
 import * as rt from 'simple-runtypes';
-import { createCase } from '../benchmarks';
+import { addCase } from '../benchmarks';
 
-createCase('simple-runtypes', 'validate', () => {
-  const checkData = rt.sloppyRecord({
-    number: rt.integer(),
-    negNumber: rt.number(),
-    maxNumber: rt.number(),
-    string: rt.string(),
-    longString: rt.string(),
-    boolean: rt.boolean(),
-    deeplyNested: rt.sloppyRecord({
-      foo: rt.string(),
-      num: rt.number(),
-      bool: rt.boolean(),
-    }),
-  });
-
-  return data => {
-    return checkData(data);
-  };
+const checkDataSafe = rt.sloppyRecord({
+  number: rt.integer(),
+  negNumber: rt.number(),
+  maxNumber: rt.number(),
+  string: rt.string(),
+  longString: rt.string(),
+  boolean: rt.boolean(),
+  deeplyNested: rt.sloppyRecord({
+    foo: rt.string(),
+    num: rt.number(),
+    bool: rt.boolean(),
+  }),
 });
 
-createCase('simple-runtypes', 'validateStrict', () => {
-  const checkDataStrict = rt.record({
-    number: rt.integer(),
-    negNumber: rt.number(),
-    maxNumber: rt.number(),
-    string: rt.string(),
-    longString: rt.string(),
-    boolean: rt.boolean(),
-    deeplyNested: rt.record({
-      foo: rt.string(),
-      num: rt.number(),
-      bool: rt.boolean(),
-    }),
-  });
+addCase('simple-runtypes', 'parseSafe', data => {
+  return checkDataSafe(data);
+});
 
-  return data => {
-    return checkDataStrict(data);
-  };
+const checkDataStrict = rt.record({
+  number: rt.integer(),
+  negNumber: rt.number(),
+  maxNumber: rt.number(),
+  string: rt.string(),
+  longString: rt.string(),
+  boolean: rt.boolean(),
+  deeplyNested: rt.record({
+    foo: rt.string(),
+    num: rt.number(),
+    bool: rt.boolean(),
+  }),
+});
+
+addCase('simple-runtypes', 'parseStrict', data => {
+  return checkDataStrict(data);
+});
+
+addCase('simple-runtypes', 'assertStrict', data => {
+  checkDataStrict(data);
+
+  return true;
 });

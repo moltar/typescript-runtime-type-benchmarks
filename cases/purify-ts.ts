@@ -1,7 +1,7 @@
 import { Codec, string, number, boolean } from 'purify-ts';
 import { createCase } from '../benchmarks';
 
-createCase('purify-ts', 'validate', () => {
+createCase('purify-ts', 'parseSafe', () => {
   const dataType = Codec.interface({
     number,
     negNumber: number,

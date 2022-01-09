@@ -15,14 +15,22 @@ const dataType = v.object({
   }),
 });
 
-addCase('valita', 'validate', data => {
+addCase('valita', 'parseSafe', data => {
   return dataType.parse(data, { mode: 'strip' });
 });
 
-addCase('valita', 'validateStrict', data => {
+addCase('valita', 'parseStrict', data => {
   return dataType.parse(data, { mode: 'strict' });
 });
 
-addCase('valita', 'validateLoose', data => {
-  return dataType.parse(data, { mode: 'passthrough' });
+addCase('valita', 'assertLoose', data => {
+  dataType.parse(data, { mode: 'passthrough' });
+
+  return true;
+});
+
+addCase('valita', 'assertStrict', data => {
+  dataType.parse(data, { mode: 'strict' });
+
+  return true;
 });

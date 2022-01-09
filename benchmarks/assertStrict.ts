@@ -1,16 +1,14 @@
 import { Benchmark } from './helpers/types';
-import { validateData } from './validate';
+import { validateData } from './parseSafe';
 
-type Fn = (data: unknown) => void;
+type Fn = (data: unknown) => boolean;
 
 /**
- * Like validate but keep unknown keys in the result.
+ * Check that an object conforms to the schema.
  *
- * Such a validation mode is highly unsafe when used in backends but might be
- * useful in old codebases.
- * Not checking for unknown/extra keys in records may provide massive speedups.
+ * Raise errors if any extra keys not present in the schema are found.
  */
-export class ValidateLoose extends Benchmark<Fn> {
+export class AssertStrict extends Benchmark<Fn> {
   run() {
     this.fn(validateData);
   }
@@ -18,19 +16,19 @@ export class ValidateLoose extends Benchmark<Fn> {
   test() {
     describe(this.moduleName, () => {
       test(`should validate the data`, () => {
-        expect(this.fn(validateData)).toEqual(validateData);
+        expect(this.fn(validateData)).toBe(true);
       });
 
-      test(`should validate with unknown attributes and keep them in the validated result`, () => {
+      test(`should throw on unknown attributes`, () => {
         const dataWithExtraKeys = {
           ...validateData,
           extraAttribute: 'foo',
         };
 
-        expect(this.fn(dataWithExtraKeys)).toEqual(dataWithExtraKeys);
+        expect(() => this.fn(dataWithExtraKeys)).toThrow();
       });
 
-      test(`should validate with unknown attributes and keep them in the validated result (nested)`, () => {
+      test(`should throw on unknown attributes (nested)`, () => {
         const dataWithExtraNestedKeys = {
           ...validateData,
           deeplyNested: {
@@ -39,9 +37,7 @@ export class ValidateLoose extends Benchmark<Fn> {
           },
         };
 
-        expect(this.fn(dataWithExtraNestedKeys)).toEqual(
-          dataWithExtraNestedKeys
-        );
+        expect(() => this.fn(dataWithExtraNestedKeys)).toThrow();
       });
 
       test(`should throw on missing attributes`, () => {

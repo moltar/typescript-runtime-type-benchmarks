@@ -9,82 +9,86 @@ import {
   result,
   string,
 } from 'bueno';
-import { createCase } from '../benchmarks';
+import { addCase } from '../benchmarks';
 
-createCase('bueno', 'validate', () => {
-  const dataType = object({
-    number: number,
-    negNumber: number,
-    maxNumber: number,
-    string: string,
-    longString: string,
-    boolean: boolean,
-    deeplyNested: object({
-      foo: string,
-      num: number,
-      bool: boolean,
-    }),
-  });
-
-  return (data: any) => {
-    const err = check(data, dataType, enUS);
-
-    if (err) {
-      throw new Error(err);
-    }
-
-    return result(data, dataType);
-  };
+const dataType = object({
+  number: number,
+  negNumber: number,
+  maxNumber: number,
+  string: string,
+  longString: string,
+  boolean: boolean,
+  deeplyNested: object({
+    foo: string,
+    num: number,
+    bool: boolean,
+  }),
 });
 
-createCase('bueno', 'validateStrict', () => {
-  const dataTypeStrict = objectExact({
-    number: number,
-    negNumber: number,
-    maxNumber: number,
-    string: string,
-    longString: string,
-    boolean: boolean,
-    deeplyNested: objectExact({
-      foo: string,
-      num: number,
-      bool: boolean,
-    }),
-  });
-
-  return (data: any) => {
-    const err = check(data, dataTypeStrict, enUS);
-
-    if (err) {
-      throw new Error(err);
-    }
-
-    return result(data, dataTypeStrict);
-  };
+const dataTypeStrict = objectExact({
+  number: number,
+  negNumber: number,
+  maxNumber: number,
+  string: string,
+  longString: string,
+  boolean: boolean,
+  deeplyNested: objectExact({
+    foo: string,
+    num: number,
+    bool: boolean,
+  }),
 });
 
-createCase('bueno', 'validateLoose', () => {
-  const dataTypeLoose = objectInexact({
-    number: number,
-    negNumber: number,
-    maxNumber: number,
-    string: string,
-    longString: string,
-    boolean: boolean,
-    deeplyNested: objectInexact({
-      foo: string,
-      num: number,
-      bool: boolean,
-    }),
-  });
+const dataTypeLoose = objectInexact({
+  number: number,
+  negNumber: number,
+  maxNumber: number,
+  string: string,
+  longString: string,
+  boolean: boolean,
+  deeplyNested: objectInexact({
+    foo: string,
+    num: number,
+    bool: boolean,
+  }),
+});
 
-  return (data: any) => {
-    const err = check(data, dataTypeLoose, enUS);
+addCase('bueno', 'parseSafe', (data: any) => {
+  const err = check(data, dataType, enUS);
 
-    if (err) {
-      throw new Error(err);
-    }
+  if (err) {
+    throw new Error(err);
+  }
 
-    return result(data, dataTypeLoose);
-  };
+  return result(data, dataType);
+});
+
+addCase('bueno', 'parseStrict', (data: any) => {
+  const err = check(data, dataTypeStrict, enUS);
+
+  if (err) {
+    throw new Error(err);
+  }
+
+  return result(data, dataTypeStrict);
+});
+
+addCase('bueno', 'assertLoose', (data: any) => {
+  const err = check(data, dataTypeLoose, enUS);
+
+  if (err) {
+    throw new Error(err);
+  }
+
+  return true;
+});
+
+addCase('bueno', 'assertStrict', (data: any) => {
+  const err = check(data, dataTypeStrict, enUS);
+
+  if (err) {
+    throw new Error(err);
+  }
+
+  return true;
 });

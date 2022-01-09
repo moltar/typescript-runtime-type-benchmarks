@@ -1,78 +1,86 @@
 import jointz from 'jointz';
-import { createCase } from '../benchmarks';
+import { addCase } from '../benchmarks';
 
-createCase('jointz', 'validateLoose', () => {
-  const dataType = jointz
-    .object({
-      number: jointz.number(),
-      negNumber: jointz.number(),
-      maxNumber: jointz.number(),
-      string: jointz.string(),
-      longString: jointz.string(),
-      boolean: jointz.constant(true, false),
-      deeplyNested: jointz
-        .object({
-          foo: jointz.string(),
-          num: jointz.number(),
-          bool: jointz.constant(true, false),
-        })
-        .requiredKeys('foo', 'num', 'bool')
-        .allowUnknownKeys(true),
-    })
-    .requiredKeys([
-      'number',
-      'boolean',
-      'deeplyNested',
-      'longString',
-      'maxNumber',
-      'negNumber',
-      'number',
-      'string',
-    ])
-    .allowUnknownKeys(true);
+const dataTypeLoose = jointz
+  .object({
+    number: jointz.number(),
+    negNumber: jointz.number(),
+    maxNumber: jointz.number(),
+    string: jointz.string(),
+    longString: jointz.string(),
+    boolean: jointz.constant(true, false),
+    deeplyNested: jointz
+      .object({
+        foo: jointz.string(),
+        num: jointz.number(),
+        bool: jointz.constant(true, false),
+      })
+      .requiredKeys('foo', 'num', 'bool')
+      .allowUnknownKeys(true),
+  })
+  .requiredKeys([
+    'number',
+    'boolean',
+    'deeplyNested',
+    'longString',
+    'maxNumber',
+    'negNumber',
+    'number',
+    'string',
+  ])
+  .allowUnknownKeys(true);
 
-  return data => {
-    if (dataType.isValid(data)) {
-      return data;
-    }
+const dataTypeStrict = jointz
+  .object({
+    number: jointz.number(),
+    negNumber: jointz.number(),
+    maxNumber: jointz.number(),
+    string: jointz.string(),
+    longString: jointz.string(),
+    boolean: jointz.constant(true, false),
+    deeplyNested: jointz
+      .object({
+        foo: jointz.string(),
+        num: jointz.number(),
+        bool: jointz.constant(true, false),
+      })
+      .requiredKeys('foo', 'num', 'bool'),
+  })
+  .requiredKeys([
+    'number',
+    'boolean',
+    'deeplyNested',
+    'longString',
+    'maxNumber',
+    'negNumber',
+    'number',
+    'string',
+  ]);
 
-    throw dataType.validate(data);
-  };
+addCase('jointz', 'assertLoose', data => {
+  const errors = dataTypeLoose.validate(data);
+
+  if (errors.length) {
+    throw errors;
+  }
+
+  return true;
 });
 
-createCase('jointz', 'validateStrict', () => {
-  const dataTypeStrict = jointz
-    .object({
-      number: jointz.number(),
-      negNumber: jointz.number(),
-      maxNumber: jointz.number(),
-      string: jointz.string(),
-      longString: jointz.string(),
-      boolean: jointz.constant(true, false),
-      deeplyNested: jointz
-        .object({
-          foo: jointz.string(),
-          num: jointz.number(),
-          bool: jointz.constant(true, false),
-        })
-        .requiredKeys('foo', 'num', 'bool'),
-    })
-    .requiredKeys([
-      'number',
-      'boolean',
-      'deeplyNested',
-      'longString',
-      'maxNumber',
-      'negNumber',
-      'number',
-      'string',
-    ]);
+addCase('jointz', 'assertStrict', data => {
+  const errors = dataTypeStrict.validate(data);
 
-  return data => {
-    if (dataTypeStrict.isValid(data)) {
-      return data;
-    }
+  if (errors.length) {
+    throw errors;
+  }
 
-    throw dataTypeStrict.validate(data);
-  };
+  return true;
+});
+
+addCase('jointz', 'parseStrict', data => {
+  if (dataTypeStrict.isValid(data)) {
+    return data;
+  }
+
+  throw dataTypeStrict.validate(data);
 });
