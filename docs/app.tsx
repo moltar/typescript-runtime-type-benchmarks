@@ -47,11 +47,12 @@ const BENCHMARKS = [
   },
   {
     name: 'assertStrict',
-    label: 'Loose Assertion',
+    label: 'Strict Assertion',
     color: COLORS[3],
-    order: '2',
+    order: '3',
   },
 ];
+
 const BENCHMARKS_ORDER = Object.fromEntries(
   BENCHMARKS.map((b, idx) => [b.name, b.order])
 );
@@ -106,11 +107,21 @@ function getNodeMajorVersionNumber(nodeVersion: string): number {
   return parseInt(match[1]);
 }
 
-async function graph(
-  selectedBenchmarks: typeof BENCHMARKS,
-  selectedNodeJsVersions: string[],
-  benchmarkResults: BenchmarkResult[]
-) {
+async function graph({
+  selectedBenchmarks,
+  selectedNodeJsVersions,
+  benchmarkResults,
+  sort,
+}: {
+  selectedBenchmarks: typeof BENCHMARKS;
+  selectedNodeJsVersions: string[];
+  benchmarkResults: BenchmarkResult[];
+  sort?: 'alphabetically' | 'fastest';
+}) {
+  if (!selectedBenchmarks.length || !selectedNodeJsVersions.length) {
+    return '';
+  }
+
   const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
   const selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
 
@@ -144,6 +155,20 @@ async function graph(
     }
   });
 
+  // build a list of module names for sorting
+  let sortedValues: BenchmarkResult[];
+
+  if (sort === 'fastest') {
+    sortedValues = values.sort((a, b) => b.ops - a.ops);
+  } else if (sort === 'alphabetically' || !sort) {
+    sortedValues = values.sort((a, b) => (a.name < b.name ? -1 : 1));
+  }
+
+  // remove duplicates not sure whether vega-lite can handle that
+  const sortedNames: string[] = [];
+
+  new Set(sortedValues.map(b => b.name)).forEach(n => sortedNames.push(n));
+
   const vegaSpec = vegaLite.compile({
     data: {
       values,
@@ -152,9 +177,6 @@ async function graph(
     height: { step: 15 / nodeJsVersionCount },
     mark: 'bar',
     layer: [
-      /* {
-       *   mark: 'bar',
-       * }, */
       {
         mark: {
           type: 'text',
@@ -179,6 +201,7 @@ async function graph(
           labelAnchor: 'middle',
           labelAlign: 'left',
         },
+        sort: sortedNames,
       },
       x: {
         field: 'ops',
@@ -220,6 +243,7 @@ class Graph extends Component<
     benchmarks: typeof BENCHMARKS;
     nodeJsVersions: string[];
     values: BenchmarkResult[];
+    sort: Parameters<typeof graph>[0]['sort'];
   },
   { svg?: string }
 > {
@@ -232,16 +256,25 @@ class Graph extends Component<
 
     this.prevProps = this.props;
     this.setState({
-      svg: await graph(
-        this.props.benchmarks,
-        this.props.nodeJsVersions,
-        this.props.values
-      ),
+      svg: await graph({
+        selectedBenchmarks: this.props.benchmarks,
+        selectedNodeJsVersions: this.props.nodeJsVersions,
+        benchmarkResults: this.props.values,
+        sort: this.props.sort,
+      }),
     });
   }
 
   render() {
     this.createGraph();
+
+    if (!this.state.svg) {
+      return (
+        <div style={{ margin: '5rem' }}>
+          <i>No Benchmark Selected</i>
+        </div>
+      );
+    }
 
     return (
       <div
@@ -306,6 +339,7 @@ class App extends Component<
     selectedBenchmarks: { [key: string]: boolean };
     selectedNodeJsVersions: { [key: string]: boolean };
     values: BenchmarkResult[];
+    sortBy: 'fastest' | 'alphabetically';
   }
 > {
   state = {
@@ -315,10 +349,13 @@ class App extends Component<
     ),
     selectedNodeJsVersions: {},
     values: [],
+    sortBy: 'alphabetically' as const,
   };
 
   getNodeJsVersions() {
-    const versionsSet = new Set(this.state.values.map(v => v.nodeVersion));
+    const versionsSet = new Set(
+      this.state.values.map(v => v.nodeVersion).sort((a, b) => (a < b ? 1 : -1))
+    );
     const res: string[] = [];
 
     versionsSet.forEach(v => res.push(v));
@@ -411,6 +448,21 @@ class App extends Component<
               })}
             </div>
           </div>
+
+          <div style={{ width: '12rem' }}>
+            <label>
+              Sort:
+              <select
+                onChange={(event: any) => {
+                  this.setState({ sortBy: event.target.value });
+                }}
+                value={this.state.sortBy}
+              >
+                <option value="alphabetically">Alphabetically</option>
+                <option value="fastest">Fastest</option>
+              </select>
+            </label>
+          </div>
         </div>
 
         <Graph
@@ -422,6 +474,7 @@ class App extends Component<
             .filter(([k, v]) => v)
             .map(([k, v]) => k)}
           values={this.state.values}
+          sort={this.state.sortBy}
         />
 
         <div>
