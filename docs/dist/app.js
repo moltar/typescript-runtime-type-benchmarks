@@ -128,9 +128,9 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         },
         {
             name: 'assertStrict',
-            label: 'Loose Assertion',
+            label: 'Strict Assertion',
             color: COLORS[3],
-            order: '2'
+            order: '3'
         },
     ];
     var BENCHMARKS_ORDER = Object.fromEntries(BENCHMARKS.map(function (b, idx) { return [b.name, b.order]; }));
@@ -172,12 +172,16 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         var match = nodeVersion.match(/v([0-9]+)\./);
         return parseInt(match[1]);
     }
-    function graph(selectedBenchmarks, selectedNodeJsVersions, benchmarkResults) {
+    function graph(_a) {
+        var selectedBenchmarks = _a.selectedBenchmarks, selectedNodeJsVersions = _a.selectedNodeJsVersions, benchmarkResults = _a.benchmarkResults, sort = _a.sort;
         return __awaiter(this, void 0, void 0, function () {
-            var selectedBenchmarkSet, selectedNodeJsVersionsSet, values, nodeJsVersionCount, colorScaleRange, vegaSpec, view, svg;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var selectedBenchmarkSet, selectedNodeJsVersionsSet, values, nodeJsVersionCount, colorScaleRange, sortedValues, sortedNames, vegaSpec, view, svg;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
+                        if (!selectedBenchmarks.length || !selectedNodeJsVersions.length) {
+                            return [2 /*return*/, ''];
+                        }
                         selectedBenchmarkSet = new Set(selectedBenchmarks.map(function (b) { return b.name; }));
                         selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
                         values = benchmarkResults
@@ -201,6 +205,14 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                 colorScaleRange.push(b.color);
                             }
                         });
+                        if (sort === 'fastest') {
+                            sortedValues = values.sort(function (a, b) { return b.ops - a.ops; });
+                        }
+                        else if (sort === 'alphabetically' || !sort) {
+                            sortedValues = values.sort(function (a, b) { return (a.name < b.name ? -1 : 1); });
+                        }
+                        sortedNames = [];
+                        new Set(sortedValues.map(function (b) { return b.name; })).forEach(function (n) { return sortedNames.push(n); });
                         vegaSpec = vegaLite.compile({
                             data: {
                                 values: values
@@ -209,9 +221,6 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                             height: { step: 15 / nodeJsVersionCount },
                             mark: 'bar',
                             layer: [
-                                /* {
-                                 *   mark: 'bar',
-                                 * }, */
                                 {
                                     mark: {
                                         type: 'text',
@@ -235,7 +244,8 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                         labelOrient: 'left',
                                         labelAnchor: 'middle',
                                         labelAlign: 'left'
-                                    }
+                                    },
+                                    sort: sortedNames
                                 },
                                 x: {
                                     field: 'ops',
@@ -268,7 +278,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                         view = new vega.View(vega.parse(vegaSpec.spec), { renderer: 'none' });
                         return [4 /*yield*/, view.toSVG()];
                     case 1:
-                        svg = _a.sent();
+                        svg = _b.sent();
                         return [2 /*return*/, svg];
                 }
             });
@@ -292,7 +302,12 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                             this.prevProps = this.props;
                             _a = this.setState;
                             _b = {};
-                            return [4 /*yield*/, graph(this.props.benchmarks, this.props.nodeJsVersions, this.props.values)];
+                            return [4 /*yield*/, graph({
+                                    selectedBenchmarks: this.props.benchmarks,
+                                    selectedNodeJsVersions: this.props.nodeJsVersions,
+                                    benchmarkResults: this.props.values,
+                                    sort: this.props.sort
+                                })];
                         case 1:
                             _a.apply(this, [(_b.svg = _c.sent(),
                                     _b)]);
@@ -303,6 +318,10 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         };
         Graph.prototype.render = function () {
             this.createGraph();
+            if (!this.state.svg) {
+                return ((0, preact_1.h)("div", { style: { margin: '5rem' } },
+                    (0, preact_1.h)("i", null, "No Benchmark Selected")));
+            }
             return ((0, preact_1.h)("div", { style: { marginBottom: '1rem' }, dangerouslySetInnerHTML: { __html: this.state.svg } }));
         };
         return Graph;
@@ -335,12 +354,13 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                     return (__assign(__assign({}, acc), (_a = {}, _a[b.name] = true, _a)));
                 }, {}),
                 selectedNodeJsVersions: {},
-                values: []
+                values: [],
+                sortBy: 'alphabetically'
             };
             return _this;
         }
         App.prototype.getNodeJsVersions = function () {
-            var versionsSet = new Set(this.state.values.map(function (v) { return v.nodeVersion; }));
+            var versionsSet = new Set(this.state.values.map(function (v) { return v.nodeVersion; }).sort(function (a, b) { return (a < b ? 1 : -1); }));
             var res = [];
             versionsSet.forEach(function (v) { return res.push(v); });
             return res;
@@ -390,7 +410,15 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                         return (__assign(__assign({}, state), { selectedNodeJsVersions: __assign(__assign({}, _this.state.selectedNodeJsVersions), (_a = {}, _a[v] = checked, _a)) }));
                                     });
                                 } }));
-                        })))),
+                        }))),
+                    (0, preact_1.h)("div", { style: { width: '12rem' } },
+                        (0, preact_1.h)("label", null,
+                            "Sort:",
+                            (0, preact_1.h)("select", { onChange: function (event) {
+                                    _this.setState({ sortBy: event.target.value });
+                                }, value: this.state.sortBy },
+                                (0, preact_1.h)("option", { value: "alphabetically" }, "Alphabetically"),
+                                (0, preact_1.h)("option", { value: "fastest" }, "Fastest"))))),
                 (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), nodeJsVersions: Object.entries(this.state.selectedNodeJsVersions)
                         .sort()
                         .filter(function (_a) {
@@ -400,7 +428,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                         .map(function (_a) {
                         var k = _a[0], v = _a[1];
                         return k;
-                    }), values: this.state.values }),
+                    }), values: this.state.values, sort: this.state.sortBy }),
                 (0, preact_1.h)("div", null,
                     (0, preact_1.h)(BenchmarkDescription, { name: "Safe Parsing", color: BENCHMARKS.find(function (x) { return x.name === 'parseSafe'; }).color },
                         (0, preact_1.h)("p", null,
