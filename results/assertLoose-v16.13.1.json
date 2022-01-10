@@ -1,0 +1,105 @@
+{
+  "name": "assertLoose",
+  "date": "2022-01-10T11:44:23.021Z",
+  "version": "1.0.0",
+  "results": [
+    {
+      "name": "ajv",
+      "ops": 23128926,
+      "margin": 0.41,
+      "percentSlower": 3.05
+    },
+    {
+      "name": "bueno",
+      "ops": 353189,
+      "margin": 0.28,
+      "percentSlower": 98.52
+    },
+    {
+      "name": "class-transformer-validator-sync",
+      "ops": 60248,
+      "margin": 4.11,
+      "percentSlower": 99.75
+    },
+    {
+      "name": "io-ts",
+      "ops": 1450917,
+      "margin": 0.3,
+      "percentSlower": 93.92
+    },
+    {
+      "name": "jointz",
+      "ops": 798351,
+      "margin": 0.37,
+      "percentSlower": 96.65
+    },
+    {
+      "name": "marshal",
+      "ops": 21502305,
+      "margin": 0.18,
+      "percentSlower": 9.87
+    },
+    {
+      "name": "runtypes",
+      "ops": 1077228,
+      "margin": 0.24,
+      "percentSlower": 95.48
+    },
+    {
+      "name": "superstruct",
+      "ops": 140530,
+      "margin": 0.29,
+      "percentSlower": 99.41
+    },
+    {
+      "name": "suretype",
+      "ops": 23856835,
+      "margin": 1.29,
+      "percentSlower": 0
+    },
+    {
+      "name": "ts-interface-checker",
+      "ops": 2397287,
+      "margin": 0.31,
+      "percentSlower": 89.95
+    },
+    {
+      "name": "ts-json-validator",
+      "ops": 23151343,
+      "margin": 1.12,
+      "percentSlower": 2.96
+    },
+    {
+      "name": "@typeofweb/schema",
+      "ops": 945005,
+      "margin": 0.3,
+      "percentSlower": 96.04
+    },
+    {
+      "name": "valita",
+      "ops": 3711146,
+      "margin": 0.32,
+      "percentSlower": 84.44
+    },
+    {
+      "name": "yup",
+      "ops": 34516,
+      "margin": 0.34,
+      "percentSlower": 99.86
+    },
+    {
+      "name": "zod",
+      "ops": 460575,
+      "margin": 0.3,
+      "percentSlower": 98.07
+    }
+  ],
+  "fastest": {
+    "name": "suretype",
+    "index": 8
+  },
+  "slowest": {
+    "name": "yup",
+    "index": 13
+  }
+}

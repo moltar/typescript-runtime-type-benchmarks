@@ -1,0 +1,81 @@
+{
+  "name": "parseStrict",
+  "date": "2022-01-10T11:52:44.786Z",
+  "version": "1.0.0",
+  "results": [
+    {
+      "name": "bueno",
+      "ops": 132810,
+      "margin": 0.36,
+      "percentSlower": 95.37
+    },
+    {
+      "name": "computed-types",
+      "ops": 679537,
+      "margin": 0.27,
+      "percentSlower": 76.33
+    },
+    {
+      "name": "decoders",
+      "ops": 144341,
+      "margin": 0.72,
+      "percentSlower": 94.97
+    },
+    {
+      "name": "jointz",
+      "ops": 1570948,
+      "margin": 0.18,
+      "percentSlower": 45.28
+    },
+    {
+      "name": "myzod",
+      "ops": 1568182,
+      "margin": 0.4,
+      "percentSlower": 45.38
+    },
+    {
+      "name": "simple-runtypes",
+      "ops": 1920065,
+      "margin": 0.6,
+      "percentSlower": 33.12
+    },
+    {
+      "name": "superstruct",
+      "ops": 110062,
+      "margin": 0.39,
+      "percentSlower": 96.17
+    },
+    {
+      "name": "toi",
+      "ops": 596190,
+      "margin": 0.29,
+      "percentSlower": 79.23
+    },
+    {
+      "name": "@typeofweb/schema",
+      "ops": 986710,
+      "margin": 0.52,
+      "percentSlower": 65.63
+    },
+    {
+      "name": "valita",
+      "ops": 2870870,
+      "margin": 0.52,
+      "percentSlower": 0
+    },
+    {
+      "name": "zod",
+      "ops": 461066,
+      "margin": 0.46,
+      "percentSlower": 83.94
+    }
+  ],
+  "fastest": {
+    "name": "valita",
+    "index": 9
+  },
+  "slowest": {
+    "name": "superstruct",
+    "index": 6
+  }
+}

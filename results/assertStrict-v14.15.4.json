@@ -1,0 +1,81 @@
+{
+  "name": "assertStrict",
+  "date": "2022-01-10T11:50:32.364Z",
+  "version": "1.0.0",
+  "results": [
+    {
+      "name": "ajv",
+      "ops": 11525892,
+      "margin": 0.53,
+      "percentSlower": 0
+    },
+    {
+      "name": "bueno",
+      "ops": 258774,
+      "margin": 0.69,
+      "percentSlower": 97.75
+    },
+    {
+      "name": "computed-types",
+      "ops": 696505,
+      "margin": 0.27,
+      "percentSlower": 93.96
+    },
+    {
+      "name": "decoders",
+      "ops": 148255,
+      "margin": 0.68,
+      "percentSlower": 98.71
+    },
+    {
+      "name": "jointz",
+      "ops": 439229,
+      "margin": 0.43,
+      "percentSlower": 96.19
+    },
+    {
+      "name": "myzod",
+      "ops": 1586212,
+      "margin": 0.32,
+      "percentSlower": 86.24
+    },
+    {
+      "name": "simple-runtypes",
+      "ops": 1961541,
+      "margin": 0.33,
+      "percentSlower": 82.98
+    },
+    {
+      "name": "superstruct",
+      "ops": 115996,
+      "margin": 0.27,
+      "percentSlower": 98.99
+    },
+    {
+      "name": "toi",
+      "ops": 602811,
+      "margin": 0.27,
+      "percentSlower": 94.77
+    },
+    {
+      "name": "valita",
+      "ops": 2925523,
+      "margin": 0.37,
+      "percentSlower": 74.62
+    },
+    {
+      "name": "zod",
+      "ops": 444058,
+      "margin": 0.31,
+      "percentSlower": 96.15
+    }
+  ],
+  "fastest": {
+    "name": "ajv",
+    "index": 0
+  },
+  "slowest": {
+    "name": "superstruct",
+    "index": 7
+  }
+}
