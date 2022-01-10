@@ -200,6 +200,7 @@ async function graph({
           labelOrient: 'left',
           labelAnchor: 'middle',
           labelAlign: 'left',
+          labelFontSize: 12,
         },
         sort: sortedNames,
       },
@@ -392,8 +393,18 @@ class App extends Component<
   render() {
     return (
       <div>
-        <h1>Runtype Benchmarks</h1>
-
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            justifyContent: 'space-between',
+          }}
+        >
+          <h1>Runtype Benchmarks</h1>
+          <a href="https://github.com/moltar/typescript-runtime-type-benchmarks/">
+            Github Repository
+          </a>
+        </div>
         <p>
           Benchmark Comparison of Packages with Runtime Validation and
           TypeScript Support

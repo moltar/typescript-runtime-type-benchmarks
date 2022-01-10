@@ -243,7 +243,8 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                                         labelAngle: 0,
                                         labelOrient: 'left',
                                         labelAnchor: 'middle',
-                                        labelAlign: 'left'
+                                        labelAlign: 'left',
+                                        labelFontSize: 12
                                     },
                                     sort: sortedNames
                                 },
@@ -386,7 +387,13 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
         App.prototype.render = function () {
             var _this = this;
             return ((0, preact_1.h)("div", null,
-                (0, preact_1.h)("h1", null, "Runtype Benchmarks"),
+                (0, preact_1.h)("div", { style: {
+                        display: 'flex',
+                        alignItems: 'baseline',
+                        justifyContent: 'space-between'
+                    } },
+                    (0, preact_1.h)("h1", null, "Runtype Benchmarks"),
+                    (0, preact_1.h)("a", { href: "https://github.com/moltar/typescript-runtime-type-benchmarks/" }, "Github Repository")),
                 (0, preact_1.h)("p", null, "Benchmark Comparison of Packages with Runtime Validation and TypeScript Support"),
                 (0, preact_1.h)("div", { style: { display: 'flex', margin: '1rem 0' } },
                     (0, preact_1.h)("div", { style: { width: '12rem', marginRight: '1rem' } },
