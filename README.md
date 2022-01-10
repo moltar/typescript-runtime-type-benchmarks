@@ -1,8 +1,8 @@
 # 📊 Benchmark Comparison of Packages with Runtime Validation and TypeScript Support
 
+## Benchmark Results
 
-> ⚠️ Note: Until [#497](https://github.com/moltar/typescript-runtime-type-benchmarks/issues/497) is resolved, some of the benchmarks in this repo are comparing apples-to-oranges due to the different APIs provided by validation libraries. Libraries which provide more functionality (like transformations, coercions, detailed errors) might be penalized for slower performance for those extra features.
-
+[Click here to view the results](https://moltar.github.io/typescript-runtime-type-benchmarks/)
 
 ## Packages Compared
 
@@ -69,45 +69,3 @@ function isMyDataValid(data: any) {
 // `res` is now type casted to the right type
 const res = isMyDataValid(data)
 ```
-
-## Benchmark Results
-
-### Data Type Checks
-
-#### Node 10.x ([JSON](./results/data-type-10.x.json), [CSV](./results/data-type-10.x.csv), [SVG](./results/data-type-10.x.svg))
-
-![Bar Graph - Node 10.x](./results/data-type-10.x.svg)
-
-#### Node 12.x ([JSON](./results/data-type-12.x.json), [CSV](./results/data-type-12.x.csv), [SVG](./results/data-type-12.x.svg))
-
-![Bar Graph - Node 12.x](./results/data-type-12.x.svg)
-
-#### Node 13.x ([JSON](./results/data-type-13.x.json), [CSV](./results/data-type-13.x.csv), [SVG](./results/data-type-13.x.svg))
-
-![Bar Graph - Node 13.x](./results/data-type-13.x.svg)
-
-#### Node 14.x ([JSON](./results/data-type-14.x.json), [CSV](./results/data-type-14.x.csv), [SVG](./results/data-type-14.x.svg))
-
-![Bar Graph - Node 14.x](./results/data-type-14.x.svg)
-
-### Data Type Checks Sans Outliers
-
-Because some packages are so performant it makes it difficult to see the benchmarks for other packages.
-
-This benchmark run includes all of the above packages, but excludes `marshal`, `suretype`, and `ts-json-validator`.
-
-#### Node 10.x ([JSON](./results/data-type-sans-outliers-10.x.json), [CSV](./results/data-type-sans-outliers-10.x.csv), [SVG](./results/data-type-sans-outliers-10.x.svg))
-
-![Bar Graph - Node 10.x](./results/data-type-sans-outliers-10.x.svg)
-
-#### Node 12.x ([JSON](./results/data-type-sans-outliers-12.x.json), [CSV](./results/data-type-sans-outliers-12.x.csv), [SVG](./results/data-type-sans-outliers-12.x.svg))
-
-![Bar Graph - Node 12.x](./results/data-type-sans-outliers-12.x.svg)
-
-#### Node 13.x ([JSON](./results/data-type-sans-outliers-13.x.json), [CSV](./results/data-type-sans-outliers-13.x.csv), [SVG](./results/data-type-sans-outliers-13.x.svg))
-
-![Bar Graph - Node 13.x](./results/data-type-sans-outliers-13.x.svg)
-
-#### Node 14.x ([JSON](./results/data-type-sans-outliers-14.x.json), [CSV](./results/data-type-sans-outliers-14.x.csv), [SVG](./results/data-type-sans-outliers-14.x.svg))
-
-![Bar Graph - Node 14.x](./results/data-type-sans-outliers-14.x.svg)
