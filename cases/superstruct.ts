@@ -1,13 +1,11 @@
 import {
+  assert,
+  boolean,
+  mask,
+  number,
   object,
   string,
-  number,
-  boolean,
-  assert,
   type,
-  mask,
-  validate,
-  create,
 } from 'superstruct';
 import { addCase } from '../benchmarks';
 

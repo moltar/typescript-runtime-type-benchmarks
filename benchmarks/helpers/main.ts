@@ -12,7 +12,7 @@ const DOCS_DIR = join(__dirname, '../../docs');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
 
 export async function main() {
-  for (let [benchmarkKey, benchmarks] of getRegisteredBenchmarks()) {
+  for (const [benchmarkKey, benchmarks] of getRegisteredBenchmarks()) {
     await runBenchmarks(benchmarkKey, benchmarks);
   }
 
@@ -74,7 +74,7 @@ function getResultFileName(
 }
 
 function getNodeMajorVersion() {
-  let majorVersion: number = 0;
+  let majorVersion = 0;
 
   majorVersion = parseInt(NODE_VERSION);
 
@@ -110,14 +110,16 @@ function aggregateResults() {
       ).toString()
     );
 
-    data.results.forEach((r: any) =>
-      results.push({
-        name: r.name,
-        benchmark: name,
-        nodeVersion: NODE_VERSION,
-        ops: r.ops,
-        margin: r.margin,
-      })
+    data.results.forEach(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (r: any) =>
+        results.push({
+          name: r.name,
+          benchmark: name,
+          nodeVersion: NODE_VERSION,
+          ops: r.ops,
+          margin: r.margin,
+        })
     );
   });
 

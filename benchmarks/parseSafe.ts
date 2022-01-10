@@ -31,11 +31,11 @@ export class ParseSafe extends Benchmark<Fn> {
 
   test() {
     describe(this.moduleName, () => {
-      test(`should validate the data`, () => {
+      test('should validate the data', () => {
         expect(this.fn(validateData)).toEqual(validateData);
       });
 
-      test(`should validate with unknown attributes but remove them from the validated result`, () => {
+      test('should validate with unknown attributes but remove them from the validated result', () => {
         const dataWithExtraKeys = {
           ...validateData,
           extraAttribute: 'foo',
@@ -48,7 +48,7 @@ export class ParseSafe extends Benchmark<Fn> {
       // option to the record/object/type type so we need to test the
       // nested extra attribute explicitely so we know our runtype has
       // been constructed correctly
-      test(`should validate with unknown attributes but remove them from the validated result (nested)`, () => {
+      test('should validate with unknown attributes but remove them from the validated result (nested)', () => {
         const dataWithExtraNestedKeys = {
           ...validateData,
           deeplyNested: {
@@ -60,7 +60,8 @@ export class ParseSafe extends Benchmark<Fn> {
         expect(this.fn(dataWithExtraNestedKeys)).toEqual(validateData);
       });
 
-      test(`should throw on missing attributes`, () => {
+      test('should throw on missing attributes', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data: any = {
           ...validateData,
         };
@@ -70,12 +71,12 @@ export class ParseSafe extends Benchmark<Fn> {
         expect(() => this.fn(data)).toThrow();
       });
 
-      test(`should throw on data with an invalid attribute`, () => {
+      test('should throw on data with an invalid attribute', () => {
         expect(() =>
           this.fn({
             ...validateData,
             number: 'foo',
-          } as any)
+          })
         ).toThrow();
       });
     });

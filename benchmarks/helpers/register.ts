@@ -64,7 +64,13 @@ export function addCase<
 
   const benchmarkCtor = availableBenchmarks[benchmarkId];
 
-  benchmarks.push(new benchmarkCtor(moduleName, implementation as any));
+  benchmarks.push(
+    new benchmarkCtor(
+      moduleName,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      implementation as any
+    )
+  );
 }
 
 export function createCase<

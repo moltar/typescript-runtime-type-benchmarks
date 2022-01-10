@@ -20,11 +20,11 @@ export class AssertLoose extends Benchmark<Fn> {
 
   test() {
     describe(this.moduleName, () => {
-      test(`should validate the data`, () => {
+      test('should validate the data', () => {
         expect(this.fn(validateData)).toBe(true);
       });
 
-      test(`should validate with unknown attributes`, () => {
+      test('should validate with unknown attributes', () => {
         const dataWithExtraKeys = {
           ...validateData,
           extraAttribute: 'foo',
@@ -33,7 +33,7 @@ export class AssertLoose extends Benchmark<Fn> {
         expect(this.fn(dataWithExtraKeys)).toBe(true);
       });
 
-      test(`should validate with unknown attributes (nested)`, () => {
+      test('should validate with unknown attributes (nested)', () => {
         const dataWithExtraNestedKeys = {
           ...validateData,
           deeplyNested: {
@@ -45,7 +45,8 @@ export class AssertLoose extends Benchmark<Fn> {
         expect(this.fn(dataWithExtraNestedKeys)).toBe(true);
       });
 
-      test(`should throw on missing attributes`, () => {
+      test('should throw on missing attributes', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data: any = {
           ...validateData,
         };
@@ -55,12 +56,12 @@ export class AssertLoose extends Benchmark<Fn> {
         expect(() => this.fn(data)).toThrow();
       });
 
-      test(`should throw on data with an invalid attribute`, () => {
+      test('should throw on data with an invalid attribute', () => {
         expect(() =>
           this.fn({
             ...validateData,
             number: 'foo',
-          } as any)
+          })
         ).toThrow();
       });
     });

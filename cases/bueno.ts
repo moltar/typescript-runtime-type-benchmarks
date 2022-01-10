@@ -53,42 +53,62 @@ const dataTypeLoose = objectInexact({
   }),
 });
 
-addCase('bueno', 'parseSafe', (data: any) => {
-  const err = check(data, dataType, enUS);
+addCase(
+  'bueno',
+  'parseSafe',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (data: any) => {
+    const err = check(data, dataType, enUS);
 
-  if (err) {
-    throw new Error(err);
+    if (err) {
+      throw new Error(err);
+    }
+
+    return result(data, dataType);
   }
+);
 
-  return result(data, dataType);
-});
+addCase(
+  'bueno',
+  'parseStrict',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (data: any) => {
+    const err = check(data, dataTypeStrict, enUS);
 
-addCase('bueno', 'parseStrict', (data: any) => {
-  const err = check(data, dataTypeStrict, enUS);
+    if (err) {
+      throw new Error(err);
+    }
 
-  if (err) {
-    throw new Error(err);
+    return result(data, dataTypeStrict);
   }
+);
 
-  return result(data, dataTypeStrict);
-});
+addCase(
+  'bueno',
+  'assertLoose',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (data: any) => {
+    const err = check(data, dataTypeLoose, enUS);
 
-addCase('bueno', 'assertLoose', (data: any) => {
-  const err = check(data, dataTypeLoose, enUS);
+    if (err) {
+      throw new Error(err);
+    }
 
-  if (err) {
-    throw new Error(err);
+    return true;
   }
+);
 
-  return true;
-});
+addCase(
+  'bueno',
+  'assertStrict',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (data: any) => {
+    const err = check(data, dataTypeStrict, enUS);
 
-addCase('bueno', 'assertStrict', (data: any) => {
-  const err = check(data, dataTypeStrict, enUS);
+    if (err) {
+      throw new Error(err);
+    }
 
-  if (err) {
-    throw new Error(err);
+    return true;
   }
-
-  return true;
-});
+);

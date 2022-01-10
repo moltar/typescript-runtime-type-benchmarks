@@ -39,6 +39,7 @@ createCase('marshal', 'assertLoose', () => {
 
   const checkData = validatesFactory(DataType);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (data: any) => {
     if (checkData(data)) {
       return true;

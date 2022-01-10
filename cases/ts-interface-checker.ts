@@ -17,6 +17,8 @@ createCase('ts-interface-checker', 'assertLoose', () => {
   });
 
   const suite = { dataType };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataTypeChecker = t.createCheckers(suite).dataType as t.CheckerT<any>;
 
   return data => {

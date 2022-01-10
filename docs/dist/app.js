@@ -88,11 +88,11 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (require, exports, preact_1, vegaLite, vega) {
+define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (require, exports, preact_1, vega, vegaLite) {
     "use strict";
     exports.__esModule = true;
-    vegaLite = __importStar(vegaLite);
     vega = __importStar(vega);
+    vegaLite = __importStar(vegaLite);
     // which results are attempted to load
     // the first is selected automatically
     var NODE_VERSIONS = [17, 16, 14, 12];
@@ -133,7 +133,11 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
             order: '3'
         },
     ];
-    var BENCHMARKS_ORDER = Object.fromEntries(BENCHMARKS.map(function (b, idx) { return [b.name, b.order]; }));
+    // order lookup table
+    var BENCHMARKS_ORDER = {};
+    BENCHMARKS.forEach(function (b) {
+        BENCHMARKS_ORDER[b.name] = b.order;
+    });
     function normalizePartialValues(values) {
         if (!values.length) {
             return [];
@@ -379,7 +383,7 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                             selectedNodeJsVersions: i === 0
                                 ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].nodeVersion] = true, _a)) : state.selectedNodeJsVersions, values: __spreadArray(__spreadArray([], state.values, true), normalizePartialValues(data.results), true) }));
                     });
-                })["catch"](function (err) {
+                })["catch"](function () {
                     console.info("no data for node ".concat(v));
                 });
             });
@@ -421,21 +425,17 @@ define("app", ["require", "exports", "preact", "vega-lite", "vega"], function (r
                     (0, preact_1.h)("div", { style: { width: '12rem' } },
                         (0, preact_1.h)("label", null,
                             "Sort:",
-                            (0, preact_1.h)("select", { onChange: function (event) {
+                            (0, preact_1.h)("select", { onChange: 
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                function (event) {
                                     _this.setState({ sortBy: event.target.value });
                                 }, value: this.state.sortBy },
                                 (0, preact_1.h)("option", { value: "alphabetically" }, "Alphabetically"),
                                 (0, preact_1.h)("option", { value: "fastest" }, "Fastest"))))),
                 (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), nodeJsVersions: Object.entries(this.state.selectedNodeJsVersions)
                         .sort()
-                        .filter(function (_a) {
-                        var k = _a[0], v = _a[1];
-                        return v;
-                    })
-                        .map(function (_a) {
-                        var k = _a[0], v = _a[1];
-                        return k;
-                    }), values: this.state.values, sort: this.state.sortBy }),
+                        .filter(function (entry) { return entry[1]; })
+                        .map(function (entry) { return entry[0]; }), values: this.state.values, sort: this.state.sortBy }),
                 (0, preact_1.h)("div", null,
                     (0, preact_1.h)(BenchmarkDescription, { name: "Safe Parsing", color: BENCHMARKS.find(function (x) { return x.name === 'parseSafe'; }).color },
                         (0, preact_1.h)("p", null,
