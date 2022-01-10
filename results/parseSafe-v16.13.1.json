@@ -1,0 +1,93 @@
+{
+  "name": "parseSafe",
+  "date": "2022-01-10T11:46:34.768Z",
+  "version": "1.0.0",
+  "results": [
+    {
+      "name": "bueno",
+      "ops": 186875,
+      "margin": 0.31,
+      "percentSlower": 94.34
+    },
+    {
+      "name": "computed-types",
+      "ops": 859342,
+      "margin": 0.42,
+      "percentSlower": 74
+    },
+    {
+      "name": "decoders",
+      "ops": 249800,
+      "margin": 0.84,
+      "percentSlower": 92.44
+    },
+    {
+      "name": "json-decoder",
+      "ops": 801167,
+      "margin": 0.35,
+      "percentSlower": 75.76
+    },
+    {
+      "name": "@mojotech/json-type-validation",
+      "ops": 1255515,
+      "margin": 1.02,
+      "percentSlower": 62.01
+    },
+    {
+      "name": "myzod",
+      "ops": 1227460,
+      "margin": 0.23,
+      "percentSlower": 62.86
+    },
+    {
+      "name": "purify-ts",
+      "ops": 760286,
+      "margin": 0.73,
+      "percentSlower": 76.99
+    },
+    {
+      "name": "rulr",
+      "ops": 836564,
+      "margin": 0.22,
+      "percentSlower": 74.68
+    },
+    {
+      "name": "simple-runtypes",
+      "ops": 1446377,
+      "margin": 0.34,
+      "percentSlower": 56.23
+    },
+    {
+      "name": "ts-utils",
+      "ops": 227077,
+      "margin": 0.22,
+      "percentSlower": 93.13
+    },
+    {
+      "name": "valita",
+      "ops": 3304582,
+      "margin": 0.39,
+      "percentSlower": 0
+    },
+    {
+      "name": "yup",
+      "ops": 32347,
+      "margin": 0.33,
+      "percentSlower": 99.02
+    },
+    {
+      "name": "zod",
+      "ops": 514525,
+      "margin": 0.31,
+      "percentSlower": 84.43
+    }
+  ],
+  "fastest": {
+    "name": "valita",
+    "index": 10
+  },
+  "slowest": {
+    "name": "yup",
+    "index": 11
+  }
+}
