@@ -13,29 +13,29 @@ export class ParseStrict extends Benchmark<Fn> {
 
   test() {
     describe(this.moduleName, () => {
-      test(`should validate the data`, () => {
+      test('should validate the data', () => {
         expect(this.fn(validateData)).toEqual(validateData);
       });
 
-      test(`should throw on invalid attribute type`, () => {
+      test('should throw on invalid attribute type', () => {
         expect(() =>
           this.fn({
             ...validateData,
             number: 'foo',
-          } as any)
+          })
         ).toThrow();
       });
 
-      test(`should throw on extra attributes`, () => {
+      test('should throw on extra attributes', () => {
         expect(() =>
           this.fn({
             ...validateData,
             extraAttribute: true,
-          } as any)
+          })
         ).toThrow();
       });
 
-      test(`should throw on extra nested attributes`, () => {
+      test('should throw on extra nested attributes', () => {
         expect(() =>
           this.fn({
             ...validateData,
@@ -43,11 +43,12 @@ export class ParseStrict extends Benchmark<Fn> {
               ...validateData.deeplyNested,
               extraDeepAttribute: true,
             },
-          } as any)
+          })
         ).toThrow();
       });
 
-      test(`should throw on missing attributes`, () => {
+      test('should throw on missing attributes', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data: any = {
           ...validateData,
         };

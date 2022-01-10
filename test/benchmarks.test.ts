@@ -1,4 +1,4 @@
-import { AvailableBenchmarksIds, getRegisteredBenchmarks } from '../benchmarks';
+import { getRegisteredBenchmarks } from '../benchmarks';
 import '../cases';
 
 getRegisteredBenchmarks().forEach(([benchmarkId, benchmarkCases]) => {

@@ -1,6 +1,6 @@
-import * as t from 'io-ts';
+import { fold } from 'fp-ts/Either';
 import { pipe } from 'fp-ts/function';
-import { fold, isRight } from 'fp-ts/Either';
+import * as t from 'io-ts';
 import { createCase } from '../benchmarks';
 
 createCase('io-ts', 'assertLoose', () => {
@@ -25,7 +25,7 @@ createCase('io-ts', 'assertLoose', () => {
         errors => {
           throw errors;
         },
-        a => true
+        () => true
       )
     );
   };

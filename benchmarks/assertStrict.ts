@@ -15,11 +15,11 @@ export class AssertStrict extends Benchmark<Fn> {
 
   test() {
     describe(this.moduleName, () => {
-      test(`should validate the data`, () => {
+      test('should validate the data', () => {
         expect(this.fn(validateData)).toBe(true);
       });
 
-      test(`should throw on unknown attributes`, () => {
+      test('should throw on unknown attributes', () => {
         const dataWithExtraKeys = {
           ...validateData,
           extraAttribute: 'foo',
@@ -28,7 +28,7 @@ export class AssertStrict extends Benchmark<Fn> {
         expect(() => this.fn(dataWithExtraKeys)).toThrow();
       });
 
-      test(`should throw on unknown attributes (nested)`, () => {
+      test('should throw on unknown attributes (nested)', () => {
         const dataWithExtraNestedKeys = {
           ...validateData,
           deeplyNested: {
@@ -40,7 +40,8 @@ export class AssertStrict extends Benchmark<Fn> {
         expect(() => this.fn(dataWithExtraNestedKeys)).toThrow();
       });
 
-      test(`should throw on missing attributes`, () => {
+      test('should throw on missing attributes', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data: any = {
           ...validateData,
         };
@@ -50,12 +51,12 @@ export class AssertStrict extends Benchmark<Fn> {
         expect(() => this.fn(data)).toThrow();
       });
 
-      test(`should throw on data with an invalid attribute`, () => {
+      test('should throw on data with an invalid attribute', () => {
         expect(() =>
           this.fn({
             ...validateData,
             number: 'foo',
-          } as any)
+          })
         ).toThrow();
       });
     });

@@ -1,6 +1,7 @@
-import { Component, Fragment, h, render, ComponentChildren } from 'preact';
-import * as vegaLite from 'vega-lite';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Component, ComponentChildren, h, render } from 'preact';
 import * as vega from 'vega';
+import * as vegaLite from 'vega-lite';
 
 // which results are attempted to load
 // the first is selected automatically
@@ -53,9 +54,12 @@ const BENCHMARKS = [
   },
 ];
 
-const BENCHMARKS_ORDER = Object.fromEntries(
-  BENCHMARKS.map((b, idx) => [b.name, b.order])
-);
+// order lookup table
+const BENCHMARKS_ORDER: { [k: string]: string } = {};
+
+BENCHMARKS.forEach(b => {
+  BENCHMARKS_ORDER[b.name] = b.order;
+});
 
 function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
   if (!values.length) {
@@ -248,7 +252,7 @@ class Graph extends Component<
   },
   { svg?: string }
 > {
-  prevProps: any;
+  prevProps: typeof this.props;
 
   async createGraph() {
     if (this.prevProps === this.props) {
@@ -384,7 +388,7 @@ class App extends Component<
             values: [...state.values, ...normalizePartialValues(data.results)],
           }));
         })
-        .catch(err => {
+        .catch(() => {
           console.info(`no data for node ${v}`);
         });
     });
@@ -464,9 +468,12 @@ class App extends Component<
             <label>
               Sort:
               <select
-                onChange={(event: any) => {
-                  this.setState({ sortBy: event.target.value });
-                }}
+                onChange={
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  (event: any) => {
+                    this.setState({ sortBy: event.target.value });
+                  }
+                }
                 value={this.state.sortBy}
               >
                 <option value="alphabetically">Alphabetically</option>
@@ -482,8 +489,8 @@ class App extends Component<
           )}
           nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
             .sort()
-            .filter(([k, v]) => v)
-            .map(([k, v]) => k)}
+            .filter(entry => entry[1])
+            .map(entry => entry[0])}
           values={this.state.values}
           sort={this.state.sortBy}
         />
