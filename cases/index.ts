@@ -1,3 +1,4 @@
+import './ajv';
 import './bueno';
 import './class-validator';
 import './computed-types';
@@ -19,6 +20,6 @@ import './ts-interface-checker';
 import './ts-json-validator';
 import './ts-utils';
 import './typeofweb-schema';
+import './valita';
 import './yup';
 import './zod';
-import './valita';
