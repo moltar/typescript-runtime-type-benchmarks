@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { f, validatesFactory } from '@marcj/marshal';
-import { createCase } from '../benchmarks';
+import { UnknownData, createCase } from '../benchmarks';
 
 createCase('marshal', 'assertLoose', () => {
   class DeeplyNestedType {
@@ -39,8 +39,7 @@ createCase('marshal', 'assertLoose', () => {
 
   const checkData = validatesFactory(DataType);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (data: any) => {
+  return (data: UnknownData) => {
     if (checkData(data)) {
       return true;
     }

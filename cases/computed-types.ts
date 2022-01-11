@@ -1,5 +1,5 @@
 import Schema, { boolean, number, string } from 'computed-types';
-import { addCase } from '../benchmarks';
+import { UnknownData, addCase } from '../benchmarks';
 
 const validator = Schema({
   number: number,
@@ -32,31 +32,16 @@ const validatorStrict = Schema(
   { strict: true }
 );
 
-addCase(
-  'computed-types',
-  'parseSafe',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data: any) => {
-    return validator(data);
-  }
-);
+addCase('computed-types', 'parseSafe', (data: UnknownData) => {
+  return validator(data);
+});
 
-addCase(
-  'computed-types',
-  'parseStrict',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data: any) => {
-    return validatorStrict(data);
-  }
-);
+addCase('computed-types', 'parseStrict', (data: UnknownData) => {
+  return validatorStrict(data);
+});
 
-addCase(
-  'computed-types',
-  'assertStrict',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data: any) => {
-    validatorStrict(data);
+addCase('computed-types', 'assertStrict', (data: UnknownData) => {
+  validatorStrict(data);
 
-    return true;
-  }
-);
+  return true;
+});

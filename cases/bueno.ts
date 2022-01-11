@@ -9,7 +9,7 @@ import {
   result,
   string,
 } from 'bueno';
-import { addCase } from '../benchmarks';
+import { UnknownData, addCase } from '../benchmarks';
 
 const dataType = object({
   number: number,
@@ -53,62 +53,42 @@ const dataTypeLoose = objectInexact({
   }),
 });
 
-addCase(
-  'bueno',
-  'parseSafe',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data: any) => {
-    const err = check(data, dataType, enUS);
+addCase('bueno', 'parseSafe', (data: UnknownData) => {
+  const err = check(data, dataType, enUS);
 
-    if (err) {
-      throw new Error(err);
-    }
-
-    return result(data, dataType);
+  if (err) {
+    throw new Error(err);
   }
-);
 
-addCase(
-  'bueno',
-  'parseStrict',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data: any) => {
-    const err = check(data, dataTypeStrict, enUS);
+  return result(data, dataType);
+});
 
-    if (err) {
-      throw new Error(err);
-    }
+addCase('bueno', 'parseStrict', (data: UnknownData) => {
+  const err = check(data, dataTypeStrict, enUS);
 
-    return result(data, dataTypeStrict);
+  if (err) {
+    throw new Error(err);
   }
-);
 
-addCase(
-  'bueno',
-  'assertLoose',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data: any) => {
-    const err = check(data, dataTypeLoose, enUS);
+  return result(data, dataTypeStrict);
+});
 
-    if (err) {
-      throw new Error(err);
-    }
+addCase('bueno', 'assertLoose', (data: UnknownData) => {
+  const err = check(data, dataTypeLoose, enUS);
 
-    return true;
+  if (err) {
+    throw new Error(err);
   }
-);
 
-addCase(
-  'bueno',
-  'assertStrict',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (data: any) => {
-    const err = check(data, dataTypeStrict, enUS);
+  return true;
+});
 
-    if (err) {
-      throw new Error(err);
-    }
+addCase('bueno', 'assertStrict', (data: UnknownData) => {
+  const err = check(data, dataTypeStrict, enUS);
 
-    return true;
+  if (err) {
+    throw new Error(err);
   }
-);
+
+  return true;
+});

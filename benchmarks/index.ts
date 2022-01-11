@@ -1,7 +1,8 @@
-export {
-  AvailableBenchmarksIds,
-  getRegisteredBenchmarks,
-  addCase,
-  createCase,
-} from './helpers/register';
 export { main } from './helpers/main';
+export {
+  addCase,
+  AvailableBenchmarksIds,
+  createCase,
+  getRegisteredBenchmarks,
+} from './helpers/register';
+export { UnknownData } from './helpers/types';

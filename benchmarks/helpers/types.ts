@@ -26,3 +26,9 @@ export abstract class Benchmark<Fn> implements BenchmarkCase {
   // run the benchmarks jest test
   abstract test(): void;
 }
+
+// Aliased any.
+// Need to use ´any` for libraries that do not accept `unknown` as data input
+// to their parse/assert functions.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type UnknownData = any;
