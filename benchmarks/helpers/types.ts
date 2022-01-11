@@ -32,3 +32,11 @@ export abstract class Benchmark<Fn> implements BenchmarkCase {
 // to their parse/assert functions.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type UnknownData = any;
+
+export interface BenchmarkResult {
+  name: string;
+  benchmark: string;
+  nodeVersion: string;
+  ops: number;
+  margin: number;
+}
