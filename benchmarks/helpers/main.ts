@@ -1,17 +1,30 @@
-import { add, complete, cycle, save, suite } from 'benny';
-import stringify from 'csv-stringify/lib/sync';
-import { readFileSync, writeFile, writeFileSync } from 'fs';
+import { add, complete, cycle, suite } from 'benny';
+import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import pkg from '../../package.json';
-import { graph } from './graph';
-import { availableBenchmarks, getRegisteredBenchmarks } from './register';
+import { writePreviewGraph } from './graph';
+import { getRegisteredBenchmarks } from './register';
 import { BenchmarkCase, BenchmarkResult } from './types';
 
-const RESULTS_DIR = join(__dirname, '../../results');
 const DOCS_DIR = join(__dirname, '../../docs');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
+const NODE_VERSION_FOR_PREVIEW = 17;
+const TEST_PREVIEW_GENERATION = false;
 
 export async function main() {
+  if (TEST_PREVIEW_GENERATION) {
+    // just generate the preview without using benchmark data from a previous run
+    const allResults: BenchmarkResult[] = JSON.parse(
+      readFileSync(join(DOCS_DIR, 'results', 'node-17.json')).toString()
+    ).results;
+
+    await writePreviewGraph({
+      filename: join(DOCS_DIR, 'results', 'preview.svg'),
+      values: allResults,
+    });
+
+    return;
+  }
+
   const majorVersion = getNodeMajorVersion();
   const allResults: BenchmarkResult[] = [];
 
@@ -38,6 +51,13 @@ export async function main() {
 
     { encoding: 'utf8' }
   );
+
+  if (majorVersion === NODE_VERSION_FOR_PREVIEW) {
+    await writePreviewGraph({
+      filename: join(DOCS_DIR, 'results', 'preview.svg'),
+      values: allResults,
+    });
+  }
 }
 
 async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
