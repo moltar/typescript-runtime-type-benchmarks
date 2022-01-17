@@ -24,10 +24,10 @@ jobs:
       max-parallel: 1
       matrix:
         node-version:
-          - 10.x
           - 12.x
-          - 13.x
           - 14.x
+          - 16.x
+          - 17.x
 
     steps:
       - uses: actions/checkout@v2
