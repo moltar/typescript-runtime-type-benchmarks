@@ -2,7 +2,9 @@
 
 ## Benchmark Results
 
-[Click here to view the results](https://moltar.github.io/typescript-runtime-type-benchmarks/)
+[![Fastest Packages - click to view details](docs/results/preview.svg)](https://moltar.github.io/typescript-runtime-type-benchmarks)
+
+[click here for result details](https://moltar.github.io/typescript-runtime-type-benchmarks)
 
 ## Packages Compared
 
