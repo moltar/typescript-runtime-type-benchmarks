@@ -179,6 +179,7 @@ async function graph({
     },
     width: 600,
     height: { step: 15 / nodeJsVersionCount },
+    background: 'transparent', // no white graphs for dark mode users
     mark: 'bar',
     layer: [
       {
@@ -298,7 +299,13 @@ function Checkbox(props: {
   onChange: (checked: boolean) => void;
 }) {
   return (
-    <div style={{ display: 'flex', backgroundColor: props.color }}>
+    <div
+      style={{
+        display: 'flex',
+        backgroundColor: props.color,
+        color: props.color ? 'black' : undefined,
+      }}
+    >
       <input
         id={props.id}
         type="checkbox"
@@ -388,8 +395,8 @@ class App extends Component<
             values: [...state.values, ...normalizePartialValues(data.results)],
           }));
         })
-        .catch(() => {
-          console.info(`no data for node ${v}`);
+        .catch(err => {
+          console.info(`no data for node ${v}`, err);
         });
     });
   }

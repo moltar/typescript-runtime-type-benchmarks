@@ -223,6 +223,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             },
                             width: 600,
                             height: { step: 15 / nodeJsVersionCount },
+                            background: 'transparent',
                             mark: 'bar',
                             layer: [
                                 {
@@ -332,7 +333,11 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
         return Graph;
     }(preact_1.Component));
     function Checkbox(props) {
-        return ((0, preact_1.h)("div", { style: { display: 'flex', backgroundColor: props.color } },
+        return ((0, preact_1.h)("div", { style: {
+                display: 'flex',
+                backgroundColor: props.color,
+                color: props.color ? 'black' : undefined
+            } },
             (0, preact_1.h)("input", { id: props.id, type: "checkbox", name: props.id, checked: props.checked, onInput: function () { return props.onChange(!props.checked); } }),
             (0, preact_1.h)("label", { style: { width: '100%' }, "for": props.id }, props.label)));
     }
@@ -383,8 +388,8 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             selectedNodeJsVersions: i === 0
                                 ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].nodeVersion] = true, _a)) : state.selectedNodeJsVersions, values: __spreadArray(__spreadArray([], state.values, true), normalizePartialValues(data.results), true) }));
                     });
-                })["catch"](function () {
-                    console.info("no data for node ".concat(v));
+                })["catch"](function (err) {
+                    console.info("no data for node ".concat(v), err);
                 });
             });
         };
