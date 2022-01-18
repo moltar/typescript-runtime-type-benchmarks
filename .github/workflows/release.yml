@@ -63,8 +63,6 @@ jobs:
 
       - name: generate benchmarks
         run: ./start.sh
-        env:
-          NODE_VERSION: ${{ matrix.node-version }}
 
         ## FIX: https://github.com/github-actions-x/commit/issues/16
       - name: Expose git commit data
