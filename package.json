@@ -14,6 +14,7 @@
     "start": "ts-node index.ts",
     "test:build": "tsc --noEmit",
     "test": "jest",
+    "docs:serve": "serve docs",
     "docs:watch": "tsc --project tsconfig.docs.json --watch --preserveWatchOutput & serve docs",
     "docs:build": "tsc --project tsconfig.docs.json"
   },
@@ -22,6 +23,7 @@
     "@badrap/valita": "0.1.1",
     "@marcj/marshal": "2.1.13",
     "@mojotech/json-type-validation": "3.1.0",
+    "@skarab/tson": "^1.4.0",
     "@toi/toi": "1.3.0",
     "@typeofweb/schema": "0.7.3",
     "@types/benchmark": "2.1.1",
