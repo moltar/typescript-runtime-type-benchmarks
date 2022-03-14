@@ -16,6 +16,7 @@ import './simple-runtypes';
 import './superstruct';
 import './suretype';
 import './toi';
+import './tson';
 import './ts-interface-checker';
 import './ts-json-validator';
 import './ts-utils';
