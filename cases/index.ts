@@ -10,7 +10,7 @@ import './marshal';
 import './mojotech-json-type-validation';
 import './myzod';
 import './purify-ts';
-// import './rulr';
+import './rulr';
 import './runtypes';
 import './simple-runtypes';
 import './superstruct';
