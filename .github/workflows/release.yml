@@ -69,7 +69,7 @@ jobs:
         uses: rlespinasse/git-commit-data-action@v1.x ## https://github.com/rlespinasse/git-commit-data-action
 
       - name: push
-        uses: github-actions-x/commit@v2.8
+        uses: github-actions-x/commit@v2.9
         ## prevents forked repos from comitting results in PRs
         if: github.repository == 'moltar/typescript-runtime-type-benchmarks'
         with:
