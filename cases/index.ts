@@ -13,6 +13,7 @@ import './purify-ts';
 import './rulr';
 import './runtypes';
 import './simple-runtypes';
+import './spectypes';
 import './superstruct';
 import './suretype';
 import './toi';
