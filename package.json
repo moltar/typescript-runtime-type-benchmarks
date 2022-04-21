@@ -9,16 +9,15 @@
   },
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "npm run compile:spectypes",
     "lint": "gts check",
     "lint:fix": "gts fix",
-    "start": "ts-node index.ts",
+    "start": "npm run compile:spectypes && ts-node index.ts",
     "test:build": "tsc --noEmit",
     "test": "jest",
     "docs:serve": "serve docs",
     "docs:watch": "tsc --project tsconfig.docs.json --watch --preserveWatchOutput & serve docs",
     "docs:build": "tsc --project tsconfig.docs.json",
-    "compile:spectypes": "rimraf compiled/spectypes/build && tsc -p compiled/spectypes/src && babel compiled/spectypes/src --out-dir compiled/spectypes/build --extensions \".ts\""
+    "compile:spectypes": "rimraf cases/spectypes/build && tsc -p cases/spectypes/src && babel cases/spectypes/src --out-dir cases/spectypes/build --extensions \".ts\""
   },
   "dependencies": {
     "@ailabs/ts-utils": "1.4.0",

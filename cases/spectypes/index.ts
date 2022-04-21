@@ -1,9 +1,5 @@
-import {
-  parseSafe,
-  parseStrict,
-  assertLoose,
-} from '../compiled/spectypes/build';
-import { addCase } from '../benchmarks';
+import { parseSafe, parseStrict, assertLoose } from './build';
+import { addCase } from '../../benchmarks';
 
 addCase('spectypes', 'parseSafe', data => {
   const parsed = parseSafe(data);
