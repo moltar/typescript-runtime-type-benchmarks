@@ -13,7 +13,7 @@
     "lint:fix": "gts fix",
     "start": "npm run compile:spectypes && ts-node index.ts",
     "test:build": "npm run compile:spectypes && tsc --noEmit",
-    "test": "jest",
+    "test": "npm run compile:spectypes && jest",
     "docs:serve": "serve docs",
     "docs:watch": "tsc --project tsconfig.docs.json --watch --preserveWatchOutput & serve docs",
     "docs:build": "tsc --project tsconfig.docs.json",
