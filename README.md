@@ -19,6 +19,7 @@
 * [marshal](https://github.com/marcj/marshal.ts)
 * [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
 * [myzod](https://github.com/davidmdm/myzod)
+* [ok-computer](https://github.com/richardscarrott/ok-computer)
 * [purify-ts](https://github.com/gigobyte/purify)
 * [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
