@@ -74,3 +74,10 @@ function isMyDataValid(data: any) {
 // `res` is now type casted to the right type
 const res = isMyDataValid(data)
 ```
+
+## Local Development
+
+* `npm run start` - run benchmarks for all modules
+* `npm run start run zod myzod valita` - run benchmarks only for a few selected modules
+* `npm run docs:serve` - result viewer
+* `npm run test` - run tests on all modules

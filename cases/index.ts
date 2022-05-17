@@ -1,28 +1,36 @@
-import './ajv';
-import './bueno';
-import './class-validator';
-import './computed-types';
-import './decoders';
-import './io-ts';
-import './jointz';
-import './json-decoder';
-import './marshal';
-import './mojotech-json-type-validation';
-import './myzod';
-import './ok-computer';
-import './purify-ts';
-import './rulr';
-import './runtypes';
-import './simple-runtypes';
-import './spectypes';
-import './superstruct';
-import './suretype';
-import './toi';
-import './tson';
-import './ts-interface-checker';
-import './ts-json-validator';
-import './ts-utils';
-import './typeofweb-schema';
-import './valita';
-import './yup';
-import './zod';
+export const cases = [
+  'ajv',
+  'bueno',
+  'class-validator',
+  'computed-types',
+  'decoders',
+  'io-ts',
+  'jointz',
+  'json-decoder',
+  'marshal',
+  'mojotech-json-type-validation',
+  'myzod',
+  'ok-computer',
+  'purify-ts',
+  'rulr',
+  'runtypes',
+  'simple-runtypes',
+  'spectypes',
+  'superstruct',
+  'suretype',
+  'toi',
+  'ts-interface-checker',
+  'ts-json-validator',
+  'ts-utils',
+  'tson',
+  'typeofweb-schema',
+  'valita',
+  'yup',
+  'zod',
+] as const;
+
+export type CaseName = typeof cases[number];
+
+export async function importCase(caseName: CaseName) {
+  await import('./' + caseName);
+}

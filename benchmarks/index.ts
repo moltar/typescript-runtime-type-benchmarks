@@ -1,4 +1,8 @@
-export { main } from './helpers/main';
+export {
+  runAllBenchmarks,
+  createPreviewGraph,
+  deleteResults,
+} from './helpers/main';
 export {
   addCase,
   AvailableBenchmarksIds,

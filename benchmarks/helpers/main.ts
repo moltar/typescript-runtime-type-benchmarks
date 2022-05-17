@@ -1,5 +1,5 @@
 import { add, complete, cycle, suite } from 'benny';
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
 import { writePreviewGraph } from './graph';
 import { getRegisteredBenchmarks } from './register';
@@ -10,15 +10,18 @@ const NODE_VERSION = process.env.NODE_VERSION || process.version;
 const NODE_VERSION_FOR_PREVIEW = 17;
 const TEST_PREVIEW_GENERATION = false;
 
-export async function main() {
+/**
+ * Run all registered benchmarks and append the results to a file.
+ */
+export async function runAllBenchmarks() {
   if (TEST_PREVIEW_GENERATION) {
-    // just generate the preview without using benchmark data from a previous run
+    // during development: generate the preview using benchmark data from a previous run
     const allResults: BenchmarkResult[] = JSON.parse(
       readFileSync(join(DOCS_DIR, 'results', 'node-17.json')).toString()
     ).results;
 
     await writePreviewGraph({
-      filename: join(DOCS_DIR, 'results', 'preview.svg'),
+      filename: previewSvgFilename(),
       values: allResults,
     });
 
@@ -42,24 +45,40 @@ export async function main() {
     });
   }
 
-  writeFileSync(
-    join(DOCS_DIR, 'results', `node-${majorVersion}.json`),
+  // collect results of isolated benchmark runs into a single file
+  appendResults(allResults);
+}
 
-    JSON.stringify({
-      results: allResults,
-    }),
+/**
+ * Remove the results json file.
+ */
+export function deleteResults() {
+  const fileName = resultsJsonFilename();
 
-    { encoding: 'utf8' }
-  );
+  if (existsSync(fileName)) {
+    unlinkSync(fileName);
+  }
+}
+
+/**
+ * Generate the preview svg shown in the readme.
+ */
+export async function createPreviewGraph() {
+  const majorVersion = getNodeMajorVersion();
 
   if (majorVersion === NODE_VERSION_FOR_PREVIEW) {
+    const allResults: BenchmarkResult[] = JSON.parse(
+      readFileSync(resultsJsonFilename()).toString()
+    ).results;
+
     await writePreviewGraph({
-      filename: join(DOCS_DIR, 'results', 'preview.svg'),
+      filename: previewSvgFilename(),
       values: allResults,
     });
   }
 }
 
+// run a benchmark fn with benny
 async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
   const fns = cases.map(c => add(c.moduleName, () => c.run()));
 
@@ -72,6 +91,52 @@ async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
     cycle(),
     complete()
   );
+}
+
+// append results to an existing file or create a new one
+function appendResults(results: BenchmarkResult[]) {
+  const fileName = resultsJsonFilename();
+  const existingResults: BenchmarkResult[] = existsSync(fileName)
+    ? JSON.parse(readFileSync(fileName).toString()).results
+    : [];
+
+  // check that we're appending unique data
+  const getKey = ({
+    benchmark,
+    name,
+    nodeVersion,
+  }: BenchmarkResult): string => {
+    return JSON.stringify({ benchmark, name, nodeVersion });
+  };
+  const existingResultsIndex = new Set(existingResults.map(r => getKey(r)));
+
+  results.forEach(r => {
+    if (existingResultsIndex.has(getKey(r))) {
+      console.error('Result %s already exists in', getKey(r), fileName);
+
+      throw new Error('Duplicate result in result json file');
+    }
+  });
+
+  writeFileSync(
+    fileName,
+
+    JSON.stringify({
+      results: [...existingResults, ...results],
+    }),
+
+    { encoding: 'utf8' }
+  );
+}
+
+function resultsJsonFilename() {
+  const majorVersion = getNodeMajorVersion();
+
+  return join(DOCS_DIR, 'results', `node-${majorVersion}.json`);
+}
+
+function previewSvgFilename() {
+  return join(DOCS_DIR, 'results', 'preview.svg');
 }
 
 function getNodeMajorVersion() {
