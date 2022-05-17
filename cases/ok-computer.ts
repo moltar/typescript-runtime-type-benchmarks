@@ -23,11 +23,14 @@ const dataTypeLoose = object(
     string: string,
     longString: string,
     boolean: boolean,
-    deeplyNested: object({
-      foo: string,
-      num: number,
-      bool: boolean,
-    }),
+    deeplyNested: object(
+      {
+        foo: string,
+        num: number,
+        bool: boolean,
+      },
+      { allowUnknown: true }
+    ),
   },
   { allowUnknown: true }
 );
