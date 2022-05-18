@@ -66,7 +66,7 @@ jobs:
 
         ## FIX: https://github.com/github-actions-x/commit/issues/16
       - name: Expose git commit data
-        uses: rlespinasse/git-commit-data-action@v1.x ## https://github.com/rlespinasse/git-commit-data-action
+        uses: rlespinasse/git-commit-data-action@v1 ## https://github.com/rlespinasse/git-commit-data-action
 
       - name: push
         uses: github-actions-x/commit@v2.9
