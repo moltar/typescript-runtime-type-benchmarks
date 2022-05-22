@@ -17,7 +17,7 @@ async function main() {
 
         const caseNames = args.length ? args : cases.cases;
 
-        for (let c of caseNames) {
+        for (const c of caseNames) {
           if (c === 'spectypes') {
             // hack: manually run the spectypes compilation step - avoids
             // having to run it before any other benchmark, esp when working
@@ -48,7 +48,7 @@ async function main() {
       {
         const caseNames = args as cases.CaseName[];
 
-        for (let c of caseNames) {
+        for (const c of caseNames) {
           console.log('Loading "%s"', c);
 
           await cases.importCase(c);
@@ -60,6 +60,8 @@ async function main() {
 
     default:
       console.error('unknown command:', command);
+
+      // eslint-disable-next-line no-process-exit
       process.exit(1);
   }
 }
