@@ -35,8 +35,8 @@ import '../cases/zod';
 test('all cases must have been imported in tests', () => {
   const registeredCases = new Set<string>();
 
-  getRegisteredBenchmarks().forEach(([benchmarkId, benchmarkCases]) => {
-    benchmarkCases.forEach(b => {
+  getRegisteredBenchmarks().forEach(nameBenchmarkPair => {
+    nameBenchmarkPair[1].forEach(b => {
       registeredCases.add(b.moduleName);
     });
   });

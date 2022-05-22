@@ -28,7 +28,6 @@ export async function runAllBenchmarks() {
     return;
   }
 
-  const majorVersion = getNodeMajorVersion();
   const allResults: BenchmarkResult[] = [];
 
   for (const [benchmark, benchmarks] of getRegisteredBenchmarks()) {
