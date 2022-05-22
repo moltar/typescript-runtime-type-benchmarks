@@ -1,5 +1,8 @@
 {
   "extends": "./node_modules/gts/",
+  "rules": {
+    "node/no-unpublished-import": "off"
+  },
   "env": {
     "jest": true
   }
