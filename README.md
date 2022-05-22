@@ -1,6 +1,8 @@
 # 📊 Benchmark Comparison of Packages with Runtime Validation and TypeScript Support
 
-** ⚡⚠ Benchmark results have changed after switching to isolated node processes for each benchmarked package, see [#864](https://github.com/moltar/typescript-runtime-type-benchmarks/issues/864) ⚠⚡ **
+- - - -
+**⚡⚠ Benchmark results have changed after switching to isolated node processes for each benchmarked package, see [#864](https://github.com/moltar/typescript-runtime-type-benchmarks/issues/864) ⚠⚡**
+- - - -
 
 ## Benchmark Results
 
