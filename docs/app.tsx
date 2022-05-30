@@ -88,7 +88,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
     normalized.push(...results);
 
     const missingBenchmarks = BENCHMARKS.map(b => b.name).filter(
-      n => !results.find(r => r.name === n)
+      n => !results.find(r => r.benchmark === n)
     );
 
     missingBenchmarks.forEach(benchmark => {
