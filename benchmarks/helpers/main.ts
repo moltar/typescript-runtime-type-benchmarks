@@ -31,6 +31,10 @@ export async function runAllBenchmarks() {
   const allResults: BenchmarkResult[] = [];
 
   for (const [benchmark, benchmarks] of getRegisteredBenchmarks()) {
+    if (benchmarks.length === 0) {
+      continue;
+    }
+
     const summary = await runBenchmarks(benchmark, benchmarks);
 
     summary.results.forEach(({ name, ops, margin }) => {
