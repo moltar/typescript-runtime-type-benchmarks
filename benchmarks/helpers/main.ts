@@ -1,5 +1,4 @@
 import { add, complete, cycle, suite } from 'benny';
-import { Summary } from 'benny/lib/internal/common-types';
 import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
 import { writePreviewGraph } from './graph';
@@ -83,10 +82,7 @@ export async function createPreviewGraph() {
 }
 
 // run a benchmark fn with benny
-async function runBenchmarks(
-  name: string,
-  cases: BenchmarkCase[]
-): Promise<Summary | undefined> {
+async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
   if (cases.length === 0) {
     return;
   }
