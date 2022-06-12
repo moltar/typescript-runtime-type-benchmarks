@@ -1,4 +1,5 @@
 import { add, complete, cycle, suite } from 'benny';
+import { Summary } from 'benny/lib/internal/common-types';
 import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
 import { writePreviewGraph } from './graph';
@@ -31,11 +32,11 @@ export async function runAllBenchmarks() {
   const allResults: BenchmarkResult[] = [];
 
   for (const [benchmark, benchmarks] of getRegisteredBenchmarks()) {
-    if (benchmarks.length === 0) {
+    const summary = await runBenchmarks(benchmark, benchmarks);
+
+    if (!summary) {
       continue;
     }
-
-    const summary = await runBenchmarks(benchmark, benchmarks);
 
     summary.results.forEach(({ name, ops, margin }) => {
       allResults.push({
@@ -82,7 +83,14 @@ export async function createPreviewGraph() {
 }
 
 // run a benchmark fn with benny
-async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
+async function runBenchmarks(
+  name: string,
+  cases: BenchmarkCase[]
+): Promise<Summary | undefined> {
+  if (cases.length === 0) {
+    return;
+  }
+
   const fns = cases.map(c => add(c.moduleName, () => c.run()));
 
   return suite(
