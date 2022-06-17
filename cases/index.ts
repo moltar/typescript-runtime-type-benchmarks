@@ -4,6 +4,7 @@ export const cases = [
   'class-validator',
   'computed-types',
   'decoders',
+  'deepkit',
   'io-ts',
   'jointz',
   'json-decoder',

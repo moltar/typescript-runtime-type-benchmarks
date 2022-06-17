@@ -8,6 +8,7 @@ import '../cases/bueno';
 import '../cases/class-validator';
 import '../cases/computed-types';
 import '../cases/decoders';
+import '../cases/deepkit';
 import '../cases/io-ts';
 import '../cases/jointz';
 import '../cases/json-decoder';
