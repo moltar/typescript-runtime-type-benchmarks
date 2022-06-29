@@ -23,6 +23,7 @@ export const cases = [
   'ts-json-validator',
   'ts-utils',
   'tson',
+  'typebox',
   'typeofweb-schema',
   'valita',
   'yup',
