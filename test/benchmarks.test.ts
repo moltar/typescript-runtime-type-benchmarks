@@ -38,7 +38,6 @@ test('all cases must have been imported in tests', () => {
 
   getRegisteredBenchmarks().forEach(nameBenchmarkPair => {
     nameBenchmarkPair[1].forEach(b => {
-      console.log(b);
       registeredCases.add(b.moduleName);
     });
   });
