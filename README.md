@@ -28,6 +28,7 @@
 * [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)
+* [@sinclair/typebox](https://github.com/sinclairzx81/typebox)
 * [spectypes](https://github.com/iyegoroff/spectypes)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
 * [suretype](https://github.com/grantila/suretype)

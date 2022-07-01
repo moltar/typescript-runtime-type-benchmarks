@@ -27,6 +27,7 @@ import '../cases/ts-interface-checker';
 import '../cases/ts-json-validator';
 import '../cases/ts-utils';
 import '../cases/tson';
+import '../cases/typebox';
 import '../cases/typeofweb-schema';
 import '../cases/valita';
 import '../cases/yup';
@@ -37,6 +38,7 @@ test('all cases must have been imported in tests', () => {
 
   getRegisteredBenchmarks().forEach(nameBenchmarkPair => {
     nameBenchmarkPair[1].forEach(b => {
+      console.log(b);
       registeredCases.add(b.moduleName);
     });
   });
