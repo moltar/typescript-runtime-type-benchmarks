@@ -1,5 +1,5 @@
 import { addCase } from '../benchmarks';
-import { Guard, Cast } from 'to-typed'
+import { Guard, Cast } from 'to-typed';
 
 const model = {
   number: 0,
@@ -13,34 +13,36 @@ const model = {
     num: 0,
     bool: false,
   },
-}
+};
 
 const guardLoose = Guard.is(model);
 const guardStrict = guardLoose.config({ keyGuarding: 'strict' });
 const castLoose = Cast.as(model);
 
-addCase('to-typed', 'assertLoose', (data: any) => {
-  if (!guardLoose.guard(data)) 
-    throw new Error('Invalid');
+addCase('to-typed', 'assertLoose', data => {
+  if (guardLoose.guard(data)) {
+    return true;
+  }
 
-  return true;
+  throw new Error('Invalid');
 });
 
-addCase('to-typed', 'assertStrict', (data: any) => {
-  if (!guardStrict.guard(data)) 
-    throw new Error('Invalid');
+addCase('to-typed', 'assertStrict', data => {
+  if (guardStrict.guard(data)) {
+    return true;
+  }
 
-  return true;
+  throw new Error('Invalid');
 });
 
-addCase('to-typed', 'parseSafe', (data: any) => {
-  return castLoose.cast(data).else(() => { 
+addCase('to-typed', 'parseSafe', data => {
+  return castLoose.cast(data).else(() => {
     throw new Error('Invalid');
   });
 });
 
-addCase('to-typed', 'parseStrict', (data: any) => {
-  return guardStrict.cast(data).else(() => { 
+addCase('to-typed', 'parseStrict', data => {
+  return guardStrict.cast(data).else(() => {
     throw new Error('Invalid');
   });
 });
