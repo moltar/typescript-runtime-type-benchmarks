@@ -18,6 +18,7 @@ export const cases = [
   'spectypes',
   'superstruct',
   'suretype',
+  'to-typed',
   'toi',
   'ts-interface-checker',
   'ts-json-validator',
