@@ -23,6 +23,7 @@ import '../cases/simple-runtypes';
 import '../cases/spectypes';
 import '../cases/superstruct';
 import '../cases/suretype';
+import '../cases/to-typed';
 import '../cases/toi';
 import '../cases/ts-interface-checker';
 import '../cases/ts-json-validator';
