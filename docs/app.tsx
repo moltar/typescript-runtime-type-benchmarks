@@ -5,7 +5,7 @@ import * as vegaLite from 'vega-lite';
 
 // which results are attempted to load
 // the first is selected automatically
-const NODE_VERSIONS = [17, 16, 14, 12];
+const NODE_VERSIONS = [18, 16, 14];
 
 interface BenchmarkResult {
   name: string;
