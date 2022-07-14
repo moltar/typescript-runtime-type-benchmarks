@@ -95,7 +95,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
     vegaLite = __importStar(vegaLite);
     // which results are attempted to load
     // the first is selected automatically
-    var NODE_VERSIONS = [17, 16, 14, 12];
+    var NODE_VERSIONS = [18, 16, 14];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
         '#8dd3c7',
@@ -159,7 +159,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
         Object.entries(existingValues).forEach(function (_a) {
             var name = _a[0], results = _a[1];
             normalized.push.apply(normalized, results);
-            var missingBenchmarks = BENCHMARKS.map(function (b) { return b.name; }).filter(function (n) { return !results.find(function (r) { return r.name === n; }); });
+            var missingBenchmarks = BENCHMARKS.map(function (b) { return b.name; }).filter(function (n) { return !results.find(function (r) { return r.benchmark === n; }); });
             missingBenchmarks.forEach(function (benchmark) {
                 normalized.push({
                     benchmark: benchmark,
