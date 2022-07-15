@@ -12,6 +12,7 @@ export const cases = [
   'myzod',
   'ok-computer',
   'purify-ts',
+  'r-assign',
   'rulr',
   'runtypes',
   'simple-runtypes',
