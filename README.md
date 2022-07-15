@@ -25,6 +25,7 @@
 * [myzod](https://github.com/davidmdm/myzod)
 * [ok-computer](https://github.com/richardscarrott/ok-computer)
 * [purify-ts](https://github.com/gigobyte/purify)
+* [r-assign](https://github.com/micnic/r-assign)
 * [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)

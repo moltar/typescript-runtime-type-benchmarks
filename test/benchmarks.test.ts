@@ -16,6 +16,7 @@ import '../cases/mojotech-json-type-validation';
 import '../cases/myzod';
 import '../cases/ok-computer';
 import '../cases/purify-ts';
+import '../cases/r-assign';
 import '../cases/rulr';
 import '../cases/runtypes';
 import '../cases/simple-runtypes';
