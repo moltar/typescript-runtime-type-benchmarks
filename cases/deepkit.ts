@@ -1,4 +1,4 @@
-import { validate, deserialize, Negative } from '@deepkit/type';
+import { guard, deserializeFunction, Negative } from '@deepkit/type';
 import { addCase } from '../benchmarks';
 
 interface DataType {
@@ -15,12 +15,15 @@ interface DataType {
   };
 }
 
+const dataTypeDeserialize = deserializeFunction<DataType>();
+const dataTypeGuard = guard<DataType>();
+
 addCase('deepkit', 'parseSafe', data => {
-  return deserialize<DataType>(data);
+  return dataTypeDeserialize(data);
 });
 
 addCase('deepkit', 'assertLoose', data => {
-  const result = validate<DataType>(data);
-  if (result.length > 0) throw new Error('invalid');
+  const valid = dataTypeGuard(data);
+  if (!valid) throw new Error('invalid');
   return true;
 });
