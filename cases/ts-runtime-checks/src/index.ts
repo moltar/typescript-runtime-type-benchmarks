@@ -1,4 +1,4 @@
-import type { Assert, ExactProps } from 'ts-runtime-checks';
+import type { Assert } from 'ts-runtime-checks';
 
 interface ToBeChecked {
   number: number;
@@ -14,5 +14,4 @@ interface ToBeChecked {
   };
 }
 
-export const parseStrict = (value: Assert<ExactProps<ToBeChecked>>) => value;
-export const assertLoose = (value: Assert<ToBeChecked>) => value;
+export const assertLoose = (value: Assert<ToBeChecked>) => true;
