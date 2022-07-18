@@ -11,13 +11,14 @@
   "scripts": {
     "lint": "gts check",
     "lint:fix": "gts fix",
-    "start": "ts-node index.ts",
-    "test:build": "npm run compile:spectypes && tsc --noEmit",
-    "test": "npm run compile:spectypes && jest",
+    "start": "ts-node --compiler ttypescript index.ts",
+    "test:build": "npm run compile:spectypes && npm run compile:ts-runtime-checks && tsc --noEmit",
+    "test": "npm run compile:spectypes && npm run compile:ts-runtime-checks && jest",
     "docs:serve": "serve docs",
     "docs:watch": "tsc --project tsconfig.docs.json --watch --preserveWatchOutput & serve docs",
     "docs:build": "tsc --project tsconfig.docs.json",
-    "compile:spectypes": "rimraf cases/spectypes/build && tsc -p cases/spectypes/src && babel cases/spectypes/src --out-dir cases/spectypes/build --extensions \".ts\""
+    "compile:spectypes": "rimraf cases/spectypes/build && tsc -p cases/spectypes/src && babel cases/spectypes/src --out-dir cases/spectypes/build --extensions \".ts\"",
+    "compile:ts-runtime-checks": "rimraf cases/ts-runtime-checks/build && ttsc -p cases/ts-runtime-checks/src"
   },
   "dependencies": {
     "@ailabs/ts-utils": "1.4.0",
@@ -60,7 +61,9 @@
     "ts-interface-checker": "1.0.2",
     "ts-json-validator": "0.7.1",
     "ts-node": "10.9.1",
-    "typescript": "4.5.5",
+    "ts-runtime-checks": "^0.1.1",
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.6.2",
     "vega": "5.22.1",
     "vega-lite": "4.11.0",
     "yup": "0.32.11",

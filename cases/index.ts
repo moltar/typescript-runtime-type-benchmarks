@@ -23,6 +23,7 @@ export const cases = [
   'toi',
   'ts-interface-checker',
   'ts-json-validator',
+  'ts-runtime-checks',
   'ts-utils',
   'tson',
   'typeofweb-schema',
