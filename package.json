@@ -11,7 +11,7 @@
   "scripts": {
     "lint": "gts check",
     "lint:fix": "gts fix",
-    "start": "ts-node --compiler ttypescript index.ts",
+    "start": "ts-node index.ts",
     "test:build": "npm run compile:spectypes && npm run compile:ts-runtime-checks && tsc --noEmit",
     "test": "npm run compile:spectypes && npm run compile:ts-runtime-checks && jest",
     "docs:serve": "serve docs",
