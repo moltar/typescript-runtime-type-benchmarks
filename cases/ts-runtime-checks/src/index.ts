@@ -14,4 +14,5 @@ interface ToBeChecked {
   };
 }
 
-export const assertLoose = (value: Assert<ToBeChecked>) => true;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const assertLoose = (_value: Assert<ToBeChecked>) => true;
