@@ -18,11 +18,16 @@ async function main() {
         const caseNames = args.length ? args : cases.cases;
 
         for (const c of caseNames) {
+          // hack: manually run the spectypes and ts-runtime-checks compilation step - avoids
+          // having to run it before any other benchmark, esp when working
+          // locally and checking against a few selected ones.
           if (c === 'spectypes') {
-            // hack: manually run the spectypes compilation step - avoids
-            // having to run it before any other benchmark, esp when working
-            // locally and checking against a few selected ones.
             childProcess.execSync('npm run compile:spectypes', {
+              stdio: 'inherit',
+            });
+          }
+          if (c === 'ts-runtime-checks') {
+            childProcess.execSync('npm run compile:ts-runtime-checks', {
               stdio: 'inherit',
             });
           }
