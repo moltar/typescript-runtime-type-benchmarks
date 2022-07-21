@@ -1,4 +1,4 @@
-import type { Assert } from 'ts-runtime-checks';
+import type { Assert, ExactProps } from 'ts-runtime-checks';
 
 interface ToBeChecked {
   number: number;
@@ -13,6 +13,11 @@ interface ToBeChecked {
     bool: boolean;
   };
 }
+
+export const parseStrict = (value: Assert<ExactProps<ToBeChecked>>) => value;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const assertStrict = (_value: Assert<ExactProps<ToBeChecked>>) => true;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const assertLoose = (_value: Assert<ToBeChecked>) => true;
