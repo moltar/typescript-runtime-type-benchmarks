@@ -15,6 +15,7 @@ export const cases = [
   'r-assign',
   'rulr',
   'runtypes',
+  'sapphire-shapeshift',
   'simple-runtypes',
   'spectypes',
   'superstruct',
