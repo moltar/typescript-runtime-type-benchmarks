@@ -19,6 +19,7 @@ import '../cases/purify-ts';
 import '../cases/r-assign';
 import '../cases/rulr';
 import '../cases/runtypes';
+import '../cases/sapphire-shapeshift';
 import '../cases/simple-runtypes';
 import '../cases/spectypes';
 import '../cases/superstruct';
