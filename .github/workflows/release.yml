@@ -23,6 +23,10 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
+        # benchmarked node versions must be kept in sync with:
+        #  - node-version matrix in pr.yml
+        #  - NODE_VERSIONS in app.tsx
+        #  - NODE_VERSION_FOR_PREVIEW in main.ts
         node-version:
           - 14.x
           - 16.x

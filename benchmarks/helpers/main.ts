@@ -7,7 +7,7 @@ import { BenchmarkCase, BenchmarkResult } from './types';
 
 const DOCS_DIR = join(__dirname, '../../docs');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
-const NODE_VERSION_FOR_PREVIEW = 17;
+const NODE_VERSION_FOR_PREVIEW = 18;
 const TEST_PREVIEW_GENERATION = false;
 
 /**
