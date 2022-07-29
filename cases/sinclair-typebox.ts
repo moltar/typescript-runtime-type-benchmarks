@@ -3,25 +3,19 @@ import { TypeCompiler } from '@sinclair/typebox/compiler';
 import { createCase } from '../benchmarks';
 
 createCase('@sinclair/typebox', 'assertLoose', () => {
-  const dataType = Type.Object(
-    {
-      number: Type.Number(),
-      negNumber: Type.Number(),
-      maxNumber: Type.Number(),
-      string: Type.String(),
-      longString: Type.String(),
-      boolean: Type.Boolean(),
-      deeplyNested: Type.Object(
-        {
-          foo: Type.String(),
-          num: Type.Number(),
-          bool: Type.Boolean(),
-        },
-        { additionalProperties: true }
-      ),
-    },
-    { additionalProperties: true }
-  );
+  const dataType = Type.Object({
+    number: Type.Number(),
+    negNumber: Type.Number(),
+    maxNumber: Type.Number(),
+    string: Type.String(),
+    longString: Type.String(),
+    boolean: Type.Boolean(),
+    deeplyNested: Type.Object({
+      foo: Type.String(),
+      num: Type.Number(),
+      bool: Type.Boolean(),
+    }),
+  });
 
   const compiledType = TypeCompiler.Compile(dataType);
 
@@ -37,19 +31,25 @@ createCase('@sinclair/typebox', 'assertLoose', () => {
 });
 
 createCase('@sinclair/typebox', 'assertStrict', () => {
-  const dataType = Type.Object({
-    number: Type.Number(),
-    negNumber: Type.Number(),
-    maxNumber: Type.Number(),
-    string: Type.String(),
-    longString: Type.String(),
-    boolean: Type.Boolean(),
-    deeplyNested: Type.Object({
-      foo: Type.String(),
-      num: Type.Number(),
-      bool: Type.Boolean(),
-    }),
-  });
+  const dataType = Type.Object(
+    {
+      number: Type.Number(),
+      negNumber: Type.Number(),
+      maxNumber: Type.Number(),
+      string: Type.String(),
+      longString: Type.String(),
+      boolean: Type.Boolean(),
+      deeplyNested: Type.Object(
+        {
+          foo: Type.String(),
+          num: Type.Number(),
+          bool: Type.Boolean(),
+        },
+        { additionalProperties: false }
+      ),
+    },
+    { additionalProperties: false }
+  );
 
   const compiledType = TypeCompiler.Compile(dataType);
 

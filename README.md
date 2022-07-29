@@ -29,6 +29,7 @@
 * [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [@sapphire/shapeshift](https://github.com/sapphiredev/shapeshift)
+* [@sinclair/typebox](https://github.com/sinclairzx81/typebox)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)
 * [spectypes](https://github.com/iyegoroff/spectypes)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
