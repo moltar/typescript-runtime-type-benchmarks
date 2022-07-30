@@ -17,6 +17,7 @@ export const cases = [
   'runtypes',
   'sapphire-shapeshift',
   'simple-runtypes',
+  'sinclair-typebox',
   'spectypes',
   'superstruct',
   'suretype',
