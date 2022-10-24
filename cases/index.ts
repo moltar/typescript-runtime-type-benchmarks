@@ -11,6 +11,7 @@ export const cases = [
   'mojotech-json-type-validation',
   'myzod',
   'ok-computer',
+  'parse-dont-validate',
   'purify-ts',
   'r-assign',
   'rulr',

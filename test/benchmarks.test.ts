@@ -15,6 +15,7 @@ import '../cases/marshal';
 import '../cases/mojotech-json-type-validation';
 import '../cases/myzod';
 import '../cases/ok-computer';
+import '../cases/parse-dont-validate';
 import '../cases/purify-ts';
 import '../cases/r-assign';
 import '../cases/rulr';
