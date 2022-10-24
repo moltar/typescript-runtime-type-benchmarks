@@ -17,7 +17,13 @@ addCase('parse-dont-validate (chained function)', 'parseSafe', data =>
           min: Number.MIN_SAFE_INTEGER,
         })
         .elseThrow(''),
-      maxNumber: parse(data.maxNumber).asNumber().elseThrow(''),
+      maxNumber: parse(data.maxNumber)
+        .asNumber()
+        .inRangeOf({
+          min: Number.MAX_VALUE,
+          max: Number.MAX_VALUE,
+        })
+        .elseThrow(''),
       string: parse(data.string).asString().elseThrow(''),
       longString: parse(data.longString).asString().elseThrow(''),
       boolean: parse(data.boolean).asBoolean().elseThrow(''),
@@ -47,11 +53,19 @@ addCase('parse-dont-validate (named parameters)', 'parseSafe', data =>
         number: data.negNumber,
         ifParsingFailThen: 'throw',
         message: 'negNumber is not a number',
+        inRangeOf: {
+          max: -1,
+          min: Number.MIN_SAFE_INTEGER,
+        },
       }),
       maxNumber: parseAsNumber({
         number: data.maxNumber,
-        ifParsingFailThen: 'get',
-        alternativeValue: '',
+        ifParsingFailThen: 'throw',
+        message: 'maxNumber is not a number',
+        inRangeOf: {
+          min: Number.MAX_VALUE,
+          max: Number.MAX_VALUE,
+        },
       }),
       string: parseAsString({
         string: data.string,
