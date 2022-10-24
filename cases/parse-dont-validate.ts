@@ -9,33 +9,43 @@ import { addCase } from '../benchmarks';
 addCase('parse-dont-validate (chained function)', 'parseSafe', data =>
   parse(data)
     .asMutableObject(data => ({
-      number: parse(data.number).asNumber().elseThrow(''),
+      number: parse(data.number).asNumber().elseThrow('number is not a number'),
       negNumber: parse(data.negNumber)
         .asNumber()
         .inRangeOf({
           max: -1,
           min: Number.MIN_SAFE_INTEGER,
         })
-        .elseThrow(''),
+        .elseThrow('negNumber is not a number'),
       maxNumber: parse(data.maxNumber)
         .asNumber()
         .inRangeOf({
           min: Number.MAX_VALUE,
           max: Number.MAX_VALUE,
         })
-        .elseThrow(''),
-      string: parse(data.string).asString().elseThrow(''),
-      longString: parse(data.longString).asString().elseThrow(''),
-      boolean: parse(data.boolean).asBoolean().elseThrow(''),
+        .elseThrow('maxNumber is not a number'),
+      string: parse(data.string).asString().elseThrow('string is not a string'),
+      longString: parse(data.longString)
+        .asString()
+        .elseThrow('longString is not a string'),
+      boolean: parse(data.boolean)
+        .asBoolean()
+        .elseThrow('boolean is not a boolean'),
       deeplyNested: parse(data.deeplyNested)
         .asMutableObject(deeplyNested => ({
-          foo: parse(deeplyNested.foo).asString().elseThrow(''),
-          num: parse(deeplyNested.num).asNumber().elseThrow(''),
-          bool: parse(deeplyNested.bool).asBoolean().elseThrow(''),
+          foo: parse(deeplyNested.foo)
+            .asString()
+            .elseThrow('foo is not a string'),
+          num: parse(deeplyNested.num)
+            .asNumber()
+            .elseThrow('num is not a number'),
+          bool: parse(deeplyNested.bool)
+            .asBoolean()
+            .elseThrow('bool is not a boolean'),
         }))
-        .elseThrow(''),
+        .elseThrow('deeplyNested is not an object'),
     }))
-    .elseThrow('')
+    .elseThrow('data is not an object')
 );
 
 addCase('parse-dont-validate (named parameters)', 'parseSafe', data =>
