@@ -39,15 +39,13 @@ import '../cases/yup';
 import '../cases/zod';
 
 test('all cases must have been imported in tests', () => {
-  const registeredCases = new Set<string>();
-
-  getRegisteredBenchmarks().forEach(nameBenchmarkPair => {
-    nameBenchmarkPair[1].forEach(b => {
-      registeredCases.add(b.moduleName);
-    });
-  });
-
-  expect(registeredCases.size).toEqual(cases.length);
+  expect(
+    new Set<string>(
+      getRegisteredBenchmarks().flatMap(pair =>
+        pair[1].map(b => b.moduleName.split(' ')[0])
+      )
+    ).size
+  ).toBe(cases.length);
 });
 
 getRegisteredBenchmarks().forEach(([benchmarkId, benchmarkCases]) => {
