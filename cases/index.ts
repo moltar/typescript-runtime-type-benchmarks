@@ -30,6 +30,7 @@ export const cases = [
   'tson',
   'typeofweb-schema',
   'valita',
+  'vality',
   'yup',
   'zod',
 ] as const;

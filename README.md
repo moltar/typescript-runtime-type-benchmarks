@@ -42,6 +42,7 @@
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
 * [@typeofweb/schema](https://github.com/typeofweb/schema)
 * [valita](https://github.com/badrap/valita)
+* [Vality](https://github.com/jeengbe/vality)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
 
