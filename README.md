@@ -47,47 +47,80 @@
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
 
-## Criteria
+## Adding Your Own Package
 
-### Validation
+- Add it to `dependencies`
+- Add to the above list
+- Add it to the `cases` array in [`cases/index.ts`](./cases/index.ts)
+- Create your cases file (see below)
+- Import your cases file in [`test/benchmarks.test.ts`](./test/benchmarks.test.ts)
 
-These packages are capable of validating the data for type correctness.
+### Adding Your Cases
 
-E.g. if `string` was expected, but a `number` was provided, the validator should fail.
-
-### Interface
-
-It has a validator function or method that returns a valid type casted value or throws.
-
-```ts
-const data: any = {}
-
-// `res` is now type casted to the right type
-const res = isValid(data)
-```
-
-Or it has a type guard function that in a truthy block type casts the value.
+- Create a new file in [`cases/`](./cases/)
+- Add your test cases
 
 ```ts
-const data: any = {}
+import { number, string, boolean, validate } from 'yourPackage';
+import { addCase } from '../benchmarks';
 
-function isMyDataValid(data: any) {
-  // isValidGuard is the type guard function provided by the package
-  if (isValidGuard(data)) {
-    // data here is "guarded" and therefore inferred to be of the right type
-    return data
-  }
+const dataType = {
+  number: number,
+  negNumber: number,
+  maxNumber: number,
+  string: string,
+  longString: string,
+  boolean: boolean,
+  deeplyNested: {
+    foo: string,
+    num: number,
+    bool: boolean,
+  },
+};
 
-  throw new Error('Invalid!')
-}
+// Return the data if it is valid, throw otherwise. Accept extra properties
+addCase('yourPackage', 'parseSafe', data => {
+  const res = validate(dataType, data);
 
-// `res` is now type casted to the right type
-const res = isMyDataValid(data)
+  if (res.valid) return res.data;
+  throw new Error('Invalid!');
+});
+
+// Return the data if it is valid, throw otherwise. Don't accept extra properties
+addCase('yourPackage', 'parseStrict', data => {
+  const res = validate(dataType, data, {
+    bail: true,
+    strict: true,
+    allowExtraProperties: false,
+  });
+
+  if (res.valid) return res.data;
+  throw new Error('Invalid!');
+});
+
+// Return true if the data is valid, throw otherwise. Accept extra properties
+addCase('yourPackage', 'assertLoose', data => {
+  const res = validate(dataType, data);
+
+  if (res.valid) return true;
+  throw new Error('Invalid!');
+});
+
+// Return true if the data is valid, throw otherwise. Don't accept extra properties
+addCase('yourPackage', 'assertStrict', data => {
+  const res = validate(dataType, data, {
+    allowExtraProperties: false,
+  });
+
+  if (res.valid) return true;
+  throw new Error('Invalid!');
+});
 ```
+- Verify that your cases are working by runnning `npm run test`
 
 ## Local Development
 
 * `npm run start` - run benchmarks for all modules
-* `npm run start run zod myzod valita` - run benchmarks only for a few selected modules
+* `npm run start run zod myzod vality` - run benchmarks only for a few selected modules
 * `npm run docs:serve` - result viewer
 * `npm run test` - run tests on all modules
