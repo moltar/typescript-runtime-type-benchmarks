@@ -80,7 +80,9 @@ const dataType = {
 
 // Return the data if it is valid, throw otherwise. Accept extra properties
 addCase('yourPackage', 'parseSafe', data => {
-  const res = validate(dataType, data);
+  const res = validate(dataType, data, {
+    allowExtraProperties: true,
+  });
 
   if (res.valid) return res.data;
   throw new Error('Invalid!');
@@ -89,8 +91,6 @@ addCase('yourPackage', 'parseSafe', data => {
 // Return the data if it is valid, throw otherwise. Don't accept extra properties
 addCase('yourPackage', 'parseStrict', data => {
   const res = validate(dataType, data, {
-    bail: true,
-    strict: true,
     allowExtraProperties: false,
   });
 
@@ -100,7 +100,9 @@ addCase('yourPackage', 'parseStrict', data => {
 
 // Return true if the data is valid, throw otherwise. Accept extra properties
 addCase('yourPackage', 'assertLoose', data => {
-  const res = validate(dataType, data);
+  const res = validate(dataType, data, {
+    allowExtraProperties: true,
+  });
 
   if (res.valid) return true;
   throw new Error('Invalid!');
