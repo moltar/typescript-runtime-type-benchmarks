@@ -4,7 +4,7 @@ import { addCase } from '../benchmarks';
 const dataType = v.object({
   number: v.number,
   negNumber: v.number,
-  maxNumber: v.number,
+  maxNumber: v.number({ allowUnsafe: true }),
   string: v.string,
   longString: v.string,
   boolean: v.boolean,
@@ -17,6 +17,7 @@ const dataType = v.object({
 
 addCase('vality', 'parseSafe', data => {
   const res = validate(dataType, data, { bail: true, strict: true });
+
   if (res.valid) return res.data;
   throw new Error('Invalid!');
 });
@@ -27,15 +28,16 @@ addCase('vality', 'parseStrict', data => {
     strict: true,
     allowExtraProperties: false,
   });
+
   if (res.valid) return res.data;
   throw new Error('Invalid!');
 });
 
 addCase('vality', 'assertLoose', data => {
   const res = validate(dataType, data, { bail: true, strict: true });
-  if (!res.valid) return false;
 
-  return true;
+  if (res.valid) return true;
+  throw new Error('Invalid!');
 });
 
 addCase('vality', 'assertStrict', data => {
@@ -44,7 +46,7 @@ addCase('vality', 'assertStrict', data => {
     strict: true,
     allowExtraProperties: false,
   });
-  if (!res.valid) return false;
 
-  return true;
+  if (res.valid) return true;
+  throw new Error('Invalid!');
 });
