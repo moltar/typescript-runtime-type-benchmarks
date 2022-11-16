@@ -35,7 +35,9 @@ async function main() {
           const cmd = [...process.argv.slice(0, 2), 'run-internal', c];
 
           console.log('Executing "%s"', c);
-          childProcess.execSync(cmd.join(' '), {
+
+          childProcess.execFileSync(cmd[0], cmd.slice(1), {
+            shell: false,
             stdio: 'inherit',
           });
         }
