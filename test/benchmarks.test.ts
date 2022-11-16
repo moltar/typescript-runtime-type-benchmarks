@@ -15,11 +15,14 @@ import '../cases/marshal';
 import '../cases/mojotech-json-type-validation';
 import '../cases/myzod';
 import '../cases/ok-computer';
+import '../cases/parse-dont-validate';
 import '../cases/purify-ts';
 import '../cases/r-assign';
 import '../cases/rulr';
 import '../cases/runtypes';
+import '../cases/sapphire-shapeshift';
 import '../cases/simple-runtypes';
+import '../cases/sinclair-typebox';
 import '../cases/spectypes';
 import '../cases/superstruct';
 import '../cases/suretype';
@@ -32,19 +35,18 @@ import '../cases/ts-utils';
 import '../cases/tson';
 import '../cases/typeofweb-schema';
 import '../cases/valita';
+import '../cases/vality';
 import '../cases/yup';
 import '../cases/zod';
 
 test('all cases must have been imported in tests', () => {
-  const registeredCases = new Set<string>();
-
-  getRegisteredBenchmarks().forEach(nameBenchmarkPair => {
-    nameBenchmarkPair[1].forEach(b => {
-      registeredCases.add(b.moduleName);
-    });
-  });
-
-  expect(registeredCases.size).toEqual(cases.length);
+  expect(
+    new Set<string>(
+      getRegisteredBenchmarks().flatMap(pair =>
+        pair[1].map(b => b.moduleName.split(' ')[0])
+      )
+    ).size
+  ).toBe(cases.length);
 });
 
 getRegisteredBenchmarks().forEach(([benchmarkId, benchmarkCases]) => {
