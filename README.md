@@ -49,8 +49,22 @@
 
 ## Adding Your Own Package
 
-- Add it to `dependencies`
-- Add to the above list
+### Criteria
+
+To consider your package a validation library, it must provide at least one method to validate an input against a given schema. Values whose type does not match the defined one are considered invaild. If an invalid value is encountered, the method must either throw an error or indicate this in its return data.
+
+Example:
+```ts
+import { validate, string } from "yourPackage";
+
+const data = 42;
+validateAndThrow(string, data); // Throws an error: '"42" is not a "string"'
+```
+
+### Steps to add your package
+
+- Add it to `dependencies` in [`package.json`](./package.json) and run `npm install`
+- Add to [the above list](#packages-compared)
 - Add it to the `cases` array in [`cases/index.ts`](./cases/index.ts)
 - Create your cases file (see below)
 - Import your cases file in [`test/benchmarks.test.ts`](./test/benchmarks.test.ts)
@@ -78,7 +92,7 @@ const dataType = {
   },
 };
 
-// Return the data if it is valid, throw otherwise. Accept extra properties
+// Return the data if it is valid, throw otherwise. Accept extra properties.
 addCase('yourPackage', 'parseSafe', data => {
   const res = validate(dataType, data, {
     allowExtraProperties: true,
@@ -88,7 +102,7 @@ addCase('yourPackage', 'parseSafe', data => {
   throw new Error('Invalid!');
 });
 
-// Return the data if it is valid, throw otherwise. Don't accept extra properties
+// Return the data if it is valid, throw otherwise. Don't accept extra properties.
 addCase('yourPackage', 'parseStrict', data => {
   const res = validate(dataType, data, {
     allowExtraProperties: false,
@@ -98,7 +112,7 @@ addCase('yourPackage', 'parseStrict', data => {
   throw new Error('Invalid!');
 });
 
-// Return true if the data is valid, throw otherwise. Accept extra properties
+// Return true if the data is valid, throw otherwise. Accept extra properties.
 addCase('yourPackage', 'assertLoose', data => {
   const res = validate(dataType, data, {
     allowExtraProperties: true,
@@ -108,7 +122,7 @@ addCase('yourPackage', 'assertLoose', data => {
   throw new Error('Invalid!');
 });
 
-// Return true if the data is valid, throw otherwise. Don't accept extra properties
+// Return true if the data is valid, throw otherwise. Don't accept extra properties.
 addCase('yourPackage', 'assertStrict', data => {
   const res = validate(dataType, data, {
     allowExtraProperties: false,
