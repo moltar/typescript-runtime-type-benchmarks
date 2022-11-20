@@ -8,26 +8,11 @@ import { BenchmarkCase, BenchmarkResult } from './types';
 const DOCS_DIR = join(__dirname, '../../docs');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
 const NODE_VERSION_FOR_PREVIEW = 18;
-const TEST_PREVIEW_GENERATION = false;
 
 /**
  * Run all registered benchmarks and append the results to a file.
  */
 export async function runAllBenchmarks() {
-  if (TEST_PREVIEW_GENERATION) {
-    // during development: generate the preview using benchmark data from a previous run
-    const allResults: BenchmarkResult[] = JSON.parse(
-      readFileSync(join(DOCS_DIR, 'results', 'node-17.json')).toString()
-    ).results;
-
-    await writePreviewGraph({
-      filename: previewSvgFilename(),
-      values: allResults,
-    });
-
-    return;
-  }
-
   const allResults: BenchmarkResult[] = [];
 
   for (const [benchmark, benchmarks] of getRegisteredBenchmarks()) {

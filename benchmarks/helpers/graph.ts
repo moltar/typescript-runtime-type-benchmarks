@@ -78,13 +78,12 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
     );
 
     // median of the rest as a comparison
-    const rest = sorted.slice(resultCountToInclude);
     const others: BenchmarkResult = {
       benchmark: v[0].benchmark,
       margin: 0,
-      name: '... rest',
+      name: '(median)',
       nodeVersion: v[0].nodeVersion,
-      ops: median(rest.map(x => x.ops)),
+      ops: median(sorted.map(x => x.ops)),
     };
 
     preparedResult.push(others);
@@ -108,7 +107,7 @@ async function previewGraph({ values }: PreviewGraphParams): Promise<string> {
     title: {
       anchor: 'middle',
       offset: 20,
-      text: 'Top 3 packages for each benchmark',
+      text: 'Top 3 packages for each benchmark + median, (ops count, better ⯈)',
       fontWeight: 'normal',
       fontSize: 16,
     },
@@ -124,7 +123,14 @@ async function previewGraph({ values }: PreviewGraphParams): Promise<string> {
           type: 'quantitative',
           sort: 'ascending',
         },
-        y: { field: 'name', type: 'nominal', title: null },
+        y: {
+          field: 'name',
+          type: 'nominal',
+          title: null,
+          // do not sort by name to keep the preparedValues sorting by ops
+          // instead
+          sort: null,
+        },
         color: {
           field: 'name',
           type: 'nominal',
