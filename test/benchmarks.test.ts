@@ -18,6 +18,7 @@ import '../cases/ok-computer';
 import '../cases/parse-dont-validate';
 import '../cases/purify-ts';
 import '../cases/r-assign';
+import '../cases/rescript-struct';
 import '../cases/rulr';
 import '../cases/runtypes';
 import '../cases/sapphire-shapeshift';
