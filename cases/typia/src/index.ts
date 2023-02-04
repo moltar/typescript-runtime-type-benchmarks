@@ -14,7 +14,27 @@ interface ToBeChecked {
   };
 }
 
-export const parseSafe = typia.createIs<ToBeChecked>();
-export const parseStrict = typia.createEquals<ToBeChecked>();
-export const assertStrict = typia.createAssertEquals<ToBeChecked>();
-export const assertLoose = typia.createAssert<ToBeChecked>();
+const is = typia.createIs<ToBeChecked>();
+const equals = typia.createEquals<ToBeChecked>();
+const stringify = typia.createIsStringify<ToBeChecked>();
+
+export function assertLoose(input: unknown): boolean {
+  if (!is(input)) throw new Error('wrong type.');
+  return true;
+}
+
+export function assertStrict(input: unknown): boolean {
+  if (!equals(input)) throw new Error('wrong type.');
+  return true;
+}
+
+export function parseStrict(input: unknown): ToBeChecked {
+  if (!equals(input)) throw new Error('wrong type.');
+  return input;
+}
+
+export function parseSafe(input: unknown): ToBeChecked {
+  const json: string | null = stringify(input);
+  if (json === null) throw new Error('wrong type.');
+  return JSON.parse(json);
+}

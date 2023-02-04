@@ -35,6 +35,7 @@ import '../cases/ts-runtime-checks';
 import '../cases/ts-utils';
 import '../cases/tson';
 import '../cases/typeofweb-schema';
+import '../cases/typia';
 import '../cases/valita';
 import '../cases/vality';
 import '../cases/yup';
