@@ -4,7 +4,12 @@
       "module": "commonjs",
       "outDir": "build",
       "strict": true,
-      "plugins": [{ "transform": "typia/lib/transform" }]
+      "plugins": [
+        { 
+          "transform": "typia/lib/transform",
+          "undefined": false 
+        }
+      ]
     },
     "include": ["src/index.ts"]
   }
