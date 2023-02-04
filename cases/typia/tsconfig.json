@@ -5,10 +5,7 @@
       "outDir": "build",
       "strict": true,
       "plugins": [
-        { 
-          "transform": "typia/lib/transform",
-          "undefined": false 
-        }
+        { "transform": "typia/lib/transform" }
       ]
     },
     "include": ["src/index.ts"]
