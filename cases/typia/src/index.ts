@@ -1,17 +1,17 @@
-import typia from "typia";
+import typia from 'typia';
 
 interface ToBeChecked {
-    number: number;
-    negNumber: number;
-    maxNumber: number;
-    string: string;
-    longString: string;
-    boolean: boolean;
-        deeplyNested: {
-            foo: string;
-            num: number;
-            bool: boolean;
-        };
+  number: number;
+  negNumber: number;
+  maxNumber: number;
+  string: string;
+  longString: string;
+  boolean: boolean;
+  deeplyNested: {
+    foo: string;
+    num: number;
+    bool: boolean;
+  };
 }
 
 export const parseSafe = typia.createIs<ToBeChecked>();
