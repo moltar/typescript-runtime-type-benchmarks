@@ -31,6 +31,7 @@ export const cases = [
   'ts-utils',
   'tson',
   'typeofweb-schema',
+  'typia',
   'valita',
   'vality',
   'yup',
