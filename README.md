@@ -42,6 +42,7 @@
 * [ts-runtime-checks](https://github.com/GoogleFeud/ts-runtime-checks)
 * [tson](https://github.com/skarab42/tson)
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
+* [typia](https://github.com/samchon/typia)
 * [@typeofweb/schema](https://github.com/typeofweb/schema)
 * [valita](https://github.com/badrap/valita)
 * [Vality](https://github.com/jeengbe/vality)
