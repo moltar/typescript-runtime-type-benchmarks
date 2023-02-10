@@ -95,7 +95,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
     vegaLite = __importStar(vegaLite);
     // which results are attempted to load
     // the first is selected automatically
-    var NODE_VERSIONS = [18, 16, 14];
+    var NODE_VERSIONS = [19, 18, 16, 14];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
         '#8dd3c7',
