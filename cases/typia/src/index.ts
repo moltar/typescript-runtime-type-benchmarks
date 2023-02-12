@@ -16,7 +16,6 @@ interface ToBeChecked {
 
 const is = typia.createIs<ToBeChecked>();
 const equals = typia.createEquals<ToBeChecked>();
-const stringify = typia.createStringify<ToBeChecked>();
 
 export function assertLoose(input: unknown): boolean {
   if (!is(input)) throw new Error('wrong type.');
@@ -35,5 +34,6 @@ export function parseStrict(input: unknown): ToBeChecked {
 
 export function parseSafe(input: unknown): ToBeChecked {
   if (!is(input)) throw new Error('wrong type.');
-  return JSON.parse(stringify(input));
+  typia.prune(input);
+  return input;
 }
