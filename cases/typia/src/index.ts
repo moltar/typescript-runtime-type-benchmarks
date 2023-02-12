@@ -34,6 +34,5 @@ export function parseStrict(input: unknown): ToBeChecked {
 
 export function parseSafe(input: unknown): ToBeChecked {
   if (!is(input)) throw new Error('wrong type.');
-  typia.prune(input);
-  return input;
+  return typia.clone(input);
 }
