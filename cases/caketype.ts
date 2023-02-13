@@ -1,7 +1,11 @@
 import { bake, boolean, number, string } from 'caketype';
 import { createCase } from '../benchmarks';
 
-const cake = bake({
+// caketype requires TS 4.7 for type inference, but using `any` below allows
+// this code to type-check in older versions. It should be safe to remove in
+// TS 4.7+.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const cake: any = bake({
   number: number,
   negNumber: number,
   maxNumber: number,
