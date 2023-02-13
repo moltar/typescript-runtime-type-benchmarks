@@ -14,6 +14,7 @@
 
 * [ajv](https://ajv.js.org/)
 * [bueno](https://github.com/philipnilsson/bueno)
+* [caketype](https://github.com/justinyaodu/caketype)
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [computed-types](https://github.com/neuledge/computed-types)
 * [decoders](https://github.com/nvie/decoders)

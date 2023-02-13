@@ -5,6 +5,7 @@ import { cases } from '../cases';
 // imported `test` and `describe`
 import '../cases/ajv';
 import '../cases/bueno';
+import '../cases/caketype';
 import '../cases/class-validator';
 import '../cases/computed-types';
 import '../cases/decoders';
