@@ -1,6 +1,11 @@
 import { Type } from '@sinclair/typebox';
 import { TypeCompiler } from '@sinclair/typebox/compiler';
+import { TypeSystem } from '@sinclair/typebox/system';
 import { createCase } from '../benchmarks';
+
+// Use TypeScript Checking Semantics
+TypeSystem.AllowArrayObjects = true;
+TypeSystem.AllowNaN = true;
 
 createCase('@sinclair/typebox', 'assertLoose', () => {
   const dataType = Type.Object({
