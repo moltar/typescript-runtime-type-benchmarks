@@ -21,78 +21,78 @@ createCase('light-type', 'parseSafe', () => {
   };
 });
 
-// createCase('light-type', 'parseStrict', () => {
-//   const dataType = lt
-//     .object({
-//       number: lt.number(),
-//       negNumber: lt.number(),
-//       maxNumber: lt.number(),
-//       string: lt.string(),
-//       longString: lt.string(),
-//       boolean: lt.boolean(),
-//       deeplyNested: lt
-//         .object({
-//           foo: lt.string(),
-//           num: lt.number(),
-//           bool: lt.boolean(),
-//         })
-//         .strict(),
-//     })
-//     .strict();
+createCase('light-type', 'parseStrict', () => {
+  const dataType = lt
+    .object({
+      number: lt.number(),
+      negNumber: lt.number(),
+      maxNumber: lt.number(),
+      string: lt.string(),
+      longString: lt.string(),
+      boolean: lt.boolean(),
+      deeplyNested: lt
+        .object({
+          foo: lt.string(),
+          num: lt.number(),
+          bool: lt.boolean(),
+        })
+        .strict(),
+    })
+    .strict();
 
-//   return data => {
-//     return dataType.parse(data);
-//   };
-// });
+  return data => {
+    return dataType.parse(data);
+  };
+});
 
-// createCase('light-type', 'assertLoose', () => {
-//   const dataType = lt
-//     .object({
-//       number: lt.number(),
-//       negNumber: lt.number(),
-//       maxNumber: lt.number(),
-//       string: lt.string(),
-//       longString: lt.string(),
-//       boolean: lt.boolean(),
-//       deeplyNested: lt
-//         .object({
-//           foo: lt.string(),
-//           num: lt.number(),
-//           bool: lt.boolean(),
-//         })
-//         .passthrough(),
-//     })
-//     .passthrough();
+createCase('light-type', 'assertLoose', () => {
+  const dataType = lt
+    .object({
+      number: lt.number(),
+      negNumber: lt.number(),
+      maxNumber: lt.number(),
+      string: lt.string(),
+      longString: lt.string(),
+      boolean: lt.boolean(),
+      deeplyNested: lt
+        .object({
+          foo: lt.string(),
+          num: lt.number(),
+          bool: lt.boolean(),
+        })
+        .passthrough(),
+    })
+    .passthrough();
 
-//   return data => {
-//     dataType.parse(data);
+  return data => {
+    dataType.parse(data);
 
-//     return true;
-//   };
-// });
+    return true;
+  };
+});
 
-// createCase('light-type', 'assertStrict', () => {
-//   const dataType = lt
-//     .object({
-//       number: lt.number(),
-//       negNumber: lt.number(),
-//       maxNumber: lt.number(),
-//       string: lt.string(),
-//       longString: lt.string(),
-//       boolean: lt.boolean(),
-//       deeplyNested: lt
-//         .object({
-//           foo: lt.string(),
-//           num: lt.number(),
-//           bool: lt.boolean(),
-//         })
-//         .strict(),
-//     })
-//     .strict();
+createCase('light-type', 'assertStrict', () => {
+  const dataType = lt
+    .object({
+      number: lt.number(),
+      negNumber: lt.number(),
+      maxNumber: lt.number(),
+      string: lt.string(),
+      longString: lt.string(),
+      boolean: lt.boolean(),
+      deeplyNested: lt
+        .object({
+          foo: lt.string(),
+          num: lt.number(),
+          bool: lt.boolean(),
+        })
+        .strict(),
+    })
+    .strict();
 
-//   return data => {
-//     dataType.parse(data);
+  return data => {
+    dataType.parse(data);
 
-//     return true;
-//   };
-// });
+    return true;
+  };
+});
