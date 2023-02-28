@@ -4,6 +4,7 @@ import { cases } from '../cases';
 // all cases need to be imported here because jest cannot pic up dynamically
 // imported `test` and `describe`
 import '../cases/ajv';
+import '../cases/banditypes';
 import '../cases/bueno';
 import '../cases/class-validator';
 import '../cases/computed-types';
