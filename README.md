@@ -13,6 +13,7 @@
 ## Packages Compared
 
 * [ajv](https://ajv.js.org/)
+* [banditypes](https://github.com/thoughtspile/banditypes)
 * [bueno](https://github.com/philipnilsson/bueno)
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [computed-types](https://github.com/neuledge/computed-types)
