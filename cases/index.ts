@@ -21,6 +21,7 @@ export const cases = [
   'simple-runtypes',
   'sinclair-typebox',
   'spectypes',
+  'succulent',
   'superstruct',
   'suretype',
   'to-typed',
