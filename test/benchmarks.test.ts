@@ -25,6 +25,7 @@ import '../cases/sapphire-shapeshift';
 import '../cases/simple-runtypes';
 import '../cases/sinclair-typebox';
 import '../cases/spectypes';
+import '../cases/succulent';
 import '../cases/superstruct';
 import '../cases/suretype';
 import '../cases/to-typed';
