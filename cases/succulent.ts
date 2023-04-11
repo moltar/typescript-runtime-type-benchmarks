@@ -37,15 +37,14 @@ const $StrictType = $Exact({
   }),
 });
 
-createCase('succulent', 'parseSafe', () => {
-  return data => {
-    return is(data, $LooseType);
-  };
-});
-
 createCase('succulent', 'parseStrict', () => {
   return data => {
-    return is(data, $StrictType);
+    const ok = is(data, $StrictType);
+    if (!ok) {
+      throw new Error('invalid data');
+    }
+
+    return data;
   };
 });
 
