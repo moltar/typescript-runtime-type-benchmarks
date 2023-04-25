@@ -14,10 +14,10 @@ jobs:
       max-parallel: 3
       matrix:
         node-version:
-          - 14.x
           - 16.x
           - 18.x
           - 19.x
+          - 20.x
 
     steps:
       - uses: actions/checkout@v3
