@@ -94,3 +94,9 @@ const res = isMyDataValid(data)
 * `npm run start run zod myzod valita` - run benchmarks only for a few selected modules
 * `npm run docs:serve` - result viewer
 * `npm run test` - run tests on all modules
+
+## Adding a new node version
+
+* update node version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
+* update `NODE_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
+* optionally set `NODE_VERSION_FOR_PREVIEW` in `benchmarks/helpers/main.ts`
