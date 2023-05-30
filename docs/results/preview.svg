@@ -4,21 +4,20 @@
         <path class="background" aria-hidden="true" d="M194 42Z"/>
         <g class="mark-group role-scope child__Safe_Parsing_group" aria-roledescription="group mark container">
             <path class="background" aria-hidden="true" d="M194.5 42.5h200v60h-200Z" stroke="#ddd"/>
-            <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis for a linear scale with values from 0 to 45,000,000">
+            <g class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis for a linear scale with values from 0 to 40,000,000">
                 <path class="background" aria-hidden="true" d="M194.5 102.5Z" pointer-events="none"/>
                 <g class="mark-rule role-axis-grid" pointer-events="none" stroke="#ddd">
-                    <path d="M194.5 102.5v-60M238.5 102.5v-60M283.5 102.5v-60M327.5 102.5v-60M372.5 102.5v-60"/>
+                    <path d="M194.5 102.5v-60M244.5 102.5v-60M294.5 102.5v-60M344.5 102.5v-60M394.5 102.5v-60"/>
                 </g>
             </g>
-            <g pointer-events="none" class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'Safe Parsing' for a linear scale with values from 0 to 45,000,000">
+            <g pointer-events="none" class="mark-group role-axis" aria-roledescription="axis" aria-label="X-axis titled 'Safe Parsing' for a linear scale with values from 0 to 40,000,000">
                 <path class="background" aria-hidden="true" d="M194.5 102.5Z"/>
                 <g class="mark-rule role-axis-tick" stroke="#888">
-                    <path d="M194.5 102.5v5M238.5 102.5v5M283.5 102.5v5M327.5 102.5v5M372.5 102.5v5"/>
+                    <path d="M194.5 102.5v5M244.5 102.5v5M294.5 102.5v5M344.5 102.5v5M394.5 102.5v5"/>
                 </g>
                 <g class="mark-text role-axis-label" font-family="sans-serif" font-size="10" fill="#000">
                     <text transform="translate(194.5 117.5)">0</text>
-                    <text text-anchor="middle" transform="translate(283.389 117.5)">20,000,000</text>
-                    <text text-anchor="middle" transform="translate(372.278 117.5)">40,000,000</text>
+                    <text text-anchor="end" transform="translate(394.5 117.5)">40,000,000</text>
                 </g>
                 <path stroke="#888" d="M194.5 102.5h200" class="mark-rule role-axis-domain"/>
                 <text text-anchor="middle" transform="translate(294.5 132.5)" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000" class="mark-text role-axis-title">Safe Parsing</text>
@@ -37,10 +36,10 @@
                 <path stroke="#888" d="M194.5 42.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g class="mark-rect role-mark child__Safe_Parsing_marks" aria-roledescription="rect mark container">
-                <path d="M194 42.75h190.973v13.5H194Z" fill="#e45756"/>
-                <path d="M194 57.75h99.813v13.5H194Z" fill="#eeca3b"/>
-                <path d="M194 72.75h86.198v13.5H194Z" fill="#72b7b2"/>
-                <path d="M194 87.75h3.814v13.5H194Z" fill="#4c78a8"/>
+                <path d="M194 42.75h195.053v13.5H194Z" fill="#e45756"/>
+                <path d="M194 57.75h124.043v13.5H194Z" fill="#eeca3b"/>
+                <path d="M194 72.75h108.92v13.5H194Z" fill="#72b7b2"/>
+                <path d="M194 87.75h4.353v13.5H194Z" fill="#4c78a8"/>
             </g>
         </g>
         <g class="mark-group role-scope child__Strict_Parsing_group" aria-roledescription="group mark container">
@@ -78,10 +77,10 @@
                 <path stroke="#888" d="M585.5 42.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g class="mark-rect role-mark child__Strict_Parsing_marks" aria-roledescription="rect mark container">
-                <path d="M585 42.75h194.463v13.5H585Z" fill="#54a24b"/>
-                <path d="M585 57.75h163.182v13.5H585Z" fill="#72b7b2"/>
-                <path d="M585 72.75h144.357v13.5H585Z" fill="#eeca3b"/>
-                <path d="M585 87.75h6.187v13.5H585Z" fill="#4c78a8"/>
+                <path d="M585 42.75h191.181v13.5H585Z" fill="#54a24b"/>
+                <path d="M585 57.75h163.096v13.5H585Z" fill="#72b7b2"/>
+                <path d="M585 72.75h162.776v13.5H585Z" fill="#eeca3b"/>
+                <path d="M585 87.75h6.13v13.5H585Z" fill="#4c78a8"/>
             </g>
         </g>
         <g class="mark-group role-scope child__Loose_Assertion_group" aria-roledescription="group mark container">
@@ -118,10 +117,10 @@
                 <path stroke="#888" d="M194.5 156.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g class="mark-rect role-mark child__Loose_Assertion_marks" aria-roledescription="rect mark container">
-                <path d="M194 156.75h193.176v13.5H194Z" fill="#54a24b"/>
-                <path d="M194 171.75h178.946v13.5H194Z" fill="#eeca3b"/>
-                <path d="M194 186.75h135.916v13.5H194Z" fill="#72b7b2"/>
-                <path d="M194 201.75h1.724v13.5H194Z" fill="#4c78a8"/>
+                <path d="M194 156.75h199.247v13.5H194Z" fill="#54a24b"/>
+                <path d="M194 171.75h179.95v13.5H194Z" fill="#eeca3b"/>
+                <path d="M194 186.75h136.228v13.5H194Z" fill="#72b7b2"/>
+                <path d="M194 201.75h1.725v13.5H194Z" fill="#4c78a8"/>
             </g>
         </g>
         <g class="mark-group role-scope child__Strict_Assertion_group" aria-roledescription="group mark container">
@@ -145,24 +144,24 @@
                 <path stroke="#888" d="M585.5 216.5h200" class="mark-rule role-axis-domain"/>
                 <text text-anchor="middle" transform="translate(685.5 246.5)" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000" class="mark-text role-axis-title">Strict Assertion</text>
             </g>
-            <g pointer-events="none" class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a discrete scale with 4 values: ts-runtime-checks, @sinclair/typebox, spectypes, (median)">
+            <g pointer-events="none" class="mark-group role-axis" aria-roledescription="axis" aria-label="Y-axis for a discrete scale with 4 values: @sinclair/typebox, ts-runtime-checks, typia, (median)">
                 <path class="background" aria-hidden="true" d="M585.5 156.5Z"/>
                 <g class="mark-rule role-axis-tick" stroke="#888">
                     <path d="M585.5 163.5h-5M585.5 178.5h-5M585.5 193.5h-5M585.5 208.5h-5"/>
                 </g>
                 <g class="mark-text role-axis-label" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">
-                    <text transform="translate(578.5 166.5)">ts-runtime-checks</text>
-                    <text transform="translate(578.5 181.5)">@sinclair/typebox</text>
-                    <text transform="translate(578.5 196.5)">spectypes</text>
+                    <text transform="translate(578.5 166.5)">@sinclair/typebox</text>
+                    <text transform="translate(578.5 181.5)">ts-runtime-checks</text>
+                    <text transform="translate(578.5 196.5)">typia</text>
                     <text transform="translate(578.5 211.5)">(median)</text>
                 </g>
                 <path stroke="#888" d="M585.5 156.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g class="mark-rect role-mark child__Strict_Assertion_marks" aria-roledescription="rect mark container">
-                <path d="M585 156.75h194.198v13.5H585Z" fill="#54a24b"/>
-                <path d="M585 171.75h174.55v13.5H585Z" fill="#f58518"/>
-                <path d="M585 186.75h154.125v13.5H585Z" fill="#72b7b2"/>
-                <path d="M585 201.75h6.029v13.5H585Z" fill="#4c78a8"/>
+                <path d="M585 156.75h191.957v13.5H585Z" fill="#f58518"/>
+                <path d="M585 171.75h191.373v13.5H585Z" fill="#54a24b"/>
+                <path d="M585 186.75h162.772v13.5H585Z" fill="#eeca3b"/>
+                <path d="M585 201.75h5.833v13.5H585Z" fill="#4c78a8"/>
             </g>
         </g>
         <g class="mark-group role-title">
