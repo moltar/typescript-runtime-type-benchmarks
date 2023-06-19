@@ -34,6 +34,7 @@
 * [@sinclair/typebox](https://github.com/sinclairzx81/typebox)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)
 * [spectypes](https://github.com/iyegoroff/spectypes)
+* [succulent](https://github.com/aslilac/succulent)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
 * [suretype](https://github.com/grantila/suretype)
 * [toi](https://github.com/hf/toi)
@@ -93,3 +94,9 @@ const res = isMyDataValid(data)
 * `npm run start run zod myzod valita` - run benchmarks only for a few selected modules
 * `npm run docs:serve` - result viewer
 * `npm run test` - run tests on all modules
+
+## Adding a new node version
+
+* update node version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
+* update `NODE_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
+* optionally set `NODE_VERSION_FOR_PREVIEW` in `benchmarks/helpers/main.ts`

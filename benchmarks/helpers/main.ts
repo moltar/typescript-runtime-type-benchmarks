@@ -7,7 +7,7 @@ import { BenchmarkCase, BenchmarkResult } from './types';
 
 const DOCS_DIR = join(__dirname, '../../docs');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;
-const NODE_VERSION_FOR_PREVIEW = 19;
+const NODE_VERSION_FOR_PREVIEW = 20;
 
 /**
  * Run all registered benchmarks and append the results to a file.
