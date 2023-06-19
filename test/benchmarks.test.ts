@@ -11,7 +11,6 @@ import '../cases/decoders';
 import '../cases/io-ts';
 import '../cases/jointz';
 import '../cases/json-decoder';
-import '../cases/marshal';
 import '../cases/mojotech-json-type-validation';
 import '../cases/myzod';
 import '../cases/ok-computer';

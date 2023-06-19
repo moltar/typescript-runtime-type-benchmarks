@@ -20,7 +20,6 @@
 * [io-ts](https://github.com/gcanti/io-ts)
 * [jointz](https://github.com/moodysalem/jointz)
 * [json-decoder](https://github.com/venil7/json-decoder)
-* [marshal](https://github.com/marcj/marshal.ts)
 * [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
 * [myzod](https://github.com/davidmdm/myzod)
 * [ok-computer](https://github.com/richardscarrott/ok-computer)
