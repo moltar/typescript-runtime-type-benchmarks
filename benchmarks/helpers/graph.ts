@@ -20,7 +20,7 @@ function assertNever(x: never): never {
   throw new Error(`assert-never: unknown value: ${x}`);
 }
 
-function getBenchmarkLabel(benchmark: AvailableBenchmarksIds): string {
+function getBenchmarkLabel(benchmark: AvailableBenchmarksIds) {
   switch (benchmark) {
     case 'assertLoose':
       return 'Loose Assertion';
@@ -35,6 +35,8 @@ function getBenchmarkLabel(benchmark: AvailableBenchmarksIds): string {
   }
 }
 
+type BenchmarkLabel = ReturnType<typeof getBenchmarkLabel>;
+
 function median(values: number[]) {
   if (!values.length) {
     return NaN;
@@ -47,6 +49,9 @@ function median(values: number[]) {
   return (values[values.length / 2 - 1] + values[values.length / 2]) / 2;
 }
 
+// Cheap aggregation of benchmark data.
+// For the repeated bar chart, vega-lite expects a numeric value for each
+// repeated field (the benchmark label) for each benchmarked library (`name`).
 function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
   const bins = new Map<string, BenchmarkResult[]>();
 
@@ -61,7 +66,21 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
     bin.push(result);
   });
 
-  const preparedResult: BenchmarkResult[] = [];
+  const preparedResult: any[] = [];
+
+  function updateResult(
+    name: string,
+    benchmarkLabel: BenchmarkLabel,
+    ops: number
+  ) {
+    const existing = preparedResult.find(v => v.name === name);
+
+    if (existing) {
+      existing[benchmarkLabel] = ops;
+    } else {
+      preparedResult.push({ name, [benchmarkLabel]: ops });
+    }
+  }
 
   bins.forEach(v => {
     if (!v.length) {
@@ -71,30 +90,31 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
     const sorted = v.sort((a, b) => b.ops - a.ops);
 
     // the N fasted benchmarks
-    preparedResult.push(
-      ...sorted
-        .slice(0, resultCountToInclude)
-        .map(r => ({ ...r, color: 'fast' }))
-    );
+    sorted
+      .slice(0, resultCountToInclude)
+      .forEach(r =>
+        updateResult(
+          r.name,
+          getBenchmarkLabel(r.benchmark as AvailableBenchmarksIds),
+          r.ops
+        )
+      );
+  });
+
+  // add median last to make it appear at the bottom of each individual
+  // barchart
+  bins.forEach(v => {
+    const sorted = v.sort((a, b) => b.ops - a.ops);
 
     // median of the rest as a comparison
-    const others: BenchmarkResult = {
-      benchmark: v[0].benchmark,
-      margin: 0,
-      name: '(median)',
-      nodeVersion: v[0].nodeVersion,
-      ops: median(sorted.map(x => x.ops)),
-    };
-
-    preparedResult.push(others);
+    updateResult(
+      '(median)',
+      getBenchmarkLabel(v[0].benchmark as AvailableBenchmarksIds),
+      median(sorted.map(x => x.ops))
+    );
   });
 
-  return preparedResult.map(v => {
-    return {
-      ...v,
-      [getBenchmarkLabel(v.benchmark as AvailableBenchmarksIds)]: v.ops,
-    };
-  });
+  return preparedResult;
 }
 
 // generate a nice preview graph
@@ -129,6 +149,9 @@ async function previewGraph({ values }: PreviewGraphParams): Promise<string> {
           title: null,
           // do not sort by name to keep the preparedValues sorting by ops
           // instead
+          // also, we cannot use `sort: '-x'` because that will include every
+          // top 3 library in every repeated bar chart, regardless whether it
+          // is in the top 3 of the current benchmark
           sort: null,
         },
         color: {
