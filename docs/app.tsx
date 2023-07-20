@@ -177,29 +177,12 @@ async function graph({
     data: {
       values,
     },
-    width: 600,
     height: { step: 15 / nodeJsVersionCount },
     background: 'transparent', // no white graphs for dark mode users
-    mark: 'bar',
-    layer: [
-      {
-        mark: {
-          type: 'text',
-          align: 'left',
-          baseline: 'middle',
-          dx: 3,
-        },
-        encoding: {
-          text: { field: 'ops', type: 'quantitative' },
-        },
-      },
-    ],
-    encoding: {
+    facet: {
       row: {
         field: 'name',
-        type: 'nominal',
         title: null,
-        spacing: 0,
         header: {
           labelAngle: 0,
           labelOrient: 'left',
@@ -209,30 +192,40 @@ async function graph({
         },
         sort: sortedNames,
       },
-      x: {
-        field: 'ops',
-        type: 'quantitative',
-        title: ['operations / sec', '(better ▶)'],
-        axis: {
-          orient: 'top',
-          offset: 10,
-          labelFontSize: 12,
-          titleFontSize: 14,
-          titleFontWeight: 'normal',
+    },
+    spec: {
+      layer: [
+        {
+          mark: "bar",
+          width: 600,
         },
-      },
-      y: {
-        field: 'benchmark',
-        type: 'nominal',
-        title: 'Benchmark',
-        axis: null, // to debug the bars: axis: {labelFontSize: 3},
-      },
-      color: {
-        field: 'benchmark',
-        type: 'nominal',
-        legend: null,
-        scale: {
-          range: colorScaleRange,
+      ],
+      encoding: {
+        x: {
+          field: 'ops',
+          type: 'quantitative',
+          title: ['operations / sec', '(better ▶)'],
+          axis: {
+            orient: 'top',
+            offset: 10,
+            labelFontSize: 12,
+            titleFontSize: 14,
+            titleFontWeight: 'normal',
+          },
+        },
+        y: {
+          field: 'benchmark',
+          type: 'nominal',
+          title: 'Benchmark',
+          axis: null, // to debug the bars: axis: {labelFontSize: 3},
+        },
+        color: {
+          field: 'benchmark',
+          type: 'nominal',
+          legend: null,
+          scale: {
+            range: colorScaleRange,
+          },
         },
       },
     },
