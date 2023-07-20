@@ -137,6 +137,7 @@ async function graph({
     )
     .map(b => ({
       ...b,
+      opsLabel: b.ops.toLocaleString('en-US'),
       // artificical benchmark name to make sure its always sorted by
       // benchmark and node-version
       benchmark: [
@@ -198,6 +199,17 @@ async function graph({
         {
           mark: "bar",
           width: 600,
+        },
+        {
+          mark: {
+            type: 'text',
+            align: 'left',
+            baseline: 'middle',
+            dx: 3,
+          },
+          encoding: {
+            text: {field: 'opsLabel'},
+          },
         },
       ],
       encoding: {
