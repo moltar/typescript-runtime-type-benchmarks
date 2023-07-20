@@ -62,7 +62,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -197,7 +197,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             return selectedBenchmarkSet.has(b.benchmark) &&
                                 selectedNodeJsVersionsSet.has(b.nodeVersion);
                         })
-                            .map(function (b) { return (__assign(__assign({}, b), { 
+                            .map(function (b) { return (__assign(__assign({}, b), { opsLabel: b.ops.toLocaleString('en-US'), 
                             // artificical benchmark name to make sure its always sorted by
                             // benchmark and node-version
                             benchmark: [
@@ -225,29 +225,12 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             data: {
                                 values: values
                             },
-                            width: 600,
                             height: { step: 15 / nodeJsVersionCount },
                             background: 'transparent',
-                            mark: 'bar',
-                            layer: [
-                                {
-                                    mark: {
-                                        type: 'text',
-                                        align: 'left',
-                                        baseline: 'middle',
-                                        dx: 3
-                                    },
-                                    encoding: {
-                                        text: { field: 'ops', type: 'quantitative' }
-                                    }
-                                },
-                            ],
-                            encoding: {
+                            facet: {
                                 row: {
                                     field: 'name',
-                                    type: 'nominal',
                                     title: null,
-                                    spacing: 0,
                                     header: {
                                         labelAngle: 0,
                                         labelOrient: 'left',
@@ -256,31 +239,52 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                         labelFontSize: 12
                                     },
                                     sort: sortedNames
-                                },
-                                x: {
-                                    field: 'ops',
-                                    type: 'quantitative',
-                                    title: ['operations / sec', '(better ▶)'],
-                                    axis: {
-                                        orient: 'top',
-                                        offset: 10,
-                                        labelFontSize: 12,
-                                        titleFontSize: 14,
-                                        titleFontWeight: 'normal'
-                                    }
-                                },
-                                y: {
-                                    field: 'benchmark',
-                                    type: 'nominal',
-                                    title: 'Benchmark',
-                                    axis: null
-                                },
-                                color: {
-                                    field: 'benchmark',
-                                    type: 'nominal',
-                                    legend: null,
-                                    scale: {
-                                        range: colorScaleRange
+                                }
+                            },
+                            spec: {
+                                layer: [
+                                    {
+                                        mark: "bar",
+                                        width: 600
+                                    },
+                                    {
+                                        mark: {
+                                            type: 'text',
+                                            align: 'left',
+                                            baseline: 'middle',
+                                            dx: 3
+                                        },
+                                        encoding: {
+                                            text: { field: 'opsLabel' }
+                                        }
+                                    },
+                                ],
+                                encoding: {
+                                    x: {
+                                        field: 'ops',
+                                        type: 'quantitative',
+                                        title: ['operations / sec', '(better ▶)'],
+                                        axis: {
+                                            orient: 'top',
+                                            offset: 10,
+                                            labelFontSize: 12,
+                                            titleFontSize: 14,
+                                            titleFontWeight: 'normal'
+                                        }
+                                    },
+                                    y: {
+                                        field: 'benchmark',
+                                        type: 'nominal',
+                                        title: 'Benchmark',
+                                        axis: null
+                                    },
+                                    color: {
+                                        field: 'benchmark',
+                                        type: 'nominal',
+                                        legend: null,
+                                        scale: {
+                                            range: colorScaleRange
+                                        }
                                     }
                                 }
                             }
