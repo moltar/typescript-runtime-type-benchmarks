@@ -197,7 +197,7 @@ async function graph({
     spec: {
       layer: [
         {
-          mark: "bar",
+          mark: 'bar',
           width: 600,
         },
         {
@@ -208,7 +208,7 @@ async function graph({
             dx: 3,
           },
           encoding: {
-            text: {field: 'opsLabel'},
+            text: { field: 'opsLabel' },
           },
         },
       ],
