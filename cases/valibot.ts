@@ -41,6 +41,6 @@ createCase('valibot', 'parseStrict', () => {
   );
 
   return data => {
-    return v.safeParse(dataType, data);
+    return dataType.parse(data);
   };
 });
