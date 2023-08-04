@@ -44,11 +44,11 @@
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
 * [typia](https://github.com/samchon/typia)
 * [@typeofweb/schema](https://github.com/typeofweb/schema)
+* [valibot](https://github.com/fabian-hiller/valibot)
 * [valita](https://github.com/badrap/valita)
 * [Vality](https://github.com/jeengbe/vality)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
-* [valibot](https://github.com/fabian-hiller/valibot)
 
 ## Criteria
 
