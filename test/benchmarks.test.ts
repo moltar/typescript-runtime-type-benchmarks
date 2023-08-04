@@ -36,6 +36,7 @@ import '../cases/ts-utils';
 import '../cases/tson';
 import '../cases/typeofweb-schema';
 import '../cases/typia';
+import '../cases/valibot';
 import '../cases/valita';
 import '../cases/vality';
 import '../cases/yup';

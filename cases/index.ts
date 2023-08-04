@@ -32,6 +32,7 @@ export const cases = [
   'tson',
   'typeofweb-schema',
   'typia',
+  'valibot',
   'valita',
   'vality',
   'yup',
