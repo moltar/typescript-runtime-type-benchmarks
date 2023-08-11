@@ -5,7 +5,7 @@ import { Loose, Strict } from './sinclair-typebox';
 const CheckLoose = TypeCompiler.Compile(Loose);
 const CheckStrict = TypeCompiler.Compile(Strict);
 
-createCase('@sinclair/typebox (just-in-time)', 'assertLoose', () => {
+createCase('@sinclair/typebox-just-in-time', 'assertLoose', () => {
   return data => {
     if (!CheckLoose.Check(data)) {
       throw new Error('validation failure');
@@ -13,7 +13,7 @@ createCase('@sinclair/typebox (just-in-time)', 'assertLoose', () => {
     return true;
   };
 });
-createCase('@sinclair/typebox (just-in-time)', 'assertStrict', () => {
+createCase('@sinclair/typebox-just-in-time', 'assertStrict', () => {
   return data => {
     if (!CheckStrict.Check(data)) {
       throw new Error('validation failure');
