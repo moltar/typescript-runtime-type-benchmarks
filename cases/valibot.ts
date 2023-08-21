@@ -17,7 +17,7 @@ createCase('valibot', 'parseSafe', () => {
   });
 
   return data => {
-    return dataType.parse(data);
+    return v.parse(dataType, data);
   };
 });
 
@@ -41,6 +41,6 @@ createCase('valibot', 'parseStrict', () => {
   );
 
   return data => {
-    return dataType.parse(data);
+    return v.parse(dataType, data);
   };
 });
