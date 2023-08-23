@@ -1,46 +1,50 @@
-import { object, number, string, boolean, parse, strict } from 'valibot';
-import { createCase } from '../benchmarks';
+import { object, number, string, boolean, parse, strict, is } from 'valibot';
+import { addCase } from '../benchmarks';
 
-createCase('valibot', 'parseSafe', () => {
-  const dataType = object({
+const LooseSchema = object({
+  number: number(),
+  negNumber: number(),
+  maxNumber: number(),
+  string: string(),
+  longString: string(),
+  boolean: boolean(),
+  deeplyNested: object({
+    foo: string(),
+    num: number(),
+    bool: boolean(),
+  }),
+});
+
+const StrictSchema = strict(
+  object({
     number: number(),
     negNumber: number(),
     maxNumber: number(),
     string: string(),
     longString: string(),
     boolean: boolean(),
-    deeplyNested: object({
-      foo: string(),
-      num: number(),
-      bool: boolean(),
-    }),
-  });
+    deeplyNested: strict(
+      object({
+        foo: string(),
+        num: number(),
+        bool: boolean(),
+      })
+    ),
+  })
+);
 
-  return data => {
-    return parse(dataType, data);
-  };
+addCase('valibot', 'assertLoose', data => {
+  return is(LooseSchema, data);
 });
 
-createCase('valibot', 'parseStrict', () => {
-  const dataType = strict(
-    object({
-      number: number(),
-      negNumber: number(),
-      maxNumber: number(),
-      string: string(),
-      longString: string(),
-      boolean: boolean(),
-      deeplyNested: strict(
-        object({
-          foo: string(),
-          num: number(),
-          bool: boolean(),
-        })
-      ),
-    })
-  );
+addCase('valibot', 'assertStrict', data => {
+  return is(StrictSchema, data);
+});
 
-  return data => {
-    return parse(dataType, data);
-  };
+addCase('valibot', 'parseSafe', data => {
+  return parse(LooseSchema, data);
+});
+
+addCase('valibot', 'parseStrict', data => {
+  return parse(StrictSchema, data);
 });
