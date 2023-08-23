@@ -1,4 +1,12 @@
-import { object, number, string, boolean, parse, strict, is } from 'valibot';
+import {
+  object,
+  number,
+  string,
+  boolean,
+  parse,
+  type ParseInfo,
+  strict,
+} from 'valibot';
 import { addCase } from '../benchmarks';
 
 const LooseSchema = object({
@@ -33,18 +41,22 @@ const StrictSchema = strict(
   })
 );
 
+const info: ParseInfo = { abortEarly: true };
+
 addCase('valibot', 'assertLoose', data => {
-  return is(LooseSchema, data);
+  parse(LooseSchema, data, info);
+  return true;
 });
 
 addCase('valibot', 'assertStrict', data => {
-  return is(StrictSchema, data);
+  parse(StrictSchema, data, info);
+  return true;
 });
 
 addCase('valibot', 'parseSafe', data => {
-  return parse(LooseSchema, data);
+  return parse(LooseSchema, data, info);
 });
 
 addCase('valibot', 'parseStrict', data => {
-  return parse(StrictSchema, data);
+  return parse(StrictSchema, data, info);
 });
