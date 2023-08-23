@@ -1,46 +1,46 @@
-import * as v from 'valibot';
+import { object, number, string, boolean, parse, strict } from 'valibot';
 import { createCase } from '../benchmarks';
 
 createCase('valibot', 'parseSafe', () => {
-  const dataType = v.object({
-    number: v.number(),
-    negNumber: v.number(),
-    maxNumber: v.number(),
-    string: v.string(),
-    longString: v.string(),
-    boolean: v.boolean(),
-    deeplyNested: v.object({
-      foo: v.string(),
-      num: v.number(),
-      bool: v.boolean(),
+  const dataType = object({
+    number: number(),
+    negNumber: number(),
+    maxNumber: number(),
+    string: string(),
+    longString: string(),
+    boolean: boolean(),
+    deeplyNested: object({
+      foo: string(),
+      num: number(),
+      bool: boolean(),
     }),
   });
 
   return data => {
-    return v.parse(dataType, data);
+    return parse(dataType, data);
   };
 });
 
 createCase('valibot', 'parseStrict', () => {
-  const dataType = v.strict(
-    v.object({
-      number: v.number(),
-      negNumber: v.number(),
-      maxNumber: v.number(),
-      string: v.string(),
-      longString: v.string(),
-      boolean: v.boolean(),
-      deeplyNested: v.strict(
-        v.object({
-          foo: v.string(),
-          num: v.number(),
-          bool: v.boolean(),
+  const dataType = strict(
+    object({
+      number: number(),
+      negNumber: number(),
+      maxNumber: number(),
+      string: string(),
+      longString: string(),
+      boolean: boolean(),
+      deeplyNested: strict(
+        object({
+          foo: string(),
+          num: number(),
+          bool: boolean(),
         })
       ),
     })
   );
 
   return data => {
-    return v.parse(dataType, data);
+    return parse(dataType, data);
   };
 });
