@@ -4,83 +4,91 @@ import { createCase } from '../benchmarks';
 
 createCase('rescript-struct', 'parseSafe', () => {
   const struct = S.object({
-    number: S.number(),
-    negNumber: S.number(),
-    maxNumber: S.number(),
-    string: S.string(),
-    longString: S.string(),
-    boolean: S.boolean(),
+    number: S.number,
+    negNumber: S.number,
+    maxNumber: S.number,
+    string: S.string,
+    longString: S.string,
+    boolean: S.boolean,
     deeplyNested: S.object({
-      foo: S.string(),
-      num: S.number(),
-      bool: S.boolean(),
+      foo: S.string,
+      num: S.number,
+      bool: S.boolean,
     }),
   });
 
   return data => {
-    return struct.parseOrThrow(data);
+    return S.parseOrThrow(struct, data);
   };
 });
 
 createCase('rescript-struct', 'parseStrict', () => {
-  const struct = S.object({
-    number: S.number(),
-    negNumber: S.number(),
-    maxNumber: S.number(),
-    string: S.string(),
-    longString: S.string(),
-    boolean: S.boolean(),
-    deeplyNested: S.object({
-      foo: S.string(),
-      num: S.number(),
-      bool: S.boolean(),
-    }).strict(),
-  }).strict();
+  const struct = S.Object.strict(
+    S.object({
+      number: S.number,
+      negNumber: S.number,
+      maxNumber: S.number,
+      string: S.string,
+      longString: S.string,
+      boolean: S.boolean,
+      deeplyNested: S.Object.strict(
+        S.object({
+          foo: S.string,
+          num: S.number,
+          bool: S.boolean,
+        })
+      ),
+    })
+  );
 
   return data => {
-    return struct.parseOrThrow(data);
+    return S.parseOrThrow(struct, data);
   };
 });
 
 createCase('rescript-struct', 'assertLoose', () => {
   const struct = S.object({
-    number: S.number(),
-    negNumber: S.number(),
-    maxNumber: S.number(),
-    string: S.string(),
-    longString: S.string(),
-    boolean: S.boolean(),
+    number: S.number,
+    negNumber: S.number,
+    maxNumber: S.number,
+    string: S.string,
+    longString: S.string,
+    boolean: S.boolean,
     deeplyNested: S.object({
-      foo: S.string(),
-      num: S.number(),
-      bool: S.boolean(),
+      foo: S.string,
+      num: S.number,
+      bool: S.boolean,
     }),
   });
 
   return data => {
-    struct.parseOrThrow(data);
+    S.parseOrThrow(struct, data);
 
     return true;
   };
 });
 
 createCase('rescript-struct', 'assertStrict', () => {
-  const struct = S.object({
-    number: S.number(),
-    negNumber: S.number(),
-    maxNumber: S.number(),
-    string: S.string(),
-    longString: S.string(),
-    boolean: S.boolean(),
-    deeplyNested: S.object({
-      foo: S.string(),
-      num: S.number(),
-      bool: S.boolean(),
-    }).strict(),
-  }).strict();
+  const struct = S.Object.strict(
+    S.object({
+      number: S.number,
+      negNumber: S.number,
+      maxNumber: S.number,
+      string: S.string,
+      longString: S.string,
+      boolean: S.boolean,
+      deeplyNested: S.Object.strict(
+        S.object({
+          foo: S.string,
+          num: S.number,
+          bool: S.boolean,
+        })
+      ),
+    })
+  );
 
   return data => {
-    struct.parseOrThrow(data);
+    S.parseOrThrow(struct, data);
 
     return true;
   };
