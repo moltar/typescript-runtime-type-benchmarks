@@ -39,7 +39,7 @@ createCase('$mol_data', 'assertLoose', () => {
   });
 
   return data => {
-    dataType(data as any);
+    dataType(data as never);
     return true;
   };
 });
