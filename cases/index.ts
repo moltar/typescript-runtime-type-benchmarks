@@ -7,6 +7,7 @@ export const cases = [
   'io-ts',
   'jointz',
   'json-decoder',
+  'mol_data',
   'mojotech-json-type-validation',
   'myzod',
   'ok-computer',
