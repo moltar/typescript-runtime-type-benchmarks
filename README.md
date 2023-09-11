@@ -21,6 +21,7 @@
 * [jointz](https://github.com/moodysalem/jointz)
 * [json-decoder](https://github.com/venil7/json-decoder)
 * [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
+* [$mol_data](https://github.com/hyoo-ru/mam_mol/blob/master/data/README.md)
 * [myzod](https://github.com/davidmdm/myzod)
 * [ok-computer](https://github.com/richardscarrott/ok-computer)
 * [purify-ts](https://github.com/gigobyte/purify)
