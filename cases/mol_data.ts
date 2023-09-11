@@ -38,7 +38,7 @@ createCase('$mol_data', 'assertLoose', () => {
     }),
   });
 
-  return data => 
+  return data => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dataType(data as any);
     return true;
