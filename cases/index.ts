@@ -1,5 +1,6 @@
 export const cases = [
   'ajv',
+  'arktype',
   'bueno',
   'class-validator',
   'computed-types',
