@@ -28,7 +28,7 @@
 * [purify-ts](https://github.com/gigobyte/purify)
 * [parse-dont-validate](https://github.com/Packer-Man/parse-dont-validate)
 * [r-assign](https://github.com/micnic/r-assign)
-* [rescript-struct](https://github.com/DZakh/rescript-struct)
+* [rescript-schema](https://github.com/DZakh/rescript-schema)
 * [rulr](https://github.com/ryansmith94/rulr)
 * [runtypes](https://github.com/pelotom/runtypes)
 * [@sapphire/shapeshift](https://github.com/sapphiredev/shapeshift)
