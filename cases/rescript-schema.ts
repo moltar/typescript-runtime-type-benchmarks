@@ -1,9 +1,9 @@
-import * as S from 'rescript-struct';
+import * as S from 'rescript-schema';
 
 import { createCase } from '../benchmarks';
 
-createCase('rescript-struct', 'parseSafe', () => {
-  const struct = S.object({
+createCase('rescript-schema', 'parseSafe', () => {
+  const schema = S.object({
     number: S.number,
     negNumber: S.number,
     maxNumber: S.number,
@@ -18,12 +18,12 @@ createCase('rescript-struct', 'parseSafe', () => {
   });
 
   return data => {
-    return S.parseOrThrow(struct, data);
+    return S.parseOrThrow(schema, data);
   };
 });
 
-createCase('rescript-struct', 'parseStrict', () => {
-  const struct = S.Object.strict(
+createCase('rescript-schema', 'parseStrict', () => {
+  const schema = S.Object.strict(
     S.object({
       number: S.number,
       negNumber: S.number,
@@ -42,12 +42,12 @@ createCase('rescript-struct', 'parseStrict', () => {
   );
 
   return data => {
-    return S.parseOrThrow(struct, data);
+    return S.parseOrThrow(schema, data);
   };
 });
 
-createCase('rescript-struct', 'assertLoose', () => {
-  const struct = S.object({
+createCase('rescript-schema', 'assertLoose', () => {
+  const schema = S.object({
     number: S.number,
     negNumber: S.number,
     maxNumber: S.number,
@@ -62,14 +62,14 @@ createCase('rescript-struct', 'assertLoose', () => {
   });
 
   return data => {
-    S.parseOrThrow(struct, data);
+    S.parseOrThrow(schema, data);
 
     return true;
   };
 });
 
-createCase('rescript-struct', 'assertStrict', () => {
-  const struct = S.Object.strict(
+createCase('rescript-schema', 'assertStrict', () => {
+  const schema = S.Object.strict(
     S.object({
       number: S.number,
       negNumber: S.number,
@@ -88,7 +88,7 @@ createCase('rescript-struct', 'assertStrict', () => {
   );
 
   return data => {
-    S.parseOrThrow(struct, data);
+    S.parseOrThrow(schema, data);
 
     return true;
   };

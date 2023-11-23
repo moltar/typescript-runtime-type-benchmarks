@@ -15,7 +15,7 @@ export const cases = [
   'parse-dont-validate',
   'purify-ts',
   'r-assign',
-  'rescript-struct',
+  'rescript-schema',
   'rulr',
   'runtypes',
   'sapphire-shapeshift',
