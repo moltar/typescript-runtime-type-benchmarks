@@ -1,4 +1,4 @@
-import { cast, getValidatorFunction } from '@deepkit/type';
+import { castFunction, getValidatorFunction } from '@deepkit/type';
 
 interface ToBeChecked {
   number: number;
@@ -15,6 +15,7 @@ interface ToBeChecked {
 }
 
 const isToBeChecked = getValidatorFunction<ToBeChecked>();
+const safeToBeChecked = castFunction<ToBeChecked>();
 
 /**
  * Check that an object conforms to the schema.
@@ -56,5 +57,5 @@ export function parseStrict(input: unknown): ToBeChecked {
  */
 export function parseSafe(input: unknown): ToBeChecked {
   if (!isToBeChecked(input) as boolean) throw new Error('wrong type.');
-  return cast<ToBeChecked>(input);
+  return safeToBeChecked(input);
 }

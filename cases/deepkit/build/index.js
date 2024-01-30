@@ -4,6 +4,7 @@ exports.parseSafe = exports.parseStrict = exports.assertStrict = exports.assertL
 const type_1 = require("@deepkit/type");
 const __ΩToBeChecked = ['number', 'negNumber', 'maxNumber', 'string', 'longString', 'boolean', 'foo', 'num', 'bool', 'deeplyNested', 'ToBeChecked', 'P\'4!\'4"\'4#&4$&4%)4&P&4\'\'4()4)M4*Mw+y'];
 const isToBeChecked = (type_1.getValidatorFunction.Ω = [[() => __ΩToBeChecked, 'n!']], (0, type_1.getValidatorFunction)());
+const safeToBeChecked = (type_1.castFunction.Ω = [[() => __ΩToBeChecked, 'n!']], (0, type_1.castFunction)());
 /**
  * Check that an object conforms to the schema.
  *
@@ -49,7 +50,7 @@ parseStrict.__type = ['input', () => __ΩToBeChecked, 'parseStrict', 'P#2!n"/#']
 function parseSafe(input) {
     if (!isToBeChecked(input))
         throw new Error('wrong type.');
-    return (type_1.cast.Ω = [[() => __ΩToBeChecked, 'n!']], (0, type_1.cast)(input));
+    return safeToBeChecked(input);
 }
 exports.parseSafe = parseSafe;
 parseSafe.__type = ['input', () => __ΩToBeChecked, 'parseSafe', 'P#2!n"/#'];
