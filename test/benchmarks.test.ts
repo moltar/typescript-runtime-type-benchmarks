@@ -46,6 +46,7 @@ import '../cases/valita';
 import '../cases/vality';
 import '../cases/yup';
 import '../cases/zod';
+import '../cases/deepkit';
 
 test('all cases must have been imported in tests', () => {
   expect(

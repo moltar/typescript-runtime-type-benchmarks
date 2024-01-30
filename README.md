@@ -18,6 +18,7 @@
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [computed-types](https://github.com/neuledge/computed-types)
 * [decoders](https://github.com/nvie/decoders)
+* [deepkit](https://deepkit.io/)
 * [io-ts](https://github.com/gcanti/io-ts)
 * [jointz](https://github.com/moodysalem/jointz)
 * [json-decoder](https://github.com/venil7/json-decoder)
