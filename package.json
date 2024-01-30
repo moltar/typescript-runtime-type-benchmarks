@@ -13,7 +13,6 @@
     "lint:fix": "gts fix",
     "start": "ts-node index.ts",
     "test:build": "npm run compile:spectypes && npm run compile:ts-runtime-checks && npm run compile:typebox && npm run compile:typia && npm run compile:deepkit && tsc --noEmit",
-    "test": "npm run compile:spectypes && npm run compile:ts-runtime-checks && npm run compile:typebox && npm run compile:typi && npm run compile:deepkit && jest",
     "test": "npm run compile:spectypes && npm run compile:ts-runtime-checks && npm run compile:typebox && npm run compile:typia && npm run compile:deepkit && jest",
     "docs:serve": "serve docs",
     "docs:watch": "tsc --project tsconfig.docs.json --watch --preserveWatchOutput & serve docs",
@@ -23,7 +22,6 @@
     "compile:ts-runtime-checks": "rimraf cases/ts-runtime-checks/build && tsc -p cases/ts-runtime-checks/src",
     "compile:typebox": "ts-node cases/typebox/index.ts cases/typebox/build",
     "compile:typia": "rimraf cases/typia/build && tsc -p cases/typia/tsconfig.json",
-    "compile:vega": "tsc -p cases/vega/tsconfig.json",
     "prepare": "ts-patch install"
   },
   "dependencies": {
