@@ -56,6 +56,5 @@ export function parseStrict(input: unknown): ToBeChecked {
  * maliciously passed to internal functions.
  */
 export function parseSafe(input: unknown): ToBeChecked {
-  if (!isToBeChecked(input) as boolean) throw new Error('wrong type.');
   return safeToBeChecked(input);
 }

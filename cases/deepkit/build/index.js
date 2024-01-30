@@ -48,8 +48,6 @@ parseStrict.__type = ['input', () => __ΩToBeChecked, 'parseStrict', 'P#2!n"/#']
  * maliciously passed to internal functions.
  */
 function parseSafe(input) {
-    if (!isToBeChecked(input))
-        throw new Error('wrong type.');
     return safeToBeChecked(input);
 }
 exports.parseSafe = parseSafe;
