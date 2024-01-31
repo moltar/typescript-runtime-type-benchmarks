@@ -42,6 +42,7 @@ export const cases = [
   'vality',
   'yup',
   'zod',
+  'deepkit',
 ] as const;
 
 export type CaseName = typeof cases[number];
