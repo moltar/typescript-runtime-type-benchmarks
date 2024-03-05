@@ -1,4 +1,5 @@
 export const cases = [
+  'aeria',
   'ajv',
   'arktype',
   'bueno',
@@ -45,7 +46,7 @@ export const cases = [
   'deepkit',
 ] as const;
 
-export type CaseName = typeof cases[number];
+export type CaseName = (typeof cases)[number];
 
 export async function importCase(caseName: CaseName) {
   await import('./' + caseName);

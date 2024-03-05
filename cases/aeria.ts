@@ -1,8 +1,9 @@
-import type { ObjectProperty } from '@aeriajs/types'
-import { silentValidator } from '@aeriajs/validation'
+/* eslint-disable-next-line */
+import type { ObjectProperty } from '@aeriajs/types';
+import { silentValidator } from '@aeriajs/validation';
 import { createCase } from '../benchmarks';
 
-const schema = <const>{
+const schema = (<const>{
   type: 'object',
   properties: {
     number: {
@@ -48,44 +49,62 @@ const schema = <const>{
     'boolean',
     'deeplyNested',
   ],
-} satisfies ObjectProperty
+}) satisfies ObjectProperty;
 
 createCase('aeria', 'parseSafe', () => {
   const [_, validate] = silentValidator(schema, {
     extraneous: true,
     filterOutExtraneous: true,
-    coerce: true
-  })
+    coerce: true,
+  });
 
   return (data: any) => {
-    return validate(data)
-  }
-})
+    const result = validate(data);
+    if( !result ) {
+      throw new Error()
+    }
+
+    return result
+  };
+});
 
 createCase('aeria', 'parseStrict', () => {
   const [_, validate] = silentValidator(schema, {
-    coerce: true
-  })
+    coerce: true,
+  });
 
   return (data: any) => {
-    return validate(data)
-  }
-})
+    const result = validate(data);
+    if( !result ) {
+      throw new Error()
+    }
+
+    return result
+  };
+});
 
 createCase('aeria', 'assertLoose', () => {
   const [_, validate] = silentValidator(schema, {
-    extraneous: true
-  })
+    extraneous: true,
+  });
 
   return (data: any) => {
-    return validate(data)
-  }
-})
+    if( !validate(data) ) {
+      throw new Error()
+    }
+
+    return true
+  };
+});
 
 createCase('aeria', 'assertStrict', () => {
-  const [_, validate] = silentValidator(schema)
+  const [_, validate] = silentValidator(schema);
 
   return (data: any) => {
-    return validate(data)
-  }
-})
+    if( !validate(data) ) {
+      throw new Error()
+    }
+
+    return true
+  };
+});
