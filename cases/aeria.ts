@@ -60,11 +60,11 @@ createCase('aeria', 'parseSafe', () => {
 
   return (data: any) => {
     const result = validate(data);
-    if( !result ) {
-      throw new Error()
+    if (!result) {
+      throw new Error();
     }
 
-    return result
+    return result;
   };
 });
 
@@ -75,11 +75,11 @@ createCase('aeria', 'parseStrict', () => {
 
   return (data: any) => {
     const result = validate(data);
-    if( !result ) {
-      throw new Error()
+    if (!result) {
+      throw new Error();
     }
 
-    return result
+    return result;
   };
 });
 
@@ -89,11 +89,11 @@ createCase('aeria', 'assertLoose', () => {
   });
 
   return (data: any) => {
-    if( !validate(data) ) {
-      throw new Error()
+    if (!validate(data)) {
+      throw new Error();
     }
 
-    return true
+    return true;
   };
 });
 
@@ -101,10 +101,10 @@ createCase('aeria', 'assertStrict', () => {
   const [_, validate] = silentValidator(schema);
 
   return (data: any) => {
-    if( !validate(data) ) {
-      throw new Error()
+    if (!validate(data)) {
+      throw new Error();
     }
 
-    return true
+    return true;
   };
 });
