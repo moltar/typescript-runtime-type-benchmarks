@@ -1,11 +1,5 @@
+import { silentValidator } from '@aeriajs/validation';
 import { createCase } from '../benchmarks';
-
-/*
- * This import was switched to a require() because otherwise
- * ts compiler would reach node_modules/@aeriajs/**, and compilation
- * would fail because aeria uses a newer Typescript version
- */
-const { silentValidator } = require('@aeriajs/validation');
 
 const schema = <const>{
   type: 'object',

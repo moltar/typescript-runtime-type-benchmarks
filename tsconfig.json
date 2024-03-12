@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfigs/nodejs-module",
+  "extends": "./node_modules/tsconfigs/nodejs-module.json",
   "compilerOptions": {
     "lib": ["ES2015", "DOM"],
     "target": "ES2015",
