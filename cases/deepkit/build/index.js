@@ -27,19 +27,19 @@ assertLoose.__type = ['input', 'assertLoose', 'P#2!)/"'];
  *
  * Raise errors if any extra keys not present in the schema are found.
  */
-function assertStrict(input) {
+function assertStrict() {
     throw new Error('not supported.');
 }
 exports.assertStrict = assertStrict;
-assertStrict.__type = ['input', 'assertStrict', 'P#2!)/"'];
+assertStrict.__type = ['assertStrict', 'P)/!'];
 /**
  * Like parseSafe but throw on unknown (extra) keys in objects.
  */
-function parseStrict(input) {
+function parseStrict() {
     throw new Error('not supported.');
 }
 exports.parseStrict = parseStrict;
-parseStrict.__type = ['input', () => __ΩToBeChecked, 'parseStrict', 'P#2!n"/#'];
+parseStrict.__type = [() => __ΩToBeChecked, 'parseStrict', 'Pn!/"'];
 /**
  * Validate and ignore unknown keys, removing them from the result.
  *

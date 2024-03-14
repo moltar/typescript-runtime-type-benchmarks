@@ -49,6 +49,10 @@ function median(values: number[]) {
   return (values[values.length / 2 - 1] + values[values.length / 2]) / 2;
 }
 
+interface PreparedResult extends Partial<Record<BenchmarkLabel, number>> {
+  name: string;
+}
+
 // Cheap aggregation of benchmark data.
 // For the repeated bar chart, vega-lite expects a numeric value for each
 // repeated field (the benchmark label) for each benchmarked library (`name`).
@@ -66,7 +70,7 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
     bin.push(result);
   });
 
-  const preparedResult: any[] = [];
+  const preparedResult: PreparedResult[] = [];
 
   function updateResult(
     name: string,

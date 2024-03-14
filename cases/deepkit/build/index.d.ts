@@ -27,11 +27,11 @@ export declare function assertLoose(input: unknown): boolean;
  *
  * Raise errors if any extra keys not present in the schema are found.
  */
-export declare function assertStrict(input: unknown): boolean;
+export declare function assertStrict(): boolean;
 /**
  * Like parseSafe but throw on unknown (extra) keys in objects.
  */
-export declare function parseStrict(input: unknown): ToBeChecked;
+export declare function parseStrict(): ToBeChecked;
 /**
  * Validate and ignore unknown keys, removing them from the result.
  *

@@ -37,14 +37,14 @@ export function assertLoose(input: unknown): boolean {
  *
  * Raise errors if any extra keys not present in the schema are found.
  */
-export function assertStrict(input: unknown): boolean {
+export function assertStrict(): boolean {
   throw new Error('not supported.');
 }
 
 /**
  * Like parseSafe but throw on unknown (extra) keys in objects.
  */
-export function parseStrict(input: unknown): ToBeChecked {
+export function parseStrict(): ToBeChecked {
   throw new Error('not supported.');
 }
 
