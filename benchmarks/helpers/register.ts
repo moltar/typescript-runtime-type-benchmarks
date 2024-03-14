@@ -24,7 +24,7 @@ const registeredBenchmarks = new Map<AvailableBenchmarksIds, BenchmarkCase[]>();
  */
 export function getRegisteredBenchmarks(): [
   keyof AvailableBenchmarks,
-  BenchmarkCase[]
+  BenchmarkCase[],
 ][] {
   return [...registeredBenchmarks.entries()];
 }
@@ -34,7 +34,7 @@ export function getRegisteredBenchmarks(): [
  */
 export function addCase<
   K extends keyof AvailableBenchmarks,
-  I = AvailableBenchmarks[K]['prototype']['fn']
+  I = AvailableBenchmarks[K]['prototype']['fn'],
 >(
   moduleName: string,
   benchmarkId: K,
@@ -75,7 +75,7 @@ export function addCase<
 
 export function createCase<
   K extends keyof AvailableBenchmarks,
-  I = AvailableBenchmarks[K]['prototype']['fn']
+  I = AvailableBenchmarks[K]['prototype']['fn'],
 >(
   moduleName: string,
   benchmarkId: K,
