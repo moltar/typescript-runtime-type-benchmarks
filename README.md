@@ -12,6 +12,7 @@
 
 ## Packages Compared
 
+* [aeria](https://github.com/aeria-org/aeria)
 * [ajv](https://ajv.js.org/)
 * [ArkType](https://github.com/arktypeio/arktype)
 * [bueno](https://github.com/philipnilsson/bueno)

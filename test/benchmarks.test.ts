@@ -3,6 +3,7 @@ import { cases } from '../cases';
 
 // all cases need to be imported here because jest cannot pic up dynamically
 // imported `test` and `describe`
+import '../cases/aeria';
 import '../cases/ajv';
 import '../cases/arktype';
 import '../cases/bueno';
