@@ -10,6 +10,7 @@ export const cases = [
   'json-decoder',
   'mol_data',
   'mojotech-json-type-validation',
+  'mondrian-framework',
   'myzod',
   'ok-computer',
   'parse-dont-validate',

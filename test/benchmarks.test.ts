@@ -14,6 +14,7 @@ import '../cases/jointz';
 import '../cases/json-decoder';
 import '../cases/mol_data';
 import '../cases/mojotech-json-type-validation';
+import '../cases/mondrian-framework';
 import '../cases/myzod';
 import '../cases/ok-computer';
 import '../cases/parse-dont-validate';
