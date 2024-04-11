@@ -44,6 +44,7 @@ import '../cases/unknownutil';
 import '../cases/valibot';
 import '../cases/valita';
 import '../cases/vality';
+import '../cases/vinejs';
 import '../cases/yup';
 import '../cases/zod';
 import '../cases/deepkit';
