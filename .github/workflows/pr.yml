@@ -52,3 +52,31 @@ jobs:
 
       - name: test
         run: npm test
+  build-bun:
+    runs-on: ubuntu-latest
+
+    strategy:
+        max-parallel: 3
+        matrix:
+          bun-version:
+            - 1.x
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Bun ${{ matrix.node-version }}
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ matrix.node-version }}
+
+      - name: install
+        run: bun install
+
+      - name: lint
+        run: bun lint
+
+      - name: test build
+        run: bun run test:build
+
+      - name: test
+        run: bun test
