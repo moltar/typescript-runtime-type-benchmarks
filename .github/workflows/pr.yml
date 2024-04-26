@@ -72,6 +72,9 @@ jobs:
       - name: install
         run: bun install
 
+      - name: trust
+        run: bun pm trust --all
+
       - name: lint
         run: bun run lint
 
