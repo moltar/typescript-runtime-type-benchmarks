@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, ComponentChildren, h, render } from 'preact';
+import { Component, type ComponentChildren, h, render } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
 

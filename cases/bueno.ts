@@ -9,7 +9,7 @@ import {
   result,
   string,
 } from 'bueno';
-import { UnknownData, addCase } from '../benchmarks';
+import { type UnknownData, addCase } from '../benchmarks';
 
 const dataType = object({
   number: number,
