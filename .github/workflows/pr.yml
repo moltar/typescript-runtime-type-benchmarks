@@ -59,6 +59,7 @@ jobs:
         max-parallel: 3
         matrix:
           bun-version:
+            - 0.x
             - 1.x
 
     steps:
