@@ -53,6 +53,7 @@ jobs:
       - name: test
         run: npm test
   build-bun:
+    needs: build
     runs-on: ubuntu-latest
 
     strategy:
