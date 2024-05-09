@@ -64,10 +64,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Bun ${{ matrix.node-version }}
+      - name: Set up Bun ${{ matrix.bun-version }}
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: ${{ matrix.node-version }}
+          bun-version: ${{ matrix.bun-version }}
 
       - name: install
         run: bun install
