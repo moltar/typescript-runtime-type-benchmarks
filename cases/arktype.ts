@@ -17,8 +17,7 @@ const t = type({
 
 createCase('arktype', 'assertLoose', () => {
   return data => {
-    if (!t.allows(data)) {
-      throw new Error('Invalid');
-    }
+    if (t.allows(data)) return true;
+    throw new Error('Invalid');
   };
 });
