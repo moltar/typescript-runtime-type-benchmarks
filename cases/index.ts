@@ -41,6 +41,7 @@ export const cases = [
   'valibot',
   'valita',
   'vality',
+  'vinejs',
   'yup',
   'zod',
   'deepkit',
