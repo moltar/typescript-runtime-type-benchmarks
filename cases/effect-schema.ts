@@ -69,7 +69,7 @@ createCase('effect-schema', 'assertLoose', () => {
   });
 
   return data => {
-    const result = asserts(data);
+    asserts(data)!;
     return true;
   };
 });
@@ -94,7 +94,7 @@ createCase('effect-schema', 'assertStrict', () => {
   });
 
   return data => {
-    const result = validate(data);
+    validate(data)!;
     return true;
   };
 });
