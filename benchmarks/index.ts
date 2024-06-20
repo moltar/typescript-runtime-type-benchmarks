@@ -5,8 +5,8 @@ export {
 } from './helpers/main';
 export {
   addCase,
-  AvailableBenchmarksIds,
+  type AvailableBenchmarksIds,
   createCase,
   getRegisteredBenchmarks,
 } from './helpers/register';
-export { UnknownData } from './helpers/types';
+export { type UnknownData } from './helpers/types';

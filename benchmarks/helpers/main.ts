@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
 import { writePreviewGraph } from './graph';
 import { getRegisteredBenchmarks } from './register';
-import { BenchmarkCase, BenchmarkResult } from './types';
+import type { BenchmarkCase, BenchmarkResult } from './types';
 
 const DOCS_DIR = join(__dirname, '../../docs');
 const NODE_VERSION = process.env.NODE_VERSION || process.version;

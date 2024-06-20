@@ -2,7 +2,7 @@ import { AssertLoose } from '../assertLoose';
 import { AssertStrict } from '../assertStrict';
 import { ParseSafe } from '../parseSafe';
 import { ParseStrict } from '../parseStrict';
-import { BenchmarkCase } from './types';
+import type { BenchmarkCase } from './types';
 
 /**
  * Map of all benchmarks.

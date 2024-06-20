@@ -1,9 +1,32 @@
 {
   "extends": "./node_modules/gts/",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
   "rules": {
-    "node/no-unpublished-import": "off"
+    "node/no-unpublished-import": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports",
+        "fixStyle": "separate-type-imports"
+      }
+    ],
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/no-import-type-side-effects": "error"
   },
   "env": {
     "jest": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["docs/**/*.tsx"],
+      "parserOptions": {
+        "project": "./tsconfig.docs.json"
+      }
+    }
+  ]
 }
