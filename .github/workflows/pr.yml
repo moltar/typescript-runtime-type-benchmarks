@@ -60,7 +60,7 @@ jobs:
         max-parallel: 3
         matrix:
           bun-version:
-            - 1.x
+            - 1.1.18
 
     steps:
       - uses: actions/checkout@v4
