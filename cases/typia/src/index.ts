@@ -17,4 +17,3 @@ interface ToBeChecked {
 export const is = typia.createIs<ToBeChecked>();
 export const equals = typia.createEquals<ToBeChecked>();
 export const clone = typia.misc.createClone<ToBeChecked>();
-
