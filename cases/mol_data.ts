@@ -8,7 +8,7 @@ import {
 import { createCase } from '../benchmarks';
 
 createCase('$mol_data', 'parseSafe', () => {
-  return Rec({
+  const dataType = Rec({
     number: Numb,
     negNumber: Numb,
     maxNumber: Numb,
@@ -21,6 +21,11 @@ createCase('$mol_data', 'parseSafe', () => {
       bool: Bool,
     }),
   });
+
+  return data => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return dataType(data as any);
+  };
 });
 
 createCase('$mol_data', 'assertLoose', () => {
