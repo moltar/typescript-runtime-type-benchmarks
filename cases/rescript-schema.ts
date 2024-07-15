@@ -2,22 +2,6 @@ import * as S from 'rescript-schema';
 
 import { createCase } from '../benchmarks';
 
-// To bypass the "Assertions require every name in the call target to be declared with an explicit type annotation.ts(2775)"
-// when using assert
-type Data = {
-  number: number;
-  negNumber: number;
-  maxNumber: number;
-  string: string;
-  longString: string;
-  boolean: boolean;
-  deeplyNested: {
-    foo: string;
-    num: number;
-    bool: boolean;
-  };
-};
-
 const makeSchema = () =>
   S.object({
     number: S.number,
@@ -60,10 +44,10 @@ createCase('rescript-schema', 'assertLoose', () => {
   S.setGlobalConfig({
     disableNanNumberCheck: true,
   });
-  const schema: S.Schema<Data> = makeSchema();
+  const schema = makeSchema();
 
   return data => {
-    schema.assert(data);
+    schema.assert(data)!;
     return true;
   };
 });
@@ -73,10 +57,10 @@ createCase('rescript-schema', 'assertStrict', () => {
     disableNanNumberCheck: true,
     defaultUnknownKeys: 'Strict',
   });
-  const schema: S.Schema<Data> = makeSchema();
+  const schema = makeSchema();
 
   return data => {
-    schema.assert(data);
+    schema.assert(data)!;
     return true;
   };
 });
