@@ -2,8 +2,24 @@ import * as S from 'rescript-schema';
 
 import { createCase } from '../benchmarks';
 
-createCase('rescript-schema', 'parseSafe', () => {
-  const schema = S.object({
+// To bypass the "Assertions require every name in the call target to be declared with an explicit type annotation.ts(2775)"
+// when using assert
+type Data = {
+  number: number;
+  negNumber: number;
+  maxNumber: number;
+  string: string;
+  longString: string;
+  boolean: boolean;
+  deeplyNested: {
+    foo: string;
+    num: number;
+    bool: boolean;
+  };
+};
+
+const makeSchema = () =>
+  S.object({
     number: S.number,
     negNumber: S.number,
     maxNumber: S.number,
@@ -17,79 +33,50 @@ createCase('rescript-schema', 'parseSafe', () => {
     }),
   });
 
+createCase('rescript-schema', 'parseSafe', () => {
+  S.setGlobalConfig({
+    disableNanNumberCheck: true,
+  });
+  const schema = makeSchema();
+
   return data => {
-    return S.parseOrThrow(schema, data);
+    return schema.parseOrThrow(data);
   };
 });
 
 createCase('rescript-schema', 'parseStrict', () => {
-  const schema = S.Object.strict(
-    S.object({
-      number: S.number,
-      negNumber: S.number,
-      maxNumber: S.number,
-      string: S.string,
-      longString: S.string,
-      boolean: S.boolean,
-      deeplyNested: S.Object.strict(
-        S.object({
-          foo: S.string,
-          num: S.number,
-          bool: S.boolean,
-        })
-      ),
-    })
-  );
+  S.setGlobalConfig({
+    disableNanNumberCheck: true,
+    defaultUnknownKeys: 'Strict',
+  });
+  const schema = makeSchema();
 
   return data => {
-    return S.parseOrThrow(schema, data);
+    return schema.parseOrThrow(data);
   };
 });
 
 createCase('rescript-schema', 'assertLoose', () => {
-  const schema = S.object({
-    number: S.number,
-    negNumber: S.number,
-    maxNumber: S.number,
-    string: S.string,
-    longString: S.string,
-    boolean: S.boolean,
-    deeplyNested: S.object({
-      foo: S.string,
-      num: S.number,
-      bool: S.boolean,
-    }),
+  S.setGlobalConfig({
+    disableNanNumberCheck: true,
   });
+  const schema: S.Schema<Data> = makeSchema();
 
   return data => {
-    S.parseOrThrow(schema, data);
-
+    schema.assert(data);
     return true;
   };
 });
 
 createCase('rescript-schema', 'assertStrict', () => {
-  const schema = S.Object.strict(
-    S.object({
-      number: S.number,
-      negNumber: S.number,
-      maxNumber: S.number,
-      string: S.string,
-      longString: S.string,
-      boolean: S.boolean,
-      deeplyNested: S.Object.strict(
-        S.object({
-          foo: S.string,
-          num: S.number,
-          bool: S.boolean,
-        })
-      ),
-    })
-  );
+  S.setGlobalConfig({
+    disableNanNumberCheck: true,
+    defaultUnknownKeys: 'Strict',
+  });
+  const schema: S.Schema<Data> = makeSchema();
 
   return data => {
-    S.parseOrThrow(schema, data);
-
+    schema.assert(data);
     return true;
   };
 });
