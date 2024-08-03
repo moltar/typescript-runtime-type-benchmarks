@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseSafe = exports.parseStrict = exports.assertStrict = exports.assertLoose = void 0;
+exports.assertLoose = assertLoose;
+exports.assertStrict = assertStrict;
+exports.parseStrict = parseStrict;
+exports.parseSafe = parseSafe;
 const type_1 = require("@deepkit/type");
 const __ΩToBeChecked = ['number', 'negNumber', 'maxNumber', 'string', 'longString', 'boolean', 'foo', 'num', 'bool', 'deeplyNested', 'ToBeChecked', 'P\'4!\'4"\'4#&4$&4%)4&P&4\'\'4()4)M4*Mw+y'];
 const isToBeChecked = (type_1.getValidatorFunction.Ω = [[() => __ΩToBeChecked, 'n!']], (0, type_1.getValidatorFunction)());
@@ -20,7 +23,6 @@ function assertLoose(input) {
         throw new Error('wrong type.');
     return true;
 }
-exports.assertLoose = assertLoose;
 assertLoose.__type = ['input', 'assertLoose', 'P#2!)/"'];
 /**
  * Check that an object conforms to the schema.
@@ -30,7 +32,6 @@ assertLoose.__type = ['input', 'assertLoose', 'P#2!)/"'];
 function assertStrict() {
     throw new Error('not supported.');
 }
-exports.assertStrict = assertStrict;
 assertStrict.__type = ['assertStrict', 'P)/!'];
 /**
  * Like parseSafe but throw on unknown (extra) keys in objects.
@@ -38,7 +39,6 @@ assertStrict.__type = ['assertStrict', 'P)/!'];
 function parseStrict() {
     throw new Error('not supported.');
 }
-exports.parseStrict = parseStrict;
 parseStrict.__type = [() => __ΩToBeChecked, 'parseStrict', 'Pn!/"'];
 /**
  * Validate and ignore unknown keys, removing them from the result.
@@ -50,6 +50,5 @@ parseStrict.__type = [() => __ΩToBeChecked, 'parseStrict', 'Pn!/"'];
 function parseSafe(input) {
     return safeToBeChecked(input);
 }
-exports.parseSafe = parseSafe;
 parseSafe.__type = ['input', () => __ΩToBeChecked, 'parseSafe', 'P#2!n"/#'];
 //# sourceMappingURL=index.js.map
