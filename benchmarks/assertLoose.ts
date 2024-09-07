@@ -1,7 +1,5 @@
 import { Benchmark } from './helpers/types';
 import { validateData } from './parseSafe';
-// eslint-disable-next-line node/no-extraneous-import
-import { describe, test, expect } from '@jest/globals';
 
 type Fn = (data: unknown) => boolean;
 
