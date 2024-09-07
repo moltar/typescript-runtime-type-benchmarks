@@ -1,4 +1,6 @@
 import { Benchmark } from './helpers/types';
+// eslint-disable-next-line node/no-extraneous-import
+import { describe, test, expect } from '@jest/globals';
 
 export const validateData = Object.freeze({
   number: 1,
