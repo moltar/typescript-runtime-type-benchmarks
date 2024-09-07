@@ -6,7 +6,9 @@ import { getRegisteredBenchmarks } from './register';
 import type { BenchmarkCase, BenchmarkResult } from './types';
 
 const DOCS_DIR = join(__dirname, '../../docs');
-const NODE_VERSION = process.env.NODE_VERSION || process.version;
+const RUNTIME = process.env.RUNTIME || 'node';
+const RUNTIME_VERSION = process.env.RUNTIME_VERSION || process.version;
+const RUNTIME_FOR_PREVIEW = 'node';
 const NODE_VERSION_FOR_PREVIEW = 20;
 
 /**
@@ -28,7 +30,8 @@ export async function runAllBenchmarks() {
         name,
         ops,
         margin,
-        nodeVersion: NODE_VERSION,
+        runtime: RUNTIME,
+        runtimeVersion: RUNTIME_VERSION,
       });
     });
   }
@@ -54,7 +57,10 @@ export function deleteResults() {
 export async function createPreviewGraph() {
   const majorVersion = getNodeMajorVersion();
 
-  if (majorVersion === NODE_VERSION_FOR_PREVIEW) {
+  if (
+    majorVersion === NODE_VERSION_FOR_PREVIEW &&
+    RUNTIME_FOR_PREVIEW === 'node'
+  ) {
     const allResults: BenchmarkResult[] = JSON.parse(
       readFileSync(resultsJsonFilename()).toString()
     ).results;
@@ -96,9 +102,10 @@ function appendResults(results: BenchmarkResult[]) {
   const getKey = ({
     benchmark,
     name,
-    nodeVersion,
+    runtime,
+    runtimeVersion,
   }: BenchmarkResult): string => {
-    return JSON.stringify({ benchmark, name, nodeVersion });
+    return JSON.stringify({ benchmark, name, runtime, runtimeVersion });
   };
   const existingResultsIndex = new Set(existingResults.map(r => getKey(r)));
 
@@ -124,7 +131,7 @@ function appendResults(results: BenchmarkResult[]) {
 function resultsJsonFilename() {
   const majorVersion = getNodeMajorVersion();
 
-  return join(DOCS_DIR, 'results', `node-${majorVersion}.json`);
+  return join(DOCS_DIR, 'results', `${RUNTIME}-${majorVersion}.json`);
 }
 
 function previewSvgFilename() {
@@ -134,13 +141,13 @@ function previewSvgFilename() {
 function getNodeMajorVersion() {
   let majorVersion = 0;
 
-  majorVersion = parseInt(NODE_VERSION);
+  majorVersion = parseInt(RUNTIME_VERSION);
 
   if (!isNaN(majorVersion)) {
     return majorVersion;
   }
 
-  majorVersion = parseInt(NODE_VERSION.slice(1));
+  majorVersion = parseInt(RUNTIME_VERSION.slice(1));
 
   if (!isNaN(majorVersion)) {
     return majorVersion;

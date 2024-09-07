@@ -5,7 +5,7 @@ export interface BenchmarkCase {
   run(): void;
 
   // run the benchmarks jest test
-  test(): void;
+  test(describe: jest.Describe, expect: jest.Expect, test: jest.It): void;
 }
 
 export abstract class Benchmark<Fn> implements BenchmarkCase {
@@ -24,7 +24,11 @@ export abstract class Benchmark<Fn> implements BenchmarkCase {
   abstract run(): void;
 
   // run the benchmarks jest test
-  abstract test(): void;
+  abstract test(
+    describe: jest.Describe,
+    expect: jest.Expect,
+    test: jest.It
+  ): void;
 }
 
 // Aliased any.
@@ -36,7 +40,8 @@ export type UnknownData = any;
 export interface BenchmarkResult {
   name: string;
   benchmark: string;
-  nodeVersion: string;
+  runtime: string;
+  runtimeVersion: string;
   ops: number;
   margin: number;
 }

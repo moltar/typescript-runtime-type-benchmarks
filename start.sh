@@ -21,4 +21,7 @@ export RUNTIME
 export RUNTIME_VERSION
 
 $RUNTIME_SCRIPT run start
-$RUNTIME_SCRIPT run start create-preview-svg
+
+if [ "$ENV_TYPE" = "NODE" ]; then
+    $RUNTIME_SCRIPT run start create-preview-svg
+fi
