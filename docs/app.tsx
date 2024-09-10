@@ -326,8 +326,6 @@ class Graph extends Component<
       return;
     }
 
-    console.log(this.props);
-
     this.prevProps = this.props;
     this.setState({
       svg: await graph({
@@ -439,7 +437,6 @@ class App extends Component<
   };
 
   getNodeJsVersions() {
-    console.log('this.state.valuesNodeJs', this.state.valuesNodeJs);
     const versionsSet = new Set(
       this.state.valuesNodeJs
         .map(v => v.runtimeVersion)
@@ -449,8 +446,6 @@ class App extends Component<
     const res: string[] = [];
 
     versionsSet.forEach(v => res.push(v));
-
-    console.log('res', res);
 
     return res;
   }
@@ -501,8 +496,6 @@ class App extends Component<
       fetch(`results/bun-${v}.json`)
         .then(response => response.json())
         .then(data => {
-          console.log(data.results);
-
           this.setState(state => ({
             ...state,
 
