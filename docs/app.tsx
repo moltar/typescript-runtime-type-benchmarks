@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, ComponentChildren, h, render } from 'preact';
+import { Component, type ComponentChildren, h, render } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
 
@@ -7,10 +7,12 @@ import * as vegaLite from 'vega-lite';
 // the first is selected automatically
 const NODE_VERSIONS = [22, 21, 20, 19, 18, 16];
 
+const BUN_VERSIONS = [1];
+
 interface BenchmarkResult {
   name: string;
   benchmark: string;
-  nodeVersion: string;
+  runtimeVersion: string;
   ops: number;
   margin: number;
 }
@@ -66,9 +68,9 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
     return [];
   }
 
-  const nodeVersion = values[0].nodeVersion;
+  const runtimeVersion = values[0].runtimeVersion;
 
-  if (!values.every(v => v.nodeVersion === nodeVersion)) {
+  if (!values.every(v => v.runtimeVersion === runtimeVersion)) {
     throw new Error('normalizeValues: expected same node version on results');
   }
 
@@ -96,7 +98,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
         benchmark,
         name,
         margin: 0,
-        nodeVersion,
+        runtimeVersion,
         ops: 0,
       });
     });
@@ -105,8 +107,25 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
   return normalized;
 }
 
+const nodeVersionRegex = /v([0-9]+)\./;
+const bunVersionRegex = /([0-9]+)\./;
+
 function getNodeMajorVersionNumber(nodeVersion: string): number {
-  const match = nodeVersion.match(/v([0-9]+)\./);
+  const match = nodeVersion.match(nodeVersionRegex);
+
+  if (!match) {
+    throw new Error(`Invalid node version: ${nodeVersion}`);
+  }
+
+  return parseInt(match[1]);
+}
+
+function getBunMajorVersionNumber(bunVersion: string): number {
+  const match = bunVersion.match(bunVersionRegex);
+
+  if (!match) {
+    throw new Error(`Invalid bun version: ${bunVersion}`);
+  }
 
   return parseInt(match[1]);
 }
@@ -114,26 +133,35 @@ function getNodeMajorVersionNumber(nodeVersion: string): number {
 async function graph({
   selectedBenchmarks,
   selectedNodeJsVersions,
-  benchmarkResults,
+  selectedBunVersions,
+  benchmarkResultsNodejs,
+  benchmarkResultsBun,
   sort,
 }: {
   selectedBenchmarks: typeof BENCHMARKS;
   selectedNodeJsVersions: string[];
-  benchmarkResults: BenchmarkResult[];
+  selectedBunVersions: string[];
+  benchmarkResultsNodejs: BenchmarkResult[];
+  benchmarkResultsBun: BenchmarkResult[];
   sort?: 'alphabetically' | 'fastest';
 }) {
-  if (!selectedBenchmarks.length || !selectedNodeJsVersions.length) {
+  if (
+    !selectedBenchmarks.length ||
+    (!selectedNodeJsVersions.length && !selectedBunVersions.length)
+  ) {
     return '';
   }
 
   const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
-  const selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
 
-  const values = benchmarkResults
+  const selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
+  const selectedBunVersionsSet = new Set(selectedBunVersions);
+
+  const valuesNodejs = benchmarkResultsNodejs
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedNodeJsVersionsSet.has(b.nodeVersion)
+        selectedNodeJsVersionsSet.has(b.runtimeVersion)
     )
     .map(b => ({
       ...b,
@@ -142,17 +170,38 @@ async function graph({
       // benchmark and node-version
       benchmark: [
         BENCHMARKS_ORDER[b.benchmark],
-        NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.nodeVersion)),
-        b.nodeVersion,
+        NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.runtimeVersion)),
+        b.runtimeVersion,
         b.benchmark,
       ].join('-'),
     }));
 
-  const nodeJsVersionCount = new Set(values.map(v => v.nodeVersion)).size;
+  const valuesBun = benchmarkResultsBun
+    .filter(
+      b =>
+        selectedBenchmarkSet.has(b.benchmark) &&
+        selectedBunVersionsSet.has(b.runtimeVersion)
+    )
+    .map(b => ({
+      ...b,
+      opsLabel: b.ops.toLocaleString('en-US'),
+      // artificical benchmark name to make sure its always sorted by
+      // benchmark and node-version
+      benchmark: [
+        BENCHMARKS_ORDER[b.benchmark],
+        BUN_VERSIONS.indexOf(getBunMajorVersionNumber(b.runtimeVersion)),
+        b.runtimeVersion,
+        b.benchmark,
+      ].join('-'),
+    }));
+
+  const nodeJsVersionCount = new Set(valuesNodejs.map(v => v.runtimeVersion))
+    .size;
+  const bunVersionCount = new Set(valuesBun.map(v => v.runtimeVersion)).size;
 
   // build a color map so that each benchmark has the same color in different
   // node-versions
-  const colorScaleRange = [];
+  const colorScaleRange: string[] = [];
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < nodeJsVersionCount; i++) {
@@ -160,13 +209,23 @@ async function graph({
     }
   });
 
+  selectedBenchmarks.forEach(b => {
+    for (let i = 0; i < bunVersionCount; i++) {
+      colorScaleRange.push(b.color);
+    }
+  });
+
   // build a list of module names for sorting
-  let sortedValues: BenchmarkResult[];
+  let sortedValues: BenchmarkResult[] = [];
 
   if (sort === 'fastest') {
-    sortedValues = values.sort((a, b) => b.ops - a.ops);
+    sortedValues = [...valuesNodejs, ...valuesBun].sort(
+      (a, b) => b.ops - a.ops
+    );
   } else if (sort === 'alphabetically' || !sort) {
-    sortedValues = values.sort((a, b) => (a.name < b.name ? -1 : 1));
+    sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) =>
+      a.name < b.name ? -1 : 1
+    );
   }
 
   // remove duplicates not sure whether vega-lite can handle that
@@ -176,9 +235,9 @@ async function graph({
 
   const vegaSpec = vegaLite.compile({
     data: {
-      values,
+      values: [...valuesNodejs, ...valuesBun],
     },
-    height: { step: 15 / nodeJsVersionCount },
+    height: { step: 15 / (nodeJsVersionCount + bunVersionCount) },
     background: 'transparent', // no white graphs for dark mode users
     facet: {
       row: {
@@ -253,7 +312,9 @@ class Graph extends Component<
   {
     benchmarks: typeof BENCHMARKS;
     nodeJsVersions: string[];
-    values: BenchmarkResult[];
+    bunVersions: string[];
+    valuesNodeJs: BenchmarkResult[];
+    valuesBun: BenchmarkResult[];
     sort: Parameters<typeof graph>[0]['sort'];
   },
   { svg?: string }
@@ -270,7 +331,9 @@ class Graph extends Component<
       svg: await graph({
         selectedBenchmarks: this.props.benchmarks,
         selectedNodeJsVersions: this.props.nodeJsVersions,
-        benchmarkResults: this.props.values,
+        selectedBunVersions: this.props.bunVersions,
+        benchmarkResultsNodejs: this.props.valuesNodeJs,
+        benchmarkResultsBun: this.props.valuesBun,
         sort: this.props.sort,
       }),
     });
@@ -355,7 +418,9 @@ class App extends Component<
   {
     selectedBenchmarks: { [key: string]: boolean };
     selectedNodeJsVersions: { [key: string]: boolean };
-    values: BenchmarkResult[];
+    selectedBunVersions: { [key: string]: boolean };
+    valuesNodeJs: BenchmarkResult[];
+    valuesBun: BenchmarkResult[];
     sortBy: 'fastest' | 'alphabetically';
   }
 > {
@@ -365,13 +430,32 @@ class App extends Component<
       {}
     ),
     selectedNodeJsVersions: {},
-    values: [],
+    selectedBunVersions: {},
+    valuesNodeJs: [],
+    valuesBun: [],
     sortBy: 'alphabetically' as const,
   };
 
   getNodeJsVersions() {
     const versionsSet = new Set(
-      this.state.values.map(v => v.nodeVersion).sort((a, b) => (a < b ? 1 : -1))
+      this.state.valuesNodeJs
+        .map(v => v.runtimeVersion)
+        .filter(v => v !== undefined)
+        .sort((a, b) => (a < b ? 1 : -1))
+    );
+    const res: string[] = [];
+
+    versionsSet.forEach(v => res.push(v));
+
+    return res;
+  }
+
+  getBunVersions() {
+    const versionsSet = new Set(
+      this.state.valuesBun
+        .map(v => v.runtimeVersion)
+        .filter(v => v !== undefined)
+        .sort((a, b) => (a < b ? 1 : -1))
     );
     const res: string[] = [];
 
@@ -397,7 +481,31 @@ class App extends Component<
                   }
                 : state.selectedNodeJsVersions,
 
-            values: [...state.values, ...normalizePartialValues(data.results)],
+            valuesNodeJs: [
+              ...state.valuesNodeJs,
+              ...normalizePartialValues(data.results),
+            ],
+          }));
+        })
+        .catch(err => {
+          console.info(`no data for node ${v}`, err);
+        });
+    });
+
+    BUN_VERSIONS.forEach(v => {
+      fetch(`results/bun-${v}.json`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState(state => ({
+            ...state,
+
+            // select the first node versions benchmark automatically
+            selectedBunVersions: state.selectedBunVersions,
+
+            valuesBun: [
+              ...state.valuesBun,
+              ...normalizePartialValues(data.results),
+            ],
           }));
         })
         .catch(err => {
@@ -477,6 +585,30 @@ class App extends Component<
           </div>
 
           <div style={{ width: '12rem' }}>
+            <label>Bun Versions:</label>
+            <div>
+              {this.getBunVersions().map(v => {
+                return (
+                  <Checkbox
+                    id={v}
+                    checked={this.state.selectedBunVersions[v] ?? false}
+                    label={v}
+                    onChange={checked =>
+                      this.setState(state => ({
+                        ...state,
+                        selectedBunVersions: {
+                          ...this.state.selectedBunVersions,
+                          [v]: checked,
+                        },
+                      }))
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          <div style={{ width: '12rem' }}>
             <label>
               Sort:
               <select
@@ -503,7 +635,12 @@ class App extends Component<
             .sort()
             .filter(entry => entry[1])
             .map(entry => entry[0])}
-          values={this.state.values}
+          bunVersions={Object.entries(this.state.selectedBunVersions)
+            .sort()
+            .filter(entry => entry[1])
+            .map(entry => entry[0])}
+          valuesNodeJs={this.state.valuesNodeJs}
+          valuesBun={this.state.valuesBun}
           sort={this.state.sortBy}
         />
 

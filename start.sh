@@ -2,7 +2,26 @@
 
 set -ex
 
-export NODE_VERSION="${NODE_VERSION:-$(node -v)}"
+ENV_TYPE=$1
 
-npm run start
-npm run start create-preview-svg
+if [ "$ENV_TYPE" = "NODE" ]; then
+    RUNTIME_SCRIPT="npm"
+    RUNTIME="node"
+    RUNTIME_VERSION="${NODE_VERSION:-$(node -v)}"
+elif [ "$ENV_TYPE" = "BUN" ]; then
+    RUNTIME_SCRIPT="bun"
+    RUNTIME="bun"
+    RUNTIME_VERSION="${BUN_VERSION:-$(bun -v)}"
+else
+    echo "Unsupported environment: $ENV_TYPE"
+    exit 1
+fi
+
+export RUNTIME
+export RUNTIME_VERSION
+
+$RUNTIME_SCRIPT run start
+
+if [ "$ENV_TYPE" = "NODE" ]; then
+    $RUNTIME_SCRIPT run start create-preview-svg
+fi

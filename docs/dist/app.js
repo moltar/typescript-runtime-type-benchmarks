@@ -94,12 +94,13 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (require, exports, preact_1, vega, vegaLite) {
     "use strict";
-    exports.__esModule = true;
+    Object.defineProperty(exports, "__esModule", { value: true });
     vega = __importStar(vega);
     vegaLite = __importStar(vegaLite);
     // which results are attempted to load
     // the first is selected automatically
     var NODE_VERSIONS = [22, 21, 20, 19, 18, 16];
+    var BUN_VERSIONS = [1];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
         '#8dd3c7',
@@ -122,19 +123,19 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
             name: 'parseStrict',
             label: 'Strict Parsing',
             color: COLORS[1],
-            order: '1'
+            order: '1',
         },
         {
             name: 'assertLoose',
             label: 'Loose Assertion',
             color: COLORS[2],
-            order: '2'
+            order: '2',
         },
         {
             name: 'assertStrict',
             label: 'Strict Assertion',
             color: COLORS[3],
-            order: '3'
+            order: '3',
         },
     ];
     // order lookup table
@@ -146,8 +147,8 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
         if (!values.length) {
             return [];
         }
-        var nodeVersion = values[0].nodeVersion;
-        if (!values.every(function (v) { return v.nodeVersion === nodeVersion; })) {
+        var runtimeVersion = values[0].runtimeVersion;
+        if (!values.every(function (v) { return v.runtimeVersion === runtimeVersion; })) {
             throw new Error('normalizeValues: expected same node version on results');
         }
         var existingValues = {};
@@ -169,64 +170,102 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                     benchmark: benchmark,
                     name: name,
                     margin: 0,
-                    nodeVersion: nodeVersion,
-                    ops: 0
+                    runtimeVersion: runtimeVersion,
+                    ops: 0,
                 });
             });
         });
         return normalized;
     }
+    var nodeVersionRegex = /v([0-9]+)\./;
+    var bunVersionRegex = /([0-9]+)\./;
     function getNodeMajorVersionNumber(nodeVersion) {
-        var match = nodeVersion.match(/v([0-9]+)\./);
+        var match = nodeVersion.match(nodeVersionRegex);
+        if (!match) {
+            throw new Error("Invalid node version: ".concat(nodeVersion));
+        }
+        return parseInt(match[1]);
+    }
+    function getBunMajorVersionNumber(bunVersion) {
+        var match = bunVersion.match(bunVersionRegex);
+        if (!match) {
+            throw new Error("Invalid bun version: ".concat(bunVersion));
+        }
         return parseInt(match[1]);
     }
     function graph(_a) {
-        var selectedBenchmarks = _a.selectedBenchmarks, selectedNodeJsVersions = _a.selectedNodeJsVersions, benchmarkResults = _a.benchmarkResults, sort = _a.sort;
-        return __awaiter(this, void 0, void 0, function () {
-            var selectedBenchmarkSet, selectedNodeJsVersionsSet, values, nodeJsVersionCount, colorScaleRange, sortedValues, sortedNames, vegaSpec, view, svg;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+        return __awaiter(this, arguments, void 0, function (_b) {
+            var selectedBenchmarkSet, selectedNodeJsVersionsSet, selectedBunVersionsSet, valuesNodejs, valuesBun, nodeJsVersionCount, bunVersionCount, colorScaleRange, sortedValues, sortedNames, vegaSpec, view, svg;
+            var selectedBenchmarks = _b.selectedBenchmarks, selectedNodeJsVersions = _b.selectedNodeJsVersions, selectedBunVersions = _b.selectedBunVersions, benchmarkResultsNodejs = _b.benchmarkResultsNodejs, benchmarkResultsBun = _b.benchmarkResultsBun, sort = _b.sort;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        if (!selectedBenchmarks.length || !selectedNodeJsVersions.length) {
+                        if (!selectedBenchmarks.length ||
+                            (!selectedNodeJsVersions.length && !selectedBunVersions.length)) {
                             return [2 /*return*/, ''];
                         }
                         selectedBenchmarkSet = new Set(selectedBenchmarks.map(function (b) { return b.name; }));
                         selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
-                        values = benchmarkResults
+                        selectedBunVersionsSet = new Set(selectedBunVersions);
+                        valuesNodejs = benchmarkResultsNodejs
                             .filter(function (b) {
                             return selectedBenchmarkSet.has(b.benchmark) &&
-                                selectedNodeJsVersionsSet.has(b.nodeVersion);
+                                selectedNodeJsVersionsSet.has(b.runtimeVersion);
                         })
                             .map(function (b) { return (__assign(__assign({}, b), { opsLabel: b.ops.toLocaleString('en-US'), 
                             // artificical benchmark name to make sure its always sorted by
                             // benchmark and node-version
                             benchmark: [
                                 BENCHMARKS_ORDER[b.benchmark],
-                                NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.nodeVersion)),
-                                b.nodeVersion,
+                                NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.runtimeVersion)),
+                                b.runtimeVersion,
                                 b.benchmark,
                             ].join('-') })); });
-                        nodeJsVersionCount = new Set(values.map(function (v) { return v.nodeVersion; })).size;
+                        valuesBun = benchmarkResultsBun
+                            .filter(function (b) {
+                            return selectedBenchmarkSet.has(b.benchmark) &&
+                                selectedBunVersionsSet.has(b.runtimeVersion);
+                        })
+                            .map(function (b) { return (__assign(__assign({}, b), { opsLabel: b.ops.toLocaleString('en-US'), 
+                            // artificical benchmark name to make sure its always sorted by
+                            // benchmark and node-version
+                            benchmark: [
+                                BENCHMARKS_ORDER[b.benchmark],
+                                BUN_VERSIONS.indexOf(getBunMajorVersionNumber(b.runtimeVersion)),
+                                b.runtimeVersion,
+                                b.benchmark,
+                            ].join('-') })); });
+                        nodeJsVersionCount = new Set(valuesNodejs.map(function (v) { return v.runtimeVersion; }))
+                            .size;
+                        bunVersionCount = new Set(valuesBun.map(function (v) { return v.runtimeVersion; })).size;
                         colorScaleRange = [];
                         selectedBenchmarks.forEach(function (b) {
                             for (var i = 0; i < nodeJsVersionCount; i++) {
                                 colorScaleRange.push(b.color);
                             }
                         });
+                        selectedBenchmarks.forEach(function (b) {
+                            for (var i = 0; i < bunVersionCount; i++) {
+                                colorScaleRange.push(b.color);
+                            }
+                        });
+                        sortedValues = [];
                         if (sort === 'fastest') {
-                            sortedValues = values.sort(function (a, b) { return b.ops - a.ops; });
+                            sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) { return b.ops - a.ops; });
                         }
                         else if (sort === 'alphabetically' || !sort) {
-                            sortedValues = values.sort(function (a, b) { return (a.name < b.name ? -1 : 1); });
+                            sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) {
+                                return a.name < b.name ? -1 : 1;
+                            });
                         }
                         sortedNames = [];
                         new Set(sortedValues.map(function (b) { return b.name; })).forEach(function (n) { return sortedNames.push(n); });
                         vegaSpec = vegaLite.compile({
                             data: {
-                                values: values
+                                values: __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true),
                             },
-                            height: { step: 15 / nodeJsVersionCount },
-                            background: 'transparent',
+                            height: { step: 15 / (nodeJsVersionCount + bunVersionCount) },
+                            background: 'transparent', // no white graphs for dark mode users
                             facet: {
                                 row: {
                                     field: 'name',
@@ -236,27 +275,27 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                         labelOrient: 'left',
                                         labelAnchor: 'middle',
                                         labelAlign: 'left',
-                                        labelFontSize: 12
+                                        labelFontSize: 12,
                                     },
-                                    sort: sortedNames
-                                }
+                                    sort: sortedNames,
+                                },
                             },
                             spec: {
                                 layer: [
                                     {
                                         mark: 'bar',
-                                        width: 600
+                                        width: 600,
                                     },
                                     {
                                         mark: {
                                             type: 'text',
                                             align: 'left',
                                             baseline: 'middle',
-                                            dx: 3
+                                            dx: 3,
                                         },
                                         encoding: {
-                                            text: { field: 'opsLabel' }
-                                        }
+                                            text: { field: 'opsLabel' },
+                                        },
                                     },
                                 ],
                                 encoding: {
@@ -269,30 +308,30 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                             offset: 10,
                                             labelFontSize: 12,
                                             titleFontSize: 14,
-                                            titleFontWeight: 'normal'
-                                        }
+                                            titleFontWeight: 'normal',
+                                        },
                                     },
                                     y: {
                                         field: 'benchmark',
                                         type: 'nominal',
                                         title: 'Benchmark',
-                                        axis: null
+                                        axis: null, // to debug the bars: axis: {labelFontSize: 3},
                                     },
                                     color: {
                                         field: 'benchmark',
                                         type: 'nominal',
                                         legend: null,
                                         scale: {
-                                            range: colorScaleRange
-                                        }
-                                    }
-                                }
-                            }
+                                            range: colorScaleRange,
+                                        },
+                                    },
+                                },
+                            },
                         });
                         view = new vega.View(vega.parse(vegaSpec.spec), { renderer: 'none' });
                         return [4 /*yield*/, view.toSVG()];
                     case 1:
-                        svg = _b.sent();
+                        svg = _c.sent();
                         return [2 /*return*/, svg];
                 }
             });
@@ -313,14 +352,17 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             if (this.prevProps === this.props) {
                                 return [2 /*return*/];
                             }
+                            console.log(this.props);
                             this.prevProps = this.props;
                             _a = this.setState;
                             _b = {};
                             return [4 /*yield*/, graph({
                                     selectedBenchmarks: this.props.benchmarks,
                                     selectedNodeJsVersions: this.props.nodeJsVersions,
-                                    benchmarkResults: this.props.values,
-                                    sort: this.props.sort
+                                    selectedBunVersions: this.props.bunVersions,
+                                    benchmarkResultsNodejs: this.props.valuesNodeJs,
+                                    benchmarkResultsBun: this.props.valuesBun,
+                                    sort: this.props.sort,
                                 })];
                         case 1:
                             _a.apply(this, [(_b.svg = _c.sent(),
@@ -344,10 +386,10 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
         return ((0, preact_1.h)("div", { style: {
                 display: 'flex',
                 backgroundColor: props.color,
-                color: props.color ? 'black' : undefined
+                color: props.color ? 'black' : undefined,
             } },
             (0, preact_1.h)("input", { id: props.id, type: "checkbox", name: props.id, checked: props.checked, onInput: function () { return props.onChange(!props.checked); } }),
-            (0, preact_1.h)("label", { style: { width: '100%' }, "for": props.id }, props.label)));
+            (0, preact_1.h)("label", { style: { width: '100%' }, for: props.id }, props.label)));
     }
     function BenchmarkDescription(props) {
         return ((0, preact_1.h)("div", { style: { marginBotton: '1rem' } },
@@ -356,7 +398,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         backgroundColor: props.color,
                         display: 'inline-block',
                         width: '2rem',
-                        marginRight: '0.5rem'
+                        marginRight: '0.5rem',
                     } }, "\u00A0"),
                 props.name,
                 ' '),
@@ -372,13 +414,29 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                     return (__assign(__assign({}, acc), (_a = {}, _a[b.name] = true, _a)));
                 }, {}),
                 selectedNodeJsVersions: {},
-                values: [],
-                sortBy: 'alphabetically'
+                selectedBunVersions: {},
+                valuesNodeJs: [],
+                valuesBun: [],
+                sortBy: 'alphabetically',
             };
             return _this;
         }
         App.prototype.getNodeJsVersions = function () {
-            var versionsSet = new Set(this.state.values.map(function (v) { return v.nodeVersion; }).sort(function (a, b) { return (a < b ? 1 : -1); }));
+            console.log('this.state.valuesNodeJs', this.state.valuesNodeJs);
+            var versionsSet = new Set(this.state.valuesNodeJs
+                .map(function (v) { return v.runtimeVersion; })
+                .filter(function (v) { return v !== undefined; })
+                .sort(function (a, b) { return (a < b ? 1 : -1); }));
+            var res = [];
+            versionsSet.forEach(function (v) { return res.push(v); });
+            console.log('res', res);
+            return res;
+        };
+        App.prototype.getBunVersions = function () {
+            var versionsSet = new Set(this.state.valuesBun
+                .map(function (v) { return v.runtimeVersion; })
+                .filter(function (v) { return v !== undefined; })
+                .sort(function (a, b) { return (a < b ? 1 : -1); }));
             var res = [];
             versionsSet.forEach(function (v) { return res.push(v); });
             return res;
@@ -394,9 +452,23 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         return (__assign(__assign({}, state), { 
                             // select the first node versions benchmark automatically
                             selectedNodeJsVersions: i === 0
-                                ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].nodeVersion] = true, _a)) : state.selectedNodeJsVersions, values: __spreadArray(__spreadArray([], state.values, true), normalizePartialValues(data.results), true) }));
+                                ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].nodeVersion] = true, _a)) : state.selectedNodeJsVersions, valuesNodeJs: __spreadArray(__spreadArray([], state.valuesNodeJs, true), normalizePartialValues(data.results), true) }));
                     });
-                })["catch"](function (err) {
+                })
+                    .catch(function (err) {
+                    console.info("no data for node ".concat(v), err);
+                });
+            });
+            BUN_VERSIONS.forEach(function (v) {
+                fetch("results/bun-".concat(v, ".json"))
+                    .then(function (response) { return response.json(); })
+                    .then(function (data) {
+                    console.log(data.results);
+                    _this.setState(function (state) { return (__assign(__assign({}, state), { 
+                        // select the first node versions benchmark automatically
+                        selectedBunVersions: state.selectedBunVersions, valuesBun: __spreadArray(__spreadArray([], state.valuesBun, true), normalizePartialValues(data.results), true) })); });
+                })
+                    .catch(function (err) {
                     console.info("no data for node ".concat(v), err);
                 });
             });
@@ -407,7 +479,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                 (0, preact_1.h)("div", { style: {
                         display: 'flex',
                         alignItems: 'baseline',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
                     } },
                     (0, preact_1.h)("h1", null, "Runtype Benchmarks"),
                     (0, preact_1.h)("a", { href: "https://github.com/moltar/typescript-runtime-type-benchmarks/" }, "Github Repository")),
@@ -436,6 +508,17 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                 } }));
                         }))),
                     (0, preact_1.h)("div", { style: { width: '12rem' } },
+                        (0, preact_1.h)("label", null, "Bun Versions:"),
+                        (0, preact_1.h)("div", null, this.getBunVersions().map(function (v) {
+                            var _a;
+                            return ((0, preact_1.h)(Checkbox, { id: v, checked: (_a = _this.state.selectedBunVersions[v]) !== null && _a !== void 0 ? _a : false, label: v, onChange: function (checked) {
+                                    return _this.setState(function (state) {
+                                        var _a;
+                                        return (__assign(__assign({}, state), { selectedBunVersions: __assign(__assign({}, _this.state.selectedBunVersions), (_a = {}, _a[v] = checked, _a)) }));
+                                    });
+                                } }));
+                        }))),
+                    (0, preact_1.h)("div", { style: { width: '12rem' } },
                         (0, preact_1.h)("label", null,
                             "Sort:",
                             (0, preact_1.h)("select", { onChange: 
@@ -448,7 +531,10 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                 (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), nodeJsVersions: Object.entries(this.state.selectedNodeJsVersions)
                         .sort()
                         .filter(function (entry) { return entry[1]; })
-                        .map(function (entry) { return entry[0]; }), values: this.state.values, sort: this.state.sortBy }),
+                        .map(function (entry) { return entry[0]; }), bunVersions: Object.entries(this.state.selectedBunVersions)
+                        .sort()
+                        .filter(function (entry) { return entry[1]; })
+                        .map(function (entry) { return entry[0]; }), valuesNodeJs: this.state.valuesNodeJs, valuesBun: this.state.valuesBun, sort: this.state.sortBy }),
                 (0, preact_1.h)("div", null,
                     (0, preact_1.h)(BenchmarkDescription, { name: "Safe Parsing", color: BENCHMARKS.find(function (x) { return x.name === 'parseSafe'; }).color },
                         (0, preact_1.h)("p", null,

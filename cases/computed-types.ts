@@ -1,5 +1,5 @@
 import Schema, { boolean, number, string } from 'computed-types';
-import { UnknownData, addCase } from '../benchmarks';
+import { type UnknownData, addCase } from '../benchmarks';
 
 const validator = Schema({
   number: number,

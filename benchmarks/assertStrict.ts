@@ -13,7 +13,7 @@ export class AssertStrict extends Benchmark<Fn> {
     this.fn(validateData);
   }
 
-  test() {
+  test(describe: jest.Describe, expect: jest.Expect, test: jest.It) {
     describe(this.moduleName, () => {
       test('should validate the data', () => {
         expect(this.fn(validateData)).toBe(true);

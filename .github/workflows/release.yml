@@ -13,6 +13,7 @@ on:
       - "*.ts"
       - package.json
       - package-lock.json
+      - bun.lockb
 
 jobs:
   build:
@@ -67,8 +68,8 @@ jobs:
       - name: npm test
         run: npm t
 
-      - name: generate benchmarks
-        run: ./start.sh
+      - name: generate benchmarks with node
+        run: ./start.sh NODE
 
         ## FIX: https://github.com/github-actions-x/commit/issues/16
       - name: Expose git commit data
@@ -82,6 +83,55 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: master
           commit-message: 'feat: ${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
+          rebase: 'true'
+          name: ${{ env.GIT_COMMIT_AUTHOR_NAME }}   ## FIX: https://github.com/github-actions-x/commit/issues/16
+          email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }} ## FIX: https://github.com/github-actions-x/commit/issues/16
+  build-bun:
+    name: "Bun ${{ matrix.bun-version }}"
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        bun-version:
+            - 1.1.27
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Bun ${{ matrix.bun-version }}
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ matrix.bun-version }}
+
+      - name: Install
+        run: bun install
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Test build
+        run: bun run test:build
+
+      - name: Test
+        run: bun run test
+
+      - name: generate benchmarks with bun
+        run: ./start.sh BUN
+
+        ## FIX: https://github.com/github-actions-x/commit/issues/16
+      - name: Expose git commit data
+        uses: rlespinasse/git-commit-data-action@v1 ## https://github.com/rlespinasse/git-commit-data-action
+
+      - name: push
+        uses: github-actions-x/commit@v2.9
+        ## prevents forked repos from comitting results in PRs
+        if: github.repository == 'moltar/typescript-runtime-type-benchmarks'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: master
+          commit-message: 'feat: ${{ matrix.bun-version }} adds auto-generated benchmarks and bar graph'
           rebase: 'true'
           name: ${{ env.GIT_COMMIT_AUTHOR_NAME }}   ## FIX: https://github.com/github-actions-x/commit/issues/16
           email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }} ## FIX: https://github.com/github-actions-x/commit/issues/16

@@ -62,6 +62,6 @@ test('all cases must have been imported in tests', () => {
 
 getRegisteredBenchmarks().forEach(([benchmarkId, benchmarkCases]) => {
   describe(benchmarkId, () => {
-    benchmarkCases.forEach(c => c.test());
+    benchmarkCases.forEach(c => c.test(describe, expect, test));
   });
 });

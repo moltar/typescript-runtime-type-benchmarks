@@ -1,5 +1,5 @@
 import { TypeCompiler } from '@sinclair/typebox/compiler';
-import { TSchema } from '@sinclair/typebox';
+import type { TSchema } from '@sinclair/typebox';
 import { Loose, Strict } from '../sinclair-typebox';
 import { writeFileSync } from 'node:fs';
 

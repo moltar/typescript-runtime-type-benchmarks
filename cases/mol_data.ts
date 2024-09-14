@@ -1,9 +1,11 @@
-import {
-  $mol_data_number as Numb,
-  $mol_data_string as Str,
-  $mol_data_record as Rec,
-  $mol_data_boolean as Bool,
-} from 'mol_data_all';
+import $ from 'mol_data_all';
+
+const {
+  $mol_data_number: Numb,
+  $mol_data_record: Rec,
+  $mol_data_string: Str,
+  $mol_data_boolean: Bool,
+} = $;
 
 import { createCase } from '../benchmarks';
 
