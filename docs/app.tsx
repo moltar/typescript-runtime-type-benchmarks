@@ -477,7 +477,7 @@ class App extends Component<
               i === 0
                 ? {
                     ...state.selectedNodeJsVersions,
-                    [data.results[0].nodeVersion]: true,
+                    [data.results[0].runtimeVersion]: true,
                   }
                 : state.selectedNodeJsVersions,
 
@@ -509,7 +509,7 @@ class App extends Component<
           }));
         })
         .catch(err => {
-          console.info(`no data for node ${v}`, err);
+          console.info(`no data for bun ${v}`, err);
         });
     });
   }

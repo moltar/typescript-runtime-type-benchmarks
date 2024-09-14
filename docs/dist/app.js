@@ -57,8 +57,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -352,7 +352,6 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             if (this.prevProps === this.props) {
                                 return [2 /*return*/];
                             }
-                            console.log(this.props);
                             this.prevProps = this.props;
                             _a = this.setState;
                             _b = {};
@@ -422,14 +421,12 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
             return _this;
         }
         App.prototype.getNodeJsVersions = function () {
-            console.log('this.state.valuesNodeJs', this.state.valuesNodeJs);
             var versionsSet = new Set(this.state.valuesNodeJs
                 .map(function (v) { return v.runtimeVersion; })
                 .filter(function (v) { return v !== undefined; })
                 .sort(function (a, b) { return (a < b ? 1 : -1); }));
             var res = [];
             versionsSet.forEach(function (v) { return res.push(v); });
-            console.log('res', res);
             return res;
         };
         App.prototype.getBunVersions = function () {
@@ -452,7 +449,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         return (__assign(__assign({}, state), { 
                             // select the first node versions benchmark automatically
                             selectedNodeJsVersions: i === 0
-                                ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].nodeVersion] = true, _a)) : state.selectedNodeJsVersions, valuesNodeJs: __spreadArray(__spreadArray([], state.valuesNodeJs, true), normalizePartialValues(data.results), true) }));
+                                ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].runtimeVersion] = true, _a)) : state.selectedNodeJsVersions, valuesNodeJs: __spreadArray(__spreadArray([], state.valuesNodeJs, true), normalizePartialValues(data.results), true) }));
                     });
                 })
                     .catch(function (err) {
@@ -463,13 +460,12 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                 fetch("results/bun-".concat(v, ".json"))
                     .then(function (response) { return response.json(); })
                     .then(function (data) {
-                    console.log(data.results);
                     _this.setState(function (state) { return (__assign(__assign({}, state), { 
                         // select the first node versions benchmark automatically
                         selectedBunVersions: state.selectedBunVersions, valuesBun: __spreadArray(__spreadArray([], state.valuesBun, true), normalizePartialValues(data.results), true) })); });
                 })
                     .catch(function (err) {
-                    console.info("no data for node ".concat(v), err);
+                    console.info("no data for bun ".concat(v), err);
                 });
             });
         };
