@@ -9,6 +9,10 @@ const NODE_VERSIONS = [22, 21, 20, 19, 18, 16];
 
 const BUN_VERSIONS = [1];
 
+interface BenchmarkResponse {
+  results: BenchmarkResult[];
+}
+
 interface BenchmarkResult {
   name: string;
   benchmark: string;
@@ -467,7 +471,7 @@ class App extends Component<
   componentDidMount() {
     NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)
-        .then(response => response.json())
+        .then(response => response.json() as Promise<BenchmarkResponse>)
         .then(data => {
           this.setState(state => ({
             ...state,
@@ -494,7 +498,7 @@ class App extends Component<
 
     BUN_VERSIONS.forEach(v => {
       fetch(`results/bun-${v}.json`)
-        .then(response => response.json())
+        .then(response => response.json() as Promise<BenchmarkResponse>)
         .then(data => {
           this.setState(state => ({
             ...state,
