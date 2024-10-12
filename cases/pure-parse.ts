@@ -1,48 +1,63 @@
 import { createCase } from '../benchmarks';
-import { object, parseString, parseNumber, parseBoolean } from 'pure-parse';
-// import {
-//   object as v_object,
-//   isString,
-//   isNumber,
-//   isBoolean,
-// } from 'pure-parse/validate';
+import {
+  object,
+  objectGuard,
+  parseString,
+  parseNumber,
+  parseBoolean,
+  Parser,
+  memo,
+  isNumber,
+  isString,
+  isBoolean,
+} from 'pure-parse';
 
-createCase('pure-parse', 'parseSafe', () => {
-  const parseData = object({
-    number: parseNumber,
-    negNumber: parseNumber,
-    maxNumber: parseNumber,
-    string: parseString,
-    longString: parseString,
-    boolean: parseBoolean,
-    deeplyNested: object({
-      foo: parseString,
-      num: parseNumber,
-      bool: parseBoolean,
-    }),
-  });
-  return (data: unknown) => {
-    const res = parseData(data);
+/**
+ * Given a PureParse parser, return a new parser that throws an error if parsing fails, and returns the value if parsing succeeds.
+ * @param parse
+ * @returns a parser that is compatible with `createCase`
+ */
+const tryParse =
+  <T>(parse: Parser<T>) =>
+  (data: unknown): T => {
+    const res = parse(data);
     if (res.tag === 'failure') {
       throw new Error('parsing failed');
     } else {
       return res.value;
     }
   };
-});
 
-// createCase('pure-parse', 'assertLoose', () =>
-//   v_object({
-//     number: isNumber,
-//     negNumber: isNumber,
-//     maxNumber: isNumber,
-//     string: isString,
-//     longString: isString,
-//     boolean: isBoolean,
-//     deeplyNested: v_object({
-//       foo: isString,
-//       num: isNumber,
-//       bool: isBoolean,
-//     }),
-//   })
-// );
+createCase('pure-parse', 'parseSafe', () =>
+  tryParse(
+    object({
+      number: parseNumber,
+      negNumber: parseNumber,
+      maxNumber: parseNumber,
+      string: parseString,
+      longString: parseString,
+      boolean: parseBoolean,
+      deeplyNested: object({
+        foo: parseString,
+        num: parseNumber,
+        bool: parseBoolean,
+      }),
+    })
+  )
+);
+
+createCase('pure-parse', 'assertLoose', () =>
+  objectGuard({
+    number: isNumber,
+    negNumber: isNumber,
+    maxNumber: isNumber,
+    string: isString,
+    longString: isString,
+    boolean: isBoolean,
+    deeplyNested: objectGuard({
+      foo: isString,
+      num: isNumber,
+      bool: isBoolean,
+    }),
+  })
+);
