@@ -1,9 +1,9 @@
 import { createCase } from '../benchmarks';
 import {
   object,
-  objectNoEval,
+  objectNoJit,
   objectGuard,
-  objectGuardNoEval,
+  objectGuardNoJit,
   parseString,
   parseNumber,
   parseBoolean,
@@ -49,14 +49,14 @@ createCase('pure-parse-(JIT)', 'parseSafe', () =>
 
 createCase('pure-parse-(dynamic)', 'parseSafe', () =>
   tryParse(
-    objectNoEval({
+    objectNoJit({
       number: parseNumber,
       negNumber: parseNumber,
       maxNumber: parseNumber,
       string: parseString,
       longString: parseString,
       boolean: parseBoolean,
-      deeplyNested: objectNoEval({
+      deeplyNested: objectNoJit({
         foo: parseString,
         num: parseNumber,
         bool: parseBoolean,
@@ -82,14 +82,14 @@ createCase('pure-parse-(JIT)', 'assertLoose', () =>
 );
 
 createCase('pure-parse-(dynamic)', 'assertLoose', () =>
-  objectGuardNoEval({
+  objectGuardNoJit({
     number: isNumber,
     negNumber: isNumber,
     maxNumber: isNumber,
     string: isString,
     longString: isString,
     boolean: isBoolean,
-    deeplyNested: objectGuardNoEval({
+    deeplyNested: objectGuardNoJit({
       foo: isString,
       num: isNumber,
       bool: isBoolean,
