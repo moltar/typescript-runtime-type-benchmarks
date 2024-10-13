@@ -1,12 +1,13 @@
 import { createCase } from '../benchmarks';
 import {
   object,
+  objectNoEval,
   objectGuard,
+  objectGuardNoEval,
   parseString,
   parseNumber,
   parseBoolean,
   Parser,
-  memo,
   isNumber,
   isString,
   isBoolean,
@@ -28,7 +29,7 @@ const tryParse =
     }
   };
 
-createCase('pure-parse', 'parseSafe', () =>
+createCase('pure-parse-(JIT)', 'parseSafe', () =>
   tryParse(
     object({
       number: parseNumber,
@@ -46,7 +47,25 @@ createCase('pure-parse', 'parseSafe', () =>
   )
 );
 
-createCase('pure-parse', 'assertLoose', () =>
+createCase('pure-parse-(dynamic)', 'parseSafe', () =>
+  tryParse(
+    objectNoEval({
+      number: parseNumber,
+      negNumber: parseNumber,
+      maxNumber: parseNumber,
+      string: parseString,
+      longString: parseString,
+      boolean: parseBoolean,
+      deeplyNested: objectNoEval({
+        foo: parseString,
+        num: parseNumber,
+        bool: parseBoolean,
+      }),
+    })
+  )
+);
+
+createCase('pure-parse-(JIT)', 'assertLoose', () =>
   objectGuard({
     number: isNumber,
     negNumber: isNumber,
@@ -55,6 +74,22 @@ createCase('pure-parse', 'assertLoose', () =>
     longString: isString,
     boolean: isBoolean,
     deeplyNested: objectGuard({
+      foo: isString,
+      num: isNumber,
+      bool: isBoolean,
+    }),
+  })
+);
+
+createCase('pure-parse-(dynamic)', 'assertLoose', () =>
+  objectGuardNoEval({
+    number: isNumber,
+    negNumber: isNumber,
+    maxNumber: isNumber,
+    string: isString,
+    longString: isString,
+    boolean: isBoolean,
+    deeplyNested: objectGuardNoEval({
       foo: isString,
       num: isNumber,
       bool: isBoolean,
