@@ -1,6 +1,5 @@
 import { object, number, string, boolean, parse, strictObject } from 'valibot';
 import { addCase } from '../benchmarks';
-import { Parse } from 'vega';
 
 const LooseSchema = object({
   number: number(),
