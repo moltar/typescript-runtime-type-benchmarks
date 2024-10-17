@@ -1,13 +1,6 @@
-import {
-  object,
-  number,
-  string,
-  boolean,
-  parse,
-  type ParseInfo,
-  strict,
-} from 'valibot';
+import { object, number, string, boolean, parse, strictObject } from 'valibot';
 import { addCase } from '../benchmarks';
+import { Parse } from 'vega';
 
 const LooseSchema = object({
   number: number(),
@@ -23,40 +16,42 @@ const LooseSchema = object({
   }),
 });
 
-const StrictSchema = strict(
-  object({
-    number: number(),
-    negNumber: number(),
-    maxNumber: number(),
-    string: string(),
-    longString: string(),
-    boolean: boolean(),
-    deeplyNested: strict(
-      object({
-        foo: string(),
-        num: number(),
-        bool: boolean(),
-      })
-    ),
-  })
-);
-
-const info: ParseInfo = { abortEarly: true };
+const StrictSchema = strictObject({
+  number: number(),
+  negNumber: number(),
+  maxNumber: number(),
+  string: string(),
+  longString: string(),
+  boolean: boolean(),
+  deeplyNested: strictObject({
+    foo: string(),
+    num: number(),
+    bool: boolean(),
+  }),
+});
 
 addCase('valibot', 'assertLoose', data => {
-  parse(LooseSchema, data, info);
+  parse(LooseSchema, data, {
+    abortEarly: true,
+  });
   return true;
 });
 
 addCase('valibot', 'assertStrict', data => {
-  parse(StrictSchema, data, info);
+  parse(StrictSchema, data, {
+    abortEarly: true,
+  });
   return true;
 });
 
 addCase('valibot', 'parseSafe', data => {
-  return parse(LooseSchema, data, info);
+  return parse(LooseSchema, data, {
+    abortEarly: true,
+  });
 });
 
 addCase('valibot', 'parseStrict', data => {
-  return parse(StrictSchema, data, info);
+  return parse(StrictSchema, data, {
+    abortEarly: true,
+  });
 });
