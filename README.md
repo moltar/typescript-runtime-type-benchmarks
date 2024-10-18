@@ -55,6 +55,7 @@
 * [Vality](https://github.com/jeengbe/vality)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
+* [ts-auto-guard](https://github.com/rhys-vdw/ts-auto-guard)
 
 ## Criteria
 
