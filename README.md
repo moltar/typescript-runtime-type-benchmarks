@@ -42,6 +42,7 @@
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
 * [suretype](https://github.com/grantila/suretype)
 * [toi](https://github.com/hf/toi)
+* [ts-auto-guard](https://github.com/rhys-vdw/ts-auto-guard)
 * [ts-interface-checker](https://github.com/gristlabs/ts-interface-checker)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 * [ts-runtime-checks](https://github.com/GoogleFeud/ts-runtime-checks)
@@ -55,7 +56,6 @@
 * [Vality](https://github.com/jeengbe/vality)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/vriad/zod)
-* [ts-auto-guard](https://github.com/rhys-vdw/ts-auto-guard)
 
 ## Criteria
 
