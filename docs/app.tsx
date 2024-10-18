@@ -530,8 +530,28 @@ class App extends Component<
         >
           <h1>Runtype Benchmarks</h1>
           <div>
-            <a class="github-button" href="https://github.com/moltar/typescript-runtime-type-benchmarks" data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star moltar/typescript-runtime-type-benchmarks on GitHub">Star</a>
-            <a class="github-button" href="https://github.com/moltar/typescript-runtime-type-benchmarks/fork" data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork moltar/typescript-runtime-type-benchmarks on GitHub">Fork</a>
+            <a
+              class="github-button"
+              href="https://github.com/moltar/typescript-runtime-type-benchmarks"
+              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
+              data-icon="octicon-star"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Star moltar/typescript-runtime-type-benchmarks on GitHub"
+            >
+              Star
+            </a>
+            <a
+              class="github-button"
+              href="https://github.com/moltar/typescript-runtime-type-benchmarks/fork"
+              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
+              data-icon="octicon-repo-forked"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Fork moltar/typescript-runtime-type-benchmarks on GitHub"
+            >
+              Fork
+            </a>
           </div>
         </div>
         <p>
