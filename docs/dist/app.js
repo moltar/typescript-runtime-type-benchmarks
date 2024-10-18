@@ -99,7 +99,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
     vegaLite = __importStar(vegaLite);
     // which results are attempted to load
     // the first is selected automatically
-    var NODE_VERSIONS = [22, 21, 20, 19, 18, 16];
+    var NODE_VERSIONS = [23, 22, 21, 20, 19, 18, 16];
     var BUN_VERSIONS = [1];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
@@ -478,7 +478,9 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         justifyContent: 'space-between',
                     } },
                     (0, preact_1.h)("h1", null, "Runtype Benchmarks"),
-                    (0, preact_1.h)("a", { href: "https://github.com/moltar/typescript-runtime-type-benchmarks/" }, "Github Repository")),
+                    (0, preact_1.h)("div", null,
+                        (0, preact_1.h)("a", { class: "github-button", href: "https://github.com/moltar/typescript-runtime-type-benchmarks", "data-color-scheme": "no-preference: dark; light: dark_dimmed; dark: dark;", "data-icon": "octicon-star", "data-size": "large", "data-show-count": "true", "aria-label": "Star moltar/typescript-runtime-type-benchmarks on GitHub" }, "Star"),
+                        (0, preact_1.h)("a", { class: "github-button", href: "https://github.com/moltar/typescript-runtime-type-benchmarks/fork", "data-color-scheme": "no-preference: dark; light: dark_dimmed; dark: dark;", "data-icon": "octicon-repo-forked", "data-size": "large", "data-show-count": "true", "aria-label": "Fork moltar/typescript-runtime-type-benchmarks on GitHub" }, "Fork"))),
                 (0, preact_1.h)("p", null, "Benchmark Comparison of Packages with Runtime Validation and TypeScript Support"),
                 (0, preact_1.h)("div", { style: { display: 'flex', margin: '1rem 0' } },
                     (0, preact_1.h)("div", { style: { width: '12rem', marginRight: '1rem' } },
