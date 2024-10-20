@@ -222,11 +222,11 @@ async function graph({
   // build a list of module names for sorting
   let sortedValues: BenchmarkResult[] = [];
 
-  if (sort === 'fastest') {
+  if (sort === 'fastest' || !sort) {
     sortedValues = [...valuesNodejs, ...valuesBun].sort(
       (a, b) => b.ops - a.ops
     );
-  } else if (sort === 'alphabetically' || !sort) {
+  } else if (sort === 'alphabetically') {
     sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) =>
       a.name < b.name ? -1 : 1
     );
@@ -437,7 +437,7 @@ class App extends Component<
     selectedBunVersions: {},
     valuesNodeJs: [],
     valuesBun: [],
-    sortBy: 'alphabetically' as const,
+    sortBy: 'fastest' as const,
   };
 
   getNodeJsVersions() {
@@ -645,8 +645,8 @@ class App extends Component<
                 }
                 value={this.state.sortBy}
               >
-                <option value="alphabetically">Alphabetically</option>
                 <option value="fastest">Fastest</option>
+                <option value="alphabetically">Alphabetically</option>
               </select>
             </label>
           </div>
