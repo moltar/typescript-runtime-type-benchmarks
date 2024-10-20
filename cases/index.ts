@@ -45,6 +45,7 @@ export const cases = [
   'zod',
   'deepkit',
   'effect-schema',
+  'ts-auto-guard',
 ] as const;
 
 export type CaseName = (typeof cases)[number];

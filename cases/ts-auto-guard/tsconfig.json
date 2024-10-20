@@ -1,0 +1,11 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+      "module": "commonjs",
+      "outDir": "build",
+      "strict": true,
+      "strictNullChecks": true,
+    },
+    "include": ["src/index.ts", "src/index.guard.ts"]
+  }
+  
