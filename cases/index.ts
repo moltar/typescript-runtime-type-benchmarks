@@ -2,6 +2,7 @@ export const cases = [
   'ajv',
   'arktype',
   'bueno',
+  'caketype',
   'class-validator',
   'computed-types',
   'decoders',

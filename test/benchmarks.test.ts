@@ -6,6 +6,7 @@ import { cases } from '../cases';
 import '../cases/ajv';
 import '../cases/arktype';
 import '../cases/bueno';
+import '../cases/caketype';
 import '../cases/class-validator';
 import '../cases/computed-types';
 import '../cases/decoders';
