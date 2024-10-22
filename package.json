@@ -12,8 +12,8 @@
     "lint": "gts check",
     "lint:fix": "gts fix",
     "start": "ts-node index.ts",
-    "test:build": "npm run compile:spectypes && npm run compile:ts-runtime-checks && npm run compile:typebox && npm run compile:typia && npm run compile:deepkit && tsc --noEmit",
-    "test": "npm run compile:spectypes && npm run compile:ts-runtime-checks && npm run compile:typebox && npm run compile:typia && npm run compile:deepkit && jest",
+    "test:build": "npm run compile:spectypes && npm run compile:ts-runtime-checks && npm run compile:typebox && npm run compile:typia && npm run compile:deepkit && npm run compile:ts-auto-guard && tsc --noEmit",
+    "test": "npm run compile:spectypes && npm run compile:ts-runtime-checks && npm run compile:typebox && npm run compile:typia && npm run compile:deepkit && npm run compile:ts-auto-guard && jest",
     "docs:serve": "serve docs",
     "docs:watch": "tsc --project tsconfig.docs.json --watch --preserveWatchOutput & serve docs",
     "docs:build": "tsc --project tsconfig.docs.json",
@@ -22,6 +22,7 @@
     "compile:ts-runtime-checks": "rimraf cases/ts-runtime-checks/build && tsc -p cases/ts-runtime-checks/src",
     "compile:typebox": "ts-node cases/typebox/index.ts cases/typebox/build",
     "compile:typia": "rimraf cases/typia/build && tsc -p cases/typia/tsconfig.json",
+    "compile:ts-auto-guard": "rimraf cases/ts-auto-guard/build && ts-auto-guard --project cases/ts-auto-guard/tsconfig.json && tsc -p cases/ts-auto-guard/tsconfig.json",
     "prepare": "ts-patch install"
   },
   "dependencies": {
@@ -74,6 +75,7 @@
     "suretype": "2.4.1",
     "svgo": "2.8.0",
     "to-typed": "0.5.2",
+    "ts-auto-guard": "^5.0.1",
     "ts-interface-checker": "1.0.2",
     "ts-json-validator": "0.7.1",
     "ts-node": "10.9.2",
