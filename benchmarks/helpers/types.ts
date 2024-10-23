@@ -27,7 +27,7 @@ export abstract class Benchmark<Fn> implements BenchmarkCase {
   abstract test(
     describe: jest.Describe,
     expect: jest.Expect,
-    test: jest.It
+    test: jest.It,
   ): void;
 }
 

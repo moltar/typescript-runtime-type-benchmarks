@@ -25,8 +25,8 @@ createCase('io-ts', 'assertLoose', () => {
         errors => {
           throw errors;
         },
-        () => true
-      )
+        () => true,
+      ),
     );
   };
 });

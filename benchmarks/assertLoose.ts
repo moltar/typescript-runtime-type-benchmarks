@@ -61,7 +61,7 @@ export class AssertLoose extends Benchmark<Fn> {
           this.fn({
             ...validateData,
             number: 'foo',
-          })
+          }),
         ).toThrow();
       });
     });

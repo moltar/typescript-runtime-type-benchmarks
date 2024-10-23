@@ -94,7 +94,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
     normalized.push(...results);
 
     const missingBenchmarks = BENCHMARKS.map(b => b.name).filter(
-      n => !results.find(r => r.benchmark === n)
+      n => !results.find(r => r.benchmark === n),
     );
 
     missingBenchmarks.forEach(benchmark => {
@@ -165,7 +165,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedNodeJsVersionsSet.has(b.runtimeVersion)
+        selectedNodeJsVersionsSet.has(b.runtimeVersion),
     )
     .map(b => ({
       ...b,
@@ -184,7 +184,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedBunVersionsSet.has(b.runtimeVersion)
+        selectedBunVersionsSet.has(b.runtimeVersion),
     )
     .map(b => ({
       ...b,
@@ -224,11 +224,11 @@ async function graph({
 
   if (sort === 'fastest' || !sort) {
     sortedValues = [...valuesNodejs, ...valuesBun].sort(
-      (a, b) => b.ops - a.ops
+      (a, b) => b.ops - a.ops,
     );
   } else if (sort === 'alphabetically') {
     sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) =>
-      a.name < b.name ? -1 : 1
+      a.name < b.name ? -1 : 1,
     );
   }
 
@@ -344,7 +344,9 @@ class Graph extends Component<
   }
 
   render() {
-    this.createGraph();
+    this.createGraph().catch(error => {
+      console.log('Create graph error', error);
+    });
 
     if (!this.state.svg) {
       return (
@@ -431,7 +433,7 @@ class App extends Component<
   state = {
     selectedBenchmarks: BENCHMARKS.reduce(
       (acc, b) => ({ ...acc, [b.name]: true }),
-      {}
+      {},
     ),
     selectedNodeJsVersions: {},
     selectedBunVersions: {},
@@ -445,7 +447,7 @@ class App extends Component<
       this.state.valuesNodeJs
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1))
+        .sort((a, b) => (a < b ? 1 : -1)),
     );
     const res: string[] = [];
 
@@ -459,7 +461,7 @@ class App extends Component<
       this.state.valuesBun
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1))
+        .sort((a, b) => (a < b ? 1 : -1)),
     );
     const res: string[] = [];
 
@@ -654,7 +656,7 @@ class App extends Component<
 
         <Graph
           benchmarks={BENCHMARKS.filter(
-            b => this.state.selectedBenchmarks[b.name]
+            b => this.state.selectedBenchmarks[b.name],
           )}
           nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
             .sort()

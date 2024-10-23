@@ -62,7 +62,7 @@ export async function createPreviewGraph() {
     RUNTIME_FOR_PREVIEW === 'node'
   ) {
     const allResults: BenchmarkResult[] = JSON.parse(
-      readFileSync(resultsJsonFilename()).toString()
+      readFileSync(resultsJsonFilename()).toString(),
     ).results;
 
     await writePreviewGraph({
@@ -87,7 +87,7 @@ async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
     ...fns,
 
     cycle(),
-    complete()
+    complete(),
   );
 }
 
@@ -124,7 +124,7 @@ function appendResults(results: BenchmarkResult[]) {
       results: [...existingResults, ...results],
     }),
 
-    { encoding: 'utf8' }
+    { encoding: 'utf8' },
   );
 }
 

@@ -39,7 +39,7 @@ export function addCase<
   moduleName: string,
   benchmarkId: K,
   implementation: I,
-  options?: { disabled?: boolean }
+  options?: { disabled?: boolean },
 ) {
   let benchmarks = registeredBenchmarks.get(benchmarkId);
 
@@ -54,7 +54,7 @@ export function addCase<
       'benchmark',
       benchmarkId,
       'is already defined for module',
-      moduleName
+      moduleName,
     );
   }
 
@@ -68,8 +68,8 @@ export function addCase<
     new benchmarkCtor(
       moduleName,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      implementation as any
-    )
+      implementation as any,
+    ),
   );
 }
 
@@ -80,13 +80,13 @@ export function createCase<
   moduleName: string,
   benchmarkId: K,
   builder: () => I,
-  options?: { disabled?: boolean }
+  options?: { disabled?: boolean },
 ) {
   const impl = builder();
 
   if (!impl) {
     throw new Error(
-      `case implementation function missing in benchmark "${benchmarkId}" for module "${moduleName}"`
+      `case implementation function missing in benchmark "${benchmarkId}" for module "${moduleName}"`,
     );
   }
 

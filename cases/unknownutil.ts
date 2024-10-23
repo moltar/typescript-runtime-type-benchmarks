@@ -29,10 +29,10 @@ const dataTypeStrict = is.ObjectOf(
         num: is.Number,
         bool: is.Boolean,
       },
-      { strict: true }
+      { strict: true },
     ),
   },
-  { strict: true }
+  { strict: true },
 );
 
 // TODO: unklike other validators, unknownutil does not remove extra properties

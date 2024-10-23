@@ -56,9 +56,9 @@ test('all cases must have been imported in tests', () => {
   expect(
     new Set<string>(
       getRegisteredBenchmarks().flatMap(pair =>
-        pair[1].map(b => b.moduleName.split(' ')[0])
-      )
-    ).size
+        pair[1].map(b => b.moduleName.split(' ')[0]),
+      ),
+    ).size,
   ).toBe(cases.length);
 });
 

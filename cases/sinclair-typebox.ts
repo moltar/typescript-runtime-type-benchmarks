@@ -39,8 +39,8 @@ export const Strict = Type.Object(
         num: Type.Number(),
         bool: Type.Boolean(),
       },
-      { additionalProperties: false }
+      { additionalProperties: false },
     ),
   },
-  { additionalProperties: false }
+  { additionalProperties: false },
 );

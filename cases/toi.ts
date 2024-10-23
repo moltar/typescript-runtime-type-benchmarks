@@ -20,9 +20,9 @@ createCase('toi', 'parseStrict', () => {
           foo: req().and(str()),
           num: req().and(num()),
           bool: req().and(toi.bool.is()),
-        })
+        }),
       ),
-    })
+    }),
   );
 
   return data => {
@@ -51,9 +51,9 @@ createCase('toi', 'assertStrict', () => {
           foo: req().and(str()),
           num: req().and(num()),
           bool: req().and(toi.bool.is()),
-        })
+        }),
       ),
-    })
+    }),
   );
 
   return data => {
