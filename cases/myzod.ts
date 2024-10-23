@@ -18,12 +18,12 @@ createCase('myzod', 'parseSafe', () => {
         },
         {
           allowUnknown: true,
-        }
+        },
       ),
     },
     {
       allowUnknown: true,
-    }
+    },
   );
 
   return data => {

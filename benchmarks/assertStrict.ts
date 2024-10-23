@@ -56,7 +56,7 @@ export class AssertStrict extends Benchmark<Fn> {
           this.fn({
             ...validateData,
             number: 'foo',
-          })
+          }),
         ).toThrow();
       });
     });

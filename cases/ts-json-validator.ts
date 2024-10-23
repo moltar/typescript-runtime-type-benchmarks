@@ -31,7 +31,7 @@ createCase('ts-json-validator', 'assertLoose', () => {
           },
         }),
       },
-    })
+    }),
   );
 
   return data => {

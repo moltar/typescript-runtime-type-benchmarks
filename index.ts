@@ -83,7 +83,7 @@ async function main() {
     default:
       console.error('unknown command:', command);
 
-      // eslint-disable-next-line no-process-exit
+      //eslint-disable-next-line n/no-process-exit
       process.exit(1);
   }
 }

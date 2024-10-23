@@ -47,7 +47,7 @@ addCase(
   },
   // can't get the `mask` stuff to work - its documented to remove any
   // additional attributes that `type` ignored
-  { disabled: true }
+  { disabled: true },
 );
 
 addCase('superstruct', 'parseStrict', data => {

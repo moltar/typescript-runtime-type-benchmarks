@@ -7,7 +7,7 @@ import { writeFileSync } from 'node:fs';
 function CompileFunction<T extends TSchema>(name: string, schema: T): string {
   return `/* eslint-disable */ export const ${name} = (() => {${TypeCompiler.Code(
     schema,
-    { language: 'typescript' }
+    { language: 'typescript' },
   )}})();`;
 }
 

@@ -16,10 +16,10 @@ createCase('@typeofweb/schema', 'assertLoose', () => {
           num: number(),
           bool: boolean(),
         },
-        { allowUnknownKeys: true }
+        { allowUnknownKeys: true },
       )(),
     },
-    { allowUnknownKeys: true }
+    { allowUnknownKeys: true },
   )();
 
   const validator = validate(dataType);

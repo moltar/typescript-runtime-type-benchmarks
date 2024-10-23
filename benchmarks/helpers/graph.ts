@@ -75,7 +75,7 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
   function updateResult(
     name: string,
     benchmarkLabel: BenchmarkLabel,
-    ops: number
+    ops: number,
   ) {
     const existing = preparedResult.find(v => v.name === name);
 
@@ -100,8 +100,8 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
         updateResult(
           r.name,
           getBenchmarkLabel(r.benchmark as AvailableBenchmarksIds),
-          r.ops
-        )
+          r.ops,
+        ),
       );
   });
 
@@ -114,7 +114,7 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
     updateResult(
       '(median)',
       getBenchmarkLabel(v[0].benchmark as AvailableBenchmarksIds),
-      median(sorted.map(x => x.ops))
+      median(sorted.map(x => x.ops)),
     );
   });
 
@@ -125,7 +125,7 @@ function prepareData(values: BenchmarkResult[], resultCountToInclude = 4) {
 async function previewGraph({ values }: PreviewGraphParams): Promise<string> {
   const vegaSpec = compile({
     repeat: Object.keys(availableBenchmarks).map(b =>
-      getBenchmarkLabel(b as AvailableBenchmarksIds)
+      getBenchmarkLabel(b as AvailableBenchmarksIds),
     ),
     columns: 2,
     title: {

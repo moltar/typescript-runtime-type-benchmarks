@@ -29,7 +29,7 @@ const validatorStrict = Schema(
       bool: boolean,
     },
   },
-  { strict: true }
+  { strict: true },
 );
 
 addCase('computed-types', 'parseSafe', (data: UnknownData) => {

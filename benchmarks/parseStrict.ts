@@ -22,7 +22,7 @@ export class ParseStrict extends Benchmark<Fn> {
           this.fn({
             ...validateData,
             number: 'foo',
-          })
+          }),
         ).toThrow();
       });
 
@@ -31,7 +31,7 @@ export class ParseStrict extends Benchmark<Fn> {
           this.fn({
             ...validateData,
             extraAttribute: true,
-          })
+          }),
         ).toThrow();
       });
 
@@ -43,7 +43,7 @@ export class ParseStrict extends Benchmark<Fn> {
               ...validateData.deeplyNested,
               extraDeepAttribute: true,
             },
-          })
+          }),
         ).toThrow();
       });
 
