@@ -57,8 +57,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -194,11 +194,11 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
         return parseInt(match[1]);
     }
     function graph(_a) {
-        var selectedBenchmarks = _a.selectedBenchmarks, selectedNodeJsVersions = _a.selectedNodeJsVersions, selectedBunVersions = _a.selectedBunVersions, benchmarkResultsNodejs = _a.benchmarkResultsNodejs, benchmarkResultsBun = _a.benchmarkResultsBun, sort = _a.sort;
-        return __awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, arguments, void 0, function (_b) {
             var selectedBenchmarkSet, selectedNodeJsVersionsSet, selectedBunVersionsSet, valuesNodejs, valuesBun, nodeJsVersionCount, bunVersionCount, colorScaleRange, sortedValues, sortedNames, vegaSpec, view, svg;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var selectedBenchmarks = _b.selectedBenchmarks, selectedNodeJsVersions = _b.selectedNodeJsVersions, selectedBunVersions = _b.selectedBunVersions, benchmarkResultsNodejs = _b.benchmarkResultsNodejs, benchmarkResultsBun = _b.benchmarkResultsBun, sort = _b.sort;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         if (!selectedBenchmarks.length ||
                             (!selectedNodeJsVersions.length && !selectedBunVersions.length)) {
@@ -265,7 +265,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                 values: __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true),
                             },
                             height: { step: 15 / (nodeJsVersionCount + bunVersionCount) },
-                            background: 'transparent',
+                            background: 'transparent', // no white graphs for dark mode users
                             facet: {
                                 row: {
                                     field: 'name',
@@ -331,7 +331,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         view = new vega.View(vega.parse(vegaSpec.spec), { renderer: 'none' });
                         return [4 /*yield*/, view.toSVG()];
                     case 1:
-                        svg = _b.sent();
+                        svg = _c.sent();
                         return [2 /*return*/, svg];
                 }
             });
@@ -372,7 +372,9 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
             });
         };
         Graph.prototype.render = function () {
-            this.createGraph();
+            this.createGraph().catch(function (error) {
+                console.log('Create graph error', error);
+            });
             if (!this.state.svg) {
                 return ((0, preact_1.h)("div", { style: { margin: '5rem' } },
                     (0, preact_1.h)("i", null, "No Benchmark Selected")));
