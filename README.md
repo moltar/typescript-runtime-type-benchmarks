@@ -14,6 +14,7 @@
 
 * [ajv](https://ajv.js.org/)
 * [ArkType](https://github.com/arktypeio/arktype)
+* [banditypes](https://github.com/thoughtspile/banditypes)
 * [bueno](https://github.com/philipnilsson/bueno)
 * [caketype](https://github.com/justinyaodu/caketype)
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
