@@ -1,8 +1,6 @@
 import { silentValidator } from '@aeriajs/validation';
 import { createCase } from '../../benchmarks';
 
-import {} from './index.d';
-
 const schema = {
   type: 'object',
   properties: {
