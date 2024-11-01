@@ -1,4 +1,5 @@
 export const cases = [
+  'aeria',
   'ajv',
   'arktype',
   'banditypes',

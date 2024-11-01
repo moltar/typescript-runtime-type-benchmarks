@@ -12,6 +12,7 @@
 
 ## Packages Compared
 
+* [aeria](https://github.com/aeria-org/aeria)
 * [ajv](https://ajv.js.org/)
 * [ArkType](https://github.com/arktypeio/arktype)
 * [banditypes](https://github.com/thoughtspile/banditypes)
