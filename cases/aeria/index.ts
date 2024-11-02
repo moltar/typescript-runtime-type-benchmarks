@@ -71,7 +71,7 @@ createCase('aeria', 'assertLoose', () => {
     validate(data, schema, {
       throwOnError: true,
       tolerateExtraneous: true,
-    })
+    });
 
     return true;
   };
@@ -81,7 +81,7 @@ createCase('aeria', 'assertStrict', () => {
   return (data: unknown) => {
     validate(data, schema, {
       throwOnError: true,
-    })
+    });
 
     return true;
   };
