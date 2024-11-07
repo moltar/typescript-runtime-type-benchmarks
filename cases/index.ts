@@ -31,6 +31,7 @@ export const cases = [
   'succulent',
   'superstruct',
   'suretype',
+  'tiny-schema-validator',
   'to-typed',
   'toi',
   'ts-interface-checker',

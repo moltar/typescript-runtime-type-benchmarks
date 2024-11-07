@@ -44,6 +44,8 @@
 * [succulent](https://github.com/aslilac/succulent)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
 * [suretype](https://github.com/grantila/suretype)
+* [tiny-schema-validator](https://github.com/5alidz/tiny-schema-validator)
+* [to-typed](https://github.com/jsoldi/to-typed)
 * [toi](https://github.com/hf/toi)
 * [ts-auto-guard](https://github.com/rhys-vdw/ts-auto-guard)
 * [ts-interface-checker](https://github.com/gristlabs/ts-interface-checker)
