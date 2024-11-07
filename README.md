@@ -110,3 +110,27 @@ const res = isMyDataValid(data)
 * update node version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
 * update `NODE_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
 * optionally set `NODE_VERSION_FOR_PREVIEW` in `benchmarks/helpers/main.ts`
+
+## Test cases
+
+* **Safe Parsing**
+  * Checks the input object against a schema and returns it.
+  * Raises an error if the input object does not conform to the schema (e.g., a type mismatch or missing attribute).
+  * Removes any extra keys in the input object that are not defined in the schema.
+
+* **Strict Parsing**
+  * Checks the input object against a schema and returns it.
+  * Raises an error if the input object does not conform to the schema (e.g., a type mismatch or missing attribute).
+  * Raises an error if the input object contains extra keys.
+
+* **Loose Assertion**
+  * Checks the input object against a schema.
+  * Raises an exception if the input object does not match the schema.
+  * Allows extra keys without raising errors.
+  * Returns true if data is valid.
+
+* **Strict Assertion**
+  * Checks the input object against a schema.
+  * Raises an exception if the input object does not match the schema.
+  * Raises an error if the input object or any nested input objects contain extra keys.
+  * Returns true if data is valid.
