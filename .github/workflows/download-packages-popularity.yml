@@ -4,15 +4,7 @@ env:
   CI: "true"
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - .github/workflows/*.yml
-      - "cases/*.ts"
-      - "*.ts"
-      - package.json
-      - package-lock.json
+  - pull_request
 
 jobs:
   build:
