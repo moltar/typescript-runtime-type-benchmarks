@@ -4,7 +4,16 @@ env:
   CI: "true"
 
 on:
-  - pull_request
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/*.yml
+      - "cases/*.ts"
+      - "*.ts"
+      - package.json
+      - package-lock.json
+      - bun.lockb
 
 jobs:
   build:
@@ -41,7 +50,7 @@ jobs:
       - name: npm install
         run: npm ci
 
-      - name: lint
+      - name: download-packages-popularity
         run: npm run download-packages-popularity
 
         ## FIX: https://github.com/github-actions-x/commit/issues/16
