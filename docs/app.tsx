@@ -67,6 +67,23 @@ BENCHMARKS.forEach(b => {
   BENCHMARKS_ORDER[b.name] = b.order;
 });
 
+const PACKAGES_POPULARITY: { [k: string]: number } = {};
+
+type PackagePopularity = {
+  name: string;
+  weeklyDownloads: number;
+}
+
+async function loadPackagesPopularity() {
+  await fetch('packagesPopularity.json')
+    .then(res => res.json() as Promise<PackagePopularity[]> )
+    .then(( data ) => {
+      data.forEach(p => {
+        PACKAGES_POPULARITY[p.name] = p.weeklyDownloads;
+      });
+    })
+}
+
 function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
   if (!values.length) {
     return [];
@@ -147,7 +164,7 @@ async function graph({
   selectedBunVersions: string[];
   benchmarkResultsNodejs: BenchmarkResult[];
   benchmarkResultsBun: BenchmarkResult[];
-  sort?: 'alphabetically' | 'fastest';
+  sort?: 'alphabetically' | 'fastest' | 'popularity';
 }) {
   if (
     !selectedBenchmarks.length ||
@@ -230,6 +247,19 @@ async function graph({
     sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) =>
       a.name < b.name ? -1 : 1,
     );
+  } else if (sort === 'popularity') {
+    console.log('sort', PACKAGES_POPULARITY);
+    
+    sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) => {
+      if(!PACKAGES_POPULARITY[a.name] || !PACKAGES_POPULARITY[b.name]) {
+        console.log('no popularity', a.name, b.name);
+        return 0;
+      }
+      const aPopularity = PACKAGES_POPULARITY[a.name] || 0;
+      const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
+
+      return bPopularity - aPopularity;
+    });
   }
 
   // remove duplicates not sure whether vega-lite can handle that
@@ -427,7 +457,7 @@ class App extends Component<
     selectedBunVersions: { [key: string]: boolean };
     valuesNodeJs: BenchmarkResult[];
     valuesBun: BenchmarkResult[];
-    sortBy: 'fastest' | 'alphabetically';
+    sortBy: 'fastest' | 'alphabetically' | 'popularity';
   }
 > {
   state = {
@@ -470,7 +500,9 @@ class App extends Component<
     return res;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await loadPackagesPopularity()
+
     NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)
         .then(response => response.json() as Promise<BenchmarkResponse>)
@@ -649,6 +681,7 @@ class App extends Component<
               >
                 <option value="fastest">Fastest</option>
                 <option value="alphabetically">Alphabetically</option>
+                <option value="popularity">Popularity</option>
               </select>
             </label>
           </div>

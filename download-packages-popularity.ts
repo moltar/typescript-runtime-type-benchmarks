@@ -27,7 +27,7 @@ export const packages = [
     packageName: 'caketype',
   },
   {
-    name: 'class-validator',
+    name: 'class-transformer-validator-sync',
     packageName: 'class-validator',
   },
   {
@@ -51,11 +51,11 @@ export const packages = [
     packageName: 'json-decoder',
   },
   {
-    name: 'mol_data',
+    name: '$mol_data',
     packageName: 'mol_data_all',
   },
   {
-    name: 'mojotech-json-type-validation',
+    name: '@mojotech/json-type-validation',
     packageName: '@mojotech/json-type-validation',
   },
   {
@@ -71,7 +71,11 @@ export const packages = [
     packageName: 'ok-computer',
   },
   {
-    name: 'parse-dont-validate',
+    name: 'parse-dont-validate (chained function)',
+    packageName: 'parse-dont-validate',
+  },
+  {
+    name: 'parse-dont-validate (named parameters)',
     packageName: 'parse-dont-validate',
   },
   {
