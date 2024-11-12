@@ -24,10 +24,10 @@
     "compile:typia": "rimraf cases/typia/build && tsc -p cases/typia/tsconfig.json",
     "compile:ts-auto-guard": "rimraf cases/ts-auto-guard/build && ts-auto-guard --project cases/ts-auto-guard/tsconfig.json && tsc -p cases/ts-auto-guard/tsconfig.json",
     "prepare": "ts-patch install",
-    "download-packages-popularity": "ts-node download-packages-popularity.ts"
+	"download-packages-popularity": "ts-node download-packages-popularity.ts"
   },
   "dependencies": {
-    "@aeriajs/validation": "0.0.130",
+    "@aeriajs/validation": "0.0.131",
     "@ailabs/ts-utils": "1.4.0",
     "@badrap/valita": "0.3.11",
     "@deepkit/core": "1.0.1-alpha.154",
@@ -59,7 +59,7 @@
     "io-ts": "2.2.21",
     "jointz": "7.0.4",
     "json-decoder": "1.4.1",
-    "mol_data_all": "1.1.1261",
+    "mol_data_all": "1.1.1263",
     "myzod": "1.12.0",
     "ok-computer": "1.0.4",
     "parse-dont-validate": "4.0.0",
@@ -86,7 +86,7 @@
     "ts-node": "10.9.2",
     "ts-runtime-checks": "0.6.2",
     "typescript": "5.6.3",
-    "typia": "6.11.4",
+    "typia": "6.12.0",
     "undici": "6.20.1",
     "unknownutil": "3.18.1",
     "valibot": "0.42.1",
