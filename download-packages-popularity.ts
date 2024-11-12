@@ -234,7 +234,7 @@ const packagesData: {
 
 async function main() {
   for (const { name, packageName } of packages) {
-    console.log(`Downloading ${name}...`);
+    console.log(`Downloading ${name}`);
 
     const weeklyDownloads = await getWeeklyDownloads(packageName);
 
@@ -252,7 +252,7 @@ async function main() {
 
   fs.writeFileSync(
     './docs/packagesPopularity.json',
-    JSON.stringify(packagesData, null, 2),
+    JSON.stringify(packagesData),
   );
 }
 
