@@ -72,16 +72,16 @@ const PACKAGES_POPULARITY: { [k: string]: number } = {};
 type PackagePopularity = {
   name: string;
   weeklyDownloads: number;
-}
+};
 
 async function loadPackagesPopularity() {
   await fetch('packagesPopularity.json')
-    .then(res => res.json() as Promise<PackagePopularity[]> )
-    .then(( data ) => {
+    .then(res => res.json() as Promise<PackagePopularity[]>)
+    .then(data => {
       data.forEach(p => {
         PACKAGES_POPULARITY[p.name] = p.weeklyDownloads;
       });
-    })
+    });
 }
 
 function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
@@ -495,7 +495,7 @@ class App extends Component<
   }
 
   async componentDidMount() {
-    await loadPackagesPopularity()
+    await loadPackagesPopularity();
 
     NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)
