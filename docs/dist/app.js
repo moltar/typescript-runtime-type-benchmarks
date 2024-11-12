@@ -278,12 +278,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             });
                         }
                         else if (sort === 'popularity') {
-                            console.log('sort', PACKAGES_POPULARITY);
                             sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) {
-                                if (!PACKAGES_POPULARITY[a.name] || !PACKAGES_POPULARITY[b.name]) {
-                                    console.log('no popularity', a.name, b.name);
-                                    return 0;
-                                }
                                 var aPopularity = PACKAGES_POPULARITY[a.name] || 0;
                                 var bPopularity = PACKAGES_POPULARITY[b.name] || 0;
                                 return bPopularity - aPopularity;

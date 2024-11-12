@@ -248,13 +248,7 @@ async function graph({
       a.name < b.name ? -1 : 1,
     );
   } else if (sort === 'popularity') {
-    console.log('sort', PACKAGES_POPULARITY);
-    
     sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) => {
-      if(!PACKAGES_POPULARITY[a.name] || !PACKAGES_POPULARITY[b.name]) {
-        console.log('no popularity', a.name, b.name);
-        return 0;
-      }
       const aPopularity = PACKAGES_POPULARITY[a.name] || 0;
       const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
 

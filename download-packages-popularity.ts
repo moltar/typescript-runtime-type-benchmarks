@@ -99,7 +99,7 @@ export const packages = [
     packageName: 'runtypes',
   },
   {
-    name: 'sapphire-shapeshift',
+    name: '@sapphire/shapeshift',
     packageName: '@sapphire/shapeshift',
   },
   {
@@ -107,15 +107,15 @@ export const packages = [
     packageName: 'simple-runtypes',
   },
   {
-    name: 'sinclair-typebox-ahead-of-time',
+    name: '@sinclair/typebox-(ahead-of-time)',
     packageName: '@sinclair/typebox',
   },
   {
-    name: 'sinclair-typebox-dynamic',
+    name: '@sinclair/typebox-(dynamic)',
     packageName: '@sinclair/typebox',
   },
   {
-    name: 'sintlair-typebox-just-in-time',
+    name: '@sinclair/typebox-(just-in-time)',
     packageName: '@sinclair/typebox',
   },
   {
@@ -167,7 +167,7 @@ export const packages = [
     packageName: '@skarab/tson',
   },
   {
-    name: 'typeofweb-schema',
+    name: '@typeofweb/schema',
     packageName: '@typeofweb/schema',
   },
   {
