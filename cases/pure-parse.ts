@@ -1,9 +1,9 @@
 import { createCase } from '../benchmarks';
 import {
   object,
-  objectNoJit,
+  objectCompiled,
   objectGuard,
-  objectGuardNoJit,
+  objectGuardCompiled,
   parseString,
   parseNumber,
   parseBoolean,
@@ -31,6 +31,24 @@ const tryParse =
 
 createCase('pure-parse-(JIT)', 'parseSafe', () =>
   tryParse(
+    objectCompiled({
+      number: parseNumber,
+      negNumber: parseNumber,
+      maxNumber: parseNumber,
+      string: parseString,
+      longString: parseString,
+      boolean: parseBoolean,
+      deeplyNested: objectCompiled({
+        foo: parseString,
+        num: parseNumber,
+        bool: parseBoolean,
+      }),
+    })
+  )
+);
+
+createCase('pure-parse-(dynamic)', 'parseSafe', () =>
+  tryParse(
     object({
       number: parseNumber,
       negNumber: parseNumber,
@@ -47,33 +65,15 @@ createCase('pure-parse-(JIT)', 'parseSafe', () =>
   )
 );
 
-createCase('pure-parse-(dynamic)', 'parseSafe', () =>
-  tryParse(
-    objectNoJit({
-      number: parseNumber,
-      negNumber: parseNumber,
-      maxNumber: parseNumber,
-      string: parseString,
-      longString: parseString,
-      boolean: parseBoolean,
-      deeplyNested: objectNoJit({
-        foo: parseString,
-        num: parseNumber,
-        bool: parseBoolean,
-      }),
-    })
-  )
-);
-
 createCase('pure-parse-(JIT)', 'assertLoose', () =>
-  objectGuard({
+  objectGuardCompiled({
     number: isNumber,
     negNumber: isNumber,
     maxNumber: isNumber,
     string: isString,
     longString: isString,
     boolean: isBoolean,
-    deeplyNested: objectGuard({
+    deeplyNested: objectGuardCompiled({
       foo: isString,
       num: isNumber,
       bool: isBoolean,
@@ -82,14 +82,14 @@ createCase('pure-parse-(JIT)', 'assertLoose', () =>
 );
 
 createCase('pure-parse-(dynamic)', 'assertLoose', () =>
-  objectGuardNoJit({
+  objectGuard({
     number: isNumber,
     negNumber: isNumber,
     maxNumber: isNumber,
     string: isString,
     longString: isString,
     boolean: isBoolean,
-    deeplyNested: objectGuardNoJit({
+    deeplyNested: objectGuard({
       foo: isString,
       num: isNumber,
       bool: isBoolean,
