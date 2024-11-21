@@ -1,97 +1,69 @@
-import { schema } from 'jet-schema';
+import jetSchema from 'jet-schema';
 import { createCase } from '../benchmarks';
 
+// **** Init Schema **** //
 
-// Parse "loose"
-createCase('jet-schema', 'parseSafe', () => {
-  const dataType = schema({
+const schema = jetSchema({
+  globals: [
+    { vf: isNum, default: 0 },
+    { vf: isStr, default: '' },
+    { vf: isBool, default: false },
+  ],
+});
+
+const Schema = schema({
+  number: isNum,
+  negNumber: isNum,
+  maxNumber: isNum,
+  string: isStr,
+  longString: isStr,
+  boolean: isBool,
+  deeplyNested: schema({
+    foo: isStr,
+    num: isNum,
+    bool: isBool,
+  }),
+});
+
+const LooseSchema = schema(
+  {
     number: isNum,
     negNumber: isNum,
     maxNumber: isNum,
     string: isStr,
     longString: isStr,
     boolean: isBool,
-    deeplyNested: schema({
-      foo: isStr,
-      num: isNum,
-      bool: isBool,
-    }),
-  });
-  // Return
-  return data => {
-    return dataType.parse(data);
-  };
-});
+    deeplyNested: schema(
+      {
+        foo: isStr,
+        num: isNum,
+        bool: isBool,
+      },
+      { safety: 'pass' },
+    ),
+  },
+  { safety: 'pass' },
+);
 
-
-// Parse "strict"
-// createCase('zod', 'parseStrict', () => {
-//   const dataType = schema({
-//       number: isNum,
-//       negNumber: isNum,
-//       maxNumber: isNum,
-//       string: isNum,
-//       longString: isStr,
-//       boolean: isBool,
-//       deeplyNested: schema({
-//           foo: isStr,
-//           num: isNum,
-//           bool: isBool,
-//         }, { strict: 'high' }),
-//     }, { safety: 'high' });
-//   // Return
-//   return data => {
-//     return dataType.parse(data);
-//   };
-// });
-
-
-// Parse "pass"
-// createCase('zod', 'assertLoose', () => {
-//   const dataType = schema({
-//       number: isNum,
-//       negNumber: isNum,
-//       maxNumber: isNum,
-//       string: isStr,
-//       longString: isStr,
-//       boolean: isBool,
-//       deeplyNested: schema({
-//           foo: isStr,
-//           num: isNum,
-//           bool: isBool,
-//         }, { strict: 'low' }),
-//     }, { strict: 'low' });
-//   // Return
-//   return data => {
-//     return dataType.parse(data);
-//   };
-// });
-
-
-// Test "strict"
-// createCase('zod', 'assertStrict', () => {
-//   const dataType = schema({
-//     number: isNum,
-//     negNumber: isNum,
-//     maxNumber: isNum,
-//     string: isStr,
-//     longString: isStr,
-//     boolean: isBool,
-//     deeplyNested: schema({
-//       foo: isStr,
-//       num: isNum,
-//       bool: isBool,
-//     }, { strict: 'high' }),
-//   }, { strict: 'high' });
-//   // Return
-//   return data => {
-//     dataType.parse(data);
-//     return true;
-//   };
-// });
-
-
-// **** Validators **** //
+const StrictSchema = schema(
+  {
+    number: isNum,
+    negNumber: isNum,
+    maxNumber: isNum,
+    string: isStr,
+    longString: isStr,
+    boolean: isBool,
+    deeplyNested: schema(
+      {
+        foo: isStr,
+        num: isNum,
+        bool: isBool,
+      },
+      { safety: 'strict' },
+    ),
+  },
+  { safety: 'strict' },
+);
 
 function isNum(arg: unknown): arg is number {
   return typeof arg === 'number';
@@ -104,3 +76,35 @@ function isStr(arg: unknown): arg is string {
 function isBool(arg: unknown): arg is boolean {
   return typeof arg === 'boolean';
 }
+
+// **** Run Tests **** //
+
+// Parse "safe"
+createCase('jet-schema', 'parseSafe', () => {
+  return data => {
+    return Schema.parse(data);
+  };
+});
+
+// Parse "strict"
+createCase('jet-schema', 'parseStrict', () => {
+  return data => {
+    return StrictSchema.parse(data);
+  };
+});
+
+// Test "loose"
+createCase('jet-schema', 'assertLoose', () => {
+  return data => {
+    LooseSchema.test(data);
+    return true;
+  };
+});
+
+// Test "loose"
+createCase('jet-schema', 'assertStrict', () => {
+  return data => {
+    StrictSchema.test(data);
+    return true;
+  };
+});

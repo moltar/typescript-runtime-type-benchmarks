@@ -24,6 +24,7 @@
 * [deepkit](https://deepkit.io/)
 * [@effect/schema](https://github.com/Effect-TS/effect/blob/main/packages/schema/README.md)
 * [io-ts](https://github.com/gcanti/io-ts)
+* [jet-schema](https://github.com/seanpmaxwell/jet-schema)
 * [jointz](https://github.com/moodysalem/jointz)
 * [json-decoder](https://github.com/venil7/json-decoder)
 * [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)

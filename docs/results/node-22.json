@@ -1,1 +1,1068 @@
-{"results":[{"benchmark":"parseSafe","name":"aeria","ops":937860,"margin":0.51,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"aeria","ops":1042914,"margin":1.19,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"aeria","ops":993524,"margin":0.98,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"aeria","ops":1029870,"margin":0.52,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"ajv","ops":34554119,"margin":2.06,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"ajv","ops":19203992,"margin":0.88,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"arktype","ops":68639221,"margin":2.89,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"banditypes","ops":2600708,"margin":0.8,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"banditypes","ops":2574310,"margin":0.78,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"bueno","ops":277326,"margin":0.38,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"bueno","ops":268582,"margin":0.47,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"bueno","ops":493568,"margin":0.35,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"bueno","ops":470428,"margin":0.75,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"caketype","ops":166569,"margin":0.32,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"caketype","ops":212973,"margin":0.62,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"caketype","ops":162954,"margin":1.65,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"class-transformer-validator-sync","ops":88919,"margin":0.3,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"computed-types","ops":1434127,"margin":1.3,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"computed-types","ops":1187116,"margin":0.3,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"computed-types","ops":1182946,"margin":0.49,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"decoders","ops":374489,"margin":0.33,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"decoders","ops":224423,"margin":0.41,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"decoders","ops":225233,"margin":0.4,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"io-ts","ops":2718333,"margin":0.44,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"jointz","ops":637722,"margin":0.49,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"jointz","ops":638655,"margin":0.54,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"jointz","ops":847585,"margin":0.37,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"json-decoder","ops":1543896,"margin":0.53,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"$mol_data","ops":3046183,"margin":0.97,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"$mol_data","ops":3056803,"margin":0.53,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"@mojotech/json-type-validation","ops":2418543,"margin":0.8,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"mondrian-framework","ops":533089,"margin":0.66,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"mondrian-framework","ops":493130,"margin":0.56,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"mondrian-framework","ops":531901,"margin":0.76,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"mondrian-framework","ops":482886,"margin":0.6,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"myzod","ops":2300499,"margin":0.29,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"myzod","ops":2597107,"margin":1.23,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"myzod","ops":2761142,"margin":0.52,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"ok-computer","ops":208072,"margin":0.23,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"ok-computer","ops":216994,"margin":0.35,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"parse-dont-validate (chained function)","ops":645722,"margin":1.23,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"parse-dont-validate (named parameters)","ops":2115253,"margin":0.56,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"purify-ts","ops":1824392,"margin":0.84,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"r-assign","ops":1810755,"margin":0.43,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"r-assign","ops":1515771,"margin":0.91,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"r-assign","ops":1786450,"margin":0.42,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"r-assign","ops":1496598,"margin":0.38,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"rescript-schema","ops":63877716,"margin":2.43,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"rescript-schema","ops":20262436,"margin":1.49,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"rescript-schema","ops":62641334,"margin":2.04,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"rescript-schema","ops":25729367,"margin":0.88,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"rulr","ops":1067105,"margin":0.76,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"runtypes","ops":176669,"margin":0.24,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"@sapphire/shapeshift","ops":305714,"margin":0.4,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"@sapphire/shapeshift","ops":293125,"margin":0.48,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"@sapphire/shapeshift","ops":260472,"margin":0.37,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"@sapphire/shapeshift","ops":291675,"margin":0.45,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"simple-runtypes","ops":2924042,"margin":0.71,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"simple-runtypes","ops":3591999,"margin":0.69,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"simple-runtypes","ops":3518481,"margin":0.47,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"@sinclair/typebox-(ahead-of-time)","ops":82328818,"margin":3.4,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"@sinclair/typebox-(ahead-of-time)","ops":30862395,"margin":1.05,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"@sinclair/typebox-(dynamic)","ops":883465,"margin":0.36,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"@sinclair/typebox-(dynamic)","ops":780780,"margin":0.53,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"@sinclair/typebox-(just-in-time)","ops":72932481,"margin":2.58,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"@sinclair/typebox-(just-in-time)","ops":29122025,"margin":1.41,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"spectypes","ops":31696752,"margin":1.46,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"spectypes","ops":25080301,"margin":1.28,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"spectypes","ops":77606302,"margin":2.11,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"spectypes","ops":23662048,"margin":0.7,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"succulent","ops":512635,"margin":0.35,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"succulent","ops":956173,"margin":0.28,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"succulent","ops":517622,"margin":0.42,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"superstruct","ops":169515,"margin":0.21,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"superstruct","ops":211201,"margin":0.94,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"superstruct","ops":169829,"margin":0.36,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"suretype","ops":45062052,"margin":1.82,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"tiny-schema-validator","ops":1896724,"margin":0.51,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"tiny-schema-validator","ops":1880200,"margin":0.61,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"to-typed","ops":4439223,"margin":1.01,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"to-typed","ops":3464672,"margin":0.23,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"to-typed","ops":119257,"margin":0.52,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"to-typed","ops":3195544,"margin":0.42,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"toi","ops":1152837,"margin":0.42,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"toi","ops":1142901,"margin":0.69,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"ts-interface-checker","ops":4197584,"margin":0.42,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"ts-json-validator","ops":45126608,"margin":1.91,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"ts-runtime-checks","ops":30016555,"margin":1.57,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"ts-runtime-checks","ops":30192668,"margin":1.05,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"ts-runtime-checks","ops":84228616,"margin":2.51,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"ts-utils","ops":354726,"margin":0.39,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"tson","ops":714623,"margin":0.99,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"tson","ops":792837,"margin":0.45,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"tson","ops":810255,"margin":0.41,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"tson","ops":807381,"margin":0.76,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"@typeofweb/schema","ops":1659863,"margin":1.22,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"@typeofweb/schema","ops":1686136,"margin":1.26,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"typia","ops":68522654,"margin":2.6,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"typia","ops":29860053,"margin":1.17,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"typia","ops":27158466,"margin":1.13,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"typia","ops":77025276,"margin":2.41,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"unknownutil","ops":3653846,"margin":0.73,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"unknownutil","ops":3663117,"margin":0.8,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"unknownutil","ops":5457036,"margin":0.8,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"valibot","ops":2282447,"margin":0.63,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"valibot","ops":1643081,"margin":0.47,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"valibot","ops":2237681,"margin":0.53,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"valibot","ops":1651018,"margin":0.45,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"valita","ops":6299017,"margin":0.38,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"valita","ops":6277103,"margin":0.53,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"valita","ops":6768172,"margin":0.43,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"valita","ops":6287268,"margin":0.42,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"vality","ops":222122,"margin":0.32,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"vality","ops":214461,"margin":0.93,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"vality","ops":223649,"margin":0.54,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"vality","ops":213904,"margin":0.9,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"yup","ops":72451,"margin":1.16,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"yup","ops":68101,"margin":1.13,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"zod","ops":784082,"margin":0.33,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"zod","ops":686619,"margin":0.53,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"zod","ops":689793,"margin":0.36,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"zod","ops":691265,"margin":0.34,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"deepkit","ops":2495321,"margin":0.38,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"deepkit","ops":23752137,"margin":1.06,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseSafe","name":"effect-schema","ops":1522399,"margin":0.46,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"parseStrict","name":"effect-schema","ops":327699,"margin":0.4,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"effect-schema","ops":1291717,"margin":0.59,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertStrict","name":"effect-schema","ops":318736,"margin":0.43,"runtime":"node","runtimeVersion":"v22.11.0"},{"benchmark":"assertLoose","name":"ts-auto-guard","ops":85454535,"margin":2.77,"runtime":"node","runtimeVersion":"v22.11.0"}]}
+{
+  "results": [
+    {
+      "benchmark": "parseSafe",
+      "name": "aeria",
+      "ops": 489095,
+      "margin": 1.96,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "aeria",
+      "ops": 498122,
+      "margin": 1.54,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "aeria",
+      "ops": 487609,
+      "margin": 1.21,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "aeria",
+      "ops": 484283,
+      "margin": 2.15,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "ajv",
+      "ops": 14299724,
+      "margin": 3.52,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "ajv",
+      "ops": 8138915,
+      "margin": 1.22,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "arktype",
+      "ops": 31068943,
+      "margin": 3.64,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "banditypes",
+      "ops": 1260030,
+      "margin": 2.61,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "banditypes",
+      "ops": 1230204,
+      "margin": 3.94,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "bueno",
+      "ops": 140344,
+      "margin": 2.44,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "bueno",
+      "ops": 129513,
+      "margin": 3.36,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "bueno",
+      "ops": 284144,
+      "margin": 0.42,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "bueno",
+      "ops": 278909,
+      "margin": 1.58,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "caketype",
+      "ops": 102882,
+      "margin": 0.21,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "caketype",
+      "ops": 130494,
+      "margin": 0.8,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "caketype",
+      "ops": 98273,
+      "margin": 1.62,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "class-transformer-validator-sync",
+      "ops": 52582,
+      "margin": 1.13,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "computed-types",
+      "ops": 759671,
+      "margin": 0.8,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "computed-types",
+      "ops": 606775,
+      "margin": 0.62,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "computed-types",
+      "ops": 607612,
+      "margin": 0.33,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "decoders",
+      "ops": 226956,
+      "margin": 0.65,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "decoders",
+      "ops": 135959,
+      "margin": 0.71,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "decoders",
+      "ops": 134001,
+      "margin": 0.51,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "io-ts",
+      "ops": 1319502,
+      "margin": 0.35,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "jointz",
+      "ops": 359321,
+      "margin": 0.76,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "jointz",
+      "ops": 359824,
+      "margin": 0.32,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "jointz",
+      "ops": 469819,
+      "margin": 0.3,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "json-decoder",
+      "ops": 804051,
+      "margin": 0.46,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "$mol_data",
+      "ops": 1494447,
+      "margin": 0.34,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "$mol_data",
+      "ops": 1494721,
+      "margin": 0.23,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "@mojotech/json-type-validation",
+      "ops": 1234948,
+      "margin": 1.01,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "mondrian-framework",
+      "ops": 269740,
+      "margin": 1.05,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "mondrian-framework",
+      "ops": 242075,
+      "margin": 2.11,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "mondrian-framework",
+      "ops": 283027,
+      "margin": 1.81,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "mondrian-framework",
+      "ops": 263089,
+      "margin": 0.46,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "myzod",
+      "ops": 1154679,
+      "margin": 0.57,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "myzod",
+      "ops": 1338777,
+      "margin": 0.39,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "myzod",
+      "ops": 1322013,
+      "margin": 0.5,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "ok-computer",
+      "ops": 127329,
+      "margin": 0.37,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "ok-computer",
+      "ops": 134029,
+      "margin": 0.32,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "parse-dont-validate (chained function)",
+      "ops": 343670,
+      "margin": 0.92,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "parse-dont-validate (named parameters)",
+      "ops": 1189488,
+      "margin": 0.6,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "purify-ts",
+      "ops": 915789,
+      "margin": 0.62,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "r-assign",
+      "ops": 979435,
+      "margin": 0.49,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "r-assign",
+      "ops": 806331,
+      "margin": 0.44,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "r-assign",
+      "ops": 970541,
+      "margin": 0.85,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "r-assign",
+      "ops": 803273,
+      "margin": 0.79,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "rescript-schema",
+      "ops": 29991890,
+      "margin": 2.35,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "rescript-schema",
+      "ops": 9052535,
+      "margin": 1.85,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "rescript-schema",
+      "ops": 29342586,
+      "margin": 2.13,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "rescript-schema",
+      "ops": 9387988,
+      "margin": 4.33,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "rulr",
+      "ops": 563087,
+      "margin": 1.18,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "runtypes",
+      "ops": 90442,
+      "margin": 1.94,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "@sapphire/shapeshift",
+      "ops": 175505,
+      "margin": 2.03,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "@sapphire/shapeshift",
+      "ops": 172094,
+      "margin": 0.66,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "@sapphire/shapeshift",
+      "ops": 152652,
+      "margin": 0.6,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "@sapphire/shapeshift",
+      "ops": 168273,
+      "margin": 2.1,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "simple-runtypes",
+      "ops": 1398181,
+      "margin": 0.69,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "simple-runtypes",
+      "ops": 1768674,
+      "margin": 2,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "simple-runtypes",
+      "ops": 1717351,
+      "margin": 0.76,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "@sinclair/typebox-(ahead-of-time)",
+      "ops": 40466405,
+      "margin": 3.59,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "@sinclair/typebox-(ahead-of-time)",
+      "ops": 13310719,
+      "margin": 1.39,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "@sinclair/typebox-(dynamic)",
+      "ops": 400980,
+      "margin": 0.87,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "@sinclair/typebox-(dynamic)",
+      "ops": 366684,
+      "margin": 1.58,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "@sinclair/typebox-(just-in-time)",
+      "ops": 35406085,
+      "margin": 3.81,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "@sinclair/typebox-(just-in-time)",
+      "ops": 12585365,
+      "margin": 1.86,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "spectypes",
+      "ops": 13154117,
+      "margin": 1.56,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "spectypes",
+      "ops": 11690140,
+      "margin": 2.18,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "spectypes",
+      "ops": 36747077,
+      "margin": 3.39,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "spectypes",
+      "ops": 11488980,
+      "margin": 1.15,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "succulent",
+      "ops": 259429,
+      "margin": 2.1,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "succulent",
+      "ops": 467675,
+      "margin": 0.71,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "succulent",
+      "ops": 261907,
+      "margin": 0.77,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "superstruct",
+      "ops": 89631,
+      "margin": 1.02,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "superstruct",
+      "ops": 105960,
+      "margin": 1.95,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "superstruct",
+      "ops": 88756,
+      "margin": 0.85,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "suretype",
+      "ops": 20032369,
+      "margin": 1.96,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "tiny-schema-validator",
+      "ops": 928517,
+      "margin": 0.77,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "tiny-schema-validator",
+      "ops": 920428,
+      "margin": 1.71,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "to-typed",
+      "ops": 2126357,
+      "margin": 0.95,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "to-typed",
+      "ops": 1620737,
+      "margin": 0.8,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "to-typed",
+      "ops": 54435,
+      "margin": 0.94,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "to-typed",
+      "ops": 1578222,
+      "margin": 1.05,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "toi",
+      "ops": 549538,
+      "margin": 0.74,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "toi",
+      "ops": 542666,
+      "margin": 1.97,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "ts-interface-checker",
+      "ops": 2049909,
+      "margin": 0.97,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "ts-json-validator",
+      "ops": 19170247,
+      "margin": 1.84,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "ts-runtime-checks",
+      "ops": 13697991,
+      "margin": 1.99,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "ts-runtime-checks",
+      "ops": 13818585,
+      "margin": 1.64,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "ts-runtime-checks",
+      "ops": 44570785,
+      "margin": 4.02,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "ts-utils",
+      "ops": 168653,
+      "margin": 0.8,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "tson",
+      "ops": 332213,
+      "margin": 4.04,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "tson",
+      "ops": 379717,
+      "margin": 2.72,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "tson",
+      "ops": 388282,
+      "margin": 3.25,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "tson",
+      "ops": 386402,
+      "margin": 4.93,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "@typeofweb/schema",
+      "ops": 760171,
+      "margin": 1.34,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "@typeofweb/schema",
+      "ops": 761596,
+      "margin": 2.17,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "typia",
+      "ops": 35799566,
+      "margin": 3.73,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "typia",
+      "ops": 13631660,
+      "margin": 1.57,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "typia",
+      "ops": 12548507,
+      "margin": 1.96,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "typia",
+      "ops": 26168225,
+      "margin": 2.68,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "unknownutil",
+      "ops": 1921744,
+      "margin": 1.74,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "unknownutil",
+      "ops": 1883652,
+      "margin": 2.47,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "unknownutil",
+      "ops": 2570407,
+      "margin": 2.19,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "valibot",
+      "ops": 1159555,
+      "margin": 0.96,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "valibot",
+      "ops": 790874,
+      "margin": 1.76,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "valibot",
+      "ops": 956202,
+      "margin": 0.55,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "valibot",
+      "ops": 758073,
+      "margin": 2.3,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "valita",
+      "ops": 2914698,
+      "margin": 2.7,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "valita",
+      "ops": 3123422,
+      "margin": 0.61,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "valita",
+      "ops": 3137094,
+      "margin": 0.41,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "valita",
+      "ops": 2962926,
+      "margin": 0.27,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "vality",
+      "ops": 121037,
+      "margin": 3.54,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "vality",
+      "ops": 111820,
+      "margin": 2.28,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "vality",
+      "ops": 123171,
+      "margin": 2.78,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "vality",
+      "ops": 123945,
+      "margin": 1.78,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "yup",
+      "ops": 37344,
+      "margin": 0.27,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "yup",
+      "ops": 34659,
+      "margin": 0.36,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "zod",
+      "ops": 370457,
+      "margin": 3.07,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "zod",
+      "ops": 361138,
+      "margin": 0.9,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "zod",
+      "ops": 382851,
+      "margin": 1.58,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "zod",
+      "ops": 391388,
+      "margin": 0.49,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "deepkit",
+      "ops": 1587377,
+      "margin": 1.24,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "deepkit",
+      "ops": 10095058,
+      "margin": 0.89,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "effect-schema",
+      "ops": 685691,
+      "margin": 2.71,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "effect-schema",
+      "ops": 185015,
+      "margin": 0.32,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "effect-schema",
+      "ops": 659343,
+      "margin": 0.43,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "effect-schema",
+      "ops": 179241,
+      "margin": 1.21,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "ts-auto-guard",
+      "ops": 39750366,
+      "margin": 2.7,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseSafe",
+      "name": "jet-schema",
+      "ops": 1877055,
+      "margin": 0.32,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "parseStrict",
+      "name": "jet-schema",
+      "ops": 1759283,
+      "margin": 0.22,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertLoose",
+      "name": "jet-schema",
+      "ops": 2674647,
+      "margin": 0.9,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    },
+    {
+      "benchmark": "assertStrict",
+      "name": "jet-schema",
+      "ops": 1762399,
+      "margin": 0.28,
+      "runtime": "node",
+      "runtimeVersion": "v22.11.0"
+    }
+  ]
+}
