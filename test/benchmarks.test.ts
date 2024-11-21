@@ -54,6 +54,7 @@ import '../cases/deepkit';
 import '../cases/effect-schema';
 import '../cases/ts-auto-guard';
 import '../cases/tiny-schema-validator';
+import '../cases/jet-schema';
 
 test('all cases must have been imported in tests', () => {
   expect(
