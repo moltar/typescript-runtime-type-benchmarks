@@ -8,6 +8,7 @@ import {
   parseNumber,
   parseBoolean,
   type Parser,
+  type Guard,
   isNumber,
   isString,
   isBoolean,
@@ -28,6 +29,22 @@ const tryParse =
       throw new Error('parsing failed');
     } else {
       return res.value;
+    }
+  };
+
+/**
+ * Given a PureParse guard, return a new guard that throws an error if parsing fails, and returns the value if parsing succeeds.
+ * @param guard
+ * @returns a parser that is compatible with `createCase`
+ */
+const tryGuard =
+  <T>(guard: Guard<T>) =>
+  (data: unknown): true => {
+    const isT = guard(data);
+    if (!isT) {
+      throw new Error('validation failed');
+    } else {
+      return true;
     }
   };
 
@@ -104,33 +121,37 @@ createCase('pure-parse (JIT compiled)', 'parseStrict', () =>
 );
 
 createCase('pure-parse (JIT compiled)', 'assertLoose', () =>
-  objectGuardCompiled({
-    number: isNumber,
-    negNumber: isNumber,
-    maxNumber: isNumber,
-    string: isString,
-    longString: isString,
-    boolean: isBoolean,
-    deeplyNested: objectGuardCompiled({
-      foo: isString,
-      num: isNumber,
-      bool: isBoolean,
+  tryGuard(
+    objectGuardCompiled({
+      number: isNumber,
+      negNumber: isNumber,
+      maxNumber: isNumber,
+      string: isString,
+      longString: isString,
+      boolean: isBoolean,
+      deeplyNested: objectGuardCompiled({
+        foo: isString,
+        num: isNumber,
+        bool: isBoolean,
+      }),
     }),
-  }),
+  ),
 );
 
 createCase('pure-parse', 'assertLoose', () =>
-  objectGuard({
-    number: isNumber,
-    negNumber: isNumber,
-    maxNumber: isNumber,
-    string: isString,
-    longString: isString,
-    boolean: isBoolean,
-    deeplyNested: objectGuard({
-      foo: isString,
-      num: isNumber,
-      bool: isBoolean,
+  tryGuard(
+    objectGuard({
+      number: isNumber,
+      negNumber: isNumber,
+      maxNumber: isNumber,
+      string: isString,
+      longString: isString,
+      boolean: isBoolean,
+      deeplyNested: objectGuard({
+        foo: isString,
+        num: isNumber,
+        bool: isBoolean,
+      }),
     }),
-  }),
+  ),
 );
