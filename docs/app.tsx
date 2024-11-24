@@ -5,9 +5,13 @@ import * as vegaLite from 'vega-lite';
 
 // which results are attempted to load
 // the first is selected automatically
-const NODE_VERSIONS = [22, 21, 20, 19, 18, 16];
+const NODE_VERSIONS = [23, 22, 21, 20, 19, 18, 16];
 
 const BUN_VERSIONS = [1];
+
+interface BenchmarkResponse {
+  results: BenchmarkResult[];
+}
 
 interface BenchmarkResult {
   name: string;
@@ -63,6 +67,23 @@ BENCHMARKS.forEach(b => {
   BENCHMARKS_ORDER[b.name] = b.order;
 });
 
+const PACKAGES_POPULARITY: { [k: string]: number } = {};
+
+type PackagePopularity = {
+  name: string;
+  weeklyDownloads: number;
+};
+
+async function loadPackagesPopularity() {
+  await fetch('packagesPopularity.json')
+    .then(res => res.json() as Promise<PackagePopularity[]>)
+    .then(data => {
+      data.forEach(p => {
+        PACKAGES_POPULARITY[p.name] = p.weeklyDownloads;
+      });
+    });
+}
+
 function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
   if (!values.length) {
     return [];
@@ -90,7 +111,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
     normalized.push(...results);
 
     const missingBenchmarks = BENCHMARKS.map(b => b.name).filter(
-      n => !results.find(r => r.benchmark === n)
+      n => !results.find(r => r.benchmark === n),
     );
 
     missingBenchmarks.forEach(benchmark => {
@@ -143,7 +164,7 @@ async function graph({
   selectedBunVersions: string[];
   benchmarkResultsNodejs: BenchmarkResult[];
   benchmarkResultsBun: BenchmarkResult[];
-  sort?: 'alphabetically' | 'fastest';
+  sort?: 'alphabetically' | 'fastest' | 'popularity';
 }) {
   if (
     !selectedBenchmarks.length ||
@@ -161,7 +182,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedNodeJsVersionsSet.has(b.runtimeVersion)
+        selectedNodeJsVersionsSet.has(b.runtimeVersion),
     )
     .map(b => ({
       ...b,
@@ -180,7 +201,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedBunVersionsSet.has(b.runtimeVersion)
+        selectedBunVersionsSet.has(b.runtimeVersion),
     )
     .map(b => ({
       ...b,
@@ -218,14 +239,21 @@ async function graph({
   // build a list of module names for sorting
   let sortedValues: BenchmarkResult[] = [];
 
-  if (sort === 'fastest') {
+  if (sort === 'fastest' || !sort) {
     sortedValues = [...valuesNodejs, ...valuesBun].sort(
-      (a, b) => b.ops - a.ops
+      (a, b) => b.ops - a.ops,
     );
-  } else if (sort === 'alphabetically' || !sort) {
+  } else if (sort === 'alphabetically') {
     sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) =>
-      a.name < b.name ? -1 : 1
+      a.name < b.name ? -1 : 1,
     );
+  } else if (sort === 'popularity') {
+    sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) => {
+      const aPopularity = PACKAGES_POPULARITY[a.name] || 0;
+      const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
+
+      return bPopularity - aPopularity;
+    });
   }
 
   // remove duplicates not sure whether vega-lite can handle that
@@ -340,7 +368,9 @@ class Graph extends Component<
   }
 
   render() {
-    this.createGraph();
+    this.createGraph().catch(error => {
+      console.log('Create graph error', error);
+    });
 
     if (!this.state.svg) {
       return (
@@ -421,19 +451,19 @@ class App extends Component<
     selectedBunVersions: { [key: string]: boolean };
     valuesNodeJs: BenchmarkResult[];
     valuesBun: BenchmarkResult[];
-    sortBy: 'fastest' | 'alphabetically';
+    sortBy: 'fastest' | 'alphabetically' | 'popularity';
   }
 > {
   state = {
     selectedBenchmarks: BENCHMARKS.reduce(
       (acc, b) => ({ ...acc, [b.name]: true }),
-      {}
+      {},
     ),
     selectedNodeJsVersions: {},
     selectedBunVersions: {},
     valuesNodeJs: [],
     valuesBun: [],
-    sortBy: 'alphabetically' as const,
+    sortBy: 'fastest' as const,
   };
 
   getNodeJsVersions() {
@@ -441,7 +471,7 @@ class App extends Component<
       this.state.valuesNodeJs
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1))
+        .sort((a, b) => (a < b ? 1 : -1)),
     );
     const res: string[] = [];
 
@@ -455,7 +485,7 @@ class App extends Component<
       this.state.valuesBun
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1))
+        .sort((a, b) => (a < b ? 1 : -1)),
     );
     const res: string[] = [];
 
@@ -464,10 +494,12 @@ class App extends Component<
     return res;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await loadPackagesPopularity();
+
     NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)
-        .then(response => response.json())
+        .then(response => response.json() as Promise<BenchmarkResponse>)
         .then(data => {
           this.setState(state => ({
             ...state,
@@ -494,7 +526,7 @@ class App extends Component<
 
     BUN_VERSIONS.forEach(v => {
       fetch(`results/bun-${v}.json`)
-        .then(response => response.json())
+        .then(response => response.json() as Promise<BenchmarkResponse>)
         .then(data => {
           this.setState(state => ({
             ...state,
@@ -525,9 +557,30 @@ class App extends Component<
           }}
         >
           <h1>Runtype Benchmarks</h1>
-          <a href="https://github.com/moltar/typescript-runtime-type-benchmarks/">
-            Github Repository
-          </a>
+          <div>
+            <a
+              class="github-button"
+              href="https://github.com/moltar/typescript-runtime-type-benchmarks"
+              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
+              data-icon="octicon-star"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Star moltar/typescript-runtime-type-benchmarks on GitHub"
+            >
+              Star
+            </a>
+            <a
+              class="github-button"
+              href="https://github.com/moltar/typescript-runtime-type-benchmarks/fork"
+              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
+              data-icon="octicon-repo-forked"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Fork moltar/typescript-runtime-type-benchmarks on GitHub"
+            >
+              Fork
+            </a>
+          </div>
         </div>
         <p>
           Benchmark Comparison of Packages with Runtime Validation and
@@ -620,8 +673,9 @@ class App extends Component<
                 }
                 value={this.state.sortBy}
               >
-                <option value="alphabetically">Alphabetically</option>
                 <option value="fastest">Fastest</option>
+                <option value="alphabetically">Alphabetically</option>
+                <option value="popularity">Popularity</option>
               </select>
             </label>
           </div>
@@ -629,7 +683,7 @@ class App extends Component<
 
         <Graph
           benchmarks={BENCHMARKS.filter(
-            b => this.state.selectedBenchmarks[b.name]
+            b => this.state.selectedBenchmarks[b.name],
           )}
           nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
             .sort()

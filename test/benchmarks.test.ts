@@ -3,9 +3,12 @@ import { cases } from '../cases';
 
 // all cases need to be imported here because jest cannot pic up dynamically
 // imported `test` and `describe`
+import '../cases/aeria';
 import '../cases/ajv';
 import '../cases/arktype';
+import '../cases/banditypes';
 import '../cases/bueno';
+import '../cases/caketype';
 import '../cases/class-validator';
 import '../cases/computed-types';
 import '../cases/decoders';
@@ -50,14 +53,17 @@ import '../cases/yup';
 import '../cases/zod';
 import '../cases/deepkit';
 import '../cases/effect-schema';
+import '../cases/ts-auto-guard';
+import '../cases/tiny-schema-validator';
+import '../cases/jet-schema';
 
 test('all cases must have been imported in tests', () => {
   expect(
     new Set<string>(
       getRegisteredBenchmarks().flatMap(pair =>
-        pair[1].map(b => b.moduleName.split(' ')[0])
-      )
-    ).size
+        pair[1].map(b => b.moduleName.split(' ')[0]),
+      ),
+    ).size,
   ).toBe(cases.length);
 });
 

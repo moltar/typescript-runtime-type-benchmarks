@@ -29,10 +29,10 @@ const dataTypeLoose = object(
         num: number,
         bool: boolean,
       },
-      { allowUnknown: true }
+      { allowUnknown: true },
     ),
   },
-  { allowUnknown: true }
+  { allowUnknown: true },
 );
 
 addCase('ok-computer', 'assertStrict', (data: UnknownData) => {

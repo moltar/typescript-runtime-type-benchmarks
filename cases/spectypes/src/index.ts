@@ -51,8 +51,8 @@ export const assertLoose = merge(
         num: number,
         bool: boolean,
       }),
-      UNSAFE_record(unknown)
+      UNSAFE_record(unknown),
     ),
   }),
-  UNSAFE_record(unknown)
+  UNSAFE_record(unknown),
 );

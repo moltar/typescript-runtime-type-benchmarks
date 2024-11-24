@@ -45,7 +45,7 @@ addCase('parse-dont-validate (chained function)', 'parseSafe', data =>
         }))
         .elseThrow('deeplyNested is not an object'),
     }))
-    .elseThrow('data is not an object')
+    .elseThrow('data is not an object'),
 );
 
 addCase('parse-dont-validate (named parameters)', 'parseSafe', data =>
@@ -115,5 +115,5 @@ addCase('parse-dont-validate (named parameters)', 'parseSafe', data =>
         message: 'deeplyNested is not an object',
       }),
     }),
-  })
+  }),
 );

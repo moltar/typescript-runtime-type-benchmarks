@@ -12,15 +12,19 @@
 
 ## Packages Compared
 
+* [aeria](https://github.com/aeria-org/aeria)
 * [ajv](https://ajv.js.org/)
 * [ArkType](https://github.com/arktypeio/arktype)
+* [banditypes](https://github.com/thoughtspile/banditypes)
 * [bueno](https://github.com/philipnilsson/bueno)
+* [caketype](https://github.com/justinyaodu/caketype)
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
 * [computed-types](https://github.com/neuledge/computed-types)
 * [decoders](https://github.com/nvie/decoders)
 * [deepkit](https://deepkit.io/)
 * [@effect/schema](https://github.com/Effect-TS/effect/blob/main/packages/schema/README.md)
 * [io-ts](https://github.com/gcanti/io-ts)
+* [jet-schema](https://github.com/seanpmaxwell/jet-schema)
 * [jointz](https://github.com/moodysalem/jointz)
 * [json-decoder](https://github.com/venil7/json-decoder)
 * [@mojotech/json-type-validaton](https://github.com/mojotech/json-type-validation)
@@ -42,7 +46,10 @@
 * [succulent](https://github.com/aslilac/succulent)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
 * [suretype](https://github.com/grantila/suretype)
+* [tiny-schema-validator](https://github.com/5alidz/tiny-schema-validator)
+* [to-typed](https://github.com/jsoldi/to-typed)
 * [toi](https://github.com/hf/toi)
+* [ts-auto-guard](https://github.com/rhys-vdw/ts-auto-guard)
 * [ts-interface-checker](https://github.com/gristlabs/ts-interface-checker)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 * [ts-runtime-checks](https://github.com/GoogleFeud/ts-runtime-checks)
@@ -107,3 +114,27 @@ const res = isMyDataValid(data)
 * update node version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
 * update `NODE_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
 * optionally set `NODE_VERSION_FOR_PREVIEW` in `benchmarks/helpers/main.ts`
+
+## Test cases
+
+* **Safe Parsing**
+  * Checks the input object against a schema and returns it.
+  * Raises an error if the input object does not conform to the schema (e.g., a type mismatch or missing attribute).
+  * Removes any extra keys in the input object that are not defined in the schema.
+
+* **Strict Parsing**
+  * Checks the input object against a schema and returns it.
+  * Raises an error if the input object does not conform to the schema (e.g., a type mismatch or missing attribute).
+  * Raises an error if the input object contains extra keys.
+
+* **Loose Assertion**
+  * Checks the input object against a schema.
+  * Raises an exception if the input object does not match the schema.
+  * Allows extra keys without raising errors.
+  * Returns true if data is valid.
+
+* **Strict Assertion**
+  * Checks the input object against a schema.
+  * Raises an exception if the input object does not match the schema.
+  * Raises an error if the input object or any nested input objects contain extra keys.
+  * Returns true if data is valid.

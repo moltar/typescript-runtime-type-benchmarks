@@ -76,7 +76,7 @@ export class ParseSafe extends Benchmark<Fn> {
           this.fn({
             ...validateData,
             number: 'foo',
-          })
+          }),
         ).toThrow();
       });
     });

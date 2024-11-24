@@ -1,7 +1,10 @@
 export const cases = [
+  'aeria',
   'ajv',
   'arktype',
+  'banditypes',
   'bueno',
+  'caketype',
   'class-validator',
   'computed-types',
   'decoders',
@@ -29,6 +32,7 @@ export const cases = [
   'succulent',
   'superstruct',
   'suretype',
+  'tiny-schema-validator',
   'to-typed',
   'toi',
   'ts-interface-checker',
@@ -46,6 +50,8 @@ export const cases = [
   'zod',
   'deepkit',
   'effect-schema',
+  'ts-auto-guard',
+  'jet-schema',
 ] as const;
 
 export type CaseName = (typeof cases)[number];

@@ -1,0 +1,73 @@
+name: Download and save packages popularity
+
+env:
+  CI: "true"
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every Monday
+    - cron: '0 0 * * 1'
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/*.yml
+      - "cases/*.ts"
+      - "*.ts"
+      - package.json
+      - package-lock.json
+      - bun.lockb
+
+jobs:
+  build:
+    name: "Node ${{ matrix.node-version }}"
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        node-version:
+          - 23.x
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install
+        run: npm ci
+
+      - name: download-packages-popularity
+        run: npm run download-packages-popularity
+
+        ## FIX: https://github.com/github-actions-x/commit/issues/16
+      - name: Expose git commit data
+        uses: rlespinasse/git-commit-data-action@v1 ## https://github.com/rlespinasse/git-commit-data-action
+
+      - name: push
+        uses: github-actions-x/commit@v2.9
+        ## prevents forked repos from comitting results in PRs
+        if: github.repository == 'moltar/typescript-runtime-type-benchmarks'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: master
+          commit-message: 'feat: adds popularity of packages'
+          rebase: 'true'
+          name: ${{ env.GIT_COMMIT_AUTHOR_NAME }}   ## FIX: https://github.com/github-actions-x/commit/issues/16
+          email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }} ## FIX: https://github.com/github-actions-x/commit/issues/16

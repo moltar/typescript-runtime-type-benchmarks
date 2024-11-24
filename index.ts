@@ -41,6 +41,11 @@ async function main() {
               stdio: 'inherit',
             });
           }
+          if (c === 'ts-auto-guard') {
+            childProcess.execSync('npm run compile:ts-auto-guard', {
+              stdio: 'inherit',
+            });
+          }
 
           const cmd = [...process.argv.slice(0, 2), 'run-internal', c];
 
@@ -78,7 +83,7 @@ async function main() {
     default:
       console.error('unknown command:', command);
 
-      // eslint-disable-next-line no-process-exit
+      //eslint-disable-next-line n/no-process-exit
       process.exit(1);
   }
 }

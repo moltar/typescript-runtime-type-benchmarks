@@ -99,7 +99,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
     vegaLite = __importStar(vegaLite);
     // which results are attempted to load
     // the first is selected automatically
-    var NODE_VERSIONS = [22, 21, 20, 19, 18, 16];
+    var NODE_VERSIONS = [23, 22, 21, 20, 19, 18, 16];
     var BUN_VERSIONS = [1];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
@@ -143,6 +143,25 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
     BENCHMARKS.forEach(function (b) {
         BENCHMARKS_ORDER[b.name] = b.order;
     });
+    var PACKAGES_POPULARITY = {};
+    function loadPackagesPopularity() {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch('packagesPopularity.json')
+                            .then(function (res) { return res.json(); })
+                            .then(function (data) {
+                            data.forEach(function (p) {
+                                PACKAGES_POPULARITY[p.name] = p.weeklyDownloads;
+                            });
+                        })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
     function normalizePartialValues(values) {
         if (!values.length) {
             return [];
@@ -250,12 +269,19 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             }
                         });
                         sortedValues = [];
-                        if (sort === 'fastest') {
+                        if (sort === 'fastest' || !sort) {
                             sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) { return b.ops - a.ops; });
                         }
-                        else if (sort === 'alphabetically' || !sort) {
+                        else if (sort === 'alphabetically') {
                             sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) {
                                 return a.name < b.name ? -1 : 1;
+                            });
+                        }
+                        else if (sort === 'popularity') {
+                            sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) {
+                                var aPopularity = PACKAGES_POPULARITY[a.name] || 0;
+                                var bPopularity = PACKAGES_POPULARITY[b.name] || 0;
+                                return bPopularity - aPopularity;
                             });
                         }
                         sortedNames = [];
@@ -372,7 +398,9 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
             });
         };
         Graph.prototype.render = function () {
-            this.createGraph();
+            this.createGraph().catch(function (error) {
+                console.log('Create graph error', error);
+            });
             if (!this.state.svg) {
                 return ((0, preact_1.h)("div", { style: { margin: '5rem' } },
                     (0, preact_1.h)("i", null, "No Benchmark Selected")));
@@ -416,7 +444,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                 selectedBunVersions: {},
                 valuesNodeJs: [],
                 valuesBun: [],
-                sortBy: 'alphabetically',
+                sortBy: 'fastest',
             };
             return _this;
         }
@@ -439,33 +467,43 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
             return res;
         };
         App.prototype.componentDidMount = function () {
-            var _this = this;
-            NODE_VERSIONS.forEach(function (v, i) {
-                fetch("results/node-".concat(v, ".json"))
-                    .then(function (response) { return response.json(); })
-                    .then(function (data) {
-                    _this.setState(function (state) {
-                        var _a;
-                        return (__assign(__assign({}, state), { 
-                            // select the first node versions benchmark automatically
-                            selectedNodeJsVersions: i === 0
-                                ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].runtimeVersion] = true, _a)) : state.selectedNodeJsVersions, valuesNodeJs: __spreadArray(__spreadArray([], state.valuesNodeJs, true), normalizePartialValues(data.results), true) }));
-                    });
-                })
-                    .catch(function (err) {
-                    console.info("no data for node ".concat(v), err);
-                });
-            });
-            BUN_VERSIONS.forEach(function (v) {
-                fetch("results/bun-".concat(v, ".json"))
-                    .then(function (response) { return response.json(); })
-                    .then(function (data) {
-                    _this.setState(function (state) { return (__assign(__assign({}, state), { 
-                        // select the first node versions benchmark automatically
-                        selectedBunVersions: state.selectedBunVersions, valuesBun: __spreadArray(__spreadArray([], state.valuesBun, true), normalizePartialValues(data.results), true) })); });
-                })
-                    .catch(function (err) {
-                    console.info("no data for bun ".concat(v), err);
+            return __awaiter(this, void 0, void 0, function () {
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, loadPackagesPopularity()];
+                        case 1:
+                            _a.sent();
+                            NODE_VERSIONS.forEach(function (v, i) {
+                                fetch("results/node-".concat(v, ".json"))
+                                    .then(function (response) { return response.json(); })
+                                    .then(function (data) {
+                                    _this.setState(function (state) {
+                                        var _a;
+                                        return (__assign(__assign({}, state), { 
+                                            // select the first node versions benchmark automatically
+                                            selectedNodeJsVersions: i === 0
+                                                ? __assign(__assign({}, state.selectedNodeJsVersions), (_a = {}, _a[data.results[0].runtimeVersion] = true, _a)) : state.selectedNodeJsVersions, valuesNodeJs: __spreadArray(__spreadArray([], state.valuesNodeJs, true), normalizePartialValues(data.results), true) }));
+                                    });
+                                })
+                                    .catch(function (err) {
+                                    console.info("no data for node ".concat(v), err);
+                                });
+                            });
+                            BUN_VERSIONS.forEach(function (v) {
+                                fetch("results/bun-".concat(v, ".json"))
+                                    .then(function (response) { return response.json(); })
+                                    .then(function (data) {
+                                    _this.setState(function (state) { return (__assign(__assign({}, state), { 
+                                        // select the first node versions benchmark automatically
+                                        selectedBunVersions: state.selectedBunVersions, valuesBun: __spreadArray(__spreadArray([], state.valuesBun, true), normalizePartialValues(data.results), true) })); });
+                                })
+                                    .catch(function (err) {
+                                    console.info("no data for bun ".concat(v), err);
+                                });
+                            });
+                            return [2 /*return*/];
+                    }
                 });
             });
         };
@@ -478,7 +516,9 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         justifyContent: 'space-between',
                     } },
                     (0, preact_1.h)("h1", null, "Runtype Benchmarks"),
-                    (0, preact_1.h)("a", { href: "https://github.com/moltar/typescript-runtime-type-benchmarks/" }, "Github Repository")),
+                    (0, preact_1.h)("div", null,
+                        (0, preact_1.h)("a", { class: "github-button", href: "https://github.com/moltar/typescript-runtime-type-benchmarks", "data-color-scheme": "no-preference: dark; light: dark_dimmed; dark: dark;", "data-icon": "octicon-star", "data-size": "large", "data-show-count": "true", "aria-label": "Star moltar/typescript-runtime-type-benchmarks on GitHub" }, "Star"),
+                        (0, preact_1.h)("a", { class: "github-button", href: "https://github.com/moltar/typescript-runtime-type-benchmarks/fork", "data-color-scheme": "no-preference: dark; light: dark_dimmed; dark: dark;", "data-icon": "octicon-repo-forked", "data-size": "large", "data-show-count": "true", "aria-label": "Fork moltar/typescript-runtime-type-benchmarks on GitHub" }, "Fork"))),
                 (0, preact_1.h)("p", null, "Benchmark Comparison of Packages with Runtime Validation and TypeScript Support"),
                 (0, preact_1.h)("div", { style: { display: 'flex', margin: '1rem 0' } },
                     (0, preact_1.h)("div", { style: { width: '12rem', marginRight: '1rem' } },
@@ -522,8 +562,9 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                 function (event) {
                                     _this.setState({ sortBy: event.target.value });
                                 }, value: this.state.sortBy },
+                                (0, preact_1.h)("option", { value: "fastest" }, "Fastest"),
                                 (0, preact_1.h)("option", { value: "alphabetically" }, "Alphabetically"),
-                                (0, preact_1.h)("option", { value: "fastest" }, "Fastest"))))),
+                                (0, preact_1.h)("option", { value: "popularity" }, "Popularity"))))),
                 (0, preact_1.h)(Graph, { benchmarks: BENCHMARKS.filter(function (b) { return _this.state.selectedBenchmarks[b.name]; }), nodeJsVersions: Object.entries(this.state.selectedNodeJsVersions)
                         .sort()
                         .filter(function (entry) { return entry[1]; })
