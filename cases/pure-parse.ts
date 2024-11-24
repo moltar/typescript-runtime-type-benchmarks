@@ -7,7 +7,7 @@ import {
   parseString,
   parseNumber,
   parseBoolean,
-  Parser,
+  type Parser,
   isNumber,
   isString,
   isBoolean,
@@ -45,8 +45,8 @@ createCase('pure-parse (JIT compiled)', 'parseSafe', () =>
         num: parseNumber,
         bool: parseBoolean,
       }),
-    })
-  )
+    }),
+  ),
 );
 
 createCase('pure-parse', 'parseSafe', () =>
@@ -63,8 +63,8 @@ createCase('pure-parse', 'parseSafe', () =>
         num: parseNumber,
         bool: parseBoolean,
       }),
-    })
-  )
+    }),
+  ),
 );
 
 createCase('pure-parse', 'parseStrict', () =>
@@ -81,8 +81,8 @@ createCase('pure-parse', 'parseStrict', () =>
         num: parseNumber,
         bool: parseBoolean,
       }),
-    })
-  )
+    }),
+  ),
 );
 
 createCase('pure-parse (JIT compiled)', 'parseStrict', () =>
@@ -99,8 +99,8 @@ createCase('pure-parse (JIT compiled)', 'parseStrict', () =>
         num: parseNumber,
         bool: parseBoolean,
       }),
-    })
-  )
+    }),
+  ),
 );
 
 createCase('pure-parse (JIT compiled)', 'assertLoose', () =>
@@ -116,7 +116,7 @@ createCase('pure-parse (JIT compiled)', 'assertLoose', () =>
       num: isNumber,
       bool: isBoolean,
     }),
-  })
+  }),
 );
 
 createCase('pure-parse', 'assertLoose', () =>
@@ -132,5 +132,5 @@ createCase('pure-parse', 'assertLoose', () =>
       num: isNumber,
       bool: isBoolean,
     }),
-  })
+  }),
 );
