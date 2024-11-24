@@ -32,6 +32,7 @@
 * [@mondrian-framework/model](https://mondrianframework.com)
 * [myzod](https://github.com/davidmdm/myzod)
 * [ok-computer](https://github.com/richardscarrott/ok-computer)
+* [pure-parse](https://github.com/johannes-lindgren/pure-parse)
 * [purify-ts](https://github.com/gigobyte/purify)
 * [parse-dont-validate](https://github.com/Packer-Man/parse-dont-validate)
 * [r-assign](https://github.com/micnic/r-assign)
