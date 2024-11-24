@@ -11,6 +11,8 @@ import {
   isNumber,
   isString,
   isBoolean,
+  objectStrict,
+  objectStrictCompiled,
 } from 'pure-parse';
 
 /**
@@ -29,7 +31,7 @@ const tryParse =
     }
   };
 
-createCase('pure-parse-(JIT)', 'parseSafe', () =>
+createCase('pure-parse (JIT compiled)', 'parseSafe', () =>
   tryParse(
     objectCompiled({
       number: parseNumber,
@@ -47,7 +49,7 @@ createCase('pure-parse-(JIT)', 'parseSafe', () =>
   )
 );
 
-createCase('pure-parse-(dynamic)', 'parseSafe', () =>
+createCase('pure-parse', 'parseSafe', () =>
   tryParse(
     object({
       number: parseNumber,
@@ -65,7 +67,43 @@ createCase('pure-parse-(dynamic)', 'parseSafe', () =>
   )
 );
 
-createCase('pure-parse-(JIT)', 'assertLoose', () =>
+createCase('pure-parse', 'parseStrict', () =>
+  tryParse(
+    objectStrict({
+      number: parseNumber,
+      negNumber: parseNumber,
+      maxNumber: parseNumber,
+      string: parseString,
+      longString: parseString,
+      boolean: parseBoolean,
+      deeplyNested: objectStrict({
+        foo: parseString,
+        num: parseNumber,
+        bool: parseBoolean,
+      }),
+    })
+  )
+);
+
+createCase('pure-parse (JIT compiled)', 'parseStrict', () =>
+  tryParse(
+    objectStrictCompiled({
+      number: parseNumber,
+      negNumber: parseNumber,
+      maxNumber: parseNumber,
+      string: parseString,
+      longString: parseString,
+      boolean: parseBoolean,
+      deeplyNested: objectStrictCompiled({
+        foo: parseString,
+        num: parseNumber,
+        bool: parseBoolean,
+      }),
+    })
+  )
+);
+
+createCase('pure-parse (JIT compiled)', 'assertLoose', () =>
   objectGuardCompiled({
     number: isNumber,
     negNumber: isNumber,
@@ -81,7 +119,7 @@ createCase('pure-parse-(JIT)', 'assertLoose', () =>
   })
 );
 
-createCase('pure-parse-(dynamic)', 'assertLoose', () =>
+createCase('pure-parse', 'assertLoose', () =>
   objectGuard({
     number: isNumber,
     negNumber: isNumber,
