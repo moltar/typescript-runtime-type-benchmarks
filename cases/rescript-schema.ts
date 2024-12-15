@@ -2,65 +2,50 @@ import * as S from 'rescript-schema';
 
 import { createCase } from '../benchmarks';
 
-const makeSchema = () =>
-  S.object({
-    number: S.number,
-    negNumber: S.number,
-    maxNumber: S.number,
-    string: S.string,
-    longString: S.string,
-    boolean: S.boolean,
-    deeplyNested: S.object({
-      foo: S.string,
-      num: S.number,
-      bool: S.boolean,
-    }),
-  });
+S.setGlobalConfig({
+  disableNanNumberValidation: true,
+});
+
+const schema = S.schema({
+  number: S.number,
+  negNumber: S.number,
+  maxNumber: S.number,
+  string: S.string,
+  longString: S.string,
+  boolean: S.boolean,
+  deeplyNested: {
+    foo: S.string,
+    num: S.number,
+    bool: S.boolean,
+  },
+});
 
 createCase('rescript-schema', 'parseSafe', () => {
-  S.setGlobalConfig({
-    disableNanNumberCheck: true,
-  });
-  const schema = makeSchema();
-
+  const parseSafe = S.compile(schema, 'Any', 'Output', 'Sync');
   return data => {
-    return schema.parseOrThrow(data);
+    return parseSafe(data);
   };
 });
 
 createCase('rescript-schema', 'parseStrict', () => {
-  S.setGlobalConfig({
-    disableNanNumberCheck: true,
-    defaultUnknownKeys: 'Strict',
-  });
-  const schema = makeSchema();
-
+  const parseStrict = S.compile(S.deepStrict(schema), 'Any', 'Output', 'Sync');
   return data => {
-    return schema.parseOrThrow(data);
+    return parseStrict(data);
   };
 });
 
 createCase('rescript-schema', 'assertLoose', () => {
-  S.setGlobalConfig({
-    disableNanNumberCheck: true,
-  });
-  const schema = makeSchema();
-
+  const assertLoose = S.compile(schema, 'Any', 'Assert', 'Sync');
   return data => {
-    schema.assert(data)!;
+    assertLoose(data)!;
     return true;
   };
 });
 
 createCase('rescript-schema', 'assertStrict', () => {
-  S.setGlobalConfig({
-    disableNanNumberCheck: true,
-    defaultUnknownKeys: 'Strict',
-  });
-  const schema = makeSchema();
-
+  const assertStrict = S.compile(S.deepStrict(schema), 'Any', 'Assert', 'Sync');
   return data => {
-    schema.assert(data)!;
+    assertStrict(data)!;
     return true;
   };
 });

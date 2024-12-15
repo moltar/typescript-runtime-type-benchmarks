@@ -24,7 +24,7 @@
     "compile:typia": "rimraf cases/typia/build && tsc -p cases/typia/tsconfig.json",
     "compile:ts-auto-guard": "rimraf cases/ts-auto-guard/build && ts-auto-guard --project cases/ts-auto-guard/tsconfig.json && tsc -p cases/ts-auto-guard/tsconfig.json",
     "prepare": "ts-patch install",
-	"download-packages-popularity": "ts-node download-packages-popularity.ts"
+    "download-packages-popularity": "ts-node download-packages-popularity.ts"
   },
   "dependencies": {
     "@aeriajs/validation": "0.0.140",
@@ -70,7 +70,7 @@
     "r-assign": "1.9.0",
     "reflect-metadata": "0.2.2",
     "rescript": "11.1.4",
-    "rescript-schema": "8.4.0",
+    "rescript-schema": "9.0.0",
     "rulr": "10.5.0",
     "runtypes": "6.7.0",
     "serve": "14.2.4",
