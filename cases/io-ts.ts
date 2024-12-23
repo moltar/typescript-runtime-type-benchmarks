@@ -1,7 +1,7 @@
-import { fold } from 'fp-ts/Either';
-import { pipe } from 'fp-ts/function';
+import { fold } from 'fp-ts/lib/Either.js';
+import { pipe } from 'fp-ts/lib/function.js';
 import * as t from 'io-ts';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('io-ts', 'assertLoose', () => {
   const dataType = t.type({

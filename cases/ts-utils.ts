@@ -1,5 +1,10 @@
-import { object, number, boolean, string } from '@ailabs/ts-utils/dist/decoder';
-import { createCase } from '../benchmarks';
+import {
+  object,
+  number,
+  boolean,
+  string,
+} from '@ailabs/ts-utils/dist/decoder.js';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('ts-utils', 'parseSafe', () => {
   const dataType = object('Data', {

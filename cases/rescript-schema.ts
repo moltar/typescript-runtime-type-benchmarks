@@ -1,6 +1,6 @@
 import * as S from 'rescript-schema';
 
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 S.setGlobalConfig({
   disableNanNumberValidation: true,

@@ -4,7 +4,7 @@ import {
   object,
   boolean,
 } from '@mojotech/json-type-validation';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('@mojotech/json-type-validation', 'parseSafe', () => {
   const dataType = object({

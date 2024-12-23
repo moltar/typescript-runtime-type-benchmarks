@@ -1,5 +1,5 @@
-import { parseSafe, assertLoose } from './build';
-import { addCase } from '../../benchmarks';
+import { parseSafe, assertLoose } from './build/index.js';
+import { addCase } from '../../benchmarks/index.ts';
 
 addCase('deepkit', 'parseSafe', data => {
   return parseSafe(data);

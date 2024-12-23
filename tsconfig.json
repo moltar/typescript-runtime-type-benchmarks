@@ -1,12 +1,15 @@
 {
   "extends": "tsconfigs/nodejs-module",
   "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
     "lib": ["ES2021", "DOM"],
     "target": "ES2021",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["**/*.ts"]
 }

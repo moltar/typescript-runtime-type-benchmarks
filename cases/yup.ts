@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('yup', 'assertLoose', () => {
   const dataType = yup.object({

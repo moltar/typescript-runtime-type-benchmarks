@@ -7,7 +7,7 @@ import {
   string,
   type,
 } from 'superstruct';
-import { addCase } from '../benchmarks';
+import { addCase } from '../benchmarks/index.ts';
 
 const dataTypeSafe = type({
   number: number(),

@@ -1,5 +1,5 @@
 import { Boolean, Number, String, Record } from 'runtypes';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('runtypes', 'assertLoose', () => {
   const dataType = Record({

@@ -1,4 +1,4 @@
-import { Benchmark } from './helpers/types';
+import { Benchmark } from './helpers/types.ts';
 
 export const validateData = Object.freeze({
   number: 1,

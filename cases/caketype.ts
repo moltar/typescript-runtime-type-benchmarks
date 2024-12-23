@@ -1,5 +1,5 @@
 import { bake, boolean, number, string } from 'caketype';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 const cake = bake({
   number: number,

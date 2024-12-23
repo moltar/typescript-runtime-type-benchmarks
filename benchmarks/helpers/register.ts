@@ -1,8 +1,8 @@
-import { AssertLoose } from '../assertLoose';
-import { AssertStrict } from '../assertStrict';
-import { ParseSafe } from '../parseSafe';
-import { ParseStrict } from '../parseStrict';
-import type { BenchmarkCase } from './types';
+import { AssertLoose } from '../assertLoose.ts';
+import { AssertStrict } from '../assertStrict.ts';
+import { ParseSafe } from '../parseSafe.ts';
+import { ParseStrict } from '../parseStrict.ts';
+import type { BenchmarkCase } from './types.ts';
 
 /**
  * Map of all benchmarks.

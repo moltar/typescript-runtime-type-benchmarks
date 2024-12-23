@@ -9,7 +9,8 @@ import {
   unknown,
 } from 'spectypes';
 
-export const parseStrict = object({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const parseStrict: any = object({
   number,
   negNumber: number,
   maxNumber: number,
@@ -23,7 +24,8 @@ export const parseStrict = object({
   }),
 });
 
-export const parseSafe = struct({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const parseSafe: any = struct({
   number,
   negNumber: number,
   maxNumber: number,
@@ -37,7 +39,8 @@ export const parseSafe = struct({
   }),
 });
 
-export const assertLoose = merge(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const assertLoose: any = merge(
   object({
     number,
     negNumber: number,

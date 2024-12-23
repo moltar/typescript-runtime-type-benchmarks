@@ -8,7 +8,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import 'reflect-metadata';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('class-transformer-validator-sync', 'assertLoose', () => {
   class DeeplyNestedType {

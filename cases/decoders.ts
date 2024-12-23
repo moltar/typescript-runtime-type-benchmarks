@@ -1,5 +1,5 @@
 import { boolean, exact, guard, number, object, string } from 'decoders';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('decoders', 'parseSafe', () => {
   const dataType = object({

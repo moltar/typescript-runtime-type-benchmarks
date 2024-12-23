@@ -1,5 +1,5 @@
 import { type } from 'arktype';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 const t = type({
   number: 'number',

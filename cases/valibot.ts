@@ -1,5 +1,5 @@
 import { object, number, string, boolean, parse, strictObject } from 'valibot';
-import { addCase } from '../benchmarks';
+import { addCase } from '../benchmarks/index.ts';
 
 const LooseSchema = object({
   number: number(),

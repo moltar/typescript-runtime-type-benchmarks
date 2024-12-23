@@ -1,11 +1,11 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-      "module": "commonjs",
+      "module": "ESNext",
       "outDir": "build",
       "strict": true,
       "strictNullChecks": true,
+      "allowImportingTsExtensions": false
     },
     "include": ["src/index.ts", "src/index.guard.ts"]
   }
-  

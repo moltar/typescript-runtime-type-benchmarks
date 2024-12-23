@@ -1,5 +1,5 @@
 import * as rt from 'simple-runtypes';
-import { addCase } from '../benchmarks';
+import { addCase } from '../benchmarks/index.ts';
 
 const checkDataSafe = rt.sloppyRecord({
   number: rt.integer(),

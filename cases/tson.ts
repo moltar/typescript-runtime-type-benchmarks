@@ -1,5 +1,5 @@
 import { t } from '@skarab/tson';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('tson', 'parseSafe', () => {
   const dataType = t

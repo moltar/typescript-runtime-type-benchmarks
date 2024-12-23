@@ -1,5 +1,5 @@
 import { boolean, number, object, string } from 'banditypes';
-import { addCase } from '../benchmarks';
+import { addCase } from '../benchmarks/index.ts';
 
 const dataTypeSafe = object({
   number: number(),

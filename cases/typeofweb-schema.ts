@@ -1,5 +1,5 @@
 import { object, number, string, validate, boolean } from '@typeofweb/schema';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('@typeofweb/schema', 'assertLoose', () => {
   const dataType = object(

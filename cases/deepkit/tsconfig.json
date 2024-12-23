@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "build"
+    "module": "ESNext",
+    "outDir": "build",
+    "allowImportingTsExtensions": false
   },
   "include": ["src/index.ts"],
   "reflection": true

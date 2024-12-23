@@ -9,7 +9,7 @@ import {
   result,
   string,
 } from 'bueno';
-import { type UnknownData, addCase } from '../benchmarks';
+import { type UnknownData, addCase } from '../benchmarks/index.ts';
 
 const dataType = object({
   number: number,

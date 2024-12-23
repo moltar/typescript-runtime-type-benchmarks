@@ -1,6 +1,6 @@
-import { createCase } from '../benchmarks';
-import { CheckLoose } from './typebox/build/check-loose';
-import { CheckStrict } from './typebox/build/check-strict';
+import { createCase } from '../benchmarks/index.ts';
+import { CheckLoose } from './typebox/build/check-loose.ts';
+import { CheckStrict } from './typebox/build/check-strict.ts';
 
 createCase('@sinclair/typebox-(ahead-of-time)', 'assertLoose', () => {
   return data => {

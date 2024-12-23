@@ -1,6 +1,6 @@
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 import { Value } from '@sinclair/typebox/value';
-import { Loose, Strict } from './sinclair-typebox';
+import { Loose, Strict } from './sinclair-typebox.ts';
 
 createCase('@sinclair/typebox-(dynamic)', 'assertLoose', () => {
   return data => {

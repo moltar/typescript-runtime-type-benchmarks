@@ -19,6 +19,7 @@ export const cases = [
   'parse-dont-validate',
   'pure-parse',
   'purify-ts',
+  'paseri',
   'r-assign',
   'rescript-schema',
   'rulr',
@@ -57,5 +58,13 @@ export const cases = [
 export type CaseName = (typeof cases)[number];
 
 export async function importCase(caseName: CaseName) {
-  await import('./' + caseName);
+  try {
+    await import(`./${caseName}.ts`);
+  } catch {
+    try {
+      await import(`./${caseName}/index.ts`);
+    } catch (e) {
+      console.error(`Could not import ${caseName}.`, e);
+    }
+  }
 }

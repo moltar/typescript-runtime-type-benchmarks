@@ -1,5 +1,5 @@
 import { createSchema as S, TsjsonParser } from 'ts-json-validator';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('ts-json-validator', 'assertLoose', () => {
   const parser = new TsjsonParser(

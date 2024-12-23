@@ -1,13 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.assertLoose = assertLoose;
-exports.assertStrict = assertStrict;
-exports.parseStrict = parseStrict;
-exports.parseSafe = parseSafe;
-const type_1 = require("@deepkit/type");
+import { castFunction, getValidatorFunction } from '@deepkit/type';
 const __ΩToBeChecked = ['number', 'negNumber', 'maxNumber', 'string', 'longString', 'boolean', 'foo', 'num', 'bool', 'deeplyNested', 'ToBeChecked', 'P\'4!\'4"\'4#&4$&4%)4&P&4\'\'4()4)M4*Mw+y'];
-const isToBeChecked = (type_1.getValidatorFunction.Ω = [[() => __ΩToBeChecked, 'n!']], (0, type_1.getValidatorFunction)());
-const safeToBeChecked = (type_1.castFunction.Ω = [[() => __ΩToBeChecked, 'n!']], (0, type_1.castFunction)());
+const isToBeChecked = (getValidatorFunction.Ω = [[() => __ΩToBeChecked, 'n!']], getValidatorFunction());
+const safeToBeChecked = (castFunction.Ω = [[() => __ΩToBeChecked, 'n!']], castFunction());
 /**
  * Check that an object conforms to the schema.
  *
@@ -18,7 +12,7 @@ const safeToBeChecked = (type_1.castFunction.Ω = [[() => __ΩToBeChecked, 'n!']
  * But not checking for unknown/extra keys in records may provide massive
  * speedups and may suffice in certain scenarios.
  */
-function assertLoose(input) {
+export function assertLoose(input) {
     if (!isToBeChecked(input))
         throw new Error('wrong type.');
     return true;
@@ -29,14 +23,14 @@ assertLoose.__type = ['input', 'assertLoose', 'P#2!)/"'];
  *
  * Raise errors if any extra keys not present in the schema are found.
  */
-function assertStrict() {
+export function assertStrict() {
     throw new Error('not supported.');
 }
 assertStrict.__type = ['assertStrict', 'P)/!'];
 /**
  * Like parseSafe but throw on unknown (extra) keys in objects.
  */
-function parseStrict() {
+export function parseStrict() {
     throw new Error('not supported.');
 }
 parseStrict.__type = [() => __ΩToBeChecked, 'parseStrict', 'Pn!/"'];
@@ -47,7 +41,7 @@ parseStrict.__type = [() => __ΩToBeChecked, 'parseStrict', 'Pn!/"'];
  * not result in unwanted parameters or the `__proto__` attribute being
  * maliciously passed to internal functions.
  */
-function parseSafe(input) {
+export function parseSafe(input) {
     return safeToBeChecked(input);
 }
 parseSafe.__type = ['input', () => __ΩToBeChecked, 'parseSafe', 'P#2!n"/#'];

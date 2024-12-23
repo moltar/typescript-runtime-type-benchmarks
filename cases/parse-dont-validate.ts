@@ -4,7 +4,7 @@ import parse, {
   parseAsNumber,
   parseAsString,
 } from 'parse-dont-validate';
-import { addCase } from '../benchmarks';
+import { addCase } from '../benchmarks/index.ts';
 
 addCase('parse-dont-validate (chained function)', 'parseSafe', data =>
   parse(data)

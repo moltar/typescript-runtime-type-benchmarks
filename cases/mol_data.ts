@@ -7,7 +7,7 @@ const {
   $mol_data_boolean: Bool,
 } = $;
 
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('$mol_data', 'parseSafe', () => {
   const dataType = Rec({

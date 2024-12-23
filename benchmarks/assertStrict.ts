@@ -1,5 +1,5 @@
-import { Benchmark } from './helpers/types';
-import { validateData } from './parseSafe';
+import { Benchmark } from './helpers/types.ts';
+import { validateData } from './parseSafe.ts';
 
 type Fn = (data: unknown) => boolean;
 

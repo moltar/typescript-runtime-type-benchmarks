@@ -1,5 +1,5 @@
 import { Schema } from '@effect/schema';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('effect-schema', 'parseSafe', () => {
   const dataType = Schema.Struct({

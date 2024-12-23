@@ -1,5 +1,5 @@
 import { s } from '@sapphire/shapeshift';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('@sapphire/shapeshift', 'parseSafe', () => {
   const dataType = s.object({

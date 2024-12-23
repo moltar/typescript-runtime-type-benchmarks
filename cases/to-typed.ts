@@ -1,4 +1,4 @@
-import { addCase } from '../benchmarks';
+import { addCase } from '../benchmarks/index.ts';
 import { Guard, Cast } from 'to-typed';
 
 const model = {
