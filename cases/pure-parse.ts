@@ -1,4 +1,4 @@
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 import {
   object,
   objectCompiled,

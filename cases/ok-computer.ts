@@ -1,5 +1,5 @@
 import { boolean, number, object, string, assert } from 'ok-computer';
-import { type UnknownData, addCase } from '../benchmarks';
+import { type UnknownData, addCase } from '../benchmarks/index.ts';
 
 const dataType = object({
   number: number,

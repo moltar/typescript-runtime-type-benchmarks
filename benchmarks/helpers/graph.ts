@@ -2,8 +2,11 @@ import { writeFileSync } from 'fs';
 import { optimize } from 'svgo';
 import { parse, View } from 'vega';
 import { compile } from 'vega-lite';
-import { availableBenchmarks, type AvailableBenchmarksIds } from './register';
-import type { BenchmarkResult } from './types';
+import {
+  availableBenchmarks,
+  type AvailableBenchmarksIds,
+} from './register.ts';
+import type { BenchmarkResult } from './types.ts';
 
 interface PreviewGraphParams {
   values: BenchmarkResult[];

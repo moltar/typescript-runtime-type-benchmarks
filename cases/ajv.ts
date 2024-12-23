@@ -1,5 +1,5 @@
 import Ajv from 'ajv';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('ajv', 'assertLoose', () => {
   const ajv = new Ajv();

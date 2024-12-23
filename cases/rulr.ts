@@ -1,5 +1,9 @@
-import { object, number, string, boolean } from 'rulr';
-import { createCase } from '../benchmarks';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import * as pkg from 'rulr';
+const { object, number, string, boolean } = pkg;
+
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('rulr', 'parseSafe', () => {
   const dataType = object({

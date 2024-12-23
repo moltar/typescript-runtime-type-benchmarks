@@ -1,9 +1,11 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-      "module": "commonjs",
+      "module": "ESNext",
+      "moduleResolution": "Node",
       "outDir": "build",
       "strict": true,
+      "allowImportingTsExtensions": false,
       "plugins": [
         { 
           "transform": "typia/lib/transform",
@@ -13,4 +15,3 @@
     },
     "include": ["src/index.ts"]
   }
-  

@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('zod', 'parseSafe', () => {
   const dataType = z.object({

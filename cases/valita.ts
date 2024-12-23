@@ -1,5 +1,5 @@
 import * as v from '@badrap/valita';
-import { addCase } from '../benchmarks';
+import { addCase } from '../benchmarks/index.ts';
 
 const dataType = v.object({
   number: v.number(),

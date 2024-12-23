@@ -1,12 +1,7 @@
-import {
-  boolean,
-  number,
-  object,
-  strictObject,
-  string,
-  parseType,
-} from 'r-assign/lib';
-import { createCase } from '../benchmarks';
+import pkg from 'r-assign/lib/index.js';
+const { boolean, number, object, strictObject, string, parseType } = pkg;
+
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('r-assign', 'parseSafe', () => {
   const dataType = object({

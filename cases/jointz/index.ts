@@ -1,5 +1,5 @@
-import jointz from 'jointz';
-import { addCase } from '../benchmarks';
+import jointz from './build/index.js';
+import { addCase } from '../../benchmarks/index.js';
 
 const dataTypeLoose = jointz
   .object({

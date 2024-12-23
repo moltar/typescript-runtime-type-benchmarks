@@ -1,9 +1,10 @@
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
     "outDir": "../build",
-    "plugins": [{ "transform": "ts-runtime-checks" }]
+    "plugins": [{ "transform": "ts-runtime-checks" }],
+    "allowImportingTsExtensions": false
   },
   "include": ["index.ts"]
 }

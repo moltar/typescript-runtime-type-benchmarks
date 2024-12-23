@@ -1,5 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import Schema, { boolean, number, string } from 'computed-types';
-import { type UnknownData, addCase } from '../benchmarks';
+import { type UnknownData, addCase } from '../benchmarks/index.ts';
 
 const validator = Schema({
   number: number,

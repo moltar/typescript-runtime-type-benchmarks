@@ -2,11 +2,11 @@ export {
   runAllBenchmarks,
   createPreviewGraph,
   deleteResults,
-} from './helpers/main';
+} from './helpers/main.ts';
 export {
   addCase,
   type AvailableBenchmarksIds,
   createCase,
   getRegisteredBenchmarks,
-} from './helpers/register';
-export { type UnknownData } from './helpers/types';
+} from './helpers/register.ts';
+export { type UnknownData } from './helpers/types.ts';

@@ -1,5 +1,5 @@
 import * as toi from '@toi/toi';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('toi', 'parseStrict', () => {
   const obj = () => toi.required().and(toi.obj.isplain());

@@ -1,6 +1,6 @@
 import * as childProcess from 'child_process';
-import * as benchmarks from './benchmarks';
-import * as cases from './cases';
+import * as benchmarks from './benchmarks/index.ts';
+import * as cases from './cases/index.ts';
 
 async function main() {
   // a runtype lib would be handy here to check the passed command names ;)
@@ -43,6 +43,11 @@ async function main() {
           }
           if (c === 'ts-auto-guard') {
             childProcess.execSync('npm run compile:ts-auto-guard', {
+              stdio: 'inherit',
+            });
+          }
+          if (c === 'jointz') {
+            childProcess.execSync('npm run compile:jointz', {
               stdio: 'inherit',
             });
           }
