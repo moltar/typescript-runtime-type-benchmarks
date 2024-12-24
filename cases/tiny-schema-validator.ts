@@ -1,5 +1,5 @@
 import { createSchema, _ } from 'tiny-schema-validator';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 // Define the Strict schema with additional property constraints
 export const Strict = createSchema({

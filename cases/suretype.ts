@@ -1,5 +1,5 @@
 import { v, compile } from 'suretype';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('suretype', 'assertLoose', () => {
   const dataSchema = v.object({

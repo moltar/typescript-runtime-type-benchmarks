@@ -1,5 +1,5 @@
 import { validate } from '@aeriajs/validation';
-import { createCase } from '../../benchmarks';
+import { createCase } from '../../benchmarks/index.ts';
 
 const schema = {
   type: 'object',

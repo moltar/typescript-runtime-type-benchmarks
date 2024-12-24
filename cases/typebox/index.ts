@@ -1,6 +1,6 @@
 import { TypeCompiler } from '@sinclair/typebox/compiler';
 import type { TSchema } from '@sinclair/typebox';
-import { Loose, Strict } from '../sinclair-typebox';
+import { Loose, Strict } from '../sinclair-typebox.ts';
 import { writeFileSync } from 'node:fs';
 
 // typebox assertion routines require a named shim before writing as modules

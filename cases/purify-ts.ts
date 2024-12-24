@@ -1,5 +1,5 @@
 import { Codec, string, number, boolean } from 'purify-ts';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('purify-ts', 'parseSafe', () => {
   const dataType = Codec.interface({

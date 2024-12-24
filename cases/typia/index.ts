@@ -1,5 +1,5 @@
-import { is, equals, clone } from './build';
-import { addCase } from '../../benchmarks';
+import { is, equals, clone } from './build/index.js';
+import { addCase } from '../../benchmarks/index.ts';
 
 addCase('typia', 'parseSafe', data => {
   if (!is(data)) throw new Error('wrong type.');

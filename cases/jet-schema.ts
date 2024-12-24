@@ -1,5 +1,7 @@
-import jetSchema from 'jet-schema';
-import { createCase } from '../benchmarks';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import jetSchema from 'jet-schema/dist/index.min.mjs';
+import { createCase } from '../benchmarks/index.ts';
 
 // **** Init Schema **** //
 

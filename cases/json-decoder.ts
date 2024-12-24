@@ -4,7 +4,7 @@ import {
   numberDecoder,
   boolDecoder,
 } from 'json-decoder';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('json-decoder', 'parseSafe', () => {
   const dataType = objectDecoder({

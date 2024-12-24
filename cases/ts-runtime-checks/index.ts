@@ -1,5 +1,5 @@
-import { assertStrict, assertLoose, parseStrict } from './build';
-import { addCase } from '../../benchmarks';
+import { assertStrict, assertLoose, parseStrict } from './build/index.js';
+import { addCase } from '../../benchmarks/index.ts';
 
 addCase('ts-runtime-checks', 'parseStrict', data => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

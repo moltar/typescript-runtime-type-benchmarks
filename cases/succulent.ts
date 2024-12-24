@@ -7,7 +7,7 @@ import {
   $number,
   $string,
 } from 'succulent';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 const $LooseType = $interface({
   number: $number,

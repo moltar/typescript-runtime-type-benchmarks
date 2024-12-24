@@ -1,11 +1,12 @@
 import { add, complete, cycle, suite } from 'benny';
 import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
-import { writePreviewGraph } from './graph';
-import { getRegisteredBenchmarks } from './register';
-import type { BenchmarkCase, BenchmarkResult } from './types';
+import { fileURLToPath } from 'url';
+import { writePreviewGraph } from './graph.ts';
+import { getRegisteredBenchmarks } from './register.ts';
+import type { BenchmarkCase, BenchmarkResult } from './types.ts';
 
-const DOCS_DIR = join(__dirname, '../../docs');
+const DOCS_DIR = join(fileURLToPath(import.meta.url), '../../../docs');
 const RUNTIME = process.env.RUNTIME || 'node';
 const RUNTIME_VERSION = process.env.RUNTIME_VERSION || process.version;
 const RUNTIME_FOR_PREVIEW = 'node';

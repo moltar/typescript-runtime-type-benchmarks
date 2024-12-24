@@ -1,6 +1,6 @@
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 import { TypeCompiler } from '@sinclair/typebox/compiler';
-import { Loose, Strict } from './sinclair-typebox';
+import { Loose, Strict } from './sinclair-typebox.ts';
 
 const CheckLoose = TypeCompiler.Compile(Loose);
 const CheckStrict = TypeCompiler.Compile(Strict);

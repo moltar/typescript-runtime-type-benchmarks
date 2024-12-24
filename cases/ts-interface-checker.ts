@@ -1,5 +1,5 @@
 import * as t from 'ts-interface-checker';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 createCase('ts-interface-checker', 'assertLoose', () => {
   const dataType = t.iface([], {

@@ -1,4 +1,4 @@
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 import { model } from '@mondrian-framework/model';
 
 const dataType = model.object({

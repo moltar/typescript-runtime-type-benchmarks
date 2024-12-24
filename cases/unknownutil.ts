@@ -1,5 +1,5 @@
 import { is, ensure, assert } from 'unknownutil';
-import { createCase } from '../benchmarks';
+import { createCase } from '../benchmarks/index.ts';
 
 const dataTypeLoose = is.ObjectOf({
   number: is.Number,
