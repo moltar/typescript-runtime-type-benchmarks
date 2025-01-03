@@ -56,18 +56,12 @@ jobs:
       - name: download-packages-popularity
         run: npm run download-packages-popularity
 
-        ## FIX: https://github.com/github-actions-x/commit/issues/16
-      - name: Expose git commit data
-        uses: rlespinasse/git-commit-data-action@v1 ## https://github.com/rlespinasse/git-commit-data-action
-
       - name: push
-        uses: github-actions-x/commit@v2.9
+        uses: EndBug/add-and-commit@v9
         ## prevents forked repos from comitting results in PRs
         if: github.repository == 'moltar/typescript-runtime-type-benchmarks'
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: master
+          author_name: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
+          author_email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
           commit-message: 'feat: adds popularity of packages'
-          rebase: 'true'
-          name: ${{ env.GIT_COMMIT_AUTHOR_NAME }}   ## FIX: https://github.com/github-actions-x/commit/issues/16
-          email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }} ## FIX: https://github.com/github-actions-x/commit/issues/16
+          push: true
