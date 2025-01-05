@@ -122,5 +122,5 @@ jobs:
         with:
           author_name: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
           author_email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
-          commit-message: 'feat: ${{ matrix.bun-version }} adds auto-generated benchmarks and bar graph'
+          message: 'feat: ${{ matrix.bun-version }} adds auto-generated benchmarks and bar graph'
           push: true
