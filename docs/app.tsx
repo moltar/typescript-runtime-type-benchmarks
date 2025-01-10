@@ -178,6 +178,11 @@ async function graph({
   const selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
   const selectedBunVersionsSet = new Set(selectedBunVersions);
 
+  const runtimesOrder = {
+    NODE: 0,
+    BUN: 1,
+  };
+
   const valuesNodejs = benchmarkResultsNodejs
     .filter(
       b =>
@@ -190,6 +195,7 @@ async function graph({
       // artificical benchmark name to make sure its always sorted by
       // benchmark and node-version
       benchmark: [
+        runtimesOrder.NODE,
         BENCHMARKS_ORDER[b.benchmark],
         NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.runtimeVersion)),
         b.runtimeVersion,
@@ -209,6 +215,7 @@ async function graph({
       // artificical benchmark name to make sure its always sorted by
       // benchmark and node-version
       benchmark: [
+        runtimesOrder.BUN,
         BENCHMARKS_ORDER[b.benchmark],
         BUN_VERSIONS.indexOf(getBunMajorVersionNumber(b.runtimeVersion)),
         b.runtimeVersion,
