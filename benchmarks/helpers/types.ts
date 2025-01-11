@@ -1,11 +1,13 @@
+import type { SuiteAPI, ExpectStatic, TestAPI } from 'vitest';
+
 export interface BenchmarkCase {
   readonly moduleName: string;
 
   // execute the actual benchmark function
   run(): void;
 
-  // run the benchmarks jest test
-  test(describe: jest.Describe, expect: jest.Expect, test: jest.It): void;
+  // run the benchmarks vitest test
+  test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI): void;
 }
 
 export abstract class Benchmark<Fn> implements BenchmarkCase {
@@ -23,12 +25,8 @@ export abstract class Benchmark<Fn> implements BenchmarkCase {
   // execute the actual benchmark function
   abstract run(): void;
 
-  // run the benchmarks jest test
-  abstract test(
-    describe: jest.Describe,
-    expect: jest.Expect,
-    test: jest.It,
-  ): void;
+  // run the benchmarks vitest test
+  abstract test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI): void;
 }
 
 // Aliased any.

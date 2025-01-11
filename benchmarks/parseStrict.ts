@@ -1,5 +1,6 @@
 import { Benchmark } from './helpers/types';
 import { validateData } from './parseSafe';
+import type { ExpectStatic, SuiteAPI, TestAPI } from 'vitest';
 
 type Fn = (data: unknown) => typeof validateData;
 
@@ -11,7 +12,7 @@ export class ParseStrict extends Benchmark<Fn> {
     this.fn(validateData);
   }
 
-  test(describe: jest.Describe, expect: jest.Expect, test: jest.It) {
+  test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI) {
     describe(this.moduleName, () => {
       test('should validate the data', () => {
         expect(this.fn(validateData)).toEqual(validateData);
