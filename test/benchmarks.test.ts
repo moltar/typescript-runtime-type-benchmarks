@@ -1,7 +1,8 @@
+import { test, describe, expect } from 'vitest';
 import { getRegisteredBenchmarks } from '../benchmarks';
 import { cases } from '../cases';
 
-// all cases need to be imported here because jest cannot pic up dynamically
+// all cases need to be imported here because vitest cannot pick up dynamically
 // imported `test` and `describe`
 import '../cases/aeria';
 import '../cases/ajv';
