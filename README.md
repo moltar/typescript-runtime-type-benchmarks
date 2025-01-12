@@ -55,6 +55,7 @@
 * [ts-runtime-checks](https://github.com/GoogleFeud/ts-runtime-checks)
 * [tson](https://github.com/skarab42/tson)
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
+* [type-predicate-generator](https://github.com/peter-leonov/typescript-predicate-generator)
 * [typia](https://github.com/samchon/typia)
 * [@typeofweb/schema](https://github.com/typeofweb/schema)
 * [unknownutil](https://github.com/lambdalisue/deno-unknownutil)

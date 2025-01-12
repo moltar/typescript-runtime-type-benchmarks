@@ -55,6 +55,7 @@ import '../cases/zod';
 import '../cases/deepkit';
 import '../cases/effect-schema';
 import '../cases/ts-auto-guard';
+import '../cases/type-predicate-generator';
 import '../cases/tiny-schema-validator';
 import '../cases/jet-schema';
 

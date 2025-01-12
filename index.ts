@@ -46,6 +46,11 @@ async function main() {
               stdio: 'inherit',
             });
           }
+          if (c === 'type-predicate-generator') {
+            childProcess.execSync('npm run compile:type-predicate-generator', {
+              stdio: 'inherit',
+            });
+          }
 
           const cmd = [...process.argv.slice(0, 2), 'run-internal', c];
 
