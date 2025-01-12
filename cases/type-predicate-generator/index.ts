@@ -1,4 +1,4 @@
-import { isLoose } from './src/index_guards.ts';
+import { isLoose } from './src/index_guards';
 import { addCase } from '../../benchmarks';
 
 addCase('type-predicate-generator', 'assertLoose', data => {
