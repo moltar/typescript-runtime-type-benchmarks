@@ -210,6 +210,10 @@ export const packages = [
     name: 'ts-auto-guard',
     packageName: 'ts-auto-guard',
   },
+  {
+    name: 'type-predicate-generator',
+    packageName: 'type-predicate-generator',
+  },
 ] as const;
 
 interface BodyWeeklyDownloads {

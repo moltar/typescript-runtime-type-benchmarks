@@ -51,6 +51,7 @@ export const cases = [
   'deepkit',
   'effect-schema',
   'ts-auto-guard',
+  'type-predicate-generator',
   'jet-schema',
 ] as const;
 
