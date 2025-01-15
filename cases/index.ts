@@ -17,6 +17,7 @@ export const cases = [
   'myzod',
   'ok-computer',
   'parse-dont-validate',
+  'paseri',
   'pure-parse',
   'purify-ts',
   'r-assign',

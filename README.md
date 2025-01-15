@@ -35,6 +35,7 @@
 * [pure-parse](https://github.com/johannes-lindgren/pure-parse)
 * [purify-ts](https://github.com/gigobyte/purify)
 * [parse-dont-validate](https://github.com/Packer-Man/parse-dont-validate)
+* [Paseri](https://github.com/vbudovski/paseri)
 * [r-assign](https://github.com/micnic/r-assign)
 * [rescript-schema](https://github.com/DZakh/rescript-schema)
 * [rulr](https://github.com/ryansmith94/rulr)

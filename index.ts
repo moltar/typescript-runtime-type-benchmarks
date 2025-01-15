@@ -51,6 +51,11 @@ async function main() {
               stdio: 'inherit',
             });
           }
+          if (c === 'paseri') {
+            childProcess.execSync('npm run compile:paseri', {
+              stdio: 'inherit',
+            });
+          }
 
           const cmd = [...process.argv.slice(0, 2), 'run-internal', c];
 
