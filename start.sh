@@ -20,7 +20,14 @@ fi
 export RUNTIME
 export RUNTIME_VERSION
 
-$RUNTIME_SCRIPT run start
+if [ "$ENV_TYPE" = "NODE" ]; then
+    $RUNTIME_SCRIPT run start
+elif [ "$ENV_TYPE" = "BUN" ]; then
+    $RUNTIME_SCRIPT run start:bun
+else
+    echo "Unsupported environment: $ENV_TYPE"
+    exit 1
+fi
 
 if [ "$ENV_TYPE" = "NODE" ]; then
     $RUNTIME_SCRIPT run start create-preview-svg
