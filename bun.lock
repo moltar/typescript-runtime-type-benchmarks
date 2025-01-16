@@ -63,7 +63,7 @@
         "ts-json-validator": "0.7.1",
         "ts-node": "10.9.2",
         "ts-runtime-checks": "0.6.3",
-        "type-predicate-generator": "0.1.15",
+        "type-predicate-generator": "1.0.1",
         "typescript": "5.6.3",
         "typia": "7.6.0",
         "undici": "7.2.1",
@@ -1508,7 +1508,7 @@
 
     "type-fest": ["type-fest@2.19.0", "", {}, "sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA=="],
 
-    "type-predicate-generator": ["type-predicate-generator@0.1.15", "", { "dependencies": { "typescript": ">=5.7.0 <5.8.0" }, "bin": { "type-predicate-generator": "dist/cli.js" } }, "sha512-aONsu8sCDI2x1mh4K4r/1gltBCQBDRpiGEOx0NLuJS2sryEYzearmjYA4ODmfX+gT9Hmy5kEZ2RxT5IFKr62vQ=="],
+    "type-predicate-generator": ["type-predicate-generator@1.0.1", "", { "dependencies": { "command-line-args": "^6.0.1", "typescript": ">=5.7.0 <5.8.0" }, "bin": { "type-predicate-generator": "dist/cli.js" } }, "sha512-/LJMsdFGElbak2cRJjNHDB3M+bJoA/dP/8K0xRKcE7oE3nBw3XYW30zLgJrWDaVFU8hXyzuJtcofpYo377hyiw=="],
 
     "typescript": ["typescript@5.6.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="],
 
@@ -1809,6 +1809,8 @@
     "tsconfig/strip-json-comments": ["strip-json-comments@2.0.1", "", {}, ""],
 
     "tsutils/tslib": ["tslib@1.14.1", "", {}, "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="],
+
+    "type-predicate-generator/command-line-args": ["command-line-args@6.0.1", "", { "dependencies": { "array-back": "^6.2.2", "find-replace": "^5.0.2", "lodash.camelcase": "^4.3.0", "typical": "^7.2.0" }, "peerDependencies": { "@75lb/nature": "latest" }, "optionalPeers": ["@75lb/nature"] }, "sha512-Jr3eByUjqyK0qd8W0SGFW1nZwqCaNCtbXjRo2cRJC1OYxWl3MZ5t1US3jq+cO4sPavqgw4l9BMGX0CBe+trepg=="],
 
     "type-predicate-generator/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
 
