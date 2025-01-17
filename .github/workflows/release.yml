@@ -81,8 +81,8 @@ jobs:
           author_email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
           message: 'feat: ${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
           push: true
-          pull: '--rebase'
           fetch: true
+          pull: '--rebase --autostash'
   build-bun:
     name: "Bun ${{ matrix.bun-version }}"
 
@@ -127,3 +127,4 @@ jobs:
           message: 'feat: ${{ matrix.bun-version }} adds auto-generated benchmarks and bar graph'
           push: true
           fetch: true
+          pull: '--rebase --autostash'
