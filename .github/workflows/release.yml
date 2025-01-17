@@ -126,5 +126,4 @@ jobs:
           author_email: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
           message: 'feat: ${{ matrix.bun-version }} adds auto-generated benchmarks and bar graph'
           push: true
-          pull: '--rebase'
           fetch: true
