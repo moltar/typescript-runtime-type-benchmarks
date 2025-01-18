@@ -20,7 +20,7 @@
         "@types/benchmark": "2.1.5",
         "@vbudovski/paseri": "npm:@jsr/vbudovski__paseri@0.1.18",
         "ajv": "8.17.1",
-        "arktype": "2.0.0-dev.12-cjs",
+        "arktype": "2.0.0",
         "banditypes": "0.2.5",
         "benny": "3.7.1",
         "bueno": "0.1.5",
@@ -112,9 +112,9 @@
 
     "@ampproject/remapping": ["@ampproject/remapping@2.2.1", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.0", "@jridgewell/trace-mapping": "^0.3.9" } }, "sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg=="],
 
-    "@arktype/schema": ["@arktype/schema@0.1.4-cjs", "", { "dependencies": { "@arktype/util": "0.0.41-cjs" } }, "sha512-mk/9CoASlEl3NQErqc9WMfs7cGiy4BdQpsmOKqWZHIpnuzvn59XbzXZ3LXtEylIOOovPvplP1VndPkiZhb8v0Q=="],
+    "@ark/schema": ["@ark/schema@0.35.0", "", { "dependencies": { "@ark/util": "0.35.0" } }, "sha512-cV3tiYpIFIt4JB4ZrXSUJ6v2nnAzbX5DqaNWRMpk4pVQV15HMEawg6wYn+JKEI16vfRCIcGqxxdGBvE0zIxqKw=="],
 
-    "@arktype/util": ["@arktype/util@0.0.41-cjs", "", {}, "sha512-JuijNPUx7CSGhw36+z12mrzsR2bRmqeL5W/h0kWlR+hUCgqNc4GLY8JRL5ERg2GwidDQCVe4lvJOpiPffuOCrQ=="],
+    "@ark/util": ["@ark/util@0.35.0", "", {}, "sha512-KxhwMOGMoV605zcqoBVyNFEtKAc3PKy95IWmVz9dwuUzIQ+sh7Bk9KEnlGPXcPAD8DCDs/10deHeO1kfWWONvg=="],
 
     "@arrows/array": ["@arrows/array@1.4.1", "", { "dependencies": { "@arrows/composition": "^1.2.2" } }, "sha512-MGYS8xi3c4tTy1ivhrVntFvufoNzje0PchjEz6G/SsWRgUKxL4tKwS6iPdO8vsaJYldagAeWMd5KRD0aX3Q39g=="],
 
@@ -592,7 +592,7 @@
 
     "argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
 
-    "arktype": ["arktype@2.0.0-dev.12-cjs", "", { "dependencies": { "@arktype/schema": "0.1.4-cjs", "@arktype/util": "0.0.41-cjs" } }, "sha512-bACCf7FLER9H3e7NY/aaxQwlUK3e36PjLRbbOgwDQiXJ2cE5EOFwb30JAt8uoFL2fFBTHipnDOhxoincUI2Ogw=="],
+    "arktype": ["arktype@2.0.0", "", { "dependencies": { "@ark/schema": "0.35.0", "@ark/util": "0.35.0" } }, "sha512-LVuXndcKO+zB7Hg9laGJmXYD5BZYhm/cUFL5pgB/75/3sGnvN8fsQ/yuBlf4JSn90g4rOoU7+9aTvdn5lToWOg=="],
 
     "array-back": ["array-back@6.2.2", "", {}, "sha512-gUAZ7HPyb4SJczXAMUXMGAvI976JoK3qEx9v1FTmeYuJj0IBiaKttG1ydtGKdkfqWkIkouke7nG8ufGy77+Cvw=="],
 
