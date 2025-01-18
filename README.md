@@ -106,16 +106,60 @@ const res = isMyDataValid(data)
 
 ## Local Development
 
-* `npm run start` - run benchmarks for all modules
+### Commands
+
+#### Benchmarks
+
+* `npm run start` - run benchmarks for all modules using Node.js
+* `npm run start:bun` - run benchmarks for all modules using bun
 * `npm run start run zod myzod valita` - run benchmarks only for a few selected modules
+
+#### Tests
+
+* `npm run test` - run build process and tests for all modules
+* `npm run test:build` - run build process for all modules
+
+#### Docs
+
 * `npm run docs:serve` - result viewer
-* `npm run test` - run tests on all modules
+* `npm run docs:build` - build docs
+* `npm run docs:watch` - watch docs for changes and rebuild
 
-## Adding a new node version
+#### Linting
 
-* update node version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
+* `npm run lint` - lint all files
+* `npm run lint:fix` - lint all files and fix errors
+
+#### Misc
+
+* `npm run download-packages-popularity` - download popularity data from npmjs.com
+
+### Debugging
+
+#### Node.js
+
+* Use [nvm](https://github.com/nvm-sh/nvm) to switch to a specific Node.js version
+* `nvm use x` - switch to Node.js x.x
+* `nvm use 18` - switch to Node.js 18.x
+* `nvm use 20` - switch to Node.js 20.x
+
+#### Bun
+
+* Use `curl -fsSl https://bun.sh/install | bash -s "bun-v1.0.x"` to switch to a specific bun version
+* `curl -fsSl https://bun.sh/install | bash -s "bun-v1.1.43"` - switch to bun 1.1.43
+
+## Adding new runtime version
+
+### Node.js runtime
+
+* update Node.js version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
 * update `NODE_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
 * optionally set `NODE_VERSION_FOR_PREVIEW` in `benchmarks/helpers/main.ts`
+
+### Bun runtime
+
+* update bun version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
+* update `BUN_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
 
 ## Test cases
 
