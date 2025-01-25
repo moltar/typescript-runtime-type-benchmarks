@@ -14,3 +14,7 @@ type-predicate-generator src/index.ts
 rimraf build/
 # type check and compile to JS
 tsc -p tsconfig.json
+# minify the resulting compiled source
+esbuild --loader=js --minify < build/index_guards.js > build/index_guards.min.js
+rimraf build/index_guards.js
+mv build/index_guards.min.js build/index_guards.js
