@@ -30,3 +30,31 @@ createCase('io-ts', 'assertLoose', () => {
     );
   };
 });
+
+createCase('io-ts', 'parseSafe', () => {
+  const dataType = t.strict({
+    number: t.Int,
+    negNumber: t.number,
+    maxNumber: t.number,
+    string: t.string,
+    longString: t.string,
+    boolean: t.boolean,
+    deeplyNested: t.strict({
+      foo: t.string,
+      num: t.number,
+      bool: t.boolean,
+    }),
+  });
+
+  return data => {
+    return pipe(
+      dataType.decode(data),
+      fold(
+        errors => {
+          throw errors;
+        },
+        result => result,
+      ),
+    );
+  };
+});
