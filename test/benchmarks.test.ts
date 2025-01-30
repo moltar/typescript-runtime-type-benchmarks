@@ -35,6 +35,7 @@ import '../cases/sinclair-typebox-ahead-of-time';
 import '../cases/sinclair-typebox-dynamic';
 import '../cases/sinclair-typebox-just-in-time';
 import '../cases/spectypes';
+import '../cases/stnl';
 import '../cases/succulent';
 import '../cases/superstruct';
 import '../cases/suretype';
