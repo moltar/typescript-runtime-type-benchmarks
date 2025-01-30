@@ -44,6 +44,7 @@
 * [@sinclair/typebox](https://github.com/sinclairzx81/typebox)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)
 * [spectypes](https://github.com/iyegoroff/spectypes)
+* [stnl](https://github.com/re-utils/stnl)
 * [succulent](https://github.com/aslilac/succulent)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
 * [suretype](https://github.com/grantila/suretype)
