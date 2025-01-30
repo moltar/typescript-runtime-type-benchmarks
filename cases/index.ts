@@ -30,6 +30,7 @@ export const cases = [
   'sinclair-typebox-dynamic',
   'sinclair-typebox-just-in-time',
   'spectypes',
+  'stnl',
   'succulent',
   'superstruct',
   'suretype',
