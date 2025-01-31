@@ -82,3 +82,34 @@ jobs:
 
       - name: test
         run: bun test
+  build-deno:
+    needs: build
+    runs-on: ubuntu-latest
+
+    strategy:
+        max-parallel: 3
+        matrix:
+          deno-version:
+            - 2.1.9
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+
+      - name: Set up Deno ${{ matrix.deno-version }}
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: ${{ matrix.deno-version }}
+
+      - name: Install
+        run: npm ci
+
+      - name: lint
+        run: deno run lint
+
+      - name: test build
+        run: deno task test:build
+
+      - name: test
+        run: deno task test
