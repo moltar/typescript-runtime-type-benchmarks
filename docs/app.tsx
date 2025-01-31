@@ -9,6 +9,8 @@ const NODE_VERSIONS = [23, 22, 21, 20, 19, 18, 16];
 
 const BUN_VERSIONS = [1];
 
+const DENO_VERSIONS = [2];
+
 interface BenchmarkResponse {
   results: BenchmarkResult[];
 }
@@ -130,6 +132,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
 
 const nodeVersionRegex = /v([0-9]+)\./;
 const bunVersionRegex = /([0-9]+)\./;
+const denoVersionRegex = /([0-9]+)\./;
 
 function getNodeMajorVersionNumber(nodeVersion: string): number {
   const match = nodeVersion.match(nodeVersionRegex);
@@ -151,24 +154,40 @@ function getBunMajorVersionNumber(bunVersion: string): number {
   return parseInt(match[1]);
 }
 
+function getDenoMajorVersionNumber(denoVersion: string): number {
+  const match = denoVersion.match(denoVersionRegex);
+
+  if (!match) {
+    throw new Error(`Invalid deno version: ${denoVersion}`);
+  }
+
+  return parseInt(match[1]);
+}
+
 async function graph({
   selectedBenchmarks,
   selectedNodeJsVersions,
   selectedBunVersions,
+  selectedDenoVersions,
   benchmarkResultsNodejs,
   benchmarkResultsBun,
+  benchmarkResultsDeno,
   sort,
 }: {
   selectedBenchmarks: typeof BENCHMARKS;
   selectedNodeJsVersions: string[];
   selectedBunVersions: string[];
+  selectedDenoVersions: string[];
   benchmarkResultsNodejs: BenchmarkResult[];
   benchmarkResultsBun: BenchmarkResult[];
+  benchmarkResultsDeno: BenchmarkResult[];
   sort?: 'alphabetically' | 'fastest' | 'popularity';
 }) {
   if (
     !selectedBenchmarks.length ||
-    (!selectedNodeJsVersions.length && !selectedBunVersions.length)
+    (!selectedNodeJsVersions.length &&
+      !selectedBunVersions.length &&
+      !selectedDenoVersions.length)
   ) {
     return '';
   }
@@ -177,10 +196,12 @@ async function graph({
 
   const selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
   const selectedBunVersionsSet = new Set(selectedBunVersions);
+  const selectedDenoVersionsSet = new Set(selectedDenoVersions);
 
   const runtimesOrder = {
     NODE: 0,
     BUN: 1,
+    DENO: 2,
   };
 
   const valuesNodejs = benchmarkResultsNodejs
@@ -223,9 +244,30 @@ async function graph({
       ].join('-'),
     }));
 
+  const valuesDeno = benchmarkResultsDeno
+    .filter(
+      b =>
+        selectedBenchmarkSet.has(b.benchmark) &&
+        selectedDenoVersionsSet.has(b.runtimeVersion),
+    )
+    .map(b => ({
+      ...b,
+      opsLabel: b.ops.toLocaleString('en-US'),
+      // artificical benchmark name to make sure its always sorted by
+      // benchmark and deno-version
+      benchmark: [
+        runtimesOrder.DENO,
+        BENCHMARKS_ORDER[b.benchmark],
+        DENO_VERSIONS.indexOf(getDenoMajorVersionNumber(b.runtimeVersion)),
+        b.runtimeVersion,
+        b.benchmark,
+      ].join('-'),
+    }));
+
   const nodeJsVersionCount = new Set(valuesNodejs.map(v => v.runtimeVersion))
     .size;
   const bunVersionCount = new Set(valuesBun.map(v => v.runtimeVersion)).size;
+  const denoVersionCount = new Set(valuesDeno.map(v => v.runtimeVersion)).size;
 
   // build a color map so that each benchmark has the same color in different
   // node-versions
@@ -243,24 +285,32 @@ async function graph({
     }
   });
 
+  selectedBenchmarks.forEach(b => {
+    for (let i = 0; i < denoVersionCount; i++) {
+      colorScaleRange.push(b.color);
+    }
+  });
+
   // build a list of module names for sorting
   let sortedValues: BenchmarkResult[] = [];
 
   if (sort === 'fastest' || !sort) {
-    sortedValues = [...valuesNodejs, ...valuesBun].sort(
+    sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
       (a, b) => b.ops - a.ops,
     );
   } else if (sort === 'alphabetically') {
-    sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) =>
-      a.name < b.name ? -1 : 1,
+    sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
+      (a, b) => (a.name < b.name ? -1 : 1),
     );
   } else if (sort === 'popularity') {
-    sortedValues = [...valuesNodejs, ...valuesBun].sort((a, b) => {
-      const aPopularity = PACKAGES_POPULARITY[a.name] || 0;
-      const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
+    sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
+      (a, b) => {
+        const aPopularity = PACKAGES_POPULARITY[a.name] || 0;
+        const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
 
-      return bPopularity - aPopularity;
-    });
+        return bPopularity - aPopularity;
+      },
+    );
   }
 
   // remove duplicates not sure whether vega-lite can handle that
@@ -270,9 +320,11 @@ async function graph({
 
   const vegaSpec = vegaLite.compile({
     data: {
-      values: [...valuesNodejs, ...valuesBun],
+      values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
     },
-    height: { step: 15 / (nodeJsVersionCount + bunVersionCount) },
+    height: {
+      step: 15 / (nodeJsVersionCount + bunVersionCount + denoVersionCount),
+    },
     background: 'transparent', // no white graphs for dark mode users
     facet: {
       row: {
@@ -348,8 +400,10 @@ class Graph extends Component<
     benchmarks: typeof BENCHMARKS;
     nodeJsVersions: string[];
     bunVersions: string[];
+    denoVersions: string[];
     valuesNodeJs: BenchmarkResult[];
     valuesBun: BenchmarkResult[];
+    valuesDeno: BenchmarkResult[];
     sort: Parameters<typeof graph>[0]['sort'];
   },
   { svg?: string }
@@ -367,8 +421,10 @@ class Graph extends Component<
         selectedBenchmarks: this.props.benchmarks,
         selectedNodeJsVersions: this.props.nodeJsVersions,
         selectedBunVersions: this.props.bunVersions,
+        selectedDenoVersions: this.props.denoVersions,
         benchmarkResultsNodejs: this.props.valuesNodeJs,
         benchmarkResultsBun: this.props.valuesBun,
+        benchmarkResultsDeno: this.props.valuesDeno,
         sort: this.props.sort,
       }),
     });
@@ -456,8 +512,10 @@ class App extends Component<
     selectedBenchmarks: { [key: string]: boolean };
     selectedNodeJsVersions: { [key: string]: boolean };
     selectedBunVersions: { [key: string]: boolean };
+    selectedDenoVersions: { [key: string]: boolean };
     valuesNodeJs: BenchmarkResult[];
     valuesBun: BenchmarkResult[];
+    valuesDeno: BenchmarkResult[];
     sortBy: 'fastest' | 'alphabetically' | 'popularity';
   }
 > {
@@ -468,8 +526,10 @@ class App extends Component<
     ),
     selectedNodeJsVersions: {},
     selectedBunVersions: {},
+    selectedDenoVersions: {},
     valuesNodeJs: [],
     valuesBun: [],
+    valuesDeno: [],
     sortBy: 'fastest' as const,
   };
 
@@ -490,6 +550,20 @@ class App extends Component<
   getBunVersions() {
     const versionsSet = new Set(
       this.state.valuesBun
+        .map(v => v.runtimeVersion)
+        .filter(v => v !== undefined)
+        .sort((a, b) => (a < b ? 1 : -1)),
+    );
+    const res: string[] = [];
+
+    versionsSet.forEach(v => res.push(v));
+
+    return res;
+  }
+
+  getDenoVersions() {
+    const versionsSet = new Set(
+      this.state.valuesDeno
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
         .sort((a, b) => (a < b ? 1 : -1)),
@@ -549,6 +623,27 @@ class App extends Component<
         })
         .catch(err => {
           console.info(`no data for bun ${v}`, err);
+        });
+    });
+
+    DENO_VERSIONS.forEach(v => {
+      fetch(`results/deno-${v}.json`)
+        .then(response => response.json() as Promise<BenchmarkResponse>)
+        .then(data => {
+          this.setState(state => ({
+            ...state,
+
+            // select the first node versions benchmark automatically
+            selectedDenoVersions: state.selectedDenoVersions,
+
+            valuesDeno: [
+              ...state.valuesDeno,
+              ...normalizePartialValues(data.results),
+            ],
+          }));
+        })
+        .catch(err => {
+          console.info(`no data for deno ${v}`, err);
         });
     });
   }
@@ -669,6 +764,30 @@ class App extends Component<
           </div>
 
           <div style={{ width: '12rem' }}>
+            <label>Deno Versions:</label>
+            <div>
+              {this.getDenoVersions().map(v => {
+                return (
+                  <Checkbox
+                    id={v}
+                    checked={this.state.selectedDenoVersions[v] ?? false}
+                    label={v}
+                    onChange={checked =>
+                      this.setState(state => ({
+                        ...state,
+                        selectedDenoVersions: {
+                          ...this.state.selectedDenoVersions,
+                          [v]: checked,
+                        },
+                      }))
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          <div style={{ width: '12rem' }}>
             <label>
               Sort:
               <select
@@ -700,8 +819,13 @@ class App extends Component<
             .sort()
             .filter(entry => entry[1])
             .map(entry => entry[0])}
+          denoVersions={Object.entries(this.state.selectedDenoVersions)
+            .sort()
+            .filter(entry => entry[1])
+            .map(entry => entry[0])}
           valuesNodeJs={this.state.valuesNodeJs}
           valuesBun={this.state.valuesBun}
+          valuesDeno={this.state.valuesDeno}
           sort={this.state.sortBy}
         />
 
