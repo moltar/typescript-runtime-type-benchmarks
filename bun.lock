@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -8,7 +8,7 @@
         "@ailabs/ts-utils": "1.4.0",
         "@badrap/valita": "0.4.2",
         "@deepkit/core": "1.0.1-alpha.156",
-        "@deepkit/type": "1.0.1-alpha.155",
+        "@deepkit/type": "1.0.1-alpha.156",
         "@deepkit/type-compiler": "1.0.1-alpha.155",
         "@effect/schema": "0.75.5",
         "@mojotech/json-type-validation": "3.1.0",
@@ -318,7 +318,7 @@
 
     "@deepkit/core": ["@deepkit/core@1.0.1-alpha.156", "", { "dependencies": { "dot-prop": "^5.1.1", "to-fast-properties": "^3.0.1" } }, "sha512-LHwqX2mEaRkMtqrW2joipDG/RtabnMY/tDDfka3ZWHdfyArjGqb585K6rk04xDnwNabYQ6AzAONJ232vLm746g=="],
 
-    "@deepkit/type": ["@deepkit/type@1.0.1-alpha.155", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1-alpha.116", "@types/uuid": "^8.3.0", "buffer": "^5.2.1", "uuid": "^8.3.2" }, "peerDependencies": { "@deepkit/core": "^1.0.1-alpha.13" } }, "sha512-hVzR+D5yz2D9Bld/YE4bw8eqv7w21pV1XGqaQJWxKjaZjWiy5HVS7K1WQGzwU1ZbhDepnTlBzG6jmIM1iYn9eQ=="],
+    "@deepkit/type": ["@deepkit/type@1.0.1-alpha.156", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1-alpha.116", "@types/uuid": "^8.3.0", "buffer": "^5.2.1", "uuid": "^8.3.2" }, "peerDependencies": { "@deepkit/core": "^1.0.1-alpha.13" } }, "sha512-I3H1Fx1MyPGEvxnRA4/pYSXj/ci2l1naBxxQ3+jzSiw19WTrpckLk5ho3xOTH6TSyXmXW0FZ92xqcT44D4TLgQ=="],
 
     "@deepkit/type-compiler": ["@deepkit/type-compiler@1.0.1-alpha.155", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1-alpha.116", "@marcj/ts-clone-node": "^2.0.0", "@rollup/pluginutils": "^5.1.0", "@typescript/vfs": "1.5.0", "get-tsconfig": "^4.5.0", "lz-string": "^1.4.4", "micromatch": "^4.0.5", "strip-json-comments": "^3.1.1" }, "peerDependencies": { "typescript": "*" }, "bin": { "deepkit-compiler-debug": "deepkit-compiler-debug.js", "deepkit-type-install": "deepkit-type-install.js" } }, "sha512-f203TkV/wVDSQNpGPomkB16TbrmjL4R3TJeJ8uYYXk0it9tdN6sVpuMoe2ouP7UzQVaV4Si75fWTbQsSQeuxiQ=="],
 
