@@ -61,10 +61,24 @@ async function main() {
 
           console.log('Executing "%s"', c);
 
-          childProcess.execFileSync(cmd[0], cmd.slice(1), {
-            shell: false,
-            stdio: 'inherit',
-          });
+          try {
+            childProcess.execFileSync(cmd[0], cmd.slice(1), {
+              shell: false,
+              stdio: 'inherit',
+            });
+          } catch (e) {
+            // See #1611.
+            // Due to the wide range of modules and node versions that we
+            // benchmark these days, not every library supports every node
+            // version.
+            // So we ignore any benchmark that fails in order to not fail the
+            // whole run benchmark gh action. Their results will not be
+            // visible for this node version in the frontend.
+            // The better solution would be benchmark case metadata that lists
+            // compatible / node versions (e.g. for stnl sth like >= 23) and
+            // then skip incompatible node versions explicitly.
+            console.error('Skipped "%s" benchmark due to an error', c);
+          }
         }
       }
       break;
