@@ -234,7 +234,7 @@ async function graph({
       ...b,
       opsLabel: b.ops.toLocaleString('en-US'),
       // artificical benchmark name to make sure its always sorted by
-      // benchmark and node-version
+      // benchmark and bun-version
       benchmark: [
         runtimesOrder.BUN,
         BENCHMARKS_ORDER[b.benchmark],
