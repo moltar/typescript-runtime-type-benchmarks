@@ -149,6 +149,11 @@ const res = isMyDataValid(data)
 * Use `curl -fsSl https://bun.sh/install | bash -s "bun-v1.0.x"` to switch to a specific bun version
 * `curl -fsSl https://bun.sh/install | bash -s "bun-v1.1.43"` - switch to bun 1.1.43
 
+#### Deno
+
+* Use `deno upgrade x.x.x` to switch to a specific Deno version
+* `deno upgrade stable` - switch to Deno x.x.x
+
 ## Adding new runtime version
 
 ### Node.js runtime
@@ -161,6 +166,11 @@ const res = isMyDataValid(data)
 
 * update bun version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
 * update `BUN_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
+
+### Deno runtime
+
+* update Deno version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
+* update `DENO_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
 
 ## Test cases
 
