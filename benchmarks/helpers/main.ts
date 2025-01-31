@@ -1,6 +1,6 @@
 import { add, complete, cycle, suite } from 'benny';
-import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'node:fs';
+import { join } from 'node:path';
 import { writePreviewGraph } from './graph';
 import { getRegisteredBenchmarks } from './register';
 import type { BenchmarkCase, BenchmarkResult } from './types';
