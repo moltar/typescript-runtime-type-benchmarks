@@ -1,11 +1,35 @@
 import { add, complete, cycle, suite } from 'benny';
 import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
 import { writePreviewGraph } from './graph';
 import { getRegisteredBenchmarks } from './register';
 import type { BenchmarkCase, BenchmarkResult } from './types';
 
-const DOCS_DIR = join(__dirname, '../../docs');
+/**
+ * A getDirname that works in CJS and ESM, since this file is directly shared
+ * across both kinds of projects.
+ * @TODO We can remove this once we've migrated all consumers to ESM.
+ *
+ * @see https://stackoverflow.com/a/79251101/13503626
+ */
+function pathFromStack() {
+  const { stack } = new Error();
+  if (!stack) {
+    throw new Error('Could not get stack');
+  }
+  const lines = stack.split('\n');
+  for (const line of lines) {
+    if (line.includes(' (/') || line.includes(' (file://')) {
+      // assumes UNIX-like paths
+      const location = line.split(' (')[1].replace('file://', '');
+      const filepath = location.split(':')[0];
+      const dirpath = dirname(filepath);
+      return { dirpath, filepath };
+    }
+  }
+  throw new Error('Could not get dirname');
+}
+const DOCS_DIR = join(pathFromStack().dirpath, '../../docs');
 const RUNTIME = process.env.RUNTIME || 'node';
 const RUNTIME_VERSION = process.env.RUNTIME_VERSION || process.version;
 const RUNTIME_FOR_PREVIEW = 'node';
