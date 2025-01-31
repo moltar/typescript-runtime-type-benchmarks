@@ -97,7 +97,11 @@ async function main() {
         for (const c of caseNames) {
           console.log('Loading "%s"', c);
 
-          await cases.importCase(c);
+          try {
+            await cases.importCase(c);
+          } catch (e) {
+            console.log('Error loading %s', c, e);
+          }
         }
 
         await benchmarks.runAllBenchmarks();
