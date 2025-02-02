@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync } from 'node:fs';
 import { optimize } from 'svgo';
 import { parse, View } from 'vega';
 import { compile } from 'vega-lite';

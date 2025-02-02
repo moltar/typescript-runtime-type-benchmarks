@@ -1,0 +1,11 @@
+{
+    "unstable": [
+        // https://docs.deno.com/runtime/reference/cli/unstable_flags/#--unstable-sloppy-imports: needed because Deno can only read ESM modules but project lacks file extension in imports (.ts)
+        "sloppy-imports",
+        // https://docs.deno.com/runtime/reference/cli/unstable_flags/#--unstable-detect-cjs: needed as some of the packages are CJS but masquerade as ESM
+        "detect-cjs"
+    ],
+    "compilerOptions": {
+        "experimentalDecorators": true
+    }
+}
