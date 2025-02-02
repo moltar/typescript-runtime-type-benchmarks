@@ -101,6 +101,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
     // the first is selected automatically
     var NODE_VERSIONS = [23, 22, 21, 20, 19, 18, 16];
     var BUN_VERSIONS = [1];
+    var DENO_VERSIONS = [2];
     // colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
     var COLORS = [
         '#8dd3c7',
@@ -198,6 +199,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
     }
     var nodeVersionRegex = /v([0-9]+)\./;
     var bunVersionRegex = /([0-9]+)\./;
+    var denoVersionRegex = /([0-9]+)\./;
     function getNodeMajorVersionNumber(nodeVersion) {
         var match = nodeVersion.match(nodeVersionRegex);
         if (!match) {
@@ -212,20 +214,35 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
         }
         return parseInt(match[1]);
     }
+    function getDenoMajorVersionNumber(denoVersion) {
+        var match = denoVersion.match(denoVersionRegex);
+        if (!match) {
+            throw new Error("Invalid deno version: ".concat(denoVersion));
+        }
+        return parseInt(match[1]);
+    }
     function graph(_a) {
         return __awaiter(this, arguments, void 0, function (_b) {
-            var selectedBenchmarkSet, selectedNodeJsVersionsSet, selectedBunVersionsSet, valuesNodejs, valuesBun, nodeJsVersionCount, bunVersionCount, colorScaleRange, sortedValues, sortedNames, vegaSpec, view, svg;
-            var selectedBenchmarks = _b.selectedBenchmarks, selectedNodeJsVersions = _b.selectedNodeJsVersions, selectedBunVersions = _b.selectedBunVersions, benchmarkResultsNodejs = _b.benchmarkResultsNodejs, benchmarkResultsBun = _b.benchmarkResultsBun, sort = _b.sort;
+            var selectedBenchmarkSet, selectedNodeJsVersionsSet, selectedBunVersionsSet, selectedDenoVersionsSet, runtimesOrder, valuesNodejs, valuesBun, valuesDeno, nodeJsVersionCount, bunVersionCount, denoVersionCount, colorScaleRange, sortedValues, sortedNames, vegaSpec, view, svg;
+            var selectedBenchmarks = _b.selectedBenchmarks, selectedNodeJsVersions = _b.selectedNodeJsVersions, selectedBunVersions = _b.selectedBunVersions, selectedDenoVersions = _b.selectedDenoVersions, benchmarkResultsNodejs = _b.benchmarkResultsNodejs, benchmarkResultsBun = _b.benchmarkResultsBun, benchmarkResultsDeno = _b.benchmarkResultsDeno, sort = _b.sort;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         if (!selectedBenchmarks.length ||
-                            (!selectedNodeJsVersions.length && !selectedBunVersions.length)) {
+                            (!selectedNodeJsVersions.length &&
+                                !selectedBunVersions.length &&
+                                !selectedDenoVersions.length)) {
                             return [2 /*return*/, ''];
                         }
                         selectedBenchmarkSet = new Set(selectedBenchmarks.map(function (b) { return b.name; }));
                         selectedNodeJsVersionsSet = new Set(selectedNodeJsVersions);
                         selectedBunVersionsSet = new Set(selectedBunVersions);
+                        selectedDenoVersionsSet = new Set(selectedDenoVersions);
+                        runtimesOrder = {
+                            NODE: 0,
+                            BUN: 1,
+                            DENO: 2,
+                        };
                         valuesNodejs = benchmarkResultsNodejs
                             .filter(function (b) {
                             return selectedBenchmarkSet.has(b.benchmark) &&
@@ -235,6 +252,7 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                             // artificical benchmark name to make sure its always sorted by
                             // benchmark and node-version
                             benchmark: [
+                                runtimesOrder.NODE,
                                 BENCHMARKS_ORDER[b.benchmark],
                                 NODE_VERSIONS.indexOf(getNodeMajorVersionNumber(b.runtimeVersion)),
                                 b.runtimeVersion,
@@ -247,16 +265,33 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         })
                             .map(function (b) { return (__assign(__assign({}, b), { opsLabel: b.ops.toLocaleString('en-US'), 
                             // artificical benchmark name to make sure its always sorted by
-                            // benchmark and node-version
+                            // benchmark and bun-version
                             benchmark: [
+                                runtimesOrder.BUN,
                                 BENCHMARKS_ORDER[b.benchmark],
                                 BUN_VERSIONS.indexOf(getBunMajorVersionNumber(b.runtimeVersion)),
+                                b.runtimeVersion,
+                                b.benchmark,
+                            ].join('-') })); });
+                        valuesDeno = benchmarkResultsDeno
+                            .filter(function (b) {
+                            return selectedBenchmarkSet.has(b.benchmark) &&
+                                selectedDenoVersionsSet.has(b.runtimeVersion);
+                        })
+                            .map(function (b) { return (__assign(__assign({}, b), { opsLabel: b.ops.toLocaleString('en-US'), 
+                            // artificical benchmark name to make sure its always sorted by
+                            // benchmark and deno-version
+                            benchmark: [
+                                runtimesOrder.DENO,
+                                BENCHMARKS_ORDER[b.benchmark],
+                                DENO_VERSIONS.indexOf(getDenoMajorVersionNumber(b.runtimeVersion)),
                                 b.runtimeVersion,
                                 b.benchmark,
                             ].join('-') })); });
                         nodeJsVersionCount = new Set(valuesNodejs.map(function (v) { return v.runtimeVersion; }))
                             .size;
                         bunVersionCount = new Set(valuesBun.map(function (v) { return v.runtimeVersion; })).size;
+                        denoVersionCount = new Set(valuesDeno.map(function (v) { return v.runtimeVersion; })).size;
                         colorScaleRange = [];
                         selectedBenchmarks.forEach(function (b) {
                             for (var i = 0; i < nodeJsVersionCount; i++) {
@@ -268,17 +303,20 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                 colorScaleRange.push(b.color);
                             }
                         });
+                        selectedBenchmarks.forEach(function (b) {
+                            for (var i = 0; i < denoVersionCount; i++) {
+                                colorScaleRange.push(b.color);
+                            }
+                        });
                         sortedValues = [];
                         if (sort === 'fastest' || !sort) {
-                            sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) { return b.ops - a.ops; });
+                            sortedValues = __spreadArray(__spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true), valuesDeno, true).sort(function (a, b) { return b.ops - a.ops; });
                         }
                         else if (sort === 'alphabetically') {
-                            sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) {
-                                return a.name < b.name ? -1 : 1;
-                            });
+                            sortedValues = __spreadArray(__spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true), valuesDeno, true).sort(function (a, b) { return (a.name < b.name ? -1 : 1); });
                         }
                         else if (sort === 'popularity') {
-                            sortedValues = __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true).sort(function (a, b) {
+                            sortedValues = __spreadArray(__spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true), valuesDeno, true).sort(function (a, b) {
                                 var aPopularity = PACKAGES_POPULARITY[a.name] || 0;
                                 var bPopularity = PACKAGES_POPULARITY[b.name] || 0;
                                 return bPopularity - aPopularity;
@@ -288,9 +326,11 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         new Set(sortedValues.map(function (b) { return b.name; })).forEach(function (n) { return sortedNames.push(n); });
                         vegaSpec = vegaLite.compile({
                             data: {
-                                values: __spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true),
+                                values: __spreadArray(__spreadArray(__spreadArray([], valuesNodejs, true), valuesBun, true), valuesDeno, true),
                             },
-                            height: { step: 15 / (nodeJsVersionCount + bunVersionCount) },
+                            height: {
+                                step: 15 / (nodeJsVersionCount + bunVersionCount + denoVersionCount),
+                            },
                             background: 'transparent', // no white graphs for dark mode users
                             facet: {
                                 row: {
@@ -385,8 +425,10 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                     selectedBenchmarks: this.props.benchmarks,
                                     selectedNodeJsVersions: this.props.nodeJsVersions,
                                     selectedBunVersions: this.props.bunVersions,
+                                    selectedDenoVersions: this.props.denoVersions,
                                     benchmarkResultsNodejs: this.props.valuesNodeJs,
                                     benchmarkResultsBun: this.props.valuesBun,
+                                    benchmarkResultsDeno: this.props.valuesDeno,
                                     sort: this.props.sort,
                                 })];
                         case 1:
@@ -442,8 +484,10 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                 }, {}),
                 selectedNodeJsVersions: {},
                 selectedBunVersions: {},
+                selectedDenoVersions: {},
                 valuesNodeJs: [],
                 valuesBun: [],
+                valuesDeno: [],
                 sortBy: 'fastest',
             };
             return _this;
@@ -459,6 +503,15 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
         };
         App.prototype.getBunVersions = function () {
             var versionsSet = new Set(this.state.valuesBun
+                .map(function (v) { return v.runtimeVersion; })
+                .filter(function (v) { return v !== undefined; })
+                .sort(function (a, b) { return (a < b ? 1 : -1); }));
+            var res = [];
+            versionsSet.forEach(function (v) { return res.push(v); });
+            return res;
+        };
+        App.prototype.getDenoVersions = function () {
+            var versionsSet = new Set(this.state.valuesDeno
                 .map(function (v) { return v.runtimeVersion; })
                 .filter(function (v) { return v !== undefined; })
                 .sort(function (a, b) { return (a < b ? 1 : -1); }));
@@ -500,6 +553,18 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                 })
                                     .catch(function (err) {
                                     console.info("no data for bun ".concat(v), err);
+                                });
+                            });
+                            DENO_VERSIONS.forEach(function (v) {
+                                fetch("results/deno-".concat(v, ".json"))
+                                    .then(function (response) { return response.json(); })
+                                    .then(function (data) {
+                                    _this.setState(function (state) { return (__assign(__assign({}, state), { 
+                                        // select the first node versions benchmark automatically
+                                        selectedDenoVersions: state.selectedDenoVersions, valuesDeno: __spreadArray(__spreadArray([], state.valuesDeno, true), normalizePartialValues(data.results), true) })); });
+                                })
+                                    .catch(function (err) {
+                                    console.info("no data for deno ".concat(v), err);
                                 });
                             });
                             return [2 /*return*/];
@@ -555,6 +620,17 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                                 } }));
                         }))),
                     (0, preact_1.h)("div", { style: { width: '12rem' } },
+                        (0, preact_1.h)("label", null, "Deno Versions:"),
+                        (0, preact_1.h)("div", null, this.getDenoVersions().map(function (v) {
+                            var _a;
+                            return ((0, preact_1.h)(Checkbox, { id: v, checked: (_a = _this.state.selectedDenoVersions[v]) !== null && _a !== void 0 ? _a : false, label: v, onChange: function (checked) {
+                                    return _this.setState(function (state) {
+                                        var _a;
+                                        return (__assign(__assign({}, state), { selectedDenoVersions: __assign(__assign({}, _this.state.selectedDenoVersions), (_a = {}, _a[v] = checked, _a)) }));
+                                    });
+                                } }));
+                        }))),
+                    (0, preact_1.h)("div", { style: { width: '12rem' } },
                         (0, preact_1.h)("label", null,
                             "Sort:",
                             (0, preact_1.h)("select", { onChange: 
@@ -571,7 +647,10 @@ define("app", ["require", "exports", "preact", "vega", "vega-lite"], function (r
                         .map(function (entry) { return entry[0]; }), bunVersions: Object.entries(this.state.selectedBunVersions)
                         .sort()
                         .filter(function (entry) { return entry[1]; })
-                        .map(function (entry) { return entry[0]; }), valuesNodeJs: this.state.valuesNodeJs, valuesBun: this.state.valuesBun, sort: this.state.sortBy }),
+                        .map(function (entry) { return entry[0]; }), denoVersions: Object.entries(this.state.selectedDenoVersions)
+                        .sort()
+                        .filter(function (entry) { return entry[1]; })
+                        .map(function (entry) { return entry[0]; }), valuesNodeJs: this.state.valuesNodeJs, valuesBun: this.state.valuesBun, valuesDeno: this.state.valuesDeno, sort: this.state.sortBy }),
                 (0, preact_1.h)("div", null,
                     (0, preact_1.h)(BenchmarkDescription, { name: "Safe Parsing", color: BENCHMARKS.find(function (x) { return x.name === 'parseSafe'; }).color },
                         (0, preact_1.h)("p", null,
