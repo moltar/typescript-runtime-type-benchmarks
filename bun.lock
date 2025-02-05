@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 1,
+  "lockfileVersion": 0,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -100,11 +100,11 @@
     },
   },
   "packages": {
-    "@aeriajs/common": ["@aeriajs/common@0.0.134", "", { "peerDependencies": { "@aeriajs/types": "^0.0.116", "bson": "^6.5.0" } }, "sha512-ooNPCp7Wj6iLXDUbKwR7xodAb4xmDB96RkNdVUSIlY4J4h7FVIHvfyr7jpJWN59eitaTaYwe2OulCEQT8HSZ/Q=="],
+    "@aeriajs/common": ["@aeriajs/common@0.0.135", "", { "peerDependencies": { "@aeriajs/types": "^0.0.117", "bson": "^6.5.0" } }, "sha512-/Bd3AUPgHU1d+e9AXmFBR+SnvB5zU1x/BbWYJDMZNYaiKrIg1Bviruq2jIXiOJZ7V8CU4IP25AYENqP4SeUdsQ=="],
 
-    "@aeriajs/entrypoint": ["@aeriajs/entrypoint@0.0.138", "", { "peerDependencies": { "@aeriajs/common": "^0.0.134", "@aeriajs/types": "^0.0.116" } }, "sha512-FGw5V7pAY5dUb1E2GG7aO7AmfntkQXWHa+sqn0ed/rPNgk7zYYm3xQ5D3kdYPR6y3zMauftb3ducNA8Y+SAYSw=="],
+    "@aeriajs/entrypoint": ["@aeriajs/entrypoint@0.0.139", "", { "peerDependencies": { "@aeriajs/common": "^0.0.135", "@aeriajs/types": "^0.0.117" } }, "sha512-l9AXlZsc5f1dXGlL330g+V+uuH5gGyAsnJqjm9QmBNtwFcSh86StbVPipJ9WAsvp4rEsYf44+xbI19PIFY0HJw=="],
 
-    "@aeriajs/types": ["@aeriajs/types@0.0.116", "", { "peerDependencies": { "@phosphor-icons/core": "^2.1.1" } }, "sha512-Qi0SKgMnEIPXASDwnnl8wuWH3sDVdbsEhjcEFOs/R0MdseO7Sny1lfv1TLOYHvy1PAocZl2g/0RuUkxfjBcrTg=="],
+    "@aeriajs/types": ["@aeriajs/types@0.0.117", "", { "peerDependencies": { "@phosphor-icons/core": "^2.1.1" } }, "sha512-n/qq9DWcAHRubYo7YRnUJiF6QXGd+wvGmJYyJmQErAAuopl+nm4sBzAqzfSCEj5luhPC1zoAMrOF2ogu+VH+Rw=="],
 
     "@aeriajs/validation": ["@aeriajs/validation@0.0.151", "", { "peerDependencies": { "@aeriajs/common": "^0.0.135", "@aeriajs/entrypoint": "^0.0.139", "@aeriajs/types": "^0.0.117", "mongodb": "^6.5.0" } }, "sha512-1tJhRTVSYtNwcVmTehM6spNteEOFOgyFdBqfaQ8X4Af8u6jBj69nu08aWUkDTyi74o+C4tjR7bTalp4bHuFFGA=="],
 
@@ -828,7 +828,7 @@
 
     "effect": ["effect@3.12.9", "", { "dependencies": { "fast-check": "^3.23.1" } }, "sha512-u3PsO0KWtCTO56yGGYaa8RLOccE6Kbeb4UotS/ArAG/tqAyf0x3JF3WaaklhnxJtt67P6SktLmwRPT4hiuhKEA=="],
 
-    "electron-to-chromium": ["electron-to-chromium@1.5.91", "", {}, "sha512-sNSHHyq048PFmZY4S90ax61q+gLCs0X0YmcOII9wG9S2XwbVr+h4VW2wWhnbp/Eys3cCwTxVF292W3qPaxIapQ=="],
+    "electron-to-chromium": ["electron-to-chromium@1.5.92", "", {}, "sha512-BeHgmNobs05N1HMmMZ7YIuHfYBGlq/UmvlsTgg+fsbFs9xVMj+xJHFg19GN04+9Q+r8Xnh9LXqaYIyEWElnNgQ=="],
 
     "emoji-regex": ["emoji-regex@8.0.0", "", {}, "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="],
 
