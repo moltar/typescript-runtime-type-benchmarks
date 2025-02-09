@@ -47,8 +47,7 @@
         "purify-ts": "2.1.0",
         "r-assign": "1.9.0",
         "reflect-metadata": "0.2.2",
-        "rescript": "11.1.4",
-        "rescript-schema": "9.1.0",
+        "rescript-schema": "9.2.2",
         "rulr": "10.7.1",
         "runtypes": "6.7.0",
         "serve": "14.2.4",
@@ -1336,9 +1335,7 @@
 
     "require-from-string": ["require-from-string@2.0.2", "", {}, "sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw=="],
 
-    "rescript": ["rescript@11.1.4", "", { "bin": { "bsc": "bsc", "rescript": "rescript", "bstracing": "lib/bstracing" } }, "sha512-0bGU0bocihjSC6MsE3TMjHjY0EUpchyrREquLS8VsZ3ohSMD+VHUEwimEfB3kpBI1vYkw3UFZ3WD8R28guz/Vw=="],
-
-    "rescript-schema": ["rescript-schema@9.1.0", "", { "peerDependencies": { "rescript": "11.x" } }, "sha512-zD6hpg59HF6QJ3rnmhFV6mYtbfUd6ZTu20osL93aR9fdc3GTIX6N8Fy/6btgZ9a35A2NAzTvCgh/dz3EK7qfAw=="],
+    "rescript-schema": ["rescript-schema@9.2.2", "", { "peerDependencies": { "rescript": "11.x" }, "optionalPeers": ["rescript"] }, "sha512-uXs34+pWx7uCx8ayk621XhtA0pUZMwxRhT11cDVXlo2TqMwAD1ZOs/HdHeVbFJzrX7v/iwcLce054zPQm0zVaw=="],
 
     "resolve": ["resolve@1.22.10", "", { "dependencies": { "is-core-module": "^2.16.0", "path-parse": "^1.0.7", "supports-preserve-symlinks-flag": "^1.0.0" }, "bin": { "resolve": "bin/resolve" } }, "sha512-NPRy+/ncIMeDlTAsuqwKIiferiawhefFJtkNSW0qZJEqMEb+qBt/77B/jGeeek+F0uOeN05CDa6HXbbIgtVX4w=="],
 
