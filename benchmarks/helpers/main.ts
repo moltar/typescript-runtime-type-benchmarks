@@ -163,6 +163,12 @@ function previewSvgFilename() {
 }
 
 function getNodeMajorVersion() {
+  // Hack for bun runtime to include major and minor version
+  // like 1.2.3 -> 1.2
+  if (RUNTIME === 'bun') {
+    return parseFloat(RUNTIME_VERSION);
+  }
+
   let majorVersion = 0;
 
   majorVersion = parseInt(RUNTIME_VERSION);
