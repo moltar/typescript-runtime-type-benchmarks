@@ -132,7 +132,7 @@ async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
 // append results to an existing file or create a new one
 function appendResults(results: BenchmarkResult[]) {
   const fileName = resultsJsonFilename();
-  console.log('fileName', fileName, RUNTIME, RUNTIME_VERSION);
+  
   const existingResults: BenchmarkResult[] = existsSync(fileName)
     ? JSON.parse(readFileSync(fileName).toString()).results
     : [];
