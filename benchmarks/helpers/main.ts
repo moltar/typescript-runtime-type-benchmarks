@@ -29,9 +29,23 @@ function pathFromStack() {
   }
   throw new Error('Could not get dirname');
 }
+
+function getRuntimeWithVersion() {
+  // @ts-expect-error
+  if (typeof Bun !== 'undefined') {
+    return { RUNTIME: 'bun', RUNTIME_VERSION: process.versions['bun'] };
+  }
+
+  // @ts-expect-error
+  if (typeof Deno !== 'undefined') {
+    return { RUNTIME: 'deno', RUNTIME_VERSION: process.versions['deno']};
+  }
+
+  return { RUNTIME: 'node', RUNTIME_VERSION: process.version };
+}
+
 const DOCS_DIR = join(pathFromStack().dirpath, '../../docs');
-const RUNTIME = process.env.RUNTIME || 'node';
-const RUNTIME_VERSION = process.env.RUNTIME_VERSION || process.version;
+const { RUNTIME, RUNTIME_VERSION } = getRuntimeWithVersion();
 const RUNTIME_FOR_PREVIEW = 'node';
 const NODE_VERSION_FOR_PREVIEW = 20;
 
@@ -118,6 +132,7 @@ async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
 // append results to an existing file or create a new one
 function appendResults(results: BenchmarkResult[]) {
   const fileName = resultsJsonFilename();
+  console.log('fileName', fileName, RUNTIME, RUNTIME_VERSION);
   const existingResults: BenchmarkResult[] = existsSync(fileName)
     ? JSON.parse(readFileSync(fileName).toString()).results
     : [];
