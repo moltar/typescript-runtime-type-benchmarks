@@ -31,14 +31,14 @@ function pathFromStack() {
 }
 
 function getRuntimeWithVersion() {
-  // @ts-expect-error
+  // @ts-expect-error no @types/bun
   if (typeof Bun !== 'undefined') {
-    return { RUNTIME: 'bun', RUNTIME_VERSION: process.versions['bun'] };
+    return { RUNTIME: 'bun', RUNTIME_VERSION: process.versions['bun']! };
   }
 
-  // @ts-expect-error
+  // @ts-expect-error no Deno types
   if (typeof Deno !== 'undefined') {
-    return { RUNTIME: 'deno', RUNTIME_VERSION: process.versions['deno']};
+    return { RUNTIME: 'deno', RUNTIME_VERSION: process.versions['deno']! };
   }
 
   return { RUNTIME: 'node', RUNTIME_VERSION: process.version };
@@ -132,7 +132,7 @@ async function runBenchmarks(name: string, cases: BenchmarkCase[]) {
 // append results to an existing file or create a new one
 function appendResults(results: BenchmarkResult[]) {
   const fileName = resultsJsonFilename();
-  
+
   const existingResults: BenchmarkResult[] = existsSync(fileName)
     ? JSON.parse(readFileSync(fileName).toString()).results
     : [];

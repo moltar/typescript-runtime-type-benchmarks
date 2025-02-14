@@ -239,7 +239,9 @@ async function graph({
       benchmark: [
         runtimesOrder.BUN,
         BENCHMARKS_ORDER[b.benchmark],
-        BUN_VERSIONS.indexOf(getBunMajorAndMinorVersionNumber(b.runtimeVersion)),
+        BUN_VERSIONS.indexOf(
+          getBunMajorAndMinorVersionNumber(b.runtimeVersion),
+        ),
         b.runtimeVersion,
         b.benchmark,
       ].join('-'),
