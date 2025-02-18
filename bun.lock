@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -38,7 +38,7 @@
         "jet-schema": "1.4.3",
         "jointz": "7.0.4",
         "json-decoder": "1.4.1",
-        "mol_data_all": "1.1.1372",
+        "mol_data_all": "1.1.1373",
         "myzod": "1.12.1",
         "ok-computer": "1.0.4",
         "parse-dont-validate": "4.0.0",
@@ -1163,7 +1163,7 @@
 
     "mkdirp": ["mkdirp@3.0.1", "", { "bin": { "mkdirp": "dist/cjs/src/bin.js" } }, "sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg=="],
 
-    "mol_data_all": ["mol_data_all@1.1.1372", "", {}, "sha512-wCY4PkEHk/3ClH06O5wN/xuckwFgJ2ckcHnvOT2vx55JzS2o0slT3X951m2B6yK5kIMeavGtG9e9/OimNFr4vw=="],
+    "mol_data_all": ["mol_data_all@1.1.1373", "", {}, "sha512-fw0yn59qGOCM6f7ShvlmU27BQXwia0xXcU3AktsUKjQsg4ZSWpSY57BX8GtU3Fjfg4/ankd9jetjViukaMs0+Q=="],
 
     "mongodb": ["mongodb@6.13.0", "", { "dependencies": { "@mongodb-js/saslprep": "^1.1.9", "bson": "^6.10.1", "mongodb-connection-string-url": "^3.0.0" }, "peerDependencies": { "@aws-sdk/credential-providers": "^3.188.0", "@mongodb-js/zstd": "^1.1.0 || ^2.0.0", "gcp-metadata": "^5.2.0", "kerberos": "^2.0.1", "mongodb-client-encryption": ">=6.0.0 <7", "snappy": "^7.2.2", "socks": "^2.7.1" }, "optionalPeers": ["@aws-sdk/credential-providers", "@mongodb-js/zstd", "gcp-metadata", "kerberos", "mongodb-client-encryption", "snappy", "socks"] }, "sha512-KeESYR5TEaFxOuwRqkOm3XOsMqCSkdeDMjaW5u2nuKfX7rqaofp7JQGoi7sVqQcNJTKuveNbzZtWMstb8ABP6Q=="],
 
