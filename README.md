@@ -19,6 +19,7 @@
 * [bueno](https://github.com/philipnilsson/bueno)
 * [caketype](https://github.com/justinyaodu/caketype)
 * [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer)
+* [cleaners](https://cleaners.js.org)
 * [computed-types](https://github.com/neuledge/computed-types)
 * [decoders](https://github.com/nvie/decoders)
 * [deepkit](https://deepkit.io/)

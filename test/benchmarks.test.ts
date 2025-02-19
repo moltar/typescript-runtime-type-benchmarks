@@ -11,6 +11,7 @@ import '../cases/banditypes';
 import '../cases/bueno';
 import '../cases/caketype';
 import '../cases/class-validator';
+import '../cases/cleaners';
 import '../cases/computed-types';
 import '../cases/decoders';
 import '../cases/io-ts';
