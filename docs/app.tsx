@@ -7,7 +7,7 @@ import * as vegaLite from 'vega-lite';
 // the first is selected automatically
 const NODE_VERSIONS = [23, 22, 21, 20, 19, 18, 16];
 
-const BUN_VERSIONS = [1];
+const BUN_VERSIONS = [1.2];
 
 const DENO_VERSIONS = [2];
 
@@ -131,7 +131,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
 }
 
 const nodeVersionRegex = /v([0-9]+)\./;
-const bunVersionRegex = /([0-9]+)\./;
+const bunVersionRegex = /^(\d+)\.(\d+)\./;
 const denoVersionRegex = /([0-9]+)\./;
 
 function getNodeMajorVersionNumber(nodeVersion: string): number {
@@ -144,14 +144,15 @@ function getNodeMajorVersionNumber(nodeVersion: string): number {
   return parseInt(match[1]);
 }
 
-function getBunMajorVersionNumber(bunVersion: string): number {
+function getBunMajorAndMinorVersionNumber(bunVersion: string): number {
   const match = bunVersion.match(bunVersionRegex);
 
   if (!match) {
     throw new Error(`Invalid bun version: ${bunVersion}`);
   }
 
-  return parseInt(match[1]);
+  // We can use just parseFloat but don't matter
+  return parseFloat(`${match[1]}.${match[2]}`);
 }
 
 function getDenoMajorVersionNumber(denoVersion: string): number {
@@ -238,7 +239,9 @@ async function graph({
       benchmark: [
         runtimesOrder.BUN,
         BENCHMARKS_ORDER[b.benchmark],
-        BUN_VERSIONS.indexOf(getBunMajorVersionNumber(b.runtimeVersion)),
+        BUN_VERSIONS.indexOf(
+          getBunMajorAndMinorVersionNumber(b.runtimeVersion),
+        ),
         b.runtimeVersion,
         b.benchmark,
       ].join('-'),
