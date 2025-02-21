@@ -6,6 +6,7 @@ export const cases = [
   'bueno',
   'caketype',
   'class-validator',
+  'cleaners',
   'computed-types',
   'decoders',
   'io-ts',
