@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -21,7 +21,7 @@
         "@types/benchmark": "2.1.5",
         "@vbudovski/paseri": "npm:@jsr/vbudovski__paseri@0.1.18",
         "ajv": "8.17.1",
-        "arktype": "2.0.0-dev.12-cjs",
+        "arktype": "2.1.0",
         "banditypes": "0.2.5",
         "benny": "3.7.1",
         "bueno": "0.1.5",
@@ -112,9 +112,9 @@
 
     "@ampproject/remapping": ["@ampproject/remapping@2.3.0", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="],
 
-    "@arktype/schema": ["@arktype/schema@0.1.4-cjs", "", { "dependencies": { "@arktype/util": "0.0.41-cjs" } }, "sha512-mk/9CoASlEl3NQErqc9WMfs7cGiy4BdQpsmOKqWZHIpnuzvn59XbzXZ3LXtEylIOOovPvplP1VndPkiZhb8v0Q=="],
+    "@ark/schema": ["@ark/schema@0.40.0", "", { "dependencies": { "@ark/util": "0.40.0" } }, "sha512-vD78TCZkoMWYDVfJVyoBI4ndxaR5jGUeYQuhFNZHXV8Ve2pKrwb4vQFD/VHg7GgF8Pd1pxy0CPouerKNR3y79g=="],
 
-    "@arktype/util": ["@arktype/util@0.0.41-cjs", "", {}, "sha512-JuijNPUx7CSGhw36+z12mrzsR2bRmqeL5W/h0kWlR+hUCgqNc4GLY8JRL5ERg2GwidDQCVe4lvJOpiPffuOCrQ=="],
+    "@ark/util": ["@ark/util@0.40.0", "", {}, "sha512-YN+qWGs1q5Pl19VcnCWZMUpDEKW9aST6kuSOs0iAswDDe494xjgmg+DJeX0OF2MspH5yY03VqitNcvkywqXNpw=="],
 
     "@arrows/array": ["@arrows/array@1.4.1", "", { "dependencies": { "@arrows/composition": "^1.2.2" } }, "sha512-MGYS8xi3c4tTy1ivhrVntFvufoNzje0PchjEz6G/SsWRgUKxL4tKwS6iPdO8vsaJYldagAeWMd5KRD0aX3Q39g=="],
 
@@ -590,7 +590,7 @@
 
     "argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
 
-    "arktype": ["arktype@2.0.0-dev.12-cjs", "", { "dependencies": { "@arktype/schema": "0.1.4-cjs", "@arktype/util": "0.0.41-cjs" } }, "sha512-bACCf7FLER9H3e7NY/aaxQwlUK3e36PjLRbbOgwDQiXJ2cE5EOFwb30JAt8uoFL2fFBTHipnDOhxoincUI2Ogw=="],
+    "arktype": ["arktype@2.1.0", "", { "dependencies": { "@ark/schema": "0.40.0", "@ark/util": "0.40.0" } }, "sha512-BjXPbh4S8nBSuHmlakrQ+ViiGIhTcxAw7dWuJjW3nlHdY8wGktuuKfP52eWjmC3Y/Og1BbbRYEDGr/H0Kg26Mg=="],
 
     "array-back": ["array-back@6.2.2", "", {}, "sha512-gUAZ7HPyb4SJczXAMUXMGAvI976JoK3qEx9v1FTmeYuJj0IBiaKttG1ydtGKdkfqWkIkouke7nG8ufGy77+Cvw=="],
 
