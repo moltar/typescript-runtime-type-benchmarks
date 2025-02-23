@@ -196,3 +196,9 @@ const res = isMyDataValid(data)
   * Raises an exception if the input object does not match the schema.
   * Raises an error if the input object or any nested input objects contain extra keys.
   * Returns true if data is valid.
+
+## Contributors
+
+<a href="https://github.com/moltar/typescript-runtime-type-benchmarks/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=moltar/typescript-runtime-type-benchmarks" />
+</a>
