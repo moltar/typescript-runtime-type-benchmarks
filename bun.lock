@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -67,7 +67,7 @@
         "ts-node": "10.9.2",
         "ts-runtime-checks": "0.6.3",
         "type-predicate-generator": "1.0.3",
-        "typescript": "5.6.3",
+        "typescript": "5.8.2",
         "typia": "7.6.4",
         "undici": "7.4.0",
         "unknownutil": "3.18.1",
@@ -1528,7 +1528,7 @@
 
     "type-predicate-generator": ["type-predicate-generator@1.0.3", "", { "dependencies": { "command-line-args": "^6.0.1", "typescript": ">=5.7.0 <5.8.0" }, "bin": { "type-predicate-generator": "dist/cli.js" } }, "sha512-rw+Z4963HQlNgVpe05vXP8AQuy45JqV8pzR/ARglDLD9VNj6yEGksr2MmHqhcJoRy6nt0kUsvH1NwSmFd7Uu6Q=="],
 
-    "typescript": ["typescript@5.6.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="],
+    "typescript": ["typescript@5.8.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ=="],
 
     "typia": ["typia@7.6.4", "", { "dependencies": { "@samchon/openapi": "^2.4.2", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.8.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-Z3AcvGBjS7Dc7+iAG2VhsT0NIv3HMoXVTJ3F7Pgth8z7rhQu1JnyS8GGqqWdKk5ROvOgALEVEWmWv3Lym2eBIg=="],
 
