@@ -15,6 +15,7 @@ import '../cases/cleaners';
 import '../cases/computed-types';
 import '../cases/decoders';
 import '../cases/io-ts';
+import '../cases/joi';
 import '../cases/jointz';
 import '../cases/json-decoder';
 import '../cases/mol_data';

@@ -214,6 +214,10 @@ export const packages = [
     name: 'type-predicate-generator',
     packageName: 'type-predicate-generator',
   },
+  {
+    name: 'joi',
+    packageName: 'joi',
+  },
 ] as const;
 
 interface BodyWeeklyDownloads {

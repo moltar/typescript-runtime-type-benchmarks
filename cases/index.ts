@@ -10,6 +10,7 @@ export const cases = [
   'computed-types',
   'decoders',
   'io-ts',
+  'joi',
   'jointz',
   'json-decoder',
   'mol_data',
