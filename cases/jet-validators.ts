@@ -68,32 +68,32 @@ const strictTest = strictTestObject({
   }),
 });
 
+const checkFailed = (arg: unknown) => {
+  if (arg === false) {
+    throw new Error('Validation failed');
+  } else {
+    return arg;
+  }
+};
+
 // **** Run Tests **** //
 
 // Parse "safe"
 createCase('jet-validators', 'parseSafe', () => {
-  return data => {
-    return safeParse(data);
-  };
+  return data => checkFailed(safeParse(data));
 });
 
 // Parse "strict"
 createCase('jet-validators', 'parseStrict', () => {
-  return data => {
-    return strictParse(data);
-  };
+  return data => checkFailed(strictParse(data));
 });
 
 // Test "loose"
 createCase('jet-validators', 'assertLoose', () => {
-  return data => {
-    return looseTest(data);
-  };
+  return data => checkFailed(looseTest(data));
 });
 
 // Test "strict"
 createCase('jet-validators', 'assertStrict', () => {
-  return data => {
-    return strictTest(data);
-  };
+  return data => checkFailed(strictTest(data));
 });
