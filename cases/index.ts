@@ -56,7 +56,7 @@ export const cases = [
   'effect-schema',
   'ts-auto-guard',
   'type-predicate-generator',
-  'jet-schema',
+  'jet-validators',
 ] as const;
 
 export type CaseName = (typeof cases)[number];

@@ -1,4 +1,4 @@
-import jetSchema from 'jet-schema';
+import jetSchema from 'jet-validators';
 import { createCase } from '../benchmarks';
 
 // **** Init Schema **** //
@@ -80,21 +80,21 @@ function isBool(arg: unknown): arg is boolean {
 // **** Run Tests **** //
 
 // Parse "safe"
-createCase('jet-schema', 'parseSafe', () => {
+createCase('jet-validators', 'parseSafe', () => {
   return data => {
     return Schema.parse(data);
   };
 });
 
 // Parse "strict"
-createCase('jet-schema', 'parseStrict', () => {
+createCase('jet-validators', 'parseStrict', () => {
   return data => {
     return StrictSchema.parse(data);
   };
 });
 
 // Test "loose"
-createCase('jet-schema', 'assertLoose', () => {
+createCase('jet-validators', 'assertLoose', () => {
   return data => {
     LooseSchema.test(data);
     return true;
@@ -102,7 +102,7 @@ createCase('jet-schema', 'assertLoose', () => {
 });
 
 // Test "loose"
-createCase('jet-schema', 'assertStrict', () => {
+createCase('jet-validators', 'assertStrict', () => {
   return data => {
     StrictSchema.test(data);
     return true;
