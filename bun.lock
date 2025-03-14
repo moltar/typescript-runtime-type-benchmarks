@@ -15,6 +15,7 @@
         "@mondrian-framework/model": "2.0.68",
         "@sapphire/shapeshift": "3.9.7",
         "@sinclair/typebox": "0.34.30",
+        "@sinclair/typemap": "0.8.19",
         "@skarab/tson": "1.5.1",
         "@toi/toi": "1.3.0",
         "@typeofweb/schema": "0.7.3",
@@ -72,7 +73,7 @@
         "typia": "8.0.1",
         "undici": "7.5.0",
         "unknownutil": "3.18.1",
-        "valibot": "0.42.1",
+        "valibot": "1.0.0-rc.4",
         "vality": "6.3.4",
         "vega": "5.31.0",
         "vega-lite": "5.11.0",
@@ -480,6 +481,8 @@
     "@sideway/pinpoint": ["@sideway/pinpoint@2.0.0", "", {}, "sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ=="],
 
     "@sinclair/typebox": ["@sinclair/typebox@0.34.30", "", {}, "sha512-gFB3BiqjDxEoadW0zn+xyMVb7cLxPCoblVn2C/BKpI41WPYi2d6fwHAlynPNZ5O/Q4WEiujdnJzVtvG/Jc2CBQ=="],
+
+    "@sinclair/typemap": ["@sinclair/typemap@0.8.19", "", { "peerDependencies": { "@sinclair/typebox": "^0.34.30", "valibot": "^1.0.0-rc.4", "zod": "^3.24.1" } }, "sha512-IbtO6nKUshXEqz5rAUqLuyBUzH7qUiUsegsKa15qLdb+tJ2jJJQUP6oUrGSUWEUaPXbwQmGtg/URfb6gvC3liA=="],
 
     "@skarab/tson": ["@skarab/tson@1.5.1", "", { "optionalDependencies": { "typescript": "^4.6.2" } }, "sha512-DZMeweKar8axpt9OtW+8OW7GmAQELM0IBiDHkz1/rkzkW0MR9VmIiKNMx7TP2BxonZnDIaUtEXB47eOU5oRRpw=="],
 
@@ -1575,7 +1578,7 @@
 
     "v8-compile-cache-lib": ["v8-compile-cache-lib@3.0.1", "", {}, "sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg=="],
 
-    "valibot": ["valibot@0.42.1", "", { "peerDependencies": { "typescript": ">=5" }, "optionalPeers": ["typescript"] }, "sha512-3keXV29Ar5b//Hqi4MbSdV7lfVp6zuYLZuA9V1PvQUsXqogr+u5lvLPLk3A4f74VUXDnf/JfWMN6sB+koJ/FFw=="],
+    "valibot": ["valibot@1.0.0-rc.4", "", { "peerDependencies": { "typescript": ">=5" }, "optionalPeers": ["typescript"] }, "sha512-VRaChgFv7Ab0P54AMLu7+GqoexdTPQ54Plj59X9qV0AFozI3j9CGH43skg+TqgMpXnrW8jxlJ2TTHAtAD3t4qA=="],
 
     "validate-npm-package-license": ["validate-npm-package-license@3.0.4", "", { "dependencies": { "spdx-correct": "^3.0.0", "spdx-expression-parse": "^3.0.0" } }, "sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew=="],
 
