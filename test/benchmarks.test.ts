@@ -36,6 +36,8 @@ import '../cases/simple-runtypes';
 import '../cases/sinclair-typebox-ahead-of-time';
 import '../cases/sinclair-typebox-dynamic';
 import '../cases/sinclair-typebox-just-in-time';
+import '../cases/sinclair-typemap-valibot';
+import '../cases/sinclair-typemap-zod';
 import '../cases/spectypes';
 import '../cases/stnl';
 import '../cases/succulent';
