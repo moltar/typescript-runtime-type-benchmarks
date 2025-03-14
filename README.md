@@ -44,6 +44,7 @@
 * [runtypes](https://github.com/pelotom/runtypes)
 * [@sapphire/shapeshift](https://github.com/sapphiredev/shapeshift)
 * [@sinclair/typebox](https://github.com/sinclairzx81/typebox)
+* [@sinclair/typemap](https://github.com/sinclairzx81/typemap)
 * [simple-runtypes](https://github.com/hoeck/simple-runtypes)
 * [spectypes](https://github.com/iyegoroff/spectypes)
 * [stnl](https://github.com/re-utils/stnl)
