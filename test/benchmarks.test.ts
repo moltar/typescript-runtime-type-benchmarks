@@ -63,7 +63,7 @@ import '../cases/effect-schema';
 import '../cases/ts-auto-guard';
 import '../cases/type-predicate-generator';
 import '../cases/tiny-schema-validator';
-import '../cases/jet-schema';
+import '../cases/jet-validators';
 
 test('all cases must have been imported in tests', () => {
   expect(
