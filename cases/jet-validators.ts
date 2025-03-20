@@ -2,7 +2,6 @@ import { isString, isNumber, isBoolean } from 'jet-validators';
 
 import {
   parseObject,
-  testObject,
   looseTestObject,
   strictParseObject,
   strictTestObject,
@@ -19,11 +18,11 @@ const safeParse = parseObject({
   string: isString,
   longString: isString,
   boolean: isBoolean,
-  deeplyNested: testObject({
+  deeplyNested: {
     foo: isString,
     num: isNumber,
     bool: isBoolean,
-  }),
+  },
 });
 
 const looseTest = looseTestObject({
@@ -33,11 +32,11 @@ const looseTest = looseTestObject({
   string: isString,
   longString: isString,
   boolean: isBoolean,
-  deeplyNested: looseTestObject({
+  deeplyNested: {
     foo: isString,
     num: isNumber,
     bool: isBoolean,
-  }),
+  },
 });
 
 const strictParse = strictParseObject({
@@ -47,11 +46,11 @@ const strictParse = strictParseObject({
   string: isString,
   longString: isString,
   boolean: isBoolean,
-  deeplyNested: strictTestObject({
+  deeplyNested: {
     foo: isString,
     num: isNumber,
     bool: isBoolean,
-  }),
+  },
 });
 
 const strictTest = strictTestObject({
@@ -61,11 +60,11 @@ const strictTest = strictTestObject({
   string: isString,
   longString: isString,
   boolean: isBoolean,
-  deeplyNested: strictTestObject({
+  deeplyNested: {
     foo: isString,
     num: isNumber,
     bool: isBoolean,
-  }),
+  },
 });
 
 const checkFailed = (arg: unknown) => {
