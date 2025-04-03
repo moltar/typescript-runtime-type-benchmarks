@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -9,7 +9,7 @@
         "@badrap/valita": "0.4.3",
         "@deepkit/core": "1.0.5",
         "@deepkit/type": "1.0.5",
-        "@deepkit/type-compiler": "1.0.2",
+        "@deepkit/type-compiler": "1.0.5",
         "@effect/schema": "0.75.5",
         "@mojotech/json-type-validation": "3.1.0",
         "@mondrian-framework/model": "2.0.69",
@@ -323,7 +323,7 @@
 
     "@deepkit/type": ["@deepkit/type@1.0.5", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1", "@types/uuid": "^8.3.0", "buffer": "^5.2.1", "uuid": "^8.3.2" }, "peerDependencies": { "@deepkit/core": "^1.0.1" } }, "sha512-vZZf5KBz2BMxnRaW8dGr1kXFFMYoaQjDgeqTBKoioX3VgCtjFEnIog6w8Gh8tmEdfdiiKCCZr/h4D158R9BGyw=="],
 
-    "@deepkit/type-compiler": ["@deepkit/type-compiler@1.0.2", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1", "@marcj/ts-clone-node": "^2.0.0", "@rollup/pluginutils": "^5.1.0", "@typescript/vfs": "1.5.0", "get-tsconfig": "^4.5.0", "lz-string": "^1.4.4", "micromatch": "^4.0.5", "strip-json-comments": "^3.1.1" }, "peerDependencies": { "typescript": "*" }, "bin": { "deepkit-type-install": "deepkit-type-install.js", "deepkit-compiler-debug": "deepkit-compiler-debug.js" } }, "sha512-qYrZPkEg2wYPVcv+VNFLv7RtKDphzkGI8AQOn4wNS1BoOVBBMhoylc98NDPZ14hW5QIcBGXlzlnoXmMzwz1Q5A=="],
+    "@deepkit/type-compiler": ["@deepkit/type-compiler@1.0.5", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1", "@marcj/ts-clone-node": "^2.0.0", "@rollup/pluginutils": "^5.1.0", "@typescript/vfs": "1.5.0", "get-tsconfig": "^4.5.0", "lz-string": "^1.4.4", "micromatch": "^4.0.5", "strip-json-comments": "^3.1.1" }, "peerDependencies": { "typescript": "*" }, "bin": { "deepkit-compiler-debug": "deepkit-compiler-debug.js", "deepkit-type-install": "deepkit-type-install.js" } }, "sha512-KiKvy/CmB4hVWKLqJonLGHW0BUKYzcuzUvhd746SLbu5jvvvuF4mnwzAKeIk3rdNojimLzURVkJyqM7CryJtug=="],
 
     "@deepkit/type-spec": ["@deepkit/type-spec@1.0.1", "", {}, "sha512-14iJbtfGdjewxhzSWTU+nxQOD+sopFg8MP0W0kizJQMRADxhreDID8lDUk6zWoAJ6aLsQ1QbKZAl1UokzRI69A=="],
 
