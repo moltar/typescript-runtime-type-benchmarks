@@ -71,7 +71,7 @@
         "ts-runtime-checks": "0.6.3",
         "type-predicate-generator": "1.0.3",
         "typescript": "5.8.3",
-        "typia": "8.1.1",
+        "typia": "9.1.1",
         "undici": "7.8.0",
         "unknownutil": "3.18.1",
         "valibot": "1.0.0",
@@ -473,7 +473,7 @@
 
     "@rollup/rollup-win32-x64-msvc": ["@rollup/rollup-win32-x64-msvc@4.39.0", "", { "os": "win32", "cpu": "x64" }, "sha512-yAkUOkIKZlK5dl7u6dg897doBgLXmUHhIINM2c+sND3DZwnrdQkkSiDh7N75Ll4mM4dxSkYfXqU9fW3lLkMFug=="],
 
-    "@samchon/openapi": ["@samchon/openapi@3.3.0", "", {}, "sha512-f8HMS0PVAKTGR0TwgiBX4PKlZRPfdtH5fJbtpUth3fMUZmikjZ7CBey8gX7HZgY4n/aYHyNQKcf/W/E2267oYw=="],
+    "@samchon/openapi": ["@samchon/openapi@4.0.0", "", {}, "sha512-fzji+KTrLqb3rD6RZID7N1cTN7aDwd0KAq0fP4rl2p1dHEy3uybqS7bP9BjMWP10k0DvFaS+P+g8+a/PA0FyZw=="],
 
     "@sapphire/shapeshift": ["@sapphire/shapeshift@3.9.7", "", { "dependencies": { "fast-deep-equal": "^3.1.3", "lodash": "^4.17.21" } }, "sha512-4It2mxPSr4OGn4HSQWGmhFMsNFGfFVhWeRPCRwbH972Ek2pzfGRZtb0pJ4Ze6oIzcyh2jw7nUDa6qGlWofgd9g=="],
 
@@ -1551,7 +1551,7 @@
 
     "typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
 
-    "typia": ["typia@8.1.1", "", { "dependencies": { "@samchon/openapi": "^3.2.2", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.9.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-R8iLPX52/tY/C/Ff7RhSsiV56JR21jLKbt1CShlrhKIJ6xoGejbXq8+y9RR/vLOo5WmZXi88yb2/zDHWyms2BQ=="],
+    "typia": ["typia@9.1.1", "", { "dependencies": { "@samchon/openapi": "^4.0.0", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.9.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-fMgrd2VLGZoDjZZwWlgriotUiG38UEzcMD0ToJOhQ0bPr966mit0ZEy5TnDhm2RidXfejZOqHb7iOoTG3VHd4w=="],
 
     "typical": ["typical@7.3.0", "", {}, "sha512-ya4mg/30vm+DOWfBg4YK3j2WD6TWtRkCbasOJr40CseYENzCUby/7rIvXA99JGsQHeNxLbnXdyLLxKSv3tauFw=="],
 
