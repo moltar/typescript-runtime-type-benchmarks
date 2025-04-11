@@ -54,6 +54,7 @@ export const cases = [
   'vality',
   'yup',
   'zod',
+  'zod4',
   'deepkit',
   'effect-schema',
   'ts-auto-guard',

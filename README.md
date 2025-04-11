@@ -68,7 +68,8 @@
 * [valita](https://github.com/badrap/valita)
 * [Vality](https://github.com/jeengbe/vality)
 * [yup](https://github.com/jquense/yup)
-* [zod](https://github.com/vriad/zod)
+* [zod](https://github.com/colinhacks/zod)
+* [zod (v4)](https://github.com/colinhacks/zod/tree/v4)
 
 ## Criteria
 
