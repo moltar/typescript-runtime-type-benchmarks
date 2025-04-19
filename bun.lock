@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -69,7 +69,7 @@
         "ts-json-validator": "0.7.1",
         "ts-node": "10.9.2",
         "ts-runtime-checks": "0.6.3",
-        "type-predicate-generator": "1.0.3",
+        "type-predicate-generator": "1.0.4",
         "typescript": "5.8.3",
         "typia": "9.1.1",
         "undici": "7.8.0",
@@ -1554,7 +1554,7 @@
 
     "type-fest": ["type-fest@4.30.0", "", {}, "sha512-G6zXWS1dLj6eagy6sVhOMQiLtJdxQBHIA9Z6HFUNLOlr6MFOgzV8wvmidtPONfPtEUv0uZsy77XJNzTAfwPDaA=="],
 
-    "type-predicate-generator": ["type-predicate-generator@1.0.3", "", { "dependencies": { "command-line-args": "^6.0.1", "typescript": ">=5.7.0 <5.8.0" }, "bin": { "type-predicate-generator": "dist/cli.js" } }, "sha512-rw+Z4963HQlNgVpe05vXP8AQuy45JqV8pzR/ARglDLD9VNj6yEGksr2MmHqhcJoRy6nt0kUsvH1NwSmFd7Uu6Q=="],
+    "type-predicate-generator": ["type-predicate-generator@1.0.4", "", { "dependencies": { "command-line-args": "^6.0.1", "typescript": ">=5.7.0 <5.8.0" }, "bin": { "type-predicate-generator": "dist/cli.js" } }, "sha512-uzLbDge84er1w0RQHAoeRoP/JXPmTjDzoDo6F7rWQ7FrKbNem/eWmUvvPwBFzYJ/5tXBMEFxIPTmeWEeHJvIcQ=="],
 
     "typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
 
