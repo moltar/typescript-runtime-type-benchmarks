@@ -28,7 +28,7 @@ import '../cases/paseri';
 import '../cases/pure-parse';
 import '../cases/purify-ts';
 import '../cases/r-assign';
-import '../cases/rescript-schema';
+import '../cases/sury';
 import '../cases/rulr';
 import '../cases/runtypes';
 import '../cases/sapphire-shapeshift';

@@ -1,4 +1,4 @@
-import * as S from 'rescript-schema';
+import * as S from 'sury';
 
 import { createCase } from '../benchmarks';
 
@@ -20,21 +20,21 @@ const schema = S.schema({
   },
 });
 
-createCase('rescript-schema', 'parseSafe', () => {
+createCase('sury', 'parseSafe', () => {
   const parseSafe = S.compile(schema, 'Any', 'Output', 'Sync');
   return data => {
     return parseSafe(data);
   };
 });
 
-createCase('rescript-schema', 'parseStrict', () => {
+createCase('sury', 'parseStrict', () => {
   const parseStrict = S.compile(S.deepStrict(schema), 'Any', 'Output', 'Sync');
   return data => {
     return parseStrict(data);
   };
 });
 
-createCase('rescript-schema', 'assertLoose', () => {
+createCase('sury', 'assertLoose', () => {
   const assertLoose = S.compile(schema, 'Any', 'Assert', 'Sync');
   return data => {
     assertLoose(data)!;
@@ -42,7 +42,7 @@ createCase('rescript-schema', 'assertLoose', () => {
   };
 });
 
-createCase('rescript-schema', 'assertStrict', () => {
+createCase('sury', 'assertStrict', () => {
   const assertStrict = S.compile(S.deepStrict(schema), 'Any', 'Assert', 'Sync');
   return data => {
     assertStrict(data)!;
