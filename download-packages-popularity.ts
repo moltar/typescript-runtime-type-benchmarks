@@ -87,7 +87,7 @@ export const packages = [
     packageName: 'r-assign',
   },
   {
-    name: 'rescript-schema',
+    name: 'sury',
     packageName: 'rescript-schema',
   },
   {
