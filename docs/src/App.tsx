@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, type ComponentChildren } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
@@ -510,7 +509,7 @@ function BenchmarkDescription(props: {
 }
 
 export class App extends Component<
-  {},
+  unknown,
   {
     selectedBenchmarks: { [key: string]: boolean };
     selectedNodeJsVersions: { [key: string]: boolean };
