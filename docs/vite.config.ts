@@ -3,6 +3,6 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   // base dir for gh-pages
-  base: 'typescript-runtime-time-benchmarks/',
+  base: 'typescript-runtime-type-benchmarks/',
   plugins: [preact()],
 });
