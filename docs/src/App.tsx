@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, type ComponentChildren, h } from 'preact';
+import { Component, type ComponentChildren } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
 
@@ -411,7 +411,7 @@ class Graph extends Component<
   },
   { svg?: string }
 > {
-  prevProps: typeof this.props;
+  prevProps!: typeof this.props;
 
   async createGraph() {
     if (this.prevProps === this.props) {
@@ -486,7 +486,7 @@ function Checkbox(props: {
 
 function BenchmarkDescription(props: {
   name: string;
-  color: string;
+  color: string | undefined;
   children?: ComponentChildren;
 }) {
   return (
@@ -494,7 +494,7 @@ function BenchmarkDescription(props: {
       <h4>
         <span
           style={{
-            backgroundColor: props.color,
+            backgroundColor: props.color ?? 'pink',
             display: 'inline-block',
             width: '2rem',
             marginRight: '0.5rem',
@@ -522,19 +522,22 @@ export class App extends Component<
     sortBy: 'fastest' | 'alphabetically' | 'popularity';
   }
 > {
-  state = {
-    selectedBenchmarks: BENCHMARKS.reduce(
-      (acc, b) => ({ ...acc, [b.name]: true }),
-      {}
-    ),
-    selectedNodeJsVersions: {},
-    selectedBunVersions: {},
-    selectedDenoVersions: {},
-    valuesNodeJs: [],
-    valuesBun: [],
-    valuesDeno: [],
-    sortBy: 'fastest' as const,
-  };
+  constructor() {
+    super();
+    this.setState({
+      selectedBenchmarks: BENCHMARKS.reduce(
+        (acc, b) => ({ ...acc, [b.name]: true }),
+        {}
+      ),
+      selectedNodeJsVersions: {},
+      selectedBunVersions: {},
+      selectedDenoVersions: {},
+      valuesNodeJs: [],
+      valuesBun: [],
+      valuesDeno: [],
+      sortBy: 'fastest' as const,
+    });
+  }
 
   getNodeJsVersions() {
     const versionsSet = new Set(
@@ -835,7 +838,7 @@ export class App extends Component<
         <div>
           <BenchmarkDescription
             name="Safe Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseSafe').color}
+            color={BENCHMARKS.find(x => x.name === 'parseSafe')?.color}
           >
             <p>
               Check the input object against a schema and return it.
@@ -851,7 +854,7 @@ export class App extends Component<
 
           <BenchmarkDescription
             name="Strict Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseStrict').color}
+            color={BENCHMARKS.find(x => x.name === 'parseStrict')?.color}
           >
             <p>
               Like safe parsing but raise an error if input objects contain
@@ -861,7 +864,7 @@ export class App extends Component<
 
           <BenchmarkDescription
             name="Loose Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertLoose').color}
+            color={BENCHMARKS.find(x => x.name === 'assertLoose')?.color}
           >
             <p>
               Check the input object against a schema and raise an exception if
@@ -873,7 +876,7 @@ export class App extends Component<
 
           <BenchmarkDescription
             name="Strict Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertStrict').color}
+            color={BENCHMARKS.find(x => x.name === 'assertStrict')?.color}
           >
             <p>
               Like loose assertion but raise an error if input objects or nested
