@@ -582,7 +582,9 @@ export class App extends Component<
   }
 
   async componentDidMount() {
-    await loadPackagesPopularity();
+    loadPackagesPopularity().catch(err => {
+      console.error(`error while loading package popularity`, err);
+    });
 
     NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)

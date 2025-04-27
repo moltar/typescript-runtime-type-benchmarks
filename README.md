@@ -132,10 +132,13 @@ It is deployed via github pages whenever something has been pushed to the main b
 ```sh
 cd docs
 
-npm run dev     # develop
+npm run dev     # develop / view results
 npm run build   # build
 npm run preview # preview the build
 ```
+
+When viewing results locally, you need to restart the app whenever the results
+are updated.
 
 #### Linting
 
