@@ -1,0 +1,24 @@
+{
+  "name": "typescript-runtime-type-benchmarks-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "preact": "^10.26.5",
+    "vega": "^5.30.0",
+    "vega-lite": "^5.21.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.9.3",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.1"
+  }
+}

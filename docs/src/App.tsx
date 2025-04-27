@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, type ComponentChildren, h, render } from 'preact';
+import { Component, type ComponentChildren, h } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
 
@@ -113,7 +113,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
     normalized.push(...results);
 
     const missingBenchmarks = BENCHMARKS.map(b => b.name).filter(
-      n => !results.find(r => r.benchmark === n),
+      n => !results.find(r => r.benchmark === n)
     );
 
     missingBenchmarks.forEach(benchmark => {
@@ -209,7 +209,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedNodeJsVersionsSet.has(b.runtimeVersion),
+        selectedNodeJsVersionsSet.has(b.runtimeVersion)
     )
     .map(b => ({
       ...b,
@@ -229,7 +229,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedBunVersionsSet.has(b.runtimeVersion),
+        selectedBunVersionsSet.has(b.runtimeVersion)
     )
     .map(b => ({
       ...b,
@@ -240,7 +240,7 @@ async function graph({
         runtimesOrder.BUN,
         BENCHMARKS_ORDER[b.benchmark],
         BUN_VERSIONS.indexOf(
-          getBunMajorAndMinorVersionNumber(b.runtimeVersion),
+          getBunMajorAndMinorVersionNumber(b.runtimeVersion)
         ),
         b.runtimeVersion,
         b.benchmark,
@@ -251,7 +251,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedDenoVersionsSet.has(b.runtimeVersion),
+        selectedDenoVersionsSet.has(b.runtimeVersion)
     )
     .map(b => ({
       ...b,
@@ -299,11 +299,11 @@ async function graph({
 
   if (sort === 'fastest' || !sort) {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
-      (a, b) => b.ops - a.ops,
+      (a, b) => b.ops - a.ops
     );
   } else if (sort === 'alphabetically') {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
-      (a, b) => (a.name < b.name ? -1 : 1),
+      (a, b) => (a.name < b.name ? -1 : 1)
     );
   } else if (sort === 'popularity') {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
@@ -312,7 +312,7 @@ async function graph({
         const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
 
         return bPopularity - aPopularity;
-      },
+      }
     );
   }
 
@@ -509,7 +509,7 @@ function BenchmarkDescription(props: {
   );
 }
 
-class App extends Component<
+export class App extends Component<
   {},
   {
     selectedBenchmarks: { [key: string]: boolean };
@@ -525,7 +525,7 @@ class App extends Component<
   state = {
     selectedBenchmarks: BENCHMARKS.reduce(
       (acc, b) => ({ ...acc, [b.name]: true }),
-      {},
+      {}
     ),
     selectedNodeJsVersions: {},
     selectedBunVersions: {},
@@ -541,7 +541,7 @@ class App extends Component<
       this.state.valuesNodeJs
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1)),
+        .sort((a, b) => (a < b ? 1 : -1))
     );
     const res: string[] = [];
 
@@ -555,7 +555,7 @@ class App extends Component<
       this.state.valuesBun
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1)),
+        .sort((a, b) => (a < b ? 1 : -1))
     );
     const res: string[] = [];
 
@@ -569,7 +569,7 @@ class App extends Component<
       this.state.valuesDeno
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1)),
+        .sort((a, b) => (a < b ? 1 : -1))
     );
     const res: string[] = [];
 
@@ -812,7 +812,7 @@ class App extends Component<
 
         <Graph
           benchmarks={BENCHMARKS.filter(
-            b => this.state.selectedBenchmarks[b.name],
+            b => this.state.selectedBenchmarks[b.name]
           )}
           nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
             .sort()
@@ -885,5 +885,3 @@ class App extends Component<
     );
   }
 }
-
-render(<App />, document.body);

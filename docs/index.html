@@ -1,33 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Benchmark Comparison of Packages with Runtime Validation and TypeScript Support.">
-        <meta name="color-scheme" content="dark light">
-
-        <title>Runtype Benchmarks</title>
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
-        <style>
-            @media (prefers-color-scheme:dark) {
-              /* fix vega graph labels in dark mode */
-              svg .mark-text text {
-                fill: white;
-              }
-            }
-            </style>
-    </head>
-    <body>
-        <script src="https://unpkg.com/samd@0/dist/samd.js" crossorigin></script>
-        <script src="https://unpkg.com/vega@5.19" crossorigin></script>
-        <script src="https://unpkg.com/vega-lite@4.11" crossorigin></script>
-        <script src="https://unpkg.com/preact@10" crossorigin></script>
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <script src="dist/app.js"></script>
-        <script>
-            define('preact', () => preact)
-            require(['app']);
-        </script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Benchmark Comparison of Packages with Runtime Validation and TypeScript Support."
+    />
+    <meta name="color-scheme" content="dark light" />
+    <title>Runtype Benchmarks</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css"
+    />
+    <style>
+      @media (prefers-color-scheme: dark) {
+        /* fix vega graph labels in dark mode */
+        svg .mark-text text {
+          fill: white;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
