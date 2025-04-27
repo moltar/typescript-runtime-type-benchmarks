@@ -137,8 +137,8 @@ npm run build   # build
 npm run preview # preview the build
 ```
 
-When viewing results locally, you need to restart the app whenever the results
-are updated.
+When viewing results locally, you will need to restart the app whenever the
+results are updated.
 
 #### Linting
 

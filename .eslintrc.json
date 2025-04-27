@@ -6,6 +6,7 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
+  "ignorePatterns": ["docs/"],
   "rules": {
     "node/no-unpublished-import": "off",
     "@typescript-eslint/consistent-type-imports": [
@@ -17,13 +18,5 @@
     ],
     "@typescript-eslint/consistent-type-exports": "error",
     "@typescript-eslint/no-import-type-side-effects": "error"
-  },
-  "overrides": [
-    {
-      "files": ["docs/**/*.tsx"],
-      "parserOptions": {
-        "project": "./tsconfig.docs.json"
-      }
-    }
-  ]
+  }
 }
