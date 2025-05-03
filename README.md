@@ -124,11 +124,21 @@ const res = isMyDataValid(data)
 * `npm run test` - run build process and tests for all modules
 * `npm run test:build` - run build process for all modules
 
-#### Docs
+#### Benchmark Viewer
 
-* `npm run docs:serve` - result viewer
-* `npm run docs:build` - build docs
-* `npm run docs:watch` - watch docs for changes and rebuild
+A basic preact+vite app lives in [`/docs`](/docs).
+It is deployed via github pages whenever something has been pushed to the main branch.
+
+```sh
+cd docs
+
+npm run dev     # develop / view results
+npm run build   # build
+npm run preview # preview the build
+```
+
+When viewing results locally, you will need to restart the app whenever the
+results are updated.
 
 #### Linting
 
@@ -163,18 +173,18 @@ const res = isMyDataValid(data)
 ### Node.js runtime
 
 * update Node.js version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
-* update `NODE_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
+* update `NODE_VERSIONS` in `docs/src/App.tsx`
 * optionally set `NODE_VERSION_FOR_PREVIEW` in `benchmarks/helpers/main.ts`
 
 ### Bun runtime
 
 * update bun version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
-* update `BUN_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
+* update `BUN_VERSIONS` in `docs/src/App.tsx`
 
 ### Deno runtime
 
 * update Deno version matrix in `.github/workflows/pr.yml` and `.github/workflows/release.yml`
-* update `DENO_VERSIONS` in `docs/dist/app.tsx` and run `npm run docs:build`
+* update `DENO_VERSIONS` in `docs/src/App.tsx`
 
 ## Test cases
 

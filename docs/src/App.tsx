@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, type ComponentChildren, h, render } from 'preact';
+import { Component, type ComponentChildren } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
 
@@ -113,7 +112,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
     normalized.push(...results);
 
     const missingBenchmarks = BENCHMARKS.map(b => b.name).filter(
-      n => !results.find(r => r.benchmark === n),
+      n => !results.find(r => r.benchmark === n)
     );
 
     missingBenchmarks.forEach(benchmark => {
@@ -209,7 +208,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedNodeJsVersionsSet.has(b.runtimeVersion),
+        selectedNodeJsVersionsSet.has(b.runtimeVersion)
     )
     .map(b => ({
       ...b,
@@ -229,7 +228,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedBunVersionsSet.has(b.runtimeVersion),
+        selectedBunVersionsSet.has(b.runtimeVersion)
     )
     .map(b => ({
       ...b,
@@ -240,7 +239,7 @@ async function graph({
         runtimesOrder.BUN,
         BENCHMARKS_ORDER[b.benchmark],
         BUN_VERSIONS.indexOf(
-          getBunMajorAndMinorVersionNumber(b.runtimeVersion),
+          getBunMajorAndMinorVersionNumber(b.runtimeVersion)
         ),
         b.runtimeVersion,
         b.benchmark,
@@ -251,7 +250,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedDenoVersionsSet.has(b.runtimeVersion),
+        selectedDenoVersionsSet.has(b.runtimeVersion)
     )
     .map(b => ({
       ...b,
@@ -299,11 +298,11 @@ async function graph({
 
   if (sort === 'fastest' || !sort) {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
-      (a, b) => b.ops - a.ops,
+      (a, b) => b.ops - a.ops
     );
   } else if (sort === 'alphabetically') {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
-      (a, b) => (a.name < b.name ? -1 : 1),
+      (a, b) => (a.name < b.name ? -1 : 1)
     );
   } else if (sort === 'popularity') {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
@@ -312,7 +311,7 @@ async function graph({
         const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
 
         return bPopularity - aPopularity;
-      },
+      }
     );
   }
 
@@ -411,7 +410,7 @@ class Graph extends Component<
   },
   { svg?: string }
 > {
-  prevProps: typeof this.props;
+  prevProps!: typeof this.props;
 
   async createGraph() {
     if (this.prevProps === this.props) {
@@ -486,7 +485,7 @@ function Checkbox(props: {
 
 function BenchmarkDescription(props: {
   name: string;
-  color: string;
+  color: string | undefined;
   children?: ComponentChildren;
 }) {
   return (
@@ -494,7 +493,7 @@ function BenchmarkDescription(props: {
       <h4>
         <span
           style={{
-            backgroundColor: props.color,
+            backgroundColor: props.color ?? 'pink',
             display: 'inline-block',
             width: '2rem',
             marginRight: '0.5rem',
@@ -509,8 +508,8 @@ function BenchmarkDescription(props: {
   );
 }
 
-class App extends Component<
-  {},
+export class App extends Component<
+  unknown,
   {
     selectedBenchmarks: { [key: string]: boolean };
     selectedNodeJsVersions: { [key: string]: boolean };
@@ -522,26 +521,29 @@ class App extends Component<
     sortBy: 'fastest' | 'alphabetically' | 'popularity';
   }
 > {
-  state = {
-    selectedBenchmarks: BENCHMARKS.reduce(
-      (acc, b) => ({ ...acc, [b.name]: true }),
-      {},
-    ),
-    selectedNodeJsVersions: {},
-    selectedBunVersions: {},
-    selectedDenoVersions: {},
-    valuesNodeJs: [],
-    valuesBun: [],
-    valuesDeno: [],
-    sortBy: 'fastest' as const,
-  };
+  constructor() {
+    super();
+    this.setState({
+      selectedBenchmarks: BENCHMARKS.reduce(
+        (acc, b) => ({ ...acc, [b.name]: true }),
+        {}
+      ),
+      selectedNodeJsVersions: {},
+      selectedBunVersions: {},
+      selectedDenoVersions: {},
+      valuesNodeJs: [],
+      valuesBun: [],
+      valuesDeno: [],
+      sortBy: 'fastest' as const,
+    });
+  }
 
   getNodeJsVersions() {
     const versionsSet = new Set(
       this.state.valuesNodeJs
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1)),
+        .sort((a, b) => (a < b ? 1 : -1))
     );
     const res: string[] = [];
 
@@ -555,7 +557,7 @@ class App extends Component<
       this.state.valuesBun
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1)),
+        .sort((a, b) => (a < b ? 1 : -1))
     );
     const res: string[] = [];
 
@@ -569,7 +571,7 @@ class App extends Component<
       this.state.valuesDeno
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1)),
+        .sort((a, b) => (a < b ? 1 : -1))
     );
     const res: string[] = [];
 
@@ -579,7 +581,9 @@ class App extends Component<
   }
 
   async componentDidMount() {
-    await loadPackagesPopularity();
+    loadPackagesPopularity().catch(err => {
+      console.error(`error while loading package popularity`, err);
+    });
 
     NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)
@@ -812,7 +816,7 @@ class App extends Component<
 
         <Graph
           benchmarks={BENCHMARKS.filter(
-            b => this.state.selectedBenchmarks[b.name],
+            b => this.state.selectedBenchmarks[b.name]
           )}
           nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
             .sort()
@@ -835,7 +839,7 @@ class App extends Component<
         <div>
           <BenchmarkDescription
             name="Safe Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseSafe').color}
+            color={BENCHMARKS.find(x => x.name === 'parseSafe')?.color}
           >
             <p>
               Check the input object against a schema and return it.
@@ -851,7 +855,7 @@ class App extends Component<
 
           <BenchmarkDescription
             name="Strict Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseStrict').color}
+            color={BENCHMARKS.find(x => x.name === 'parseStrict')?.color}
           >
             <p>
               Like safe parsing but raise an error if input objects contain
@@ -861,7 +865,7 @@ class App extends Component<
 
           <BenchmarkDescription
             name="Loose Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertLoose').color}
+            color={BENCHMARKS.find(x => x.name === 'assertLoose')?.color}
           >
             <p>
               Check the input object against a schema and raise an exception if
@@ -873,7 +877,7 @@ class App extends Component<
 
           <BenchmarkDescription
             name="Strict Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertStrict').color}
+            color={BENCHMARKS.find(x => x.name === 'assertStrict')?.color}
           >
             <p>
               Like loose assertion but raise an error if input objects or nested
@@ -885,5 +889,3 @@ class App extends Component<
     );
   }
 }
-
-render(<App />, document.body);
