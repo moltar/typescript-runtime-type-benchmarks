@@ -126,7 +126,7 @@ const res = isMyDataValid(data)
 
 #### Benchmark Viewer
 
-A basic preact+vite app lives in [`/docs`](/tree/master/docs).
+A basic preact+vite app lives in [`/docs`](/docs).
 It is deployed via github pages whenever something has been pushed to the main branch.
 
 ```sh
