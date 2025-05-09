@@ -29,13 +29,11 @@ jobs:
         #  - NODE_VERSIONS in app.tsx
         #  - NODE_VERSION_FOR_PREVIEW in main.ts
         node-version:
-          - 16.x
-          - 18.x
-          - 19.x
           - 20.x
           - 21.x
           - 22.x
           - 23.x
+          - 24.x
 
     steps:
       - uses: actions/checkout@v4
