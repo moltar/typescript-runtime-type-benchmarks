@@ -6,7 +6,7 @@ import * as vegaLite from 'vega-lite';
 // the first is selected automatically
 const NODE_VERSIONS = [23, 22, 21, 20, 19, 18, 16];
 
-const BUN_VERSIONS = [1.2];
+const BUN_VERSIONS = [1.2, 1.1];
 
 const DENO_VERSIONS = [2];
 
