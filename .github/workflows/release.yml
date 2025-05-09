@@ -92,8 +92,7 @@ jobs:
       max-parallel: 1
       matrix:
         bun-version:
-            - 1.1.43
-            - 1.2.2
+            - 1.2.12
 
     steps:
       - uses: actions/checkout@v4
