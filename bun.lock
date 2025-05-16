@@ -70,7 +70,7 @@
         "ts-runtime-checks": "0.6.3",
         "type-predicate-generator": "1.0.4",
         "typescript": "5.8.3",
-        "typia": "9.1.1",
+        "typia": "9.3.0",
         "undici": "7.9.0",
         "unknownutil": "3.18.1",
         "valibot": "1.0.0",
@@ -471,7 +471,7 @@
 
     "@rollup/rollup-win32-x64-msvc": ["@rollup/rollup-win32-x64-msvc@4.40.1", "", { "os": "win32", "cpu": "x64" }, "sha512-ECyOuDeH3C1I8jH2MK1RtBJW+YPMvSfT0a5NN0nHfQYnDSJ6tUiZH3gzwVP5/Kfh/+Tt7tpWVF9LXNTnhTJ3kA=="],
 
-    "@samchon/openapi": ["@samchon/openapi@4.2.0", "", {}, "sha512-OIgKBbUtWf0bcv3PRGwm1CbOeZsVC8qGE0H7xXEtUwqbin9O3czhWf9jxP90GGEw55joNJyV2fXZ3eWBm45O5g=="],
+    "@samchon/openapi": ["@samchon/openapi@4.3.0", "", {}, "sha512-PdagymZCUCPmhtfriO+6xYRulds2hgo1ec0LduPFEAOWkZ4viM15iRuEa5wkm9DkDRF/oaMiC+dOgXefmOFZAA=="],
 
     "@sapphire/shapeshift": ["@sapphire/shapeshift@3.9.7", "", { "dependencies": { "fast-deep-equal": "^3.1.3", "lodash": "^4.17.21" } }, "sha512-4It2mxPSr4OGn4HSQWGmhFMsNFGfFVhWeRPCRwbH972Ek2pzfGRZtb0pJ4Ze6oIzcyh2jw7nUDa6qGlWofgd9g=="],
 
@@ -1497,7 +1497,7 @@
 
     "typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
 
-    "typia": ["typia@9.1.1", "", { "dependencies": { "@samchon/openapi": "^4.0.0", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.9.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-fMgrd2VLGZoDjZZwWlgriotUiG38UEzcMD0ToJOhQ0bPr966mit0ZEy5TnDhm2RidXfejZOqHb7iOoTG3VHd4w=="],
+    "typia": ["typia@9.3.0", "", { "dependencies": { "@samchon/openapi": "^4.3.0", "@standard-schema/spec": "^1.0.0", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.9.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-srQSYteGIrMiM36y/8MfqrCYA2RWyk4Bb7Xrlk3Ywfpc7AmmzcxwZkPuC4xOkI1IwRfjkhM7k4wviRb6WtW46g=="],
 
     "typical": ["typical@7.3.0", "", {}, "sha512-ya4mg/30vm+DOWfBg4YK3j2WD6TWtRkCbasOJr40CseYENzCUby/7rIvXA99JGsQHeNxLbnXdyLLxKSv3tauFw=="],
 
