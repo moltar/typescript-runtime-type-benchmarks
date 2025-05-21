@@ -51,6 +51,7 @@
 * [succulent](https://github.com/aslilac/succulent)
 * [superstruct](https://github.com/ianstormtaylor/superstruct)
 * [suretype](https://github.com/grantila/suretype)
+* [sury](https://github.com/DZakh/sury)
 * [tiny-schema-validator](https://github.com/5alidz/tiny-schema-validator)
 * [to-typed](https://github.com/jsoldi/to-typed)
 * [toi](https://github.com/hf/toi)

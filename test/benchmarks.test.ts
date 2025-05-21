@@ -43,6 +43,7 @@ import '../cases/stnl';
 import '../cases/succulent';
 import '../cases/superstruct';
 import '../cases/suretype';
+import '../cases/sury';
 import '../cases/to-typed';
 import '../cases/toi';
 import '../cases/ts-interface-checker';

@@ -135,6 +135,10 @@ export const packages = [
     packageName: 'suretype',
   },
   {
+    name: 'sury',
+    packageName: 'sury',
+  },
+  {
     name: 'tiny-schema-validator',
     packageName: 'tiny-schema-validator',
   },
