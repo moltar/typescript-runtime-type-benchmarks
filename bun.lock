@@ -8,7 +8,7 @@
         "@ailabs/ts-utils": "1.4.0",
         "@badrap/valita": "0.4.5",
         "@deepkit/core": "1.0.5",
-        "@deepkit/type": "1.0.5",
+        "@deepkit/type": "1.0.8",
         "@deepkit/type-compiler": "1.0.5",
         "@effect/schema": "0.75.5",
         "@mojotech/json-type-validation": "3.1.0",
@@ -320,7 +320,7 @@
 
     "@deepkit/core": ["@deepkit/core@1.0.5", "", { "dependencies": { "dot-prop": "^5.1.1", "to-fast-properties": "^3.0.1" } }, "sha512-1N+HuDEV7BOiF1KFg5JwMtgPCtxR1KPLIut645o98sUcnQzJP0ywvgyqpfqV+D9IK7TGBGxQDhbUSQlBG34pTg=="],
 
-    "@deepkit/type": ["@deepkit/type@1.0.5", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1", "@types/uuid": "^8.3.0", "buffer": "^5.2.1", "uuid": "^8.3.2" }, "peerDependencies": { "@deepkit/core": "^1.0.1" } }, "sha512-vZZf5KBz2BMxnRaW8dGr1kXFFMYoaQjDgeqTBKoioX3VgCtjFEnIog6w8Gh8tmEdfdiiKCCZr/h4D158R9BGyw=="],
+    "@deepkit/type": ["@deepkit/type@1.0.8", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1", "@types/uuid": "^8.3.0", "buffer": "^5.2.1", "uuid": "^8.3.2" }, "peerDependencies": { "@deepkit/core": "^1.0.1" } }, "sha512-oL9qHSl7fVtRAp94jxIRhfhN81t2RddOeQWBykyJF2K2ElMNAdKmf67e2i8xwtuqlWcDxZSnJC8HZHHFaSgVFg=="],
 
     "@deepkit/type-compiler": ["@deepkit/type-compiler@1.0.5", "", { "dependencies": { "@deepkit/type-spec": "^1.0.1", "@marcj/ts-clone-node": "^2.0.0", "@rollup/pluginutils": "^5.1.0", "@typescript/vfs": "1.5.0", "get-tsconfig": "^4.5.0", "lz-string": "^1.4.4", "micromatch": "^4.0.5", "strip-json-comments": "^3.1.1" }, "peerDependencies": { "typescript": "*" }, "bin": { "deepkit-compiler-debug": "deepkit-compiler-debug.js", "deepkit-type-install": "deepkit-type-install.js" } }, "sha512-KiKvy/CmB4hVWKLqJonLGHW0BUKYzcuzUvhd746SLbu5jvvvuF4mnwzAKeIk3rdNojimLzURVkJyqM7CryJtug=="],
 
