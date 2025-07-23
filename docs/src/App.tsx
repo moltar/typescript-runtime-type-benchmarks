@@ -112,7 +112,7 @@ function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
     normalized.push(...results);
 
     const missingBenchmarks = BENCHMARKS.map(b => b.name).filter(
-      n => !results.find(r => r.benchmark === n)
+      n => !results.find(r => r.benchmark === n),
     );
 
     missingBenchmarks.forEach(benchmark => {
@@ -208,7 +208,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedNodeJsVersionsSet.has(b.runtimeVersion)
+        selectedNodeJsVersionsSet.has(b.runtimeVersion),
     )
     .map(b => ({
       ...b,
@@ -228,7 +228,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedBunVersionsSet.has(b.runtimeVersion)
+        selectedBunVersionsSet.has(b.runtimeVersion),
     )
     .map(b => ({
       ...b,
@@ -239,7 +239,7 @@ async function graph({
         runtimesOrder.BUN,
         BENCHMARKS_ORDER[b.benchmark],
         BUN_VERSIONS.indexOf(
-          getBunMajorAndMinorVersionNumber(b.runtimeVersion)
+          getBunMajorAndMinorVersionNumber(b.runtimeVersion),
         ),
         b.runtimeVersion,
         b.benchmark,
@@ -250,7 +250,7 @@ async function graph({
     .filter(
       b =>
         selectedBenchmarkSet.has(b.benchmark) &&
-        selectedDenoVersionsSet.has(b.runtimeVersion)
+        selectedDenoVersionsSet.has(b.runtimeVersion),
     )
     .map(b => ({
       ...b,
@@ -298,11 +298,11 @@ async function graph({
 
   if (sort === 'fastest' || !sort) {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
-      (a, b) => b.ops - a.ops
+      (a, b) => b.ops - a.ops,
     );
   } else if (sort === 'alphabetically') {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
-      (a, b) => (a.name < b.name ? -1 : 1)
+      (a, b) => (a.name < b.name ? -1 : 1),
     );
   } else if (sort === 'popularity') {
     sortedValues = [...valuesNodejs, ...valuesBun, ...valuesDeno].sort(
@@ -311,18 +311,65 @@ async function graph({
         const bPopularity = PACKAGES_POPULARITY[b.name] || 0;
 
         return bPopularity - aPopularity;
-      }
+      },
     );
   }
 
   // remove duplicates not sure whether vega-lite can handle that
   const sortedNames: string[] = [];
+  const sortedNamesWithRank: string[] = [];
 
   new Set(sortedValues.map(b => b.name)).forEach(n => sortedNames.push(n));
 
+  // Calculate average ops for ranking when multiple benchmarks are selected
+  const rankingScores: { [name: string]: number } = {};
+
+  sortedNames.forEach(name => {
+    const libraryResults = sortedValues.filter(v => v.name === name);
+    if (libraryResults.length > 0) {
+      const avgOps =
+        libraryResults.reduce((sum, result) => sum + result.ops, 0) /
+        libraryResults.length;
+      rankingScores[name] = avgOps;
+    }
+  });
+
+  // Sort by ranking score and create names with rank numbers
+  const rankedNames = sortedNames.sort((a, b) => {
+    if (sort === 'fastest' || !sort) {
+      return rankingScores[b] - rankingScores[a]; // Descending for fastest
+    } else if (sort === 'alphabetically') {
+      return a.localeCompare(b); // Alphabetical
+    } else if (sort === 'popularity') {
+      const aPopularity = PACKAGES_POPULARITY[a] || 0;
+      const bPopularity = PACKAGES_POPULARITY[b] || 0;
+      return bPopularity - aPopularity; // Descending for popularity
+    }
+    return 0;
+  });
+
+  rankedNames.forEach((name, index) => {
+    const rank = index + 1;
+    const rankPrefix = `#${rank} `;
+    sortedNamesWithRank.push(rankPrefix + name);
+  });
+
+  // Update the values to include rank in the name for display
+  const valuesWithRank = [...valuesNodejs, ...valuesBun, ...valuesDeno].map(
+    value => {
+      const rankIndex = rankedNames.indexOf(value.name);
+      const rank = rankIndex + 1;
+      const rankPrefix = `#${rank} `;
+      return {
+        ...value,
+        name: rankPrefix + value.name,
+      };
+    },
+  );
+
   const vegaSpec = vegaLite.compile({
     data: {
-      values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
+      values: valuesWithRank,
     },
     height: {
       step: 15 / (nodeJsVersionCount + bunVersionCount + denoVersionCount),
@@ -339,7 +386,7 @@ async function graph({
           labelAlign: 'left',
           labelFontSize: 12,
         },
-        sort: sortedNames,
+        sort: sortedNamesWithRank,
       },
     },
     spec: {
@@ -526,7 +573,7 @@ export class App extends Component<
     this.setState({
       selectedBenchmarks: BENCHMARKS.reduce(
         (acc, b) => ({ ...acc, [b.name]: true }),
-        {}
+        {},
       ),
       selectedNodeJsVersions: {},
       selectedBunVersions: {},
@@ -543,7 +590,7 @@ export class App extends Component<
       this.state.valuesNodeJs
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1))
+        .sort((a, b) => (a < b ? 1 : -1)),
     );
     const res: string[] = [];
 
@@ -557,7 +604,7 @@ export class App extends Component<
       this.state.valuesBun
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1))
+        .sort((a, b) => (a < b ? 1 : -1)),
     );
     const res: string[] = [];
 
@@ -571,7 +618,7 @@ export class App extends Component<
       this.state.valuesDeno
         .map(v => v.runtimeVersion)
         .filter(v => v !== undefined)
-        .sort((a, b) => (a < b ? 1 : -1))
+        .sort((a, b) => (a < b ? 1 : -1)),
     );
     const res: string[] = [];
 
@@ -816,7 +863,7 @@ export class App extends Component<
 
         <Graph
           benchmarks={BENCHMARKS.filter(
-            b => this.state.selectedBenchmarks[b.name]
+            b => this.state.selectedBenchmarks[b.name],
           )}
           nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
             .sort()
