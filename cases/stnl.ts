@@ -1,38 +1,23 @@
-import compose from 'stnl/compilers/validate-json/compose';
-import { build } from 'stnl/compilers/validate-json';
-import stnl from 'stnl';
+import { build, t } from 'stnl';
 
 import { createCase } from '../benchmarks';
 
-const assertLoose = stnl({
-  props: {
-    number: 'f64',
-    negNumber: 'f64',
-    maxNumber: 'f64',
-    string: 'string',
-    longString: 'string',
-    boolean: 'bool',
-    deeplyNested: {
-      props: {
-        foo: 'string',
-        num: 'f64',
-        bool: 'bool',
-      },
-    },
-  },
-});
-
-createCase('stnl (composition)', 'assertLoose', () => {
-  const check = compose(assertLoose);
-
-  return data => {
-    if (check(data)) return true;
-    throw null;
-  };
+const assertLoose = t.dict({
+  number: t.float,
+  negNumber: t.float,
+  maxNumber: t.float,
+  string: t.string,
+  longString: t.string,
+  boolean: t.bool,
+  deeplyNested: t.dict({
+    foo: t.string,
+    num: t.float,
+    bool: t.bool,
+  }),
 });
 
 createCase('stnl (just-in-time)', 'assertLoose', () => {
-  const check = build(assertLoose);
+  const check = build.json.assert.compile(assertLoose);
 
   return data => {
     if (check(data)) return true;
