@@ -1,4 +1,3 @@
-import compose from 'stnl/compilers/validate-json/compose';
 import { build, t } from 'stnl';
 
 import { createCase } from '../benchmarks';
@@ -13,8 +12,8 @@ const assertLoose = t.dict({
   deeplyNested: t.dict({
     foo: t.string,
     num: t.float,
-    bool: t.bool
-  })
+    bool: t.bool,
+  }),
 });
 
 createCase('stnl (just-in-time)', 'assertLoose', () => {
