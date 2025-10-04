@@ -1,9 +1,6 @@
 import { z } from 'dhi/schema';
 import { createCase } from '../benchmarks';
 
-// Note: dhi doesn't support .strict() or .passthrough() yet
-// All cases use the same validation (which is the default behavior)
-
 createCase('dhi', 'parseSafe', () => {
   const dataType = z.object({
     number: z.number(),
@@ -17,7 +14,7 @@ createCase('dhi', 'parseSafe', () => {
       num: z.number(),
       bool: z.boolean(),
     }),
-  });
+  }); // Default behavior: strips unknown keys
 
   return data => {
     return dataType.parse(data);
@@ -25,19 +22,23 @@ createCase('dhi', 'parseSafe', () => {
 });
 
 createCase('dhi', 'parseStrict', () => {
-  const dataType = z.object({
-    number: z.number(),
-    negNumber: z.number(),
-    maxNumber: z.number(),
-    string: z.string(),
-    longString: z.string(),
-    boolean: z.boolean(),
-    deeplyNested: z.object({
-      foo: z.string(),
-      num: z.number(),
-      bool: z.boolean(),
-    }),
-  });
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .strict(), // Throw on unknown keys (nested)
+    })
+    .strict(); // Throw on unknown keys (root)
 
   return data => {
     return dataType.parse(data);
@@ -45,19 +46,23 @@ createCase('dhi', 'parseStrict', () => {
 });
 
 createCase('dhi', 'assertLoose', () => {
-  const dataType = z.object({
-    number: z.number(),
-    negNumber: z.number(),
-    maxNumber: z.number(),
-    string: z.string(),
-    longString: z.string(),
-    boolean: z.boolean(),
-    deeplyNested: z.object({
-      foo: z.string(),
-      num: z.number(),
-      bool: z.boolean(),
-    }),
-  });
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .passthrough(), // Allow unknown keys (nested)
+    })
+    .passthrough(); // Allow unknown keys (root)
 
   return data => {
     dataType.parse(data);
@@ -66,19 +71,23 @@ createCase('dhi', 'assertLoose', () => {
 });
 
 createCase('dhi', 'assertStrict', () => {
-  const dataType = z.object({
-    number: z.number(),
-    negNumber: z.number(),
-    maxNumber: z.number(),
-    string: z.string(),
-    longString: z.string(),
-    boolean: z.boolean(),
-    deeplyNested: z.object({
-      foo: z.string(),
-      num: z.number(),
-      bool: z.boolean(),
-    }),
-  });
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .strict(), // Throw on unknown keys (nested)
+    })
+    .strict(); // Throw on unknown keys (root)
 
   return data => {
     dataType.parse(data);
