@@ -1,6 +1,9 @@
 import { z } from 'dhi/schema';
 import { createCase } from '../benchmarks';
 
+// Note: dhi doesn't support .strict() or .passthrough() yet
+// All cases use the same validation (which is the default behavior)
+
 createCase('dhi', 'parseSafe', () => {
   const dataType = z.object({
     number: z.number(),
@@ -58,7 +61,6 @@ createCase('dhi', 'assertLoose', () => {
 
   return data => {
     dataType.parse(data);
-
     return true;
   };
 });
@@ -80,7 +82,6 @@ createCase('dhi', 'assertStrict', () => {
 
   return data => {
     dataType.parse(data);
-
     return true;
   };
 });
