@@ -1,3 +1,4 @@
+// @ts-expect-error - dhi uses package.json exports which require moduleResolution: "bundler" or "node16"
 import { z } from 'dhi/schema';
 import { createCase } from '../benchmarks';
 
