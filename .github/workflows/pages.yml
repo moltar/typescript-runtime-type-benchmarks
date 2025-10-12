@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Use latest Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
 
       - name: Install
         run: npm ci
