@@ -36,10 +36,10 @@
                 <path stroke="#888" d="M204.5 42.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g aria-roledescription="rect mark container" class="mark-rect role-mark child__Safe_Parsing_marks">
-                <path fill="#ff9da6" d="M204 42.75h190.536v13.5H204Z" aria-label="Safe Parsing: 114321380; name: typia" aria-roledescription="bar"/>
-                <path fill="#54a24b" d="M204 57.75h183.186v13.5H204Z" aria-label="Safe Parsing: 109911630; name: sury" aria-roledescription="bar"/>
-                <path fill="#72b7b2" d="M204 72.75h171.063v13.5H204Z" aria-label="Safe Parsing: 102637549; name: rescript-schema" aria-roledescription="bar"/>
-                <path fill="#4c78a8" d="M204 87.75h2.832v13.5H204Z" aria-label="Safe Parsing: 1699405; name: (median)" aria-roledescription="bar"/>
+                <path fill="#ff9da6" d="M204 42.75h189.256v13.5H204Z" aria-label="Safe Parsing: 113553311; name: typia" aria-roledescription="bar"/>
+                <path fill="#54a24b" d="M204 57.75h182.376v13.5H204Z" aria-label="Safe Parsing: 109425509; name: sury" aria-roledescription="bar"/>
+                <path fill="#72b7b2" d="M204 72.75h170.057v13.5H204Z" aria-label="Safe Parsing: 102034194; name: rescript-schema" aria-roledescription="bar"/>
+                <path fill="#4c78a8" d="M204 87.75h2.739v13.5H204Z" aria-label="Safe Parsing: 1643381; name: (median)" aria-roledescription="bar"/>
             </g>
         </g>
         <g aria-roledescription="group mark container" class="mark-group role-scope child__Strict_Parsing_group">
@@ -76,10 +76,10 @@
                 <path stroke="#888" d="M620.5 42.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g aria-roledescription="rect mark container" class="mark-rect role-mark child__Strict_Parsing_marks">
-                <path fill="#ff9da6" d="M620 42.75h189.206v13.5H620Z" aria-label="Strict Parsing: 37841103; name: typia" aria-roledescription="bar"/>
-                <path fill="#54a24b" d="M620 57.75h153.296v13.5H620Z" aria-label="Strict Parsing: 30659240; name: sury" aria-roledescription="bar"/>
-                <path fill="#eeca3b" d="M620 72.75h180.726v13.5H620Z" aria-label="Strict Parsing: 36145184; name: ts-runtime-checks" aria-roledescription="bar"/>
-                <path fill="#4c78a8" d="M620 87.75h7.897v13.5H620Z" aria-label="Strict Parsing: 1579346; name: (median)" aria-roledescription="bar"/>
+                <path fill="#ff9da6" d="M620 42.75h183.876v13.5H620Z" aria-label="Strict Parsing: 36775102; name: typia" aria-roledescription="bar"/>
+                <path fill="#54a24b" d="M620 57.75h152.27v13.5H620Z" aria-label="Strict Parsing: 30453850; name: sury" aria-roledescription="bar"/>
+                <path fill="#b279a2" d="M620 72.75h181.06v13.5H620Z" aria-label="Strict Parsing: 36212054; name: ts-runtime-checks" aria-roledescription="bar"/>
+                <path fill="#4c78a8" d="M620 87.75h7.84v13.5H620Z" aria-label="Strict Parsing: 1568010; name: (median)" aria-roledescription="bar"/>
             </g>
         </g>
         <g aria-roledescription="group mark container" class="mark-group role-scope child__Loose_Assertion_group">
@@ -102,24 +102,24 @@
                 <path stroke="#888" d="M204.5 216.5h200" class="mark-rule role-axis-domain"/>
                 <text fill="#000" class="mark-text role-axis-title" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" transform="translate(304.5 246.5)">Loose Assertion</text>
             </g>
-            <g aria-label="Y-axis for a discrete scale with 4 values: ts-runtime-checks, type-predicate-generator, @sinclair/typebox-(ahead-of-time), (median)" aria-roledescription="axis" class="mark-group role-axis" pointer-events="none">
+            <g aria-label="Y-axis for a discrete scale with 4 values: ts-runtime-checks, ts-auto-guard, @sinclair/typebox-(ahead-of-time), (median)" aria-roledescription="axis" class="mark-group role-axis" pointer-events="none">
                 <path d="M204.5 156.5" aria-hidden="true" class="background"/>
                 <g stroke="#888" class="mark-rule role-axis-tick">
                     <path d="M204.5 163.5h-5M204.5 178.5h-5M204.5 193.5h-5M204.5 208.5h-5"/>
                 </g>
                 <g fill="#000" class="mark-text role-axis-label" font-family="sans-serif" font-size="10" text-anchor="end">
                     <text transform="translate(197.5 166.5)">ts-runtime-checks</text>
-                    <text transform="translate(197.5 181.5)">type-predicate-genera…</text>
+                    <text transform="translate(197.5 181.5)">ts-auto-guard</text>
                     <text transform="translate(197.5 196.5)">@sinclair/typebox-(ah…</text>
                     <text transform="translate(197.5 211.5)">(median)</text>
                 </g>
                 <path stroke="#888" d="M204.5 156.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g aria-roledescription="rect mark container" class="mark-rect role-mark child__Loose_Assertion_marks">
-                <path fill="#eeca3b" d="M204 156.75h189.955v13.5H204Z" aria-label="Loose Assertion: 170959624; name: ts-runtime-checks" aria-roledescription="bar"/>
-                <path fill="#b279a2" d="M204 171.75h181.902v13.5H204Z" aria-label="Loose Assertion: 163711800; name: type-predicate-generator" aria-roledescription="bar"/>
-                <path fill="#f58518" d="M204 186.75h181.867v13.5H204Z" aria-label="Loose Assertion: 163680031; name: @sinclair/typebox-(ahead-of-time)" aria-roledescription="bar"/>
-                <path fill="#4c78a8" d="M204 201.75h3.448v13.5H204Z" aria-label="Loose Assertion: 3103615.5; name: (median)" aria-roledescription="bar"/>
+                <path fill="#b279a2" d="M204 156.75h190.211v13.5H204Z" aria-label="Loose Assertion: 171190106; name: ts-runtime-checks" aria-roledescription="bar"/>
+                <path fill="#eeca3b" d="M204 171.75h181.036v13.5H204Z" aria-label="Loose Assertion: 162932581; name: ts-auto-guard" aria-roledescription="bar"/>
+                <path fill="#f58518" d="M204 186.75h180.49v13.5H204Z" aria-label="Loose Assertion: 162441439; name: @sinclair/typebox-(ahead-of-time)" aria-roledescription="bar"/>
+                <path fill="#4c78a8" d="M204 201.75h3.403v13.5H204Z" aria-label="Loose Assertion: 3062675; name: (median)" aria-roledescription="bar"/>
             </g>
         </g>
         <g aria-roledescription="group mark container" class="mark-group role-scope child__Strict_Assertion_group">
@@ -156,10 +156,10 @@
                 <path stroke="#888" d="M620.5 156.5v60" class="mark-rule role-axis-domain"/>
             </g>
             <g aria-roledescription="rect mark container" class="mark-rect role-mark child__Strict_Assertion_marks">
-                <path fill="#eeca3b" d="M620 156.75h182.37v13.5H620Z" aria-label="Strict Assertion: 36473888; name: ts-runtime-checks" aria-roledescription="bar"/>
-                <path fill="#f58518" d="M620 171.75h198.054v13.5H620Z" aria-label="Strict Assertion: 39610888; name: @sinclair/typebox-(ahead-of-time)" aria-roledescription="bar"/>
-                <path fill="#e45756" d="M620 186.75h183.717v13.5H620Z" aria-label="Strict Assertion: 36743466; name: @sinclair/typebox-(just-in-time)" aria-roledescription="bar"/>
-                <path fill="#4c78a8" d="M620 201.75h8.075v13.5H620Z" aria-label="Strict Assertion: 1615034; name: (median)" aria-roledescription="bar"/>
+                <path fill="#b279a2" d="M620 156.75h181.311v13.5H620Z" aria-label="Strict Assertion: 36262270; name: ts-runtime-checks" aria-roledescription="bar"/>
+                <path fill="#f58518" d="M620 171.75h192.87v13.5H620Z" aria-label="Strict Assertion: 38573998; name: @sinclair/typebox-(ahead-of-time)" aria-roledescription="bar"/>
+                <path fill="#e45756" d="M620 186.75h179.016v13.5H620Z" aria-label="Strict Assertion: 35803221; name: @sinclair/typebox-(just-in-time)" aria-roledescription="bar"/>
+                <path fill="#4c78a8" d="M620 201.75h7.931v13.5H620Z" aria-label="Strict Assertion: 1586224; name: (median)" aria-roledescription="bar"/>
             </g>
         </g>
         <g class="mark-group role-title">
