@@ -2,14 +2,14 @@ import * as z from 'zod4';
 import { createCase } from '../benchmarks';
 
 createCase('zod4', 'parseSafe', () => {
-  const dataType = z.interface({
+  const dataType = z.object({
     number: z.number(),
     negNumber: z.number(),
     maxNumber: z.number(),
     string: z.string(),
     longString: z.string(),
     boolean: z.boolean(),
-    deeplyNested: z.interface({
+    deeplyNested: z.object({
       foo: z.string(),
       num: z.number(),
       bool: z.boolean(),
@@ -23,7 +23,7 @@ createCase('zod4', 'parseSafe', () => {
 
 createCase('zod4', 'parseStrict', () => {
   const dataType = z
-    .interface({
+    .object({
       number: z.number(),
       negNumber: z.number(),
       maxNumber: z.number(),
@@ -31,7 +31,7 @@ createCase('zod4', 'parseStrict', () => {
       longString: z.string(),
       boolean: z.boolean(),
       deeplyNested: z
-        .interface({
+        .object({
           foo: z.string(),
           num: z.number(),
           bool: z.boolean(),
@@ -46,19 +46,23 @@ createCase('zod4', 'parseStrict', () => {
 });
 
 createCase('zod4', 'assertLoose', () => {
-  const dataType = z.looseInterface({
-    number: z.number(),
-    negNumber: z.number(),
-    maxNumber: z.number(),
-    string: z.string(),
-    longString: z.string(),
-    boolean: z.boolean(),
-    deeplyNested: z.looseInterface({
-      foo: z.string(),
-      num: z.number(),
-      bool: z.boolean(),
-    }),
-  });
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .passthrough(),
+    })
+    .passthrough();
 
   return data => {
     dataType.parse(data);
@@ -68,19 +72,23 @@ createCase('zod4', 'assertLoose', () => {
 });
 
 createCase('zod4', 'assertStrict', () => {
-  const dataType = z.strictInterface({
-    number: z.number(),
-    negNumber: z.number(),
-    maxNumber: z.number(),
-    string: z.string(),
-    longString: z.string(),
-    boolean: z.boolean(),
-    deeplyNested: z.strictInterface({
-      foo: z.string(),
-      num: z.number(),
-      bool: z.boolean(),
-    }),
-  });
+  const dataType = z
+    .object({
+      number: z.number(),
+      negNumber: z.number(),
+      maxNumber: z.number(),
+      string: z.string(),
+      longString: z.string(),
+      boolean: z.boolean(),
+      deeplyNested: z
+        .object({
+          foo: z.string(),
+          num: z.number(),
+          bool: z.boolean(),
+        })
+        .strict(),
+    })
+    .strict();
 
   return data => {
     dataType.parse(data);
