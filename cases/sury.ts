@@ -21,31 +21,35 @@ const schema = S.schema({
 });
 
 createCase('sury', 'parseSafe', () => {
-  const parseSafe = S.compile(schema, 'Any', 'Output', 'Sync');
+  const parseSafe = S.parser(schema);
   return data => {
     return parseSafe(data);
   };
 });
 
 createCase('sury', 'parseStrict', () => {
-  const parseStrict = S.compile(S.deepStrict(schema), 'Any', 'Output', 'Sync');
+  const parseStrict = S.parser(S.deepStrict(schema));
   return data => {
     return parseStrict(data);
   };
 });
 
 createCase('sury', 'assertLoose', () => {
-  const assertLoose = S.compile(schema, 'Any', 'Assert', 'Sync');
+  const assertLoose = S.parser(
+    schema,
+    S.schema(true).with(S.noValidation, true)
+  );
   return data => {
-    assertLoose(data)!;
-    return true;
+    return assertLoose(data);
   };
 });
 
 createCase('sury', 'assertStrict', () => {
-  const assertStrict = S.compile(S.deepStrict(schema), 'Any', 'Assert', 'Sync');
+  const assertStrict = S.parser(
+    S.deepStrict(schema),
+    S.schema(true).with(S.noValidation, true)
+  );
   return data => {
-    assertStrict(data)!;
-    return true;
+    return assertStrict(data);
   };
 });
