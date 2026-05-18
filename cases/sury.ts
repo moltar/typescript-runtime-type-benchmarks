@@ -37,7 +37,7 @@ createCase('sury', 'parseStrict', () => {
 createCase('sury', 'assertLoose', () => {
   const assertLoose = S.parser(
     schema,
-    S.schema(true).with(S.noValidation, true)
+    S.schema(true).with(S.noValidation, true),
   );
   return data => {
     return assertLoose(data);
@@ -47,7 +47,7 @@ createCase('sury', 'assertLoose', () => {
 createCase('sury', 'assertStrict', () => {
   const assertStrict = S.parser(
     S.deepStrict(schema),
-    S.schema(true).with(S.noValidation, true)
+    S.schema(true).with(S.noValidation, true),
   );
   return data => {
     return assertStrict(data);
