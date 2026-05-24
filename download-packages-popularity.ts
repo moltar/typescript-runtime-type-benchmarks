@@ -222,6 +222,10 @@ export const packages = [
     name: 'joi',
     packageName: 'joi',
   },
+  {
+    name: '@sx3/gate',
+    packageName: '@sx3/gate',
+  },
 ] as const;
 
 interface BodyWeeklyDownloads {

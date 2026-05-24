@@ -66,6 +66,7 @@ import '../cases/ts-auto-guard';
 import '../cases/type-predicate-generator';
 import '../cases/tiny-schema-validator';
 import '../cases/jet-validators';
+import '../cases/sx3-gate';
 
 test('all cases must have been imported in tests', () => {
   expect(
