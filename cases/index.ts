@@ -58,6 +58,7 @@ export const cases = [
   'zod4',
   'deepkit',
   'effect-schema',
+  'sx3-gate',
   'ts-auto-guard',
   'type-predicate-generator',
   'jet-validators',
