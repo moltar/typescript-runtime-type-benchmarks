@@ -25,6 +25,7 @@ import '../cases/myzod';
 import '../cases/ok-computer';
 import '../cases/parse-dont-validate';
 import '../cases/paseri';
+import '../cases/paseri-aot';
 import '../cases/pure-parse';
 import '../cases/purify-ts';
 import '../cases/r-assign';

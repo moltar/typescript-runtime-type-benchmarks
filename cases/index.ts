@@ -20,6 +20,7 @@ export const cases = [
   'ok-computer',
   'parse-dont-validate',
   'paseri',
+  'paseri-aot',
   'pure-parse',
   'purify-ts',
   'r-assign',

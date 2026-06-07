@@ -167,5 +167,9 @@ cases/type-predicate-generator/src/index_guards.ts
 # Paseri
 cases/paseri/build
 
+# Paseri ahead-of-time build artifacts and generated parsers
+cases/paseri-aot/build
+cases/paseri-aot/src/generated
+
 # Bun binary lock file makes mergin harder. Using text lock file instead.
 bun.lockb
