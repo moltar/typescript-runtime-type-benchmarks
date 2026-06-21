@@ -66,7 +66,7 @@
         "svgo": "3.3.3",
         "tiny-schema-validator": "5.0.3",
         "to-typed": "0.5.2",
-        "ts-auto-guard": "5.0.1",
+        "ts-auto-guard": "5.1.3",
         "ts-interface-checker": "1.0.2",
         "ts-json-validator": "0.7.1",
         "ts-node": "10.9.2",
@@ -510,7 +510,7 @@
 
     "@trysound/sax": ["@trysound/sax@0.2.0", "", {}, "sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA=="],
 
-    "@ts-morph/common": ["@ts-morph/common@0.24.0", "", { "dependencies": { "fast-glob": "^3.3.2", "minimatch": "^9.0.4", "mkdirp": "^3.0.1", "path-browserify": "^1.0.1" } }, "sha512-c1xMmNHWpNselmpIqursHeOHHBTIsJLbB+NuovbTTRCNiTLEr/U9dbJ8qy0jd/O2x5pc3seWuOUN5R2IoOTp8A=="],
+    "@ts-morph/common": ["@ts-morph/common@0.25.0", "", { "dependencies": { "minimatch": "^9.0.4", "path-browserify": "^1.0.1", "tinyglobby": "^0.2.9" } }, "sha512-kMnZz+vGGHi4GoHnLmMhGNjm44kGtKUXGnOvrKmMwAuvNjM/PgKVGfUnL7IDvK7Jb2QQ82jq3Zmp04Gy+r3Dkg=="],
 
     "@tsconfig/node10": ["@tsconfig/node10@1.0.11", "", {}, "sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw=="],
 
@@ -1170,8 +1170,6 @@
 
     "minipass": ["minipass@7.1.3", "", {}, "sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A=="],
 
-    "mkdirp": ["mkdirp@3.0.1", "", { "bin": { "mkdirp": "dist/cjs/src/bin.js" } }, "sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg=="],
-
     "mol_data_all": ["mol_data_all@1.1.1800", "", {}, "sha512-qM6MkEcauDpcYiR6gAqCm98+L0PYMI0M9pmUOlV9Et44pzzQXKIWKb4qtafGFjzzt+c84u5FvTPSSE/TyVVMYw=="],
 
     "mongodb": ["mongodb@6.16.0", "", { "dependencies": { "@mongodb-js/saslprep": "^1.1.9", "bson": "^6.10.3", "mongodb-connection-string-url": "^3.0.0" }, "peerDependencies": { "@aws-sdk/credential-providers": "^3.188.0", "@mongodb-js/zstd": "^1.1.0 || ^2.0.0", "gcp-metadata": "^5.2.0", "kerberos": "^2.0.1", "mongodb-client-encryption": ">=6.0.0 <7", "snappy": "^7.2.2", "socks": "^2.7.1" }, "optionalPeers": ["@aws-sdk/credential-providers", "@mongodb-js/zstd", "gcp-metadata", "kerberos", "mongodb-client-encryption", "snappy", "socks"] }, "sha512-D1PNcdT0y4Grhou5Zi/qgipZOYeWrhLEpk33n3nm6LGtz61jvO88WlrWCK/bigMjpnOdAUKKQwsGIl0NtWMyYw=="],
@@ -1476,7 +1474,7 @@
 
     "trim-newlines": ["trim-newlines@3.0.1", "", {}, "sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw=="],
 
-    "ts-auto-guard": ["ts-auto-guard@5.0.1", "", { "dependencies": { "command-line-args": "^6.0.0", "command-line-usage": "^7.0.2", "ts-morph": "^23.0.0", "tsconfig": "^7.0.0" }, "bin": { "ts-auto-guard": "lib/cli.js" } }, "sha512-0s4zJfYJK2eko8VF2YFbL6zncaMwSwfI94n+FM+zrQXMjbvw1DovChVCNIJwGTGnl6RhQG2x1Q8bx/sMrTo0Pg=="],
+    "ts-auto-guard": ["ts-auto-guard@5.1.3", "", { "dependencies": { "command-line-args": "^6.0.0", "command-line-usage": "^7.0.2", "ts-morph": "^24.0.0", "tsconfig": "^7.0.0" }, "bin": { "ts-auto-guard": "lib/cli.js" } }, "sha512-vOkiT+pZGOqSnAl/j7q5FS1KfpKXQTQpwZhIUjUIskOKWFWc9+74JnR72DP+l+e7foyAHw8cvwxShYCG7KrVqw=="],
 
     "ts-interface-checker": ["ts-interface-checker@1.0.2", "", {}, "sha512-4IKKvhZRXhvtYF/mtu+OCfBqJKV6LczUq4kQYcpT+iSB7++R9+giWnp2ecwWMIcnG16btVOkXFnoxLSYMN1Q1g=="],
 
@@ -1484,7 +1482,7 @@
 
     "ts-json-validator": ["ts-json-validator@0.7.1", "", { "dependencies": { "ajv": "^6.12.6" }, "peerDependencies": { "typescript": ">= 3.7.0" } }, "sha512-q0T9FUj41/Nqx4zhSIi9371JR1qlv595Ix5cm+fs3i/XfYDcId0qr6+VcUawpOB9jhU+dQ7lKBIZWzcbN3dnVA=="],
 
-    "ts-morph": ["ts-morph@23.0.0", "", { "dependencies": { "@ts-morph/common": "~0.24.0", "code-block-writer": "^13.0.1" } }, "sha512-FcvFx7a9E8TUe6T3ShihXJLiJOiqyafzFKUO4aqIHDUCIvADdGNShcbc2W5PMr3LerXRv7mafvFZ9lRENxJmug=="],
+    "ts-morph": ["ts-morph@24.0.0", "", { "dependencies": { "@ts-morph/common": "~0.25.0", "code-block-writer": "^13.0.3" } }, "sha512-2OAOg/Ob5yx9Et7ZX4CvTCc0UFoZHwLEJ+dpDPSUi5TgwwlTlX47w+iFRrEwzUZwYACjq83cgjS/Da50Ga37uw=="],
 
     "ts-node": ["ts-node@10.9.2", "", { "dependencies": { "@cspotcode/source-map-support": "^0.8.0", "@tsconfig/node10": "^1.0.7", "@tsconfig/node12": "^1.0.7", "@tsconfig/node14": "^1.0.0", "@tsconfig/node16": "^1.0.2", "acorn": "^8.4.1", "acorn-walk": "^8.1.1", "arg": "^4.1.0", "create-require": "^1.1.0", "diff": "^4.0.1", "make-error": "^1.1.1", "v8-compile-cache-lib": "^3.0.1", "yn": "3.1.1" }, "peerDependencies": { "@swc/core": ">=1.2.50", "@swc/wasm": ">=1.2.50", "@types/node": "*", "typescript": ">=2.7" }, "optionalPeers": ["@swc/core", "@swc/wasm"], "bin": { "ts-node": "dist/bin.js", "ts-script": "dist/bin-script-deprecated.js", "ts-node-cwd": "dist/bin-cwd.js", "ts-node-esm": "dist/bin-esm.js", "ts-node-script": "dist/bin-script.js", "ts-node-transpile-only": "dist/bin-transpile.js" } }, "sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ=="],
 
