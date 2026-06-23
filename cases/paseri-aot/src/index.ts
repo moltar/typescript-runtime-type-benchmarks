@@ -1,3 +1,3 @@
-export { parseDataTypeStrip } from './generated/strip';
-export { parseDataTypeStrict } from './generated/strict';
-export { parseDataTypePassthrough } from './generated/passthrough';
+export { DataTypeStrip } from './generated/strip';
+export { DataTypeStrict } from './generated/strict';
+export { DataTypePassthrough } from './generated/passthrough';
