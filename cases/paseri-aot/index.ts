@@ -1,8 +1,4 @@
-import {
-  parseDataTypeStrip,
-  parseDataTypeStrict,
-  parseDataTypePassthrough,
-} from './build';
+import { DataTypeStrip, DataTypeStrict, DataTypePassthrough } from './build';
 import { addCase } from '../../benchmarks';
 
 // Ahead-of-time compiled counterpart to the runtime `paseri` case. The parsers
@@ -11,21 +7,21 @@ import { addCase } from '../../benchmarks';
 // one over the same shapes.
 
 addCase('paseri-(ahead-of-time)', 'parseSafe', data => {
-  return parseDataTypeStrip(data);
+  return DataTypeStrip.parse(data);
 });
 
 addCase('paseri-(ahead-of-time)', 'parseStrict', data => {
-  return parseDataTypeStrict(data);
+  return DataTypeStrict.parse(data);
 });
 
 addCase('paseri-(ahead-of-time)', 'assertLoose', data => {
-  parseDataTypePassthrough(data);
+  DataTypePassthrough.parse(data);
 
   return true;
 });
 
 addCase('paseri-(ahead-of-time)', 'assertStrict', data => {
-  parseDataTypeStrict(data);
+  DataTypeStrict.parse(data);
 
   return true;
 });
