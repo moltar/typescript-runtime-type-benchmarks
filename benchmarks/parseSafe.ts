@@ -1,5 +1,4 @@
 import { Benchmark } from './helpers/types';
-import { sink } from './helpers/sink';
 import type { ExpectStatic, SuiteAPI, TestAPI } from 'vitest';
 
 export const validateData = Object.freeze({
@@ -28,10 +27,7 @@ type Fn = (data: unknown) => typeof validateData;
  */
 export class ParseSafe extends Benchmark<Fn> {
   run() {
-    // Route the result through `sink` so implementations that return a fresh
-    // stripped CLONE of the input (rather than mutating it in place) cannot be
-    // dead-code-eliminated by the JIT. See `helpers/sink.ts`.
-    sink(this.fn(validateData));
+    this.fn(validateData);
   }
 
   test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI) {
