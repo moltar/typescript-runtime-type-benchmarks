@@ -1,7 +1,7 @@
 import {
   validate,
   hasUnknownKeys,
-  stripUnknownKeys,
+  cloneWithoutUnknownKeys,
   type ToBeChecked,
   // Import the built module explicitly (not the `./build` directory): the
   // directory also contains `index.d.ts`, which some resolvers (e.g. Vitest's)
@@ -19,7 +19,10 @@ const isStrict = (data: unknown): data is ToBeChecked =>
 
 addCase('ts-runtypes', 'parseSafe', data => {
   if (!validate(data)) throw new Error('wrong type.');
-  return stripUnknownKeys(data);
+  // Clone-based strip: returns a fresh object built from the declared shape, so
+  // unknown keys are dropped by construction (input is not mutated). Faster
+  // than a delete-based strip, which deopts V8 by mutating object shapes.
+  return cloneWithoutUnknownKeys(data);
 });
 
 addCase('ts-runtypes', 'parseStrict', data => {
