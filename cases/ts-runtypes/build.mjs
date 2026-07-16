@@ -32,5 +32,11 @@ await esbuild.build({
   target: 'es2021',
   outfile: 'build/index.js',
   logLevel: 'warning',
-  plugins: [runtypes({ cwd: here, tsconfig: 'tsconfig.json' })],
+  // `emitMode: 'functions'` makes the compiler emit real validator functions
+  // directly, rather than the default `'code'` mode, which ships each validator
+  // as serialized params/body strings that are rebuilt at runtime via
+  // `new Function(...)`. Emitting functions avoids that runtime reconstruction.
+  plugins: [
+    runtypes({ cwd: here, tsconfig: 'tsconfig.json', emitMode: 'functions' }),
+  ],
 });
