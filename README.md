@@ -61,6 +61,7 @@
 * [ts-interface-checker](https://github.com/gristlabs/ts-interface-checker)
 * [ts-json-validator](https://github.com/ostrowr/ts-json-validator)
 * [ts-runtime-checks](https://github.com/GoogleFeud/ts-runtime-checks)
+* [ts-runtypes](https://github.com/MionKit/ts-run-types)
 * [tson](https://github.com/skarab42/tson)
 * [ts-utils](https://github.com/ai-labs-team/ts-utils)
 * [type-predicate-generator](https://github.com/peter-leonov/typescript-predicate-generator)
