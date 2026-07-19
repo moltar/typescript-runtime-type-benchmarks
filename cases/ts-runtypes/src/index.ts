@@ -1,9 +1,7 @@
 import {
   createValidate,
   createHasUnknownKeys,
-  getRTFunction,
-  type InjectTypeFnArgs,
-  type PrepareForJsonFn,
+  createCloneExactShape,
 } from '@ts-runtypes/core';
 
 // This is the scoped `@ts-runtypes/*` project (https://github.com/MionKit/ts-run-types),
@@ -33,27 +31,24 @@ export const validate = createValidate<ToBeChecked>();
 
 // Returns true when the value carries keys not declared in `ToBeChecked`,
 // recursively (including nested objects). Used to build the strict modes.
-export const hasUnknownKeys = createHasUnknownKeys<ToBeChecked>();
+//
+// The strict modes only ever call this AFTER `validate` has already passed (see
+// `../index.ts`), so the compile-time `{runsAfterValidation: true}` precondition
+// holds. On this all-required shape the emitter then swaps the per-key scan for a
+// single enumerable-key count compare (and recurses the same way into
+// `deeplyNested`), which is materially faster than scanning every key.
+export const hasUnknownKeys = createHasUnknownKeys<ToBeChecked>(undefined, {
+  runsAfterValidation: true,
+});
 
 // Used by the `parseSafe` mode to return a value with unknown/extra keys
-// removed. Rather than the delete-based `stripUnknownKeys` (which deopts V8 by
-// mutating shapes with `delete`), this uses the clone-based `prepareForJsonSafe`
-// primitive: it builds a FRESH value from the declared shape, so unknown keys
-// are dropped by construction and the input is never mutated — the same
-// approach typia takes, and materially faster.
+// removed. Rather than a delete-based strip (which deopts V8 by mutating object
+// shapes with `delete`), `createCloneExactShape` builds a FRESH value from the
+// declared shape, so unknown keys are dropped by construction and the input is
+// never mutated — the same approach typia takes, and materially faster.
 //
-// `prepareForJsonSafe` is a value-level JSON transform that has no `createX`
-// factory; it is recovered via `getRTFunction<'pjs'>()` from an
-// `InjectTypeFnArgs<T, 'pjs'>` marker the plugin injects at this wrapper's call
-// site. (The `'pj'` / plain `prepareForJson` sibling is the *mutate* variant,
-// which for this already-JSON-safe type degrades to identity and would NOT drop
-// unknown keys.)
-function recoverStripClone<T>(
-  injected?: InjectTypeFnArgs<T, 'pjs'>,
-): PrepareForJsonFn {
-  return getRTFunction<'pjs'>(injected);
-}
-
-export const cloneWithoutUnknownKeys = recoverStripClone<ToBeChecked>() as (
-  value: unknown,
-) => ToBeChecked;
+// 0.10 makes this clone-based strip a first-class factory; earlier versions had
+// no `createX` for it, so this case recovered the `prepareForJsonSafe` primitive
+// via `getRTFunction<'pjs'>()`. `createCloneExactShape` is the direct, intended
+// replacement.
+export const cloneWithoutUnknownKeys = createCloneExactShape<ToBeChecked>();
