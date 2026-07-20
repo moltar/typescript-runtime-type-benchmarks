@@ -17,7 +17,7 @@ import { addCase } from '../../benchmarks';
 const isStrict = (data: unknown): data is ToBeChecked =>
   validate(data) && !hasUnknownKeys(data);
 
-addCase('ts-runtypes', 'parseSafe', data => {
+addCase('@ts-runtypes', 'parseSafe', data => {
   if (!validate(data)) throw new Error('wrong type.');
   // Clone-based strip: returns a fresh object built from the declared shape, so
   // unknown keys are dropped by construction (input is not mutated). Faster
@@ -25,17 +25,17 @@ addCase('ts-runtypes', 'parseSafe', data => {
   return cloneWithoutUnknownKeys(data);
 });
 
-addCase('ts-runtypes', 'parseStrict', data => {
+addCase('@ts-runtypes', 'parseStrict', data => {
   if (!isStrict(data)) throw new Error('wrong type.');
   return data;
 });
 
-addCase('ts-runtypes', 'assertLoose', data => {
+addCase('@ts-runtypes', 'assertLoose', data => {
   if (!validate(data)) throw new Error('wrong type.');
   return true;
 });
 
-addCase('ts-runtypes', 'assertStrict', data => {
+addCase('@ts-runtypes', 'assertStrict', data => {
   if (!isStrict(data)) throw new Error('wrong type.');
   return true;
 });
