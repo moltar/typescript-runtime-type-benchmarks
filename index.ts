@@ -61,6 +61,11 @@ async function main() {
               stdio: 'inherit',
             });
           }
+          if (c === 'ts-runtypes') {
+            childProcess.execSync('npm run compile:ts-runtypes', {
+              stdio: 'inherit',
+            });
+          }
 
           const cmd = [...process.argv.slice(0, 2), 'run-internal', c];
 

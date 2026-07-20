@@ -46,6 +46,7 @@ export const cases = [
   'ts-interface-checker',
   'ts-json-validator',
   'ts-runtime-checks',
+  'ts-runtypes',
   'ts-utils',
   'tson',
   'typeofweb-schema',

@@ -50,6 +50,7 @@ import '../cases/toi';
 import '../cases/ts-interface-checker';
 import '../cases/ts-json-validator';
 import '../cases/ts-runtime-checks';
+import '../cases/ts-runtypes';
 import '../cases/ts-utils';
 import '../cases/tson';
 import '../cases/typeofweb-schema';
