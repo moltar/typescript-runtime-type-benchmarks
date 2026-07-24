@@ -85,6 +85,36 @@ async function loadPackagesPopularity() {
     });
 }
 
+/**
+ * Parses an HTTP `Last-Modified` header into a Date. On GitHub Pages this
+ * reflects when the site was last published, i.e. when the benchmark data was
+ * last updated. Returns undefined when the header is missing or unparseable.
+ */
+function parseLastModified(header: string | null): Date | undefined {
+  if (!header) {
+    return undefined;
+  }
+
+  const date = new Date(header);
+
+  return Number.isNaN(date.getTime()) ? undefined : date;
+}
+
+/**
+ * Returns the more recent of two optional dates.
+ */
+function mostRecent(a: Date | undefined, b: Date | undefined): Date | undefined {
+  if (!a) {
+    return b;
+  }
+
+  if (!b) {
+    return a;
+  }
+
+  return a > b ? a : b;
+}
+
 function normalizePartialValues(values: BenchmarkResult[]): BenchmarkResult[] {
   if (!values.length) {
     return [];
@@ -519,6 +549,7 @@ export class App extends Component<
     valuesBun: BenchmarkResult[];
     valuesDeno: BenchmarkResult[];
     sortBy: 'fastest' | 'alphabetically' | 'popularity';
+    lastUpdated?: Date;
   }
 > {
   constructor() {
@@ -587,10 +618,21 @@ export class App extends Component<
 
     NODE_VERSIONS.forEach((v, i) => {
       fetch(`results/node-${v}.json`)
-        .then(response => response.json() as Promise<BenchmarkResponse>)
-        .then(data => {
+        .then(response => {
+          const lastUpdated = parseLastModified(
+            response.headers.get('last-modified')
+          );
+
+          return response
+            .json()
+            .then((data: BenchmarkResponse) => ({ data, lastUpdated }));
+        })
+        .then(({ data, lastUpdated }) => {
           this.setState(state => ({
             ...state,
+
+            // reflects when the site was last published, shown to the user
+            lastUpdated: mostRecent(state.lastUpdated, lastUpdated),
 
             // select the first node versions benchmark automatically
             selectedNodeJsVersions:
@@ -695,6 +737,17 @@ export class App extends Component<
           Benchmark Comparison of Packages with Runtime Validation and
           TypeScript Support
         </p>
+
+        {this.state.lastUpdated && (
+          <p style={{ color: '#666', fontSize: '0.9rem', marginTop: '-0.5rem' }}>
+            Data last updated:{' '}
+            {this.state.lastUpdated.toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+        )}
 
         <div style={{ display: 'flex', margin: '1rem 0' }}>
           <div style={{ width: '12rem', marginRight: '1rem' }}>
