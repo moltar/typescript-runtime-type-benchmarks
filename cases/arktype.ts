@@ -15,9 +15,28 @@ const t = type({
   },
 });
 
+const tStrict = t.onDeepUndeclaredKey('reject');
+
 createCase('arktype', 'assertLoose', () => {
   return data => {
     if (t.allows(data)) return true;
     throw new Error('Invalid');
+  };
+});
+
+createCase('arktype', 'assertStrict', () => {
+  return data => {
+    if (tStrict.allows(data)) return true;
+    throw new Error('Invalid');
+  };
+});
+
+createCase('arktype', 'parseStrict', () => {
+  return data => {
+    const out = tStrict(data);
+
+    if (out instanceof type.errors) throw new Error('Invalid');
+
+    return out;
   };
 });
