@@ -58,6 +58,7 @@ export const cases = [
   'yup',
   'zod',
   'zod4',
+  'zod4-compiled',
   'deepkit',
   'effect-schema',
   'sx3-gate',

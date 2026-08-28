@@ -74,6 +74,7 @@
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/colinhacks/zod)
 * [zod (v4)](https://github.com/colinhacks/zod/tree/v4)
+* [zod (v4, compiled)](https://zod.dev/compile)
 
 ## Criteria
 

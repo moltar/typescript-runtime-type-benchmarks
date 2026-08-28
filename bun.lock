@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -83,7 +84,7 @@
         "vega-lite": "5.11.0",
         "yup": "1.7.1",
         "zod": "3.25.76",
-        "zod4": "npm:zod@next",
+        "zod4": "npm:zod@4.5.0-canary.20260828T062315",
       },
       "devDependencies": {
         "@babel/cli": "7.29.7",
@@ -618,8 +619,6 @@
     "@vitest/spy": ["@vitest/spy@3.2.7", "", { "dependencies": { "tinyspy": "^4.0.3" } }, "sha512-Q2eQGI6d2L/hBtZ0qNuKcAGid68XK6cv1xsoaIma6PaJhHPoqcEJhYpXZ/5myCMqkNgtP6UKuBhbc0nHKnrkuQ=="],
 
     "@vitest/utils": ["@vitest/utils@3.2.7", "", { "dependencies": { "@vitest/pretty-format": "3.2.7", "loupe": "^3.1.4", "tinyrainbow": "^2.0.0" } }, "sha512-x6BDOd7dyo3PFLY3I9/HJ25X/6OurhGXk2/B9gOZNPF7XDVjeBK4k01lQE5uvDpbuheErh91qYuE1E2OEjK3Rw=="],
-
-    "@zod/core": ["@zod/core@0.10.1", "", {}, "sha512-EmgYiJLMfZ3Dop9Wp7SadkEGYxbjGvrB/qRCT6PhGft9Eh1TbtNQYO9wEBgw4RE9JsmkolZ5Ah+tHu0EwoIy5g=="],
 
     "acorn": ["acorn@8.14.1", "", { "bin": { "acorn": "bin/acorn" } }, "sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg=="],
 
@@ -1681,7 +1680,7 @@
 
     "zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
 
-    "zod4": ["zod@4.0.0-beta.20250503T014749", "", { "dependencies": { "@zod/core": "0.10.1" } }, "sha512-ND9JjNpf2IaTZlHr4xgvWbOmzOwjDzrlCqBlhpnYSpXcx6DFzmLJrWhCZc4xgNGieD7MCx/ZoWIHDGZzmg/gnA=="],
+    "zod4": ["zod@4.5.0-canary.20260828T062315", "", {}, "sha512-SnU1IPrT4j2K20F72MrWwr2DxxP6e+d8QiwEzhp+NR2XDYKpkI27J790YgR2JReDoGq/Xh21ITbL2pDc69+zuA=="],
 
     "@babel/helper-create-regexp-features-plugin/@babel/helper-annotate-as-pure": ["@babel/helper-annotate-as-pure@7.27.1", "", { "dependencies": { "@babel/types": "^7.27.1" } }, "sha512-WnuuDILl9oOBbKnb4L+DyODx7iC47XfzmNCpTttFsSp6hTG7XZxu60+4IO+2/hPfcGOoKbFiwoI/+zwARbNQow=="],
 
