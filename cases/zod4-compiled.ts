@@ -71,7 +71,7 @@ createCase('zod4-compiled', 'assertLoose', () => {
   );
 
   return data => {
-    dataType.parse(data);
+    if (!z.validate(dataType, data)) throw new Error('Invalid');
 
     return true;
   };
@@ -99,7 +99,7 @@ createCase('zod4-compiled', 'assertStrict', () => {
   );
 
   return data => {
-    dataType.parse(data);
+    if (!z.validate(dataType, data)) throw new Error('Invalid');
 
     return true;
   };

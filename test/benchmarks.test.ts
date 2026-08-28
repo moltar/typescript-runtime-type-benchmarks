@@ -62,6 +62,7 @@ import '../cases/vality';
 import '../cases/yup';
 import '../cases/zod';
 import '../cases/zod4';
+import '../cases/zod4-compiled';
 import '../cases/deepkit';
 import '../cases/effect-schema';
 import '../cases/ts-auto-guard';
