@@ -15,7 +15,7 @@ createCase('zod4-compiled', 'parseSafe', () => {
         num: z.number(),
         bool: z.boolean(),
       }),
-    })
+    }),
   );
 
   return data => {
@@ -41,7 +41,7 @@ createCase('zod4-compiled', 'parseStrict', () => {
           })
           .strict(),
       })
-      .strict()
+      .strict(),
   );
 
   return data => {
@@ -67,7 +67,7 @@ createCase('zod4-compiled', 'assertLoose', () => {
           })
           .passthrough(),
       })
-      .passthrough()
+      .passthrough(),
   );
 
   return data => {
@@ -95,7 +95,7 @@ createCase('zod4-compiled', 'assertStrict', () => {
           })
           .strict(),
       })
-      .strict()
+      .strict(),
   );
 
   return data => {
