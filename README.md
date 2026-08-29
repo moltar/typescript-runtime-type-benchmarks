@@ -73,7 +73,7 @@
 * [Vality](https://github.com/jeengbe/vality)
 * [yup](https://github.com/jquense/yup)
 * [zod](https://github.com/colinhacks/zod)
-* [zod (v4)](https://github.com/colinhacks/zod/tree/v4)
+* [zod (v3)](https://github.com/colinhacks/zod/tree/v3)
 
 ## Criteria
 

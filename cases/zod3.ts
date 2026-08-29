@@ -1,7 +1,7 @@
-import * as z from 'zod4';
+import * as z from 'zod3';
 import { createCase } from '../benchmarks';
 
-createCase('zod4', 'parseSafe', () => {
+createCase('zod3', 'parseSafe', () => {
   const dataType = z.object({
     number: z.number(),
     negNumber: z.number(),
@@ -21,7 +21,7 @@ createCase('zod4', 'parseSafe', () => {
   };
 });
 
-createCase('zod4', 'parseStrict', () => {
+createCase('zod3', 'parseStrict', () => {
   const dataType = z
     .object({
       number: z.number(),
@@ -45,7 +45,7 @@ createCase('zod4', 'parseStrict', () => {
   };
 });
 
-createCase('zod4', 'assertLoose', () => {
+createCase('zod3', 'assertLoose', () => {
   const dataType = z
     .object({
       number: z.number(),
@@ -71,7 +71,7 @@ createCase('zod4', 'assertLoose', () => {
   };
 });
 
-createCase('zod4', 'assertStrict', () => {
+createCase('zod3', 'assertStrict', () => {
   const dataType = z
     .object({
       number: z.number(),
