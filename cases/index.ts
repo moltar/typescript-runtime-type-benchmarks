@@ -56,6 +56,7 @@ export const cases = [
   'vality',
   'yup',
   'zod',
+  'zod-compiled',
   'zod3',
   'deepkit',
   'effect-schema',
