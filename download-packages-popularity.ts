@@ -15,6 +15,10 @@ export const packages = [
     packageName: 'arktype',
   },
   {
+    name: 'ata',
+    packageName: 'ata-validator',
+  },
+  {
     name: 'banditypes',
     packageName: 'banditypes',
   },

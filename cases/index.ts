@@ -2,6 +2,7 @@ export const cases = [
   'aeria',
   'ajv',
   'arktype',
+  'ata',
   'banditypes',
   'bueno',
   'caketype',

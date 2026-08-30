@@ -7,6 +7,7 @@ import { cases } from '../cases';
 import '../cases/aeria';
 import '../cases/ajv';
 import '../cases/arktype';
+import '../cases/ata';
 import '../cases/banditypes';
 import '../cases/bueno';
 import '../cases/caketype';
