@@ -216,7 +216,7 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : '',
+      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : 'n/a',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and node-version
       benchmark: [
@@ -236,7 +236,7 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : '',
+      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : 'n/a',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and bun-version
       benchmark: [
@@ -258,7 +258,7 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : '',
+      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : 'n/a',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and deno-version
       benchmark: [
@@ -369,11 +369,24 @@ async function graph({
     spec: {
       layer: [
         {
+          // full-width track so benchmarks a library doesn't run still
+          // read as deliberate empty rows
+          mark: {
+            type: 'bar',
+            cornerRadius: 2,
+          },
+          width: chart.width,
+          encoding: {
+            x: { value: 0 },
+            x2: { value: chart.width },
+            color: { value: chart.trackColor },
+          },
+        },
+        {
           mark: {
             type: 'bar',
             cornerRadiusEnd: 2,
           },
-          width: chart.width,
         },
         {
           mark: {
@@ -400,6 +413,7 @@ async function graph({
             offset: 10,
             format: '~s',
             tickCount: 6,
+            grid: false,
             labelFontSize: 11,
             titleFontSize: 12.5,
             titleFontWeight: 'normal',

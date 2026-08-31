@@ -18,6 +18,8 @@ export interface ChartTheme {
   gridColor: string;
   /** axis domain/tick color */
   domainColor: string;
+  /** full-width row track behind each bar */
+  trackColor: string;
   /** bar plot width in px */
   width: number;
 }
@@ -42,6 +44,7 @@ export const CHART: { light: ChartTheme; dark: ChartTheme } = {
     valueColor: '#6b7280',
     gridColor: '#f3f4f6',
     domainColor: '#e5e7eb',
+    trackColor: '#f1f3f5',
     width: 470,
   },
   dark: {
@@ -58,6 +61,7 @@ export const CHART: { light: ChartTheme; dark: ChartTheme } = {
     valueColor: '#9ca3af',
     gridColor: '#1f242c',
     domainColor: '#333a44',
+    trackColor: '#20252d',
     width: 470,
   },
 };
