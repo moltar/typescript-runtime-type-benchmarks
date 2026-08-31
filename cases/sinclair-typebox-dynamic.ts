@@ -2,14 +2,11 @@ import { createCase } from '../benchmarks';
 import { Value } from '@sinclair/typebox/value';
 import { Loose, Strict } from './sinclair-typebox';
 
-// Value.Clean removes unknown keys; it runs on a clone so the input is not
-// mutated and the case returns a new object.
+// Value.Parse is the first-class parse entry point: it clones, removes
+// unknown keys and asserts in one call, returning a new typed object.
 createCase('@sinclair/typebox-(dynamic)', 'parseSafe', () => {
   return data => {
-    if (!Value.Check(Loose, data)) {
-      throw new Error('validation failure');
-    }
-    return Value.Clean(Loose, Value.Clone(data)) as typeof data;
+    return Value.Parse(Loose, data);
   };
 });
 createCase('@sinclair/typebox-(dynamic)', 'parseStrict', () => {
