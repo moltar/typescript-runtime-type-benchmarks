@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "typescript-runtime-type-benchmarks",
@@ -27,6 +26,7 @@
         "@types/benchmark": "2.1.5",
         "ajv": "8.20.0",
         "arktype": "2.2.3",
+        "ata-validator": "1.10.0",
         "banditypes": "0.3.0",
         "benny": "3.7.1",
         "bueno": "0.1.5",
@@ -133,6 +133,20 @@
     "@arrows/error": ["@arrows/error@1.0.2", "", {}, "sha512-yvkiv1ay4Z3+Z6oQsUkedsQm5aFdyPpkBUQs8vejazU/RmANABx6bMMcBPPHI4aW43VPQmXFfBzr/4FExwWTEA=="],
 
     "@arrows/multimethod": ["@arrows/multimethod@1.4.1", "", { "dependencies": { "@arrows/array": "^1.4.1", "@arrows/composition": "^1.2.2", "@arrows/error": "^1.0.2", "fast-deep-equal": "^3.1.3" } }, "sha512-AZnAay0dgPnCJxn3We5uKiB88VL+1ZIF2SjZohLj6vqY2UyvB/sKdDnFP+LZNVsTC5lcnGPmLlRRkAh4sXkXsQ=="],
+
+    "@ata-validator/native-darwin-arm64": ["@ata-validator/native-darwin-arm64@1.10.0", "", { "os": "darwin", "cpu": "arm64" }, "sha512-ji72AWqJnnTGjT1GFGTCBJIndclKWko+r4gdwzyuSsm5AR61hDYVQDmYxzmI1yXxKRGabKqlMsqXwH34OhMZ7Q=="],
+
+    "@ata-validator/native-darwin-x64": ["@ata-validator/native-darwin-x64@1.10.0", "", { "os": "darwin", "cpu": "x64" }, "sha512-0pICN5GGpHhuTvhHJRR9IgigSl30zbzsIuDBTjKWZKoyQGcPZY1VSS29hZSVmYmVWdPoEZvDDGYRFdqjq/TSEw=="],
+
+    "@ata-validator/native-linux-arm64-gnu": ["@ata-validator/native-linux-arm64-gnu@1.10.0", "", { "os": "linux", "cpu": "arm64" }, "sha512-n8oyif9KEUGLgWfCcaDiJNn8YnB4bNQsCpjr/fDA8bpD8HpgsfxkBAgtDKoAxQnQWZVuzgU++bcwRu04sDi2Vg=="],
+
+    "@ata-validator/native-linux-arm64-musl": ["@ata-validator/native-linux-arm64-musl@1.10.0", "", { "os": "linux", "cpu": "arm64" }, "sha512-mkSQgkJGdotzf41mSVMnhZ+p5ecPcUBqHGBlx+vIidtvN4pXR1bhUKFaxT8JUU2hVyQy3onHeQfiI5hS/Gnewg=="],
+
+    "@ata-validator/native-linux-x64-gnu": ["@ata-validator/native-linux-x64-gnu@1.10.0", "", { "os": "linux", "cpu": "x64" }, "sha512-TGWjqqwtB1LPwl08SOmK0Z7VDLYF9he1ETYREYBEEwFCEwGd8XuFz/jgRGbk5mQC1NJDaqtLNtu+RLTmgqaRzg=="],
+
+    "@ata-validator/native-linux-x64-musl": ["@ata-validator/native-linux-x64-musl@1.10.0", "", { "os": "linux", "cpu": "x64" }, "sha512-05gTYrbKTIvKLgWjHLjZvlDCbSWoPZZhEmaFsgtsX4OdEASlCK+EmkVfwmD+oTvkvh6ASwvZ9bgpADwtgKCKvw=="],
+
+    "@ata-validator/native-win32-x64": ["@ata-validator/native-win32-x64@1.10.0", "", { "os": "win32", "cpu": "x64" }, "sha512-VQfGFGJBwrMRcpYk0u1y2KOQkaz3G8Hftw6eapUa7I7R6zdbZkWrNij93B+n9jVsQr48nVHzIlfI/PZq9pDoAw=="],
 
     "@babel/cli": ["@babel/cli@7.29.7", "", { "dependencies": { "@jridgewell/trace-mapping": "^0.3.28", "commander": "^6.2.0", "convert-source-map": "^2.0.0", "fs-readdir-recursive": "^1.1.0", "glob": "^7.2.0", "make-dir": "^2.1.0", "slash": "^2.0.0" }, "optionalDependencies": { "@nicolo-ribaudo/chokidar-2": "2.1.8-no-fsevents.3", "chokidar": "^3.6.0" }, "peerDependencies": { "@babel/core": "^7.0.0-0" }, "bin": { "babel": "./bin/babel.js", "babel-external-helpers": "./bin/babel-external-helpers.js" } }, "sha512-/75HwRbAYPqXv/Ax1h7Fg3IZfXgdU98jnA8H93/m/QBaPV3Hp5ICoLqzGYye1yHBCgpmXvtqgSUN8oOKX5tojQ=="],
 
@@ -655,6 +669,8 @@
     "assertion-error": ["assertion-error@2.0.1", "", {}, "sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA=="],
 
     "astral-regex": ["astral-regex@2.0.0", "", {}, "sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ=="],
+
+    "ata-validator": ["ata-validator@1.10.0", "", { "optionalDependencies": { "@ata-validator/native-darwin-arm64": "1.10.0", "@ata-validator/native-darwin-x64": "1.10.0", "@ata-validator/native-linux-arm64-gnu": "1.10.0", "@ata-validator/native-linux-arm64-musl": "1.10.0", "@ata-validator/native-linux-x64-gnu": "1.10.0", "@ata-validator/native-linux-x64-musl": "1.10.0", "@ata-validator/native-win32-x64": "1.10.0" }, "peerDependencies": { "yaml": "^2.0.0" }, "optionalPeers": ["yaml"], "bin": { "ata": "bin/ata.js" } }, "sha512-BhL2sUy1P9OCwzc6BKFOX4RbExz2h8cUS37vyaa5n3M8n8nC1zk5G6+0h2bp5UiPQNiKs5q7+vGr3G6HVx5Tyg=="],
 
     "atob": ["atob@2.1.2", "", { "bin": { "atob": "bin/atob.js" } }, "sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg=="],
 
