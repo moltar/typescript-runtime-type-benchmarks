@@ -3,14 +3,23 @@
 /* ---------------------------------------------------------------- */
 
 :root {
+  color-scheme: light dark;
   --c-parseSafe: #2a78d6;
   --c-parseStrict: #eb6834;
   --c-assertLoose: #1baf7a;
   --c-assertStrict: #eda100;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-parseSafe: #3987e5;
+    --c-parseStrict: #d95926;
+    --c-assertLoose: #199e70;
+    --c-assertStrict: #c98500;
+  }
+}
+
 html[data-theme='report'] {
-  color-scheme: light;
   --bg: #fdfcfa;
   --surface: #fdfcfa;
   --ink: #1a1a19;
@@ -19,14 +28,25 @@ html[data-theme='report'] {
   --line: #e5e2dc;
   --line-strong: #1a1a19;
   --chip-bg: #f4f2ee;
-  --chip-checked: #1a1a19;
   --font-display: 'IBM Plex Sans', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
+@media (prefers-color-scheme: dark) {
+  html[data-theme='report'] {
+    --bg: #1b1b19;
+    --surface: #1b1b19;
+    --ink: #e8e6df;
+    --ink-2: #b3b1a7;
+    --ink-3: #898781;
+    --line: #33322e;
+    --line-strong: #e8e6df;
+    --chip-bg: #262521;
+  }
+}
+
 html[data-theme='panel'] {
-  color-scheme: dark;
   --bg: #131317;
   --surface: #1a1a20;
   --ink: #e8e6df;
@@ -35,18 +55,25 @@ html[data-theme='panel'] {
   --line: #28282f;
   --line-strong: #3c3c46;
   --chip-bg: #202027;
-  --chip-checked: #e8e6df;
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --c-parseSafe: #3987e5;
-  --c-parseStrict: #d95926;
-  --c-assertLoose: #199e70;
-  --c-assertStrict: #c98500;
+}
+
+@media (prefers-color-scheme: light) {
+  html[data-theme='panel'] {
+    --bg: #f4f4f5;
+    --surface: #ffffff;
+    --ink: #1b1b20;
+    --ink-2: #4c4c55;
+    --ink-3: #77777f;
+    --line: #e2e2e6;
+    --line-strong: #1b1b20;
+    --chip-bg: #ececef;
+  }
 }
 
 html[data-theme='tool'] {
-  color-scheme: light;
   --bg: #f3f4f6;
   --surface: #ffffff;
   --ink: #111827;
@@ -55,10 +82,22 @@ html[data-theme='tool'] {
   --line: #e5e7eb;
   --line-strong: #111827;
   --chip-bg: #f3f4f6;
-  --chip-checked: #111827;
   --font-display: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme='tool'] {
+    --bg: #0f1115;
+    --surface: #161a20;
+    --ink: #e5e7eb;
+    --ink-2: #9ca3af;
+    --ink-3: #6b7280;
+    --line: #262b33;
+    --line-strong: #e5e7eb;
+    --chip-bg: #1f242c;
+  }
 }
 
 /* ---------------------------------------------------------------- */

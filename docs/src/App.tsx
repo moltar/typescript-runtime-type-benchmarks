@@ -175,6 +175,7 @@ async function graph({
   benchmarkResultsBun,
   benchmarkResultsDeno,
   sort,
+  dark,
 }: {
   selectedBenchmarks: typeof BENCHMARKS;
   selectedNodeJsVersions: string[];
@@ -184,6 +185,7 @@ async function graph({
   benchmarkResultsBun: BenchmarkResult[];
   benchmarkResultsDeno: BenchmarkResult[];
   sort?: 'alphabetically' | 'fastest' | 'popularity';
+  dark: boolean;
 }) {
   if (
     !selectedBenchmarks.length ||
@@ -193,6 +195,8 @@ async function graph({
   ) {
     return '';
   }
+
+  const chart = THEME.chart[dark ? 'dark' : 'light'];
 
   const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
 
@@ -279,19 +283,19 @@ async function graph({
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < nodeJsVersionCount; i++) {
-      colorScaleRange.push(THEME.chart.series[b.name]);
+      colorScaleRange.push(chart.series[b.name]);
     }
   });
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < bunVersionCount; i++) {
-      colorScaleRange.push(THEME.chart.series[b.name]);
+      colorScaleRange.push(chart.series[b.name]);
     }
   });
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < denoVersionCount; i++) {
-      colorScaleRange.push(THEME.chart.series[b.name]);
+      colorScaleRange.push(chart.series[b.name]);
     }
   });
 
@@ -321,8 +325,6 @@ async function graph({
   const sortedNames: string[] = [];
 
   new Set(sortedValues.map(b => b.name)).forEach(n => sortedNames.push(n));
-
-  const chart = THEME.chart;
 
   const vegaSpec = vegaLite.compile({
     data: {
@@ -439,6 +441,7 @@ class Graph extends Component<
     valuesBun: BenchmarkResult[];
     valuesDeno: BenchmarkResult[];
     sort: Parameters<typeof graph>[0]['sort'];
+    dark: boolean;
   },
   { svg?: string }
 > {
@@ -460,6 +463,7 @@ class Graph extends Component<
         benchmarkResultsBun: this.props.valuesBun,
         benchmarkResultsDeno: this.props.valuesDeno,
         sort: this.props.sort,
+        dark: this.props.dark,
       }),
     });
   }
@@ -528,7 +532,7 @@ function BenchmarkDescription(props: {
       <h4>
         <span
           class="swatch"
-          style={{ background: THEME.chart.series[props.benchmark] }}
+          style={{ background: `var(--c-${props.benchmark})` }}
         />
         {props.name}
       </h4>
@@ -549,11 +553,15 @@ export class App extends Component<
     valuesDeno: BenchmarkResult[];
     sortBy: 'fastest' | 'alphabetically' | 'popularity';
     lastUpdated?: Date;
+    darkMode: boolean;
   }
 > {
+  darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
   constructor() {
     super();
     this.setState({
+      darkMode: this.darkModeQuery.matches,
       selectedBenchmarks: BENCHMARKS.reduce(
         (acc, b) => ({ ...acc, [b.name]: true }),
         {}
@@ -611,6 +619,10 @@ export class App extends Component<
   }
 
   async componentDidMount() {
+    this.darkModeQuery.addEventListener('change', event => {
+      this.setState({ darkMode: event.matches });
+    });
+
     loadPackagesPopularity().catch(err => {
       console.error(`error while loading package popularity`, err);
     });
@@ -881,6 +893,7 @@ export class App extends Component<
           valuesBun={this.state.valuesBun}
           valuesDeno={this.state.valuesDeno}
           sort={this.state.sortBy}
+          dark={this.state.darkMode}
           />
         </main>
 

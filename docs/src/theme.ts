@@ -1,5 +1,6 @@
 // Visual themes. The active theme is picked via the `?theme=` query
-// parameter (mockup switch); `report` is the default.
+// parameter (mockup switch); `report` is the default. Each theme has a
+// light and a dark chart config, chosen by prefers-color-scheme.
 
 export interface ChartTheme {
   /** color per benchmark name, stable across the whole page */
@@ -14,7 +15,7 @@ export interface ChartTheme {
   axisColor: string;
   /** bar value label color */
   valueColor: string;
-  /** grid line color ('' disables the grid) */
+  /** grid line color */
   gridColor: string;
   /** axis domain/tick color */
   domainColor: string;
@@ -24,7 +25,7 @@ export interface ChartTheme {
 
 export interface Theme {
   name: string;
-  chart: ChartTheme;
+  chart: { light: ChartTheme; dark: ChartTheme };
 }
 
 const PLEX_SANS = "'IBM Plex Sans', system-ui, sans-serif";
@@ -53,43 +54,82 @@ export const THEMES: { [name: string]: Theme } = {
   report: {
     name: 'report',
     chart: {
-      series: SERIES_LIGHT,
-      font: PLEX_SANS,
-      monoFont: PLEX_MONO,
-      headerColor: '#1a1a19',
-      axisColor: '#898781',
-      valueColor: '#52514e',
-      gridColor: '#efedea',
-      domainColor: '#d8d5d0',
-      width: 600,
+      light: {
+        series: SERIES_LIGHT,
+        font: PLEX_SANS,
+        monoFont: PLEX_MONO,
+        headerColor: '#1a1a19',
+        axisColor: '#898781',
+        valueColor: '#52514e',
+        gridColor: '#efedea',
+        domainColor: '#d8d5d0',
+        width: 600,
+      },
+      dark: {
+        series: SERIES_DARK,
+        font: PLEX_SANS,
+        monoFont: PLEX_MONO,
+        headerColor: '#e8e6df',
+        axisColor: '#898781',
+        valueColor: '#a3a19a',
+        gridColor: '#262521',
+        domainColor: '#3a3934',
+        width: 600,
+      },
     },
   },
   panel: {
     name: 'panel',
     chart: {
-      series: SERIES_DARK,
-      font: GROTESK,
-      monoFont: JET_MONO,
-      headerColor: '#e8e6df',
-      axisColor: '#8b898f',
-      valueColor: '#a8a6ad',
-      gridColor: '#26262e',
-      domainColor: '#3a3a44',
-      width: 600,
+      light: {
+        series: SERIES_LIGHT,
+        font: GROTESK,
+        monoFont: JET_MONO,
+        headerColor: '#1b1b20',
+        axisColor: '#8b8b93',
+        valueColor: '#62626b',
+        gridColor: '#ececef',
+        domainColor: '#d5d5da',
+        width: 600,
+      },
+      dark: {
+        series: SERIES_DARK,
+        font: GROTESK,
+        monoFont: JET_MONO,
+        headerColor: '#e8e6df',
+        axisColor: '#8b898f',
+        valueColor: '#a8a6ad',
+        gridColor: '#26262e',
+        domainColor: '#3a3a44',
+        width: 600,
+      },
     },
   },
   tool: {
     name: 'tool',
     chart: {
-      series: SERIES_LIGHT,
-      font: INTER,
-      monoFont: JET_MONO,
-      headerColor: '#111827',
-      axisColor: '#9ca3af',
-      valueColor: '#6b7280',
-      gridColor: '#f3f4f6',
-      domainColor: '#e5e7eb',
-      width: 470,
+      light: {
+        series: SERIES_LIGHT,
+        font: INTER,
+        monoFont: JET_MONO,
+        headerColor: '#111827',
+        axisColor: '#9ca3af',
+        valueColor: '#6b7280',
+        gridColor: '#f3f4f6',
+        domainColor: '#e5e7eb',
+        width: 470,
+      },
+      dark: {
+        series: SERIES_DARK,
+        font: INTER,
+        monoFont: JET_MONO,
+        headerColor: '#e5e7eb',
+        axisColor: '#6b7280',
+        valueColor: '#9ca3af',
+        gridColor: '#1f242c',
+        domainColor: '#333a44',
+        width: 470,
+      },
     },
   },
 };
