@@ -572,7 +572,7 @@ export class App extends Component<
 
   constructor() {
     super();
-    this.setState({
+    this.state = {
       darkMode: this.darkModeQuery.matches,
       selectedBenchmarks: BENCHMARKS.reduce(
         (acc, b) => ({ ...acc, [b.name]: true }),
@@ -585,7 +585,7 @@ export class App extends Component<
       valuesBun: [],
       valuesDeno: [],
       sortBy: 'fastest' as const,
-    });
+    };
   }
 
   getNodeJsVersions() {
@@ -886,26 +886,26 @@ export class App extends Component<
 
         <main class="chart">
           <Graph
-          benchmarks={BENCHMARKS.filter(
-            b => this.state.selectedBenchmarks[b.name]
-          )}
-          nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
-            .sort()
-            .filter(entry => entry[1])
-            .map(entry => entry[0])}
-          bunVersions={Object.entries(this.state.selectedBunVersions)
-            .sort()
-            .filter(entry => entry[1])
-            .map(entry => entry[0])}
-          denoVersions={Object.entries(this.state.selectedDenoVersions)
-            .sort()
-            .filter(entry => entry[1])
-            .map(entry => entry[0])}
-          valuesNodeJs={this.state.valuesNodeJs}
-          valuesBun={this.state.valuesBun}
-          valuesDeno={this.state.valuesDeno}
-          sort={this.state.sortBy}
-          dark={this.state.darkMode}
+            benchmarks={BENCHMARKS.filter(
+              b => this.state.selectedBenchmarks[b.name]
+            )}
+            nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
+              .sort()
+              .filter(entry => entry[1])
+              .map(entry => entry[0])}
+            bunVersions={Object.entries(this.state.selectedBunVersions)
+              .sort()
+              .filter(entry => entry[1])
+              .map(entry => entry[0])}
+            denoVersions={Object.entries(this.state.selectedDenoVersions)
+              .sort()
+              .filter(entry => entry[1])
+              .map(entry => entry[0])}
+            valuesNodeJs={this.state.valuesNodeJs}
+            valuesBun={this.state.valuesBun}
+            valuesDeno={this.state.valuesDeno}
+            sort={this.state.sortBy}
+            dark={this.state.darkMode}
           />
         </main>
 
