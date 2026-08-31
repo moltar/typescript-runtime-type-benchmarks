@@ -1,6 +1,9 @@
 import { Component, type ComponentChildren } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
+import { activeTheme } from './theme.js';
+
+const THEME = activeTheme();
 
 // which results are attempted to load
 // the first is selected automatically
@@ -22,43 +25,12 @@ interface BenchmarkResult {
   margin: number;
 }
 
-// colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
-const COLORS = [
-  '#8dd3c7',
-  // '#ffffb3', not this one .. looks too bright to me
-  '#bebada',
-  '#fb8072',
-  '#80b1d3',
-  '#fdb462',
-  '#b3de69',
-  '#fccde5',
-  '#d9d9d9',
-  '#bc80bd',
-  '#ccebc5',
-  '#ffed6f',
-];
-
-// create a stable color list
+// colors come from the active theme, keyed by benchmark name
 const BENCHMARKS = [
-  { name: 'parseSafe', label: 'Safe Parsing', color: COLORS[0], order: '0' },
-  {
-    name: 'parseStrict',
-    label: 'Strict Parsing',
-    color: COLORS[1],
-    order: '1',
-  },
-  {
-    name: 'assertLoose',
-    label: 'Loose Assertion',
-    color: COLORS[2],
-    order: '2',
-  },
-  {
-    name: 'assertStrict',
-    label: 'Strict Assertion',
-    color: COLORS[3],
-    order: '3',
-  },
+  { name: 'parseSafe', label: 'Safe Parsing', order: '0' },
+  { name: 'parseStrict', label: 'Strict Parsing', order: '1' },
+  { name: 'assertLoose', label: 'Loose Assertion', order: '2' },
+  { name: 'assertStrict', label: 'Strict Assertion', order: '3' },
 ];
 
 // order lookup table
@@ -242,7 +214,7 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops.toLocaleString('en-US'),
+      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : '',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and node-version
       benchmark: [
@@ -262,7 +234,7 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops.toLocaleString('en-US'),
+      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : '',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and bun-version
       benchmark: [
@@ -284,7 +256,7 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops.toLocaleString('en-US'),
+      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : '',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and deno-version
       benchmark: [
@@ -307,19 +279,19 @@ async function graph({
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < nodeJsVersionCount; i++) {
-      colorScaleRange.push(b.color);
+      colorScaleRange.push(THEME.chart.series[b.name]);
     }
   });
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < bunVersionCount; i++) {
-      colorScaleRange.push(b.color);
+      colorScaleRange.push(THEME.chart.series[b.name]);
     }
   });
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < denoVersionCount; i++) {
-      colorScaleRange.push(b.color);
+      colorScaleRange.push(THEME.chart.series[b.name]);
     }
   });
 
@@ -350,14 +322,35 @@ async function graph({
 
   new Set(sortedValues.map(b => b.name)).forEach(n => sortedNames.push(n));
 
+  const chart = THEME.chart;
+
   const vegaSpec = vegaLite.compile({
     data: {
       values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
     },
     height: {
-      step: 15 / (nodeJsVersionCount + bunVersionCount + denoVersionCount),
+      step: 16 / (nodeJsVersionCount + bunVersionCount + denoVersionCount),
     },
+    spacing: 10,
     background: 'transparent', // no white graphs for dark mode users
+    config: {
+      view: { stroke: null },
+      font: chart.font,
+      header: {
+        labelFont: chart.font,
+        labelColor: chart.headerColor,
+        labelFontWeight: 600,
+      },
+      axis: {
+        labelFont: chart.monoFont,
+        labelColor: chart.axisColor,
+        titleFont: chart.font,
+        titleColor: chart.axisColor,
+        gridColor: chart.gridColor,
+        tickColor: chart.domainColor,
+        domainColor: chart.domainColor,
+      },
+    },
     facet: {
       row: {
         field: 'name',
@@ -367,7 +360,8 @@ async function graph({
           labelOrient: 'left',
           labelAnchor: 'middle',
           labelAlign: 'left',
-          labelFontSize: 12,
+          labelFontSize: 12.5,
+          labelLimit: 260,
         },
         sort: sortedNames,
       },
@@ -375,15 +369,21 @@ async function graph({
     spec: {
       layer: [
         {
-          mark: 'bar',
-          width: 600,
+          mark: {
+            type: 'bar',
+            cornerRadiusEnd: 2,
+          },
+          width: chart.width,
         },
         {
           mark: {
             type: 'text',
             align: 'left',
             baseline: 'middle',
-            dx: 3,
+            dx: 4,
+            font: chart.monoFont,
+            fontSize: 9.5,
+            fill: chart.valueColor,
           },
           encoding: {
             text: { field: 'opsLabel' },
@@ -398,8 +398,10 @@ async function graph({
           axis: {
             orient: 'top',
             offset: 10,
-            labelFontSize: 12,
-            titleFontSize: 14,
+            format: '~s',
+            tickCount: 6,
+            labelFontSize: 11,
+            titleFontSize: 12.5,
             titleFontWeight: 'normal',
           },
         },
@@ -468,23 +470,14 @@ class Graph extends Component<
     });
 
     if (!this.state.svg) {
-      return (
-        <div style={{ margin: '5rem' }}>
-          <i>No Benchmark Selected</i>
-        </div>
-      );
+      return <div class="empty">No Benchmark Selected</div>;
     }
 
-    return (
-      <div
-        style={{ marginBottom: '1rem' }}
-        dangerouslySetInnerHTML={{ __html: this.state.svg }}
-      />
-    );
+    return <div dangerouslySetInnerHTML={{ __html: this.state.svg }} />;
   }
 }
 
-function Checkbox(props: {
+function Chip(props: {
   id: string;
   label: string;
   color?: string;
@@ -492,12 +485,9 @@ function Checkbox(props: {
   onChange: (checked: boolean) => void;
 }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        backgroundColor: props.color,
-        color: props.color ? 'black' : undefined,
-      }}
+    <label
+      class={`chip${props.checked ? ' checked' : ''}`}
+      style={props.color ? { '--dot': props.color } : undefined}
     >
       <input
         id={props.id}
@@ -506,32 +496,41 @@ function Checkbox(props: {
         checked={props.checked}
         onInput={() => props.onChange(!props.checked)}
       />
-      <label style={{ width: '100%' }} for={props.id}>
-        {props.label}
-      </label>
-    </div>
+      {props.color && <span class="dot" />}
+      {props.label}
+    </label>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+    </svg>
+  );
+}
+
+function ForkIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z" />
+    </svg>
   );
 }
 
 function BenchmarkDescription(props: {
   name: string;
-  color: string | undefined;
+  benchmark: string;
   children?: ComponentChildren;
 }) {
   return (
-    <div style={{ marginBotton: '1rem' }}>
+    <div class="bench-doc">
       <h4>
         <span
-          style={{
-            backgroundColor: props.color ?? 'pink',
-            display: 'inline-block',
-            width: '2rem',
-            marginRight: '0.5rem',
-          }}
-        >
-          &nbsp;
-        </span>
-        {props.name}{' '}
+          class="swatch"
+          style={{ background: THEME.chart.series[props.benchmark] }}
+        />
+        {props.name}
       </h4>
       {props.children}
     </div>
@@ -699,65 +698,57 @@ export class App extends Component<
 
   render() {
     return (
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'baseline',
-            justifyContent: 'space-between',
-          }}
-        >
-          <h1>Runtype Benchmarks</h1>
+      <div class="app">
+        <header class="masthead">
           <div>
+            <h1>Runtype Benchmarks</h1>
+            <div class="strip" aria-hidden="true">
+              {BENCHMARKS.map(b => (
+                <span style={{ background: `var(--c-${b.name})` }} />
+              ))}
+            </div>
+            <p class="tagline">
+              Benchmark comparison of packages with runtime validation and
+              TypeScript support.
+            </p>
+            {this.state.lastUpdated && (
+              <p class="updated">
+                Data last updated:{' '}
+                {this.state.lastUpdated.toLocaleDateString(undefined, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </p>
+            )}
+          </div>
+          <div class="gh-links">
             <a
-              class="github-button"
+              class="gh-btn"
               href="https://github.com/moltar/typescript-runtime-type-benchmarks"
-              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
-              data-icon="octicon-star"
-              data-size="large"
-              data-show-count="true"
               aria-label="Star moltar/typescript-runtime-type-benchmarks on GitHub"
             >
-              Star
+              <StarIcon /> Star
             </a>
             <a
-              class="github-button"
+              class="gh-btn"
               href="https://github.com/moltar/typescript-runtime-type-benchmarks/fork"
-              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
-              data-icon="octicon-repo-forked"
-              data-size="large"
-              data-show-count="true"
               aria-label="Fork moltar/typescript-runtime-type-benchmarks on GitHub"
             >
-              Fork
+              <ForkIcon /> Fork
             </a>
           </div>
-        </div>
-        <p>
-          Benchmark Comparison of Packages with Runtime Validation and
-          TypeScript Support
-        </p>
+        </header>
 
-        {this.state.lastUpdated && (
-          <p style={{ color: '#666', fontSize: '0.9rem', marginTop: '-0.5rem' }}>
-            Data last updated:{' '}
-            {this.state.lastUpdated.toLocaleDateString(undefined, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-        )}
-
-        <div style={{ display: 'flex', margin: '1rem 0' }}>
-          <div style={{ width: '12rem', marginRight: '1rem' }}>
-            <label>Benchmarks:</label>
-            <div>
+        <section class="controls">
+          <fieldset class="control-group">
+            <legend>Benchmarks</legend>
+            <div class="chip-row">
               {BENCHMARKS.map(b => {
                 return (
-                  <Checkbox
+                  <Chip
                     id={b.name}
-                    color={b.color}
+                    color={`var(--c-${b.name})`}
                     checked={this.state.selectedBenchmarks[b.name] ?? false}
                     label={b.label}
                     onChange={checked =>
@@ -773,14 +764,14 @@ export class App extends Component<
                 );
               })}
             </div>
-          </div>
+          </fieldset>
 
-          <div style={{ width: '12rem' }}>
-            <label>Node.js Versions:</label>
-            <div>
+          <fieldset class="control-group">
+            <legend>Node.js</legend>
+            <div class="chip-row">
               {this.getNodeJsVersions().map(v => {
                 return (
-                  <Checkbox
+                  <Chip
                     id={v}
                     checked={this.state.selectedNodeJsVersions[v] ?? false}
                     label={v}
@@ -797,14 +788,14 @@ export class App extends Component<
                 );
               })}
             </div>
-          </div>
+          </fieldset>
 
-          <div style={{ width: '12rem' }}>
-            <label>Bun Versions:</label>
-            <div>
+          <fieldset class="control-group">
+            <legend>Bun</legend>
+            <div class="chip-row">
               {this.getBunVersions().map(v => {
                 return (
-                  <Checkbox
+                  <Chip
                     id={v}
                     checked={this.state.selectedBunVersions[v] ?? false}
                     label={v}
@@ -821,14 +812,14 @@ export class App extends Component<
                 );
               })}
             </div>
-          </div>
+          </fieldset>
 
-          <div style={{ width: '12rem' }}>
-            <label>Deno Versions:</label>
-            <div>
+          <fieldset class="control-group">
+            <legend>Deno</legend>
+            <div class="chip-row">
               {this.getDenoVersions().map(v => {
                 return (
-                  <Checkbox
+                  <Chip
                     id={v}
                     checked={this.state.selectedDenoVersions[v] ?? false}
                     label={v}
@@ -845,29 +836,32 @@ export class App extends Component<
                 );
               })}
             </div>
-          </div>
+          </fieldset>
 
-          <div style={{ width: '12rem' }}>
-            <label>
-              Sort:
-              <select
-                onChange={
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  (event: any) => {
-                    this.setState({ sortBy: event.target.value });
-                  }
+          <div class="control-group">
+            <span class="group-label" id="sort-label">
+              Sort
+            </span>
+            <select
+              class="sort-select"
+              aria-labelledby="sort-label"
+              onChange={
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (event: any) => {
+                  this.setState({ sortBy: event.target.value });
                 }
-                value={this.state.sortBy}
-              >
-                <option value="fastest">Fastest</option>
-                <option value="alphabetically">Alphabetically</option>
-                <option value="popularity">Popularity</option>
-              </select>
-            </label>
+              }
+              value={this.state.sortBy}
+            >
+              <option value="fastest">Fastest</option>
+              <option value="alphabetically">Alphabetically</option>
+              <option value="popularity">Popularity</option>
+            </select>
           </div>
-        </div>
+        </section>
 
-        <Graph
+        <main class="chart">
+          <Graph
           benchmarks={BENCHMARKS.filter(
             b => this.state.selectedBenchmarks[b.name]
           )}
@@ -887,57 +881,45 @@ export class App extends Component<
           valuesBun={this.state.valuesBun}
           valuesDeno={this.state.valuesDeno}
           sort={this.state.sortBy}
-        />
+          />
+        </main>
 
-        <div>
-          <BenchmarkDescription
-            name="Safe Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseSafe')?.color}
-          >
+        <section class="bench-docs">
+          <BenchmarkDescription name="Safe Parsing" benchmark="parseSafe">
             <p>
-              Check the input object against a schema and return it.
-              <br />
-              Raise an error if the input object does not conform to the schema,
-              e.g. an attribute is a number instead of a string or an attribute
-              is missing completely.
-              <br />
-              Any extra keys in the input object that are not defined in the
-              schema must be removed.
+              Check the input object against a schema and return it. Raise an
+              error if the input object does not conform to the schema, e.g. an
+              attribute is a number instead of a string or an attribute is
+              missing completely. Any extra keys in the input object that are
+              not defined in the schema must be removed.
             </p>
           </BenchmarkDescription>
 
-          <BenchmarkDescription
-            name="Strict Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseStrict')?.color}
-          >
+          <BenchmarkDescription name="Strict Parsing" benchmark="parseStrict">
             <p>
               Like safe parsing but raise an error if input objects contain
               extra keys.
             </p>
           </BenchmarkDescription>
 
-          <BenchmarkDescription
-            name="Loose Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertLoose')?.color}
-          >
+          <BenchmarkDescription name="Loose Assertion" benchmark="assertLoose">
             <p>
               Check the input object against a schema and raise an exception if
-              it does not match.
-              <br />
-              No errors are raised when encountering extra keys.
+              it does not match. No errors are raised when encountering extra
+              keys.
             </p>
           </BenchmarkDescription>
 
           <BenchmarkDescription
             name="Strict Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertStrict')?.color}
+            benchmark="assertStrict"
           >
             <p>
               Like loose assertion but raise an error if input objects or nested
               input objects contain extra keys.
             </p>
           </BenchmarkDescription>
-        </div>
+        </section>
       </div>
     );
   }
