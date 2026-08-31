@@ -1,4 +1,4 @@
-import { Component, type ComponentChildren } from 'preact';
+import { Component, type ComponentChildren, createRef } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
 import { CHART } from './theme.js';
@@ -174,6 +174,7 @@ async function graph({
   benchmarkResultsDeno,
   sort,
   dark,
+  containerWidth,
 }: {
   selectedBenchmarks: typeof BENCHMARKS;
   selectedNodeJsVersions: string[];
@@ -184,6 +185,7 @@ async function graph({
   benchmarkResultsDeno: BenchmarkResult[];
   sort?: 'alphabetically' | 'fastest' | 'popularity';
   dark: boolean;
+  containerWidth: number;
 }) {
   if (
     !selectedBenchmarks.length ||
@@ -195,6 +197,14 @@ async function graph({
   }
 
   const chart = CHART[dark ? 'dark' : 'light'];
+
+  // the library-name column and the value labels are laid out by vega, so
+  // reserve room for both and give the bars whatever is left
+  const labelLimit = containerWidth < 560 ? 130 : 260;
+  const plotWidth = Math.min(
+    Math.max(containerWidth - labelLimit - 95, 240),
+    560
+  );
 
   const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
 
@@ -275,6 +285,9 @@ async function graph({
   const bunVersionCount = new Set(valuesBun.map(v => v.runtimeVersion)).size;
   const denoVersionCount = new Set(valuesDeno.map(v => v.runtimeVersion)).size;
 
+  const versionCount =
+    nodeJsVersionCount + bunVersionCount + denoVersionCount;
+
   // build a color map so that each benchmark has the same color in different
   // node-versions
   const colorScaleRange: string[] = [];
@@ -328,9 +341,7 @@ async function graph({
     data: {
       values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
     },
-    height: {
-      step: 16 / (nodeJsVersionCount + bunVersionCount + denoVersionCount),
-    },
+    height: { step: 16 / versionCount },
     spacing: 10,
     background: 'transparent', // no white graphs for dark mode users
     config: {
@@ -361,7 +372,7 @@ async function graph({
           labelAnchor: 'middle',
           labelAlign: 'left',
           labelFontSize: 12.5,
-          labelLimit: 260,
+          labelLimit,
         },
         sort: sortedNames,
       },
@@ -375,10 +386,10 @@ async function graph({
             type: 'bar',
             cornerRadius: 2,
           },
-          width: chart.width,
+          width: plotWidth,
           encoding: {
             x: { value: 0 },
-            x2: { value: chart.width },
+            x2: { value: plotWidth },
             color: { value: chart.trackColor },
           },
         },
@@ -422,8 +433,21 @@ async function graph({
         y: {
           field: 'benchmark',
           type: 'nominal',
-          title: 'Benchmark',
-          axis: null, // to debug the bars: axis: {labelFontSize: 3},
+          title: null,
+          // one runtime version needs no label; several would otherwise be
+          // indistinguishable repeats of the same color
+          axis:
+            versionCount > 1
+              ? {
+                  labelExpr: "split(datum.label, '-')[3]",
+                  labelFont: chart.monoFont,
+                  labelFontSize: 9,
+                  labelColor: chart.axisColor,
+                  labelPadding: 4,
+                  domain: false,
+                  ticks: false,
+                }
+              : null,
         },
         color: {
           field: 'benchmark',
@@ -454,6 +478,7 @@ class Graph extends Component<
     valuesDeno: BenchmarkResult[];
     sort: Parameters<typeof graph>[0]['sort'];
     dark: boolean;
+    containerWidth: number;
   },
   { svg?: string }
 > {
@@ -476,6 +501,7 @@ class Graph extends Component<
         benchmarkResultsDeno: this.props.valuesDeno,
         sort: this.props.sort,
         dark: this.props.dark,
+        containerWidth: this.props.containerWidth,
       }),
     });
   }
@@ -566,9 +592,12 @@ export class App extends Component<
     sortBy: 'fastest' | 'alphabetically' | 'popularity';
     lastUpdated?: Date;
     darkMode: boolean;
+    chartWidth: number;
   }
 > {
   darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  chartRef = createRef<HTMLElement>();
+  resizeObserver?: ResizeObserver;
 
   constructor() {
     super();
@@ -585,6 +614,7 @@ export class App extends Component<
       valuesBun: [],
       valuesDeno: [],
       sortBy: 'fastest' as const,
+      chartWidth: 560,
     };
   }
 
@@ -634,6 +664,14 @@ export class App extends Component<
     this.darkModeQuery.addEventListener('change', event => {
       this.setState({ darkMode: event.matches });
     });
+
+    // the chart is a static svg, so it has to be re-rendered at the new size
+    if (this.chartRef.current) {
+      this.resizeObserver = new ResizeObserver(([entry]) => {
+        this.setState({ chartWidth: entry.contentRect.width });
+      });
+      this.resizeObserver.observe(this.chartRef.current);
+    }
 
     loadPackagesPopularity().catch(err => {
       console.error(`error while loading package popularity`, err);
@@ -718,6 +756,10 @@ export class App extends Component<
           console.info(`no data for deno ${v}`, err);
         });
     });
+  }
+
+  componentWillUnmount() {
+    this.resizeObserver?.disconnect();
   }
 
   render() {
@@ -884,7 +926,7 @@ export class App extends Component<
           </div>
         </section>
 
-        <main class="chart">
+        <main class="chart" ref={this.chartRef}>
           <Graph
             benchmarks={BENCHMARKS.filter(
               b => this.state.selectedBenchmarks[b.name]
@@ -906,6 +948,7 @@ export class App extends Component<
             valuesDeno={this.state.valuesDeno}
             sort={this.state.sortBy}
             dark={this.state.darkMode}
+            containerWidth={this.state.chartWidth}
           />
         </main>
 
