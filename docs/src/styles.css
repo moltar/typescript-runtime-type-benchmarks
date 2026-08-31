@@ -1,79 +1,9 @@
 /* ---------------------------------------------------------------- */
-/* theme tokens                                                     */
+/* tokens                                                           */
 /* ---------------------------------------------------------------- */
 
 :root {
   color-scheme: light dark;
-  --c-parseSafe: #2a78d6;
-  --c-parseStrict: #eb6834;
-  --c-assertLoose: #1baf7a;
-  --c-assertStrict: #eda100;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --c-parseSafe: #3987e5;
-    --c-parseStrict: #d95926;
-    --c-assertLoose: #199e70;
-    --c-assertStrict: #c98500;
-  }
-}
-
-html[data-theme='report'] {
-  --bg: #fdfcfa;
-  --surface: #fdfcfa;
-  --ink: #1a1a19;
-  --ink-2: #52514e;
-  --ink-3: #898781;
-  --line: #e5e2dc;
-  --line-strong: #1a1a19;
-  --chip-bg: #f4f2ee;
-  --font-display: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme='report'] {
-    --bg: #1b1b19;
-    --surface: #1b1b19;
-    --ink: #e8e6df;
-    --ink-2: #b3b1a7;
-    --ink-3: #898781;
-    --line: #33322e;
-    --line-strong: #e8e6df;
-    --chip-bg: #262521;
-  }
-}
-
-html[data-theme='panel'] {
-  --bg: #131317;
-  --surface: #1a1a20;
-  --ink: #e8e6df;
-  --ink-2: #a8a6ad;
-  --ink-3: #8b898f;
-  --line: #28282f;
-  --line-strong: #3c3c46;
-  --chip-bg: #202027;
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-}
-
-@media (prefers-color-scheme: light) {
-  html[data-theme='panel'] {
-    --bg: #f4f4f5;
-    --surface: #ffffff;
-    --ink: #1b1b20;
-    --ink-2: #4c4c55;
-    --ink-3: #77777f;
-    --line: #e2e2e6;
-    --line-strong: #1b1b20;
-    --chip-bg: #ececef;
-  }
-}
-
-html[data-theme='tool'] {
   --bg: #f3f4f6;
   --surface: #ffffff;
   --ink: #111827;
@@ -82,13 +12,16 @@ html[data-theme='tool'] {
   --line: #e5e7eb;
   --line-strong: #111827;
   --chip-bg: #f3f4f6;
-  --font-display: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --c-parseSafe: #2a78d6;
+  --c-parseStrict: #eb6834;
+  --c-assertLoose: #1baf7a;
+  --c-assertStrict: #eda100;
 }
 
 @media (prefers-color-scheme: dark) {
-  html[data-theme='tool'] {
+  :root {
     --bg: #0f1115;
     --surface: #161a20;
     --ink: #e5e7eb;
@@ -97,6 +30,10 @@ html[data-theme='tool'] {
     --line: #262b33;
     --line-strong: #e5e7eb;
     --chip-bg: #1f242c;
+    --c-parseSafe: #3987e5;
+    --c-parseStrict: #d95926;
+    --c-assertLoose: #199e70;
+    --c-assertStrict: #c98500;
   }
 }
 
@@ -122,9 +59,17 @@ a {
 }
 
 .app {
-  max-width: 1080px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 2.5rem 2rem 4rem;
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  grid-template-areas:
+    'masthead masthead'
+    'controls main'
+    'docs docs';
+  gap: 1.5rem;
+  align-items: start;
 }
 
 /* ---------------------------------------------------------------- */
@@ -132,19 +77,18 @@ a {
 /* ---------------------------------------------------------------- */
 
 .masthead {
+  grid-area: masthead;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 2rem;
-  margin-bottom: 2rem;
 }
 
 .masthead h1 {
   margin: 0 0 0.3rem;
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
@@ -203,17 +147,26 @@ a {
 }
 
 /* ---------------------------------------------------------------- */
-/* controls                                                         */
+/* controls sidebar                                                 */
 /* ---------------------------------------------------------------- */
 
 .controls {
+  grid-area: controls;
+  position: sticky;
+  top: 1.5rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem 2.5rem;
-  padding: 1.1rem 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 1.2rem;
+}
+
+.control-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .control-group legend,
@@ -226,12 +179,6 @@ a {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-3);
-}
-
-.control-group {
-  border: 0;
-  margin: 0;
-  padding: 0;
 }
 
 .chip-row {
@@ -309,6 +256,11 @@ a {
 /* ---------------------------------------------------------------- */
 
 .chart {
+  grid-area: main;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 1.5rem;
   overflow-x: auto;
 }
 
@@ -323,12 +275,11 @@ a {
 /* ---------------------------------------------------------------- */
 
 .bench-docs {
+  grid-area: docs;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 1rem;
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
+  margin-top: 1rem;
 }
 
 .bench-doc {
@@ -361,114 +312,24 @@ a {
 }
 
 /* ---------------------------------------------------------------- */
-/* theme: report — document feel                                    */
+/* responsive                                                       */
 /* ---------------------------------------------------------------- */
-
-html[data-theme='report'] .masthead {
-  padding-bottom: 1.4rem;
-  border-bottom: 2px solid var(--line-strong);
-  margin-bottom: 0;
-}
-
-html[data-theme='report'] .controls {
-  border-top: 0;
-}
-
-html[data-theme='report'] .masthead h1 {
-  font-weight: 600;
-  font-size: 2.1rem;
-}
-
-/* ---------------------------------------------------------------- */
-/* theme: panel — instrument feel                                   */
-/* ---------------------------------------------------------------- */
-
-html[data-theme='panel'] .controls {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 1.1rem 1.3rem;
-  background: var(--surface);
-}
-
-html[data-theme='panel'] .chip {
-  background: var(--chip-bg);
-  border-color: transparent;
-}
-
-html[data-theme='panel'] .chip.checked {
-  border-color: var(--line-strong);
-}
-
-html[data-theme='panel'] .masthead h1 {
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-html[data-theme='panel'] .updated::before {
-  content: '● ';
-  color: var(--c-assertLoose);
-}
-
-/* ---------------------------------------------------------------- */
-/* theme: tool — workspace feel                                     */
-/* ---------------------------------------------------------------- */
-
-html[data-theme='tool'] .app {
-  max-width: 1180px;
-  display: grid;
-  grid-template-columns: 232px minmax(0, 1fr);
-  grid-template-areas:
-    'masthead masthead'
-    'controls main'
-    'docs docs';
-  gap: 1.5rem;
-  align-items: start;
-}
-
-html[data-theme='tool'] .masthead {
-  grid-area: masthead;
-  margin-bottom: 0;
-}
-
-html[data-theme='tool'] .controls {
-  grid-area: controls;
-  position: sticky;
-  top: 1.5rem;
-  flex-direction: column;
-  gap: 1.3rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
-  padding: 1.2rem;
-  margin-bottom: 0;
-}
-
-html[data-theme='tool'] .chart {
-  grid-area: main;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
-  padding: 1.5rem;
-}
-
-html[data-theme='tool'] .bench-docs {
-  grid-area: docs;
-  border-top: 0;
-  padding-top: 0;
-}
-
-html[data-theme='tool'] .masthead h1 {
-  font-size: 1.7rem;
-  letter-spacing: -0.03em;
-}
 
 @media (max-width: 900px) {
-  html[data-theme='tool'] .app {
+  .app {
     display: block;
   }
 
-  html[data-theme='tool'] .controls {
+  .masthead {
+    margin-bottom: 1.5rem;
+  }
+
+  .controls {
     position: static;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart {
     margin-bottom: 1.5rem;
   }
 }

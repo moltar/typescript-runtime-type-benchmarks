@@ -1,9 +1,7 @@
 import { Component, type ComponentChildren } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
-import { activeTheme } from './theme.js';
-
-const THEME = activeTheme();
+import { CHART } from './theme.js';
 
 // which results are attempted to load
 // the first is selected automatically
@@ -196,7 +194,7 @@ async function graph({
     return '';
   }
 
-  const chart = THEME.chart[dark ? 'dark' : 'light'];
+  const chart = CHART[dark ? 'dark' : 'light'];
 
   const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
 
