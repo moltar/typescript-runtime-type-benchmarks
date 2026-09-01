@@ -164,6 +164,23 @@ function getDenoMajorVersionNumber(denoVersion: string): number {
   return parseInt(match[1]);
 }
 
+// vega writes the datum description onto each bar as an aria-label; promoting
+// it to a <title> child gives the exact figure back on hover
+function withTooltips(svg: string) {
+  return svg.replace(
+    /<path([^>]*?aria-label="([^"]*?)"[^>]*?)\/>/g,
+    (match, attrs: string, label: string) =>
+      /ops\/sec|not implemented/.test(label)
+        ? `<path${attrs}><title>${label}</title></path>`
+        : match
+  );
+}
+
+const compactOps = new Intl.NumberFormat('en-US', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+});
+
 // vega sizes the name column and the value labels from the text itself, so the
 // plot can only fill the card exactly if we measure that text the same way
 const measureText = (() => {
@@ -236,7 +253,10 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : 'n/a',
+      opsLabel: b.ops ? compactOps.format(b.ops) : 'n/a',
+      opsFull: b.ops
+        ? `${b.ops.toLocaleString('en-US')} ops/sec`
+        : 'not implemented',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and node-version
       benchmark: [
@@ -256,7 +276,10 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : 'n/a',
+      opsLabel: b.ops ? compactOps.format(b.ops) : 'n/a',
+      opsFull: b.ops
+        ? `${b.ops.toLocaleString('en-US')} ops/sec`
+        : 'not implemented',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and bun-version
       benchmark: [
@@ -278,7 +301,10 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops ? b.ops.toLocaleString('en-US') : 'n/a',
+      opsLabel: b.ops ? compactOps.format(b.ops) : 'n/a',
+      opsFull: b.ops
+        ? `${b.ops.toLocaleString('en-US')} ops/sec`
+        : 'not implemented',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and deno-version
       benchmark: [
@@ -356,6 +382,7 @@ async function graph({
   const valueWidth = Math.max(
     ...allValues.map(v => measureText(v.opsLabel, `9.5px ${chart.monoFont}`))
   );
+  const maxOps = Math.max(...allValues.map(v => v.ops), 1);
   const versionWidth =
     versionCount > 1
       ? Math.max(
@@ -372,11 +399,16 @@ async function graph({
   );
 
   const estimatedPlotWidth = Math.max(
-    containerWidth - labelLimit - versionWidth - valueWidth - 22,
+    containerWidth - labelLimit - versionWidth - 22,
     160
   );
 
   const renderAt = async (plotWidth: number) => {
+    // the label of the longest bar would otherwise sit past the track's right
+    // edge, so end the scale beyond the data by exactly that label's width
+    const labelRoom = Math.min(valueWidth + 6, plotWidth * 0.4);
+    const domainMax = (maxOps * plotWidth) / Math.max(plotWidth - labelRoom, 1);
+
     const vegaSpec = vegaLite.compile({
       data: {
         values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
@@ -438,6 +470,9 @@ async function graph({
               type: 'bar',
               cornerRadiusEnd: 2,
             },
+            encoding: {
+              description: { field: 'opsFull' },
+            },
           },
           {
             mark: {
@@ -459,12 +494,17 @@ async function graph({
             field: 'ops',
             type: 'quantitative',
             title: null,
+            scale: { domain: [0, domainMax], nice: true },
             axis: {
               orient: 'top',
               offset: 10,
               format: '~s',
               tickCount: 6,
               grid: false,
+              // keep tick labels inside the plot: flush the end ones, drop any
+              // that still would not fit
+              labelFlush: true,
+              labelBound: true,
               labelFontSize: 11,
               titleFontSize: 12.5,
               titleFontWeight: 'normal',
@@ -506,7 +546,10 @@ async function graph({
     });
     const svg = await view.toSVG();
 
-    return { svg, width: Number(/width="(\d+)"/.exec(svg)?.[1] ?? 0) };
+    return {
+      svg: withTooltips(svg),
+      width: Number(/width="(\d+)"/.exec(svg)?.[1] ?? 0),
+    };
   };
 
   // vega reserves room for the value label of the longest bar rather than the
