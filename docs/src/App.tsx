@@ -164,6 +164,24 @@ function getDenoMajorVersionNumber(denoVersion: string): number {
   return parseInt(match[1]);
 }
 
+// vega sizes the name column and the value labels from the text itself, so the
+// plot can only fill the card exactly if we measure that text the same way
+const measureText = (() => {
+  let ctx: CanvasRenderingContext2D | undefined;
+
+  return (text: string, font: string) => {
+    ctx ??= document.createElement('canvas').getContext('2d') ?? undefined;
+
+    if (!ctx) {
+      return text.length * 7;
+    }
+
+    ctx.font = font;
+
+    return ctx.measureText(text).width;
+  };
+})();
+
 async function graph({
   selectedBenchmarks,
   selectedNodeJsVersions,
@@ -197,14 +215,6 @@ async function graph({
   }
 
   const chart = CHART[dark ? 'dark' : 'light'];
-
-  // the library-name column and the value labels are laid out by vega, so
-  // reserve room for both and give the bars whatever is left
-  const labelLimit = containerWidth < 560 ? 130 : 260;
-  const plotWidth = Math.min(
-    Math.max(containerWidth - labelLimit - 95, 240),
-    560
-  );
 
   const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
 
@@ -337,134 +347,178 @@ async function graph({
 
   new Set(sortedValues.map(b => b.name)).forEach(n => sortedNames.push(n));
 
-  const vegaSpec = vegaLite.compile({
-    data: {
-      values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
-    },
-    height: { step: 16 / versionCount },
-    spacing: 10,
-    background: 'transparent', // no white graphs for dark mode users
-    config: {
-      view: { stroke: null },
-      font: chart.font,
-      header: {
-        labelFont: chart.font,
-        labelColor: chart.headerColor,
-        labelFontWeight: 600,
+  // measure the two text columns vega puts either side of the bars, so the
+  // plot fills the card exactly: no dead gutter, no value label past the edge
+  const allValues = [...valuesNodejs, ...valuesBun, ...valuesDeno];
+  const nameWidth = Math.max(
+    ...sortedNames.map(n => measureText(n, `600 12.5px ${chart.font}`))
+  );
+  const valueWidth = Math.max(
+    ...allValues.map(v => measureText(v.opsLabel, `9.5px ${chart.monoFont}`))
+  );
+  const versionWidth =
+    versionCount > 1
+      ? Math.max(
+          ...allValues.map(v =>
+            measureText(v.benchmark.split('-')[3], `9px ${chart.monoFont}`)
+          )
+        ) + 8
+      : 0;
+
+  // a very long library name must not take the card over from the bars
+  const labelLimit = Math.max(
+    Math.min(nameWidth, containerWidth * 0.3, 240),
+    90
+  );
+
+  const estimatedPlotWidth = Math.max(
+    containerWidth - labelLimit - versionWidth - valueWidth - 22,
+    160
+  );
+
+  const renderAt = async (plotWidth: number) => {
+    const vegaSpec = vegaLite.compile({
+      data: {
+        values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
       },
-      axis: {
-        labelFont: chart.monoFont,
-        labelColor: chart.axisColor,
-        titleFont: chart.font,
-        titleColor: chart.axisColor,
-        gridColor: chart.gridColor,
-        tickColor: chart.domainColor,
-        domainColor: chart.domainColor,
-      },
-    },
-    facet: {
-      row: {
-        field: 'name',
-        title: null,
+      height: { step: 16 / versionCount },
+      spacing: 10,
+      background: 'transparent', // no white graphs for dark mode users
+      config: {
+        view: { stroke: null },
+        font: chart.font,
         header: {
-          labelAngle: 0,
-          labelOrient: 'left',
-          labelAnchor: 'middle',
-          labelAlign: 'left',
-          labelFontSize: 12.5,
-          labelLimit,
+          labelFont: chart.font,
+          labelColor: chart.headerColor,
+          labelFontWeight: 600,
         },
-        sort: sortedNames,
+        axis: {
+          labelFont: chart.monoFont,
+          labelColor: chart.axisColor,
+          titleFont: chart.font,
+          titleColor: chart.axisColor,
+          gridColor: chart.gridColor,
+          tickColor: chart.domainColor,
+          domainColor: chart.domainColor,
+        },
       },
-    },
-    spec: {
-      layer: [
-        {
-          // full-width track so benchmarks a library doesn't run still
-          // read as deliberate empty rows
-          mark: {
-            type: 'bar',
-            cornerRadius: 2,
-          },
-          width: plotWidth,
-          encoding: {
-            x: { value: 0 },
-            x2: { value: plotWidth },
-            color: { value: chart.trackColor },
-          },
-        },
-        {
-          mark: {
-            type: 'bar',
-            cornerRadiusEnd: 2,
-          },
-        },
-        {
-          mark: {
-            type: 'text',
-            align: 'left',
-            baseline: 'middle',
-            dx: 4,
-            font: chart.monoFont,
-            fontSize: 9.5,
-            fill: chart.valueColor,
-          },
-          encoding: {
-            text: { field: 'opsLabel' },
-          },
-        },
-      ],
-      encoding: {
-        x: {
-          field: 'ops',
-          type: 'quantitative',
-          title: ['operations / sec', '(better ▶)'],
-          axis: {
-            orient: 'top',
-            offset: 10,
-            format: '~s',
-            tickCount: 6,
-            grid: false,
-            labelFontSize: 11,
-            titleFontSize: 12.5,
-            titleFontWeight: 'normal',
-          },
-        },
-        y: {
-          field: 'benchmark',
-          type: 'nominal',
+      facet: {
+        row: {
+          field: 'name',
           title: null,
-          // one runtime version needs no label; several would otherwise be
-          // indistinguishable repeats of the same color
-          axis:
-            versionCount > 1
-              ? {
-                  labelExpr: "split(datum.label, '-')[3]",
-                  labelFont: chart.monoFont,
-                  labelFontSize: 9,
-                  labelColor: chart.axisColor,
-                  labelPadding: 4,
-                  domain: false,
-                  ticks: false,
-                }
-              : null,
+          header: {
+            labelAngle: 0,
+            labelOrient: 'left',
+            labelAnchor: 'middle',
+            labelAlign: 'left',
+            labelFontSize: 12.5,
+            labelLimit,
+          },
+          sort: sortedNames,
         },
-        color: {
-          field: 'benchmark',
-          type: 'nominal',
-          legend: null,
-          scale: {
-            range: colorScaleRange,
+      },
+      spec: {
+        layer: [
+          {
+            // full-width track so benchmarks a library doesn't run still
+            // read as deliberate empty rows
+            mark: {
+              type: 'bar',
+              cornerRadius: 2,
+            },
+            width: plotWidth,
+            encoding: {
+              x: { value: 0 },
+              x2: { value: plotWidth },
+              color: { value: chart.trackColor },
+            },
+          },
+          {
+            mark: {
+              type: 'bar',
+              cornerRadiusEnd: 2,
+            },
+          },
+          {
+            mark: {
+              type: 'text',
+              align: 'left',
+              baseline: 'middle',
+              dx: 4,
+              font: chart.monoFont,
+              fontSize: 9.5,
+              fill: chart.valueColor,
+            },
+            encoding: {
+              text: { field: 'opsLabel' },
+            },
+          },
+        ],
+        encoding: {
+          x: {
+            field: 'ops',
+            type: 'quantitative',
+            title: null,
+            axis: {
+              orient: 'top',
+              offset: 10,
+              format: '~s',
+              tickCount: 6,
+              grid: false,
+              labelFontSize: 11,
+              titleFontSize: 12.5,
+              titleFontWeight: 'normal',
+            },
+          },
+          y: {
+            field: 'benchmark',
+            type: 'nominal',
+            title: null,
+            // one runtime version needs no label; several would otherwise be
+            // indistinguishable repeats of the same color
+            axis:
+              versionCount > 1
+                ? {
+                    labelExpr: "split(datum.label, '-')[3]",
+                    labelFont: chart.monoFont,
+                    labelFontSize: 9,
+                    labelColor: chart.axisColor,
+                    labelPadding: 4,
+                    domain: false,
+                    ticks: false,
+                  }
+                : null,
+          },
+          color: {
+            field: 'benchmark',
+            type: 'nominal',
+            legend: null,
+            scale: {
+              range: colorScaleRange,
+            },
           },
         },
       },
-    },
-  });
+    });
 
-  const view = new vega.View(vega.parse(vegaSpec.spec), { renderer: 'none' });
-  const svg = await view.toSVG();
+    const view = new vega.View(vega.parse(vegaSpec.spec), {
+      renderer: 'none',
+    });
+    const svg = await view.toSVG();
 
-  return svg;
+    return { svg, width: Number(/width="(\d+)"/.exec(svg)?.[1] ?? 0) };
+  };
+
+  // vega reserves room for the value label of the longest bar rather than the
+  // widest one, so the first render lands short of the card; correct it once
+  const first = await renderAt(estimatedPlotWidth);
+  const delta = containerWidth - first.width;
+
+  if (Math.abs(delta) <= 2) {
+    return first.svg;
+  }
+
+  return (await renderAt(Math.max(estimatedPlotWidth + delta, 160))).svg;
 }
 
 class Graph extends Component<
@@ -806,127 +860,132 @@ export class App extends Component<
           </div>
         </header>
 
-        <section class="controls">
-          <fieldset class="control-group">
-            <legend>Benchmarks</legend>
-            <div class="chip-row">
-              {BENCHMARKS.map(b => {
-                return (
-                  <Chip
-                    id={b.name}
-                    color={`var(--c-${b.name})`}
-                    checked={this.state.selectedBenchmarks[b.name] ?? false}
-                    label={b.label}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedBenchmarks: {
-                          ...this.state.selectedBenchmarks,
-                          [b.name]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
+        <div class="controls-col">
+          <section class="controls">
+            <fieldset class="control-group">
+              <legend>Benchmarks</legend>
+              <div class="chip-row">
+                {BENCHMARKS.map(b => {
+                  return (
+                    <Chip
+                      id={b.name}
+                      color={`var(--c-${b.name})`}
+                      checked={this.state.selectedBenchmarks[b.name] ?? false}
+                      label={b.label}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedBenchmarks: {
+                            ...this.state.selectedBenchmarks,
+                            [b.name]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-          <fieldset class="control-group">
-            <legend>Node.js</legend>
-            <div class="chip-row">
-              {this.getNodeJsVersions().map(v => {
-                return (
-                  <Chip
-                    id={v}
-                    checked={this.state.selectedNodeJsVersions[v] ?? false}
-                    label={v}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedNodeJsVersions: {
-                          ...this.state.selectedNodeJsVersions,
-                          [v]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
+            <fieldset class="control-group">
+              <legend>Node.js</legend>
+              <div class="chip-row">
+                {this.getNodeJsVersions().map(v => {
+                  return (
+                    <Chip
+                      id={v}
+                      checked={this.state.selectedNodeJsVersions[v] ?? false}
+                      label={v}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedNodeJsVersions: {
+                            ...this.state.selectedNodeJsVersions,
+                            [v]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-          <fieldset class="control-group">
-            <legend>Bun</legend>
-            <div class="chip-row">
-              {this.getBunVersions().map(v => {
-                return (
-                  <Chip
-                    id={v}
-                    checked={this.state.selectedBunVersions[v] ?? false}
-                    label={v}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedBunVersions: {
-                          ...this.state.selectedBunVersions,
-                          [v]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
+            <fieldset class="control-group">
+              <legend>Bun</legend>
+              <div class="chip-row">
+                {this.getBunVersions().map(v => {
+                  return (
+                    <Chip
+                      id={v}
+                      checked={this.state.selectedBunVersions[v] ?? false}
+                      label={v}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedBunVersions: {
+                            ...this.state.selectedBunVersions,
+                            [v]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-          <fieldset class="control-group">
-            <legend>Deno</legend>
-            <div class="chip-row">
-              {this.getDenoVersions().map(v => {
-                return (
-                  <Chip
-                    id={v}
-                    checked={this.state.selectedDenoVersions[v] ?? false}
-                    label={v}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedDenoVersions: {
-                          ...this.state.selectedDenoVersions,
-                          [v]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
+            <fieldset class="control-group">
+              <legend>Deno</legend>
+              <div class="chip-row">
+                {this.getDenoVersions().map(v => {
+                  return (
+                    <Chip
+                      id={v}
+                      checked={this.state.selectedDenoVersions[v] ?? false}
+                      label={v}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedDenoVersions: {
+                            ...this.state.selectedDenoVersions,
+                            [v]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-          <div class="control-group">
-            <span class="group-label" id="sort-label">
-              Sort
-            </span>
-            <select
-              class="sort-select"
-              aria-labelledby="sort-label"
-              onChange={
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (event: any) => {
-                  this.setState({ sortBy: event.target.value });
+            <div class="control-group">
+              <span class="group-label" id="sort-label">
+                Sort
+              </span>
+              <select
+                class="sort-select"
+                aria-labelledby="sort-label"
+                onChange={
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  (event: any) => {
+                    this.setState({ sortBy: event.target.value });
+                  }
                 }
-              }
-              value={this.state.sortBy}
-            >
-              <option value="fastest">Fastest</option>
-              <option value="alphabetically">Alphabetically</option>
-              <option value="popularity">Popularity</option>
-            </select>
-          </div>
-        </section>
+                value={this.state.sortBy}
+              >
+                <option value="fastest">Fastest</option>
+                <option value="alphabetically">Alphabetically</option>
+                <option value="popularity">Popularity</option>
+              </select>
+            </div>
+          </section>
+        </div>
 
         <main class="chart" ref={this.chartRef}>
+          <p class="chart-caption">
+            operations / sec <span>— higher is better</span>
+          </p>
           <Graph
             benchmarks={BENCHMARKS.filter(
               b => this.state.selectedBenchmarks[b.name]

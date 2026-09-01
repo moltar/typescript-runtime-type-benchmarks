@@ -14,6 +14,7 @@
   --chip-bg: #f3f4f6;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --card-pad: 1.25rem;
   --c-parseSafe: #2a78d6;
   --c-parseStrict: #eb6834;
   --c-assertLoose: #1baf7a;
@@ -150,17 +151,25 @@ a {
 /* controls sidebar                                                 */
 /* ---------------------------------------------------------------- */
 
-.controls {
+/* the wrapper spans the whole row so the sticky card stops at the chart's
+   bottom edge instead of riding over the descriptions below */
+.controls-col {
   grid-area: controls;
+  align-self: stretch;
+}
+
+.controls {
   position: sticky;
   top: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--surface);
-  padding: 1.2rem;
+  padding: var(--card-pad);
 }
 
 .control-group {
@@ -260,14 +269,26 @@ a {
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--surface);
-  padding: 1.5rem;
+  padding: var(--card-pad);
   overflow-x: auto;
 }
 
-.chart .empty {
-  margin: 5rem 0;
+.chart-caption {
+  margin: 0 0 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.chart-caption span {
   color: var(--ink-3);
-  font-style: italic;
+  font-weight: 400;
+}
+
+.chart .empty {
+  margin: 4rem 0;
+  text-align: center;
+  color: var(--ink-3);
 }
 
 /* ---------------------------------------------------------------- */
@@ -283,7 +304,7 @@ a {
 }
 
 .bench-doc {
-  padding: 1rem 1.1rem;
+  padding: var(--card-pad);
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -326,6 +347,7 @@ a {
 
   .controls {
     position: static;
+    max-height: none;
     margin-bottom: 1.5rem;
   }
 
