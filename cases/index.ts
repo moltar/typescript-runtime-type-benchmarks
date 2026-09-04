@@ -3,6 +3,7 @@ export const cases = [
   'ajv',
   'arktype',
   'ata',
+  'ata-aot',
   'banditypes',
   'bueno',
   'caketype',
