@@ -5,6 +5,15 @@ import { Loose, Strict } from './sinclair-typebox';
 const CheckLoose = TypeCompiler.Compile(Loose);
 const CheckStrict = TypeCompiler.Compile(Strict);
 
+// TypeCompiler only compiles checks, so there is no just-in-time parseSafe.
+createCase('@sinclair/typebox-(just-in-time)', 'parseStrict', () => {
+  return data => {
+    if (!CheckStrict.Check(data)) {
+      throw new Error('validation failure');
+    }
+    return data;
+  };
+});
 createCase('@sinclair/typebox-(just-in-time)', 'assertLoose', () => {
   return data => {
     if (!CheckLoose.Check(data)) {
