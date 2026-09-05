@@ -1,0 +1,368 @@
+/* ---------------------------------------------------------------- */
+/* tokens                                                           */
+/* ---------------------------------------------------------------- */
+
+:root {
+  color-scheme: light dark;
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --ink: #111827;
+  --ink-2: #4b5563;
+  --ink-3: #9ca3af;
+  --line: #e5e7eb;
+  --line-strong: #111827;
+  --chip-bg: #f3f4f6;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --card-pad: 1.25rem;
+  --c-parseSafe: #2a78d6;
+  --c-parseStrict: #eb6834;
+  --c-assertLoose: #1baf7a;
+  --c-assertStrict: #eda100;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --surface: #161a20;
+    --ink: #e5e7eb;
+    --ink-2: #9ca3af;
+    --ink-3: #6b7280;
+    --line: #262b33;
+    --line-strong: #e5e7eb;
+    --chip-bg: #1f242c;
+    --c-parseSafe: #3987e5;
+    --c-parseStrict: #d95926;
+    --c-assertLoose: #199e70;
+    --c-assertStrict: #c98500;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* base                                                             */
+/* ---------------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+.app {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  grid-template-areas:
+    'masthead masthead'
+    'controls main'
+    'docs docs';
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ---------------------------------------------------------------- */
+/* masthead                                                         */
+/* ---------------------------------------------------------------- */
+
+.masthead {
+  grid-area: masthead;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.masthead h1 {
+  margin: 0 0 0.3rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.masthead .strip {
+  display: flex;
+  gap: 4px;
+  margin: 0.65rem 0 0.9rem;
+}
+
+.masthead .strip span {
+  height: 4px;
+  width: 34px;
+  border-radius: 2px;
+}
+
+.tagline {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--ink-2);
+}
+
+.updated {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-3);
+}
+
+.gh-links {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.gh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.gh-btn:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.gh-btn svg {
+  fill: currentColor;
+}
+
+/* ---------------------------------------------------------------- */
+/* controls sidebar                                                 */
+/* ---------------------------------------------------------------- */
+
+/* the wrapper spans the whole row so the sticky card stops at the chart's
+   bottom edge instead of riding over the descriptions below */
+.controls-col {
+  grid-area: controls;
+  align-self: stretch;
+}
+
+.controls {
+  position: sticky;
+  top: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: var(--card-pad);
+}
+
+.control-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.control-group legend,
+.control-group .group-label {
+  display: block;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--dot, var(--ink-3));
+  opacity: 0.35;
+}
+
+.chip:hover {
+  border-color: var(--line-strong);
+}
+
+.chip.checked {
+  border-color: var(--line-strong);
+  color: var(--ink);
+  background: var(--chip-bg);
+}
+
+.chip.checked .dot {
+  opacity: 1;
+}
+
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--c-parseSafe);
+  outline-offset: 2px;
+}
+
+.sort-select {
+  appearance: none;
+  padding: 0.35rem 1.9rem 0.35rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background-color: var(--surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23898781' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------- */
+/* chart                                                            */
+/* ---------------------------------------------------------------- */
+
+.chart {
+  grid-area: main;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: var(--card-pad);
+  overflow-x: auto;
+}
+
+.chart-caption {
+  margin: 0 0 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.chart-caption span {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.chart .empty {
+  margin: 4rem 0;
+  text-align: center;
+  color: var(--ink-3);
+}
+
+/* ---------------------------------------------------------------- */
+/* benchmark descriptions                                           */
+/* ---------------------------------------------------------------- */
+
+.bench-docs {
+  grid-area: docs;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.bench-doc {
+  padding: var(--card-pad);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.bench-doc h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.bench-doc h4 .swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.bench-doc p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+
+/* ---------------------------------------------------------------- */
+/* responsive                                                       */
+/* ---------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .app {
+    display: block;
+  }
+
+  .masthead {
+    margin-bottom: 1.5rem;
+  }
+
+  .controls {
+    position: static;
+    max-height: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .app {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .masthead {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

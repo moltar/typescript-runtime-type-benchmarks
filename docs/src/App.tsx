@@ -1,6 +1,7 @@
-import { Component, type ComponentChildren } from 'preact';
+import { Component, type ComponentChildren, createRef } from 'preact';
 import * as vega from 'vega';
 import * as vegaLite from 'vega-lite';
+import { CHART } from './theme.js';
 
 // which results are attempted to load
 // the first is selected automatically
@@ -22,43 +23,12 @@ interface BenchmarkResult {
   margin: number;
 }
 
-// colors taken from https://colorbrewer2.org/?type=qualitative&scheme=Set3&n=12
-const COLORS = [
-  '#8dd3c7',
-  // '#ffffb3', not this one .. looks too bright to me
-  '#bebada',
-  '#fb8072',
-  '#80b1d3',
-  '#fdb462',
-  '#b3de69',
-  '#fccde5',
-  '#d9d9d9',
-  '#bc80bd',
-  '#ccebc5',
-  '#ffed6f',
-];
-
-// create a stable color list
+// colors come from the active theme, keyed by benchmark name
 const BENCHMARKS = [
-  { name: 'parseSafe', label: 'Safe Parsing', color: COLORS[0], order: '0' },
-  {
-    name: 'parseStrict',
-    label: 'Strict Parsing',
-    color: COLORS[1],
-    order: '1',
-  },
-  {
-    name: 'assertLoose',
-    label: 'Loose Assertion',
-    color: COLORS[2],
-    order: '2',
-  },
-  {
-    name: 'assertStrict',
-    label: 'Strict Assertion',
-    color: COLORS[3],
-    order: '3',
-  },
+  { name: 'parseSafe', label: 'Safe Parsing', order: '0' },
+  { name: 'parseStrict', label: 'Strict Parsing', order: '1' },
+  { name: 'assertLoose', label: 'Loose Assertion', order: '2' },
+  { name: 'assertStrict', label: 'Strict Assertion', order: '3' },
 ];
 
 // order lookup table
@@ -194,6 +164,41 @@ function getDenoMajorVersionNumber(denoVersion: string): number {
   return parseInt(match[1]);
 }
 
+// vega writes the datum description onto each bar as an aria-label; promoting
+// it to a <title> child gives the exact figure back on hover
+function withTooltips(svg: string) {
+  return svg.replace(
+    /<path([^>]*?aria-label="([^"]*?)"[^>]*?)\/>/g,
+    (match, attrs: string, label: string) =>
+      /ops\/sec|not implemented/.test(label)
+        ? `<path${attrs}><title>${label}</title></path>`
+        : match
+  );
+}
+
+const compactOps = new Intl.NumberFormat('en-US', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+});
+
+// vega sizes the name column and the value labels from the text itself, so the
+// plot can only fill the card exactly if we measure that text the same way
+const measureText = (() => {
+  let ctx: CanvasRenderingContext2D | undefined;
+
+  return (text: string, font: string) => {
+    ctx ??= document.createElement('canvas').getContext('2d') ?? undefined;
+
+    if (!ctx) {
+      return text.length * 7;
+    }
+
+    ctx.font = font;
+
+    return ctx.measureText(text).width;
+  };
+})();
+
 async function graph({
   selectedBenchmarks,
   selectedNodeJsVersions,
@@ -203,6 +208,8 @@ async function graph({
   benchmarkResultsBun,
   benchmarkResultsDeno,
   sort,
+  dark,
+  containerWidth,
 }: {
   selectedBenchmarks: typeof BENCHMARKS;
   selectedNodeJsVersions: string[];
@@ -212,6 +219,8 @@ async function graph({
   benchmarkResultsBun: BenchmarkResult[];
   benchmarkResultsDeno: BenchmarkResult[];
   sort?: 'alphabetically' | 'fastest' | 'popularity';
+  dark: boolean;
+  containerWidth: number;
 }) {
   if (
     !selectedBenchmarks.length ||
@@ -221,6 +230,8 @@ async function graph({
   ) {
     return '';
   }
+
+  const chart = CHART[dark ? 'dark' : 'light'];
 
   const selectedBenchmarkSet = new Set(selectedBenchmarks.map(b => b.name));
 
@@ -242,7 +253,10 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops.toLocaleString('en-US'),
+      opsLabel: b.ops ? compactOps.format(b.ops) : 'n/a',
+      opsFull: b.ops
+        ? `${b.ops.toLocaleString('en-US')} ops/sec`
+        : 'not implemented',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and node-version
       benchmark: [
@@ -262,7 +276,10 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops.toLocaleString('en-US'),
+      opsLabel: b.ops ? compactOps.format(b.ops) : 'n/a',
+      opsFull: b.ops
+        ? `${b.ops.toLocaleString('en-US')} ops/sec`
+        : 'not implemented',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and bun-version
       benchmark: [
@@ -284,7 +301,10 @@ async function graph({
     )
     .map(b => ({
       ...b,
-      opsLabel: b.ops.toLocaleString('en-US'),
+      opsLabel: b.ops ? compactOps.format(b.ops) : 'n/a',
+      opsFull: b.ops
+        ? `${b.ops.toLocaleString('en-US')} ops/sec`
+        : 'not implemented',
       // artificical benchmark name to make sure its always sorted by
       // benchmark and deno-version
       benchmark: [
@@ -301,25 +321,28 @@ async function graph({
   const bunVersionCount = new Set(valuesBun.map(v => v.runtimeVersion)).size;
   const denoVersionCount = new Set(valuesDeno.map(v => v.runtimeVersion)).size;
 
+  const versionCount =
+    nodeJsVersionCount + bunVersionCount + denoVersionCount;
+
   // build a color map so that each benchmark has the same color in different
   // node-versions
   const colorScaleRange: string[] = [];
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < nodeJsVersionCount; i++) {
-      colorScaleRange.push(b.color);
+      colorScaleRange.push(chart.series[b.name]);
     }
   });
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < bunVersionCount; i++) {
-      colorScaleRange.push(b.color);
+      colorScaleRange.push(chart.series[b.name]);
     }
   });
 
   selectedBenchmarks.forEach(b => {
     for (let i = 0; i < denoVersionCount; i++) {
-      colorScaleRange.push(b.color);
+      colorScaleRange.push(chart.series[b.name]);
     }
   });
 
@@ -350,81 +373,195 @@ async function graph({
 
   new Set(sortedValues.map(b => b.name)).forEach(n => sortedNames.push(n));
 
-  const vegaSpec = vegaLite.compile({
-    data: {
-      values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
-    },
-    height: {
-      step: 15 / (nodeJsVersionCount + bunVersionCount + denoVersionCount),
-    },
-    background: 'transparent', // no white graphs for dark mode users
-    facet: {
-      row: {
-        field: 'name',
-        title: null,
+  // measure the two text columns vega puts either side of the bars, so the
+  // plot fills the card exactly: no dead gutter, no value label past the edge
+  const allValues = [...valuesNodejs, ...valuesBun, ...valuesDeno];
+  const nameWidth = Math.max(
+    ...sortedNames.map(n => measureText(n, `600 12.5px ${chart.font}`))
+  );
+  const valueWidth = Math.max(
+    ...allValues.map(v => measureText(v.opsLabel, `9.5px ${chart.monoFont}`))
+  );
+  const maxOps = Math.max(...allValues.map(v => v.ops), 1);
+  const versionWidth =
+    versionCount > 1
+      ? Math.max(
+          ...allValues.map(v =>
+            measureText(v.benchmark.split('-')[3], `9px ${chart.monoFont}`)
+          )
+        ) + 8
+      : 0;
+
+  // a very long library name must not take the card over from the bars
+  const labelLimit = Math.max(
+    Math.min(nameWidth, containerWidth * 0.3, 240),
+    90
+  );
+
+  const estimatedPlotWidth = Math.max(
+    containerWidth - labelLimit - versionWidth - 22,
+    160
+  );
+
+  const renderAt = async (plotWidth: number) => {
+    // the label of the longest bar would otherwise sit past the track's right
+    // edge, so end the scale beyond the data by exactly that label's width
+    const labelRoom = Math.min(valueWidth + 6, plotWidth * 0.4);
+    const domainMax = (maxOps * plotWidth) / Math.max(plotWidth - labelRoom, 1);
+
+    const vegaSpec = vegaLite.compile({
+      data: {
+        values: [...valuesNodejs, ...valuesBun, ...valuesDeno],
+      },
+      height: { step: 16 / versionCount },
+      spacing: 10,
+      background: 'transparent', // no white graphs for dark mode users
+      config: {
+        view: { stroke: null },
+        font: chart.font,
         header: {
-          labelAngle: 0,
-          labelOrient: 'left',
-          labelAnchor: 'middle',
-          labelAlign: 'left',
-          labelFontSize: 12,
+          labelFont: chart.font,
+          labelColor: chart.headerColor,
+          labelFontWeight: 600,
         },
-        sort: sortedNames,
-      },
-    },
-    spec: {
-      layer: [
-        {
-          mark: 'bar',
-          width: 600,
-        },
-        {
-          mark: {
-            type: 'text',
-            align: 'left',
-            baseline: 'middle',
-            dx: 3,
-          },
-          encoding: {
-            text: { field: 'opsLabel' },
-          },
-        },
-      ],
-      encoding: {
-        x: {
-          field: 'ops',
-          type: 'quantitative',
-          title: ['operations / sec', '(better ▶)'],
-          axis: {
-            orient: 'top',
-            offset: 10,
-            labelFontSize: 12,
-            titleFontSize: 14,
-            titleFontWeight: 'normal',
-          },
-        },
-        y: {
-          field: 'benchmark',
-          type: 'nominal',
-          title: 'Benchmark',
-          axis: null, // to debug the bars: axis: {labelFontSize: 3},
-        },
-        color: {
-          field: 'benchmark',
-          type: 'nominal',
-          legend: null,
-          scale: {
-            range: colorScaleRange,
-          },
+        axis: {
+          labelFont: chart.monoFont,
+          labelColor: chart.axisColor,
+          titleFont: chart.font,
+          titleColor: chart.axisColor,
+          gridColor: chart.gridColor,
+          tickColor: chart.domainColor,
+          domainColor: chart.domainColor,
         },
       },
-    },
-  });
+      facet: {
+        row: {
+          field: 'name',
+          title: null,
+          header: {
+            labelAngle: 0,
+            labelOrient: 'left',
+            labelAnchor: 'middle',
+            labelAlign: 'left',
+            labelFontSize: 12.5,
+            labelLimit,
+          },
+          sort: sortedNames,
+        },
+      },
+      spec: {
+        layer: [
+          {
+            // full-width track so benchmarks a library doesn't run still
+            // read as deliberate empty rows
+            mark: {
+              type: 'bar',
+              cornerRadius: 2,
+            },
+            width: plotWidth,
+            encoding: {
+              x: { value: 0 },
+              x2: { value: plotWidth },
+              color: { value: chart.trackColor },
+            },
+          },
+          {
+            mark: {
+              type: 'bar',
+              cornerRadiusEnd: 2,
+            },
+            encoding: {
+              description: { field: 'opsFull' },
+            },
+          },
+          {
+            mark: {
+              type: 'text',
+              align: 'left',
+              baseline: 'middle',
+              dx: 4,
+              font: chart.monoFont,
+              fontSize: 9.5,
+              fill: chart.valueColor,
+            },
+            encoding: {
+              text: { field: 'opsLabel' },
+            },
+          },
+        ],
+        encoding: {
+          x: {
+            field: 'ops',
+            type: 'quantitative',
+            title: null,
+            scale: { domain: [0, domainMax], nice: true },
+            axis: {
+              orient: 'top',
+              offset: 10,
+              format: '~s',
+              tickCount: 6,
+              grid: false,
+              // keep tick labels inside the plot: flush the end ones, drop any
+              // that still would not fit
+              labelFlush: true,
+              labelBound: true,
+              labelFontSize: 11,
+              titleFontSize: 12.5,
+              titleFontWeight: 'normal',
+            },
+          },
+          y: {
+            field: 'benchmark',
+            type: 'nominal',
+            title: null,
+            // one runtime version needs no label; several would otherwise be
+            // indistinguishable repeats of the same color
+            axis:
+              versionCount > 1
+                ? {
+                    labelExpr: "split(datum.label, '-')[3]",
+                    labelFont: chart.monoFont,
+                    labelFontSize: 9,
+                    labelColor: chart.axisColor,
+                    labelPadding: 4,
+                    domain: false,
+                    ticks: false,
+                  }
+                : null,
+          },
+          color: {
+            field: 'benchmark',
+            type: 'nominal',
+            legend: null,
+            scale: {
+              range: colorScaleRange,
+            },
+          },
+        },
+      },
+    });
 
-  const view = new vega.View(vega.parse(vegaSpec.spec), { renderer: 'none' });
-  const svg = await view.toSVG();
+    const view = new vega.View(vega.parse(vegaSpec.spec), {
+      renderer: 'none',
+    });
+    const svg = await view.toSVG();
 
-  return svg;
+    return {
+      svg: withTooltips(svg),
+      width: Number(/width="(\d+)"/.exec(svg)?.[1] ?? 0),
+    };
+  };
+
+  // vega reserves room for the value label of the longest bar rather than the
+  // widest one, so the first render lands short of the card; correct it once
+  const first = await renderAt(estimatedPlotWidth);
+  const delta = containerWidth - first.width;
+
+  if (Math.abs(delta) <= 2) {
+    return first.svg;
+  }
+
+  return (await renderAt(Math.max(estimatedPlotWidth + delta, 160))).svg;
 }
 
 class Graph extends Component<
@@ -437,6 +574,8 @@ class Graph extends Component<
     valuesBun: BenchmarkResult[];
     valuesDeno: BenchmarkResult[];
     sort: Parameters<typeof graph>[0]['sort'];
+    dark: boolean;
+    containerWidth: number;
   },
   { svg?: string }
 > {
@@ -458,6 +597,8 @@ class Graph extends Component<
         benchmarkResultsBun: this.props.valuesBun,
         benchmarkResultsDeno: this.props.valuesDeno,
         sort: this.props.sort,
+        dark: this.props.dark,
+        containerWidth: this.props.containerWidth,
       }),
     });
   }
@@ -468,23 +609,14 @@ class Graph extends Component<
     });
 
     if (!this.state.svg) {
-      return (
-        <div style={{ margin: '5rem' }}>
-          <i>No Benchmark Selected</i>
-        </div>
-      );
+      return <div class="empty">No Benchmark Selected</div>;
     }
 
-    return (
-      <div
-        style={{ marginBottom: '1rem' }}
-        dangerouslySetInnerHTML={{ __html: this.state.svg }}
-      />
-    );
+    return <div dangerouslySetInnerHTML={{ __html: this.state.svg }} />;
   }
 }
 
-function Checkbox(props: {
+function Chip(props: {
   id: string;
   label: string;
   color?: string;
@@ -492,12 +624,9 @@ function Checkbox(props: {
   onChange: (checked: boolean) => void;
 }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        backgroundColor: props.color,
-        color: props.color ? 'black' : undefined,
-      }}
+    <label
+      class={`chip${props.checked ? ' checked' : ''}`}
+      style={props.color ? { '--dot': props.color } : undefined}
     >
       <input
         id={props.id}
@@ -506,32 +635,41 @@ function Checkbox(props: {
         checked={props.checked}
         onInput={() => props.onChange(!props.checked)}
       />
-      <label style={{ width: '100%' }} for={props.id}>
-        {props.label}
-      </label>
-    </div>
+      {props.color && <span class="dot" />}
+      {props.label}
+    </label>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+    </svg>
+  );
+}
+
+function ForkIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z" />
+    </svg>
   );
 }
 
 function BenchmarkDescription(props: {
   name: string;
-  color: string | undefined;
+  benchmark: string;
   children?: ComponentChildren;
 }) {
   return (
-    <div style={{ marginBotton: '1rem' }}>
+    <div class="bench-doc">
       <h4>
         <span
-          style={{
-            backgroundColor: props.color ?? 'pink',
-            display: 'inline-block',
-            width: '2rem',
-            marginRight: '0.5rem',
-          }}
-        >
-          &nbsp;
-        </span>
-        {props.name}{' '}
+          class="swatch"
+          style={{ background: `var(--c-${props.benchmark})` }}
+        />
+        {props.name}
       </h4>
       {props.children}
     </div>
@@ -550,11 +688,18 @@ export class App extends Component<
     valuesDeno: BenchmarkResult[];
     sortBy: 'fastest' | 'alphabetically' | 'popularity';
     lastUpdated?: Date;
+    darkMode: boolean;
+    chartWidth: number;
   }
 > {
+  darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  chartRef = createRef<HTMLElement>();
+  resizeObserver?: ResizeObserver;
+
   constructor() {
     super();
-    this.setState({
+    this.state = {
+      darkMode: this.darkModeQuery.matches,
       selectedBenchmarks: BENCHMARKS.reduce(
         (acc, b) => ({ ...acc, [b.name]: true }),
         {}
@@ -566,7 +711,8 @@ export class App extends Component<
       valuesBun: [],
       valuesDeno: [],
       sortBy: 'fastest' as const,
-    });
+      chartWidth: 560,
+    };
   }
 
   getNodeJsVersions() {
@@ -612,6 +758,18 @@ export class App extends Component<
   }
 
   async componentDidMount() {
+    this.darkModeQuery.addEventListener('change', event => {
+      this.setState({ darkMode: event.matches });
+    });
+
+    // the chart is a static svg, so it has to be re-rendered at the new size
+    if (this.chartRef.current) {
+      this.resizeObserver = new ResizeObserver(([entry]) => {
+        this.setState({ chartWidth: entry.contentRect.width });
+      });
+      this.resizeObserver.observe(this.chartRef.current);
+    }
+
     loadPackagesPopularity().catch(err => {
       console.error(`error while loading package popularity`, err);
     });
@@ -697,160 +855,160 @@ export class App extends Component<
     });
   }
 
+  componentWillUnmount() {
+    this.resizeObserver?.disconnect();
+  }
+
   render() {
     return (
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'baseline',
-            justifyContent: 'space-between',
-          }}
-        >
-          <h1>Runtype Benchmarks</h1>
+      <div class="app">
+        <header class="masthead">
           <div>
+            <h1>Runtype Benchmarks</h1>
+            <div class="strip" aria-hidden="true">
+              {BENCHMARKS.map(b => (
+                <span style={{ background: `var(--c-${b.name})` }} />
+              ))}
+            </div>
+            <p class="tagline">
+              Benchmark comparison of packages with runtime validation and
+              TypeScript support.
+            </p>
+            {this.state.lastUpdated && (
+              <p class="updated">
+                Data last updated:{' '}
+                {this.state.lastUpdated.toLocaleDateString(undefined, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </p>
+            )}
+          </div>
+          <div class="gh-links">
             <a
-              class="github-button"
+              class="gh-btn"
               href="https://github.com/moltar/typescript-runtime-type-benchmarks"
-              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
-              data-icon="octicon-star"
-              data-size="large"
-              data-show-count="true"
               aria-label="Star moltar/typescript-runtime-type-benchmarks on GitHub"
             >
-              Star
+              <StarIcon /> Star
             </a>
             <a
-              class="github-button"
+              class="gh-btn"
               href="https://github.com/moltar/typescript-runtime-type-benchmarks/fork"
-              data-color-scheme="no-preference: dark; light: dark_dimmed; dark: dark;"
-              data-icon="octicon-repo-forked"
-              data-size="large"
-              data-show-count="true"
               aria-label="Fork moltar/typescript-runtime-type-benchmarks on GitHub"
             >
-              Fork
+              <ForkIcon /> Fork
             </a>
           </div>
-        </div>
-        <p>
-          Benchmark Comparison of Packages with Runtime Validation and
-          TypeScript Support
-        </p>
+        </header>
 
-        {this.state.lastUpdated && (
-          <p style={{ color: '#666', fontSize: '0.9rem', marginTop: '-0.5rem' }}>
-            Data last updated:{' '}
-            {this.state.lastUpdated.toLocaleDateString(undefined, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-        )}
+        <div class="controls-col">
+          <section class="controls">
+            <fieldset class="control-group">
+              <legend>Benchmarks</legend>
+              <div class="chip-row">
+                {BENCHMARKS.map(b => {
+                  return (
+                    <Chip
+                      id={b.name}
+                      color={`var(--c-${b.name})`}
+                      checked={this.state.selectedBenchmarks[b.name] ?? false}
+                      label={b.label}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedBenchmarks: {
+                            ...this.state.selectedBenchmarks,
+                            [b.name]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-        <div style={{ display: 'flex', margin: '1rem 0' }}>
-          <div style={{ width: '12rem', marginRight: '1rem' }}>
-            <label>Benchmarks:</label>
-            <div>
-              {BENCHMARKS.map(b => {
-                return (
-                  <Checkbox
-                    id={b.name}
-                    color={b.color}
-                    checked={this.state.selectedBenchmarks[b.name] ?? false}
-                    label={b.label}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedBenchmarks: {
-                          ...this.state.selectedBenchmarks,
-                          [b.name]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </div>
+            <fieldset class="control-group">
+              <legend>Node.js</legend>
+              <div class="chip-row">
+                {this.getNodeJsVersions().map(v => {
+                  return (
+                    <Chip
+                      id={v}
+                      checked={this.state.selectedNodeJsVersions[v] ?? false}
+                      label={v}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedNodeJsVersions: {
+                            ...this.state.selectedNodeJsVersions,
+                            [v]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-          <div style={{ width: '12rem' }}>
-            <label>Node.js Versions:</label>
-            <div>
-              {this.getNodeJsVersions().map(v => {
-                return (
-                  <Checkbox
-                    id={v}
-                    checked={this.state.selectedNodeJsVersions[v] ?? false}
-                    label={v}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedNodeJsVersions: {
-                          ...this.state.selectedNodeJsVersions,
-                          [v]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </div>
+            <fieldset class="control-group">
+              <legend>Bun</legend>
+              <div class="chip-row">
+                {this.getBunVersions().map(v => {
+                  return (
+                    <Chip
+                      id={v}
+                      checked={this.state.selectedBunVersions[v] ?? false}
+                      label={v}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedBunVersions: {
+                            ...this.state.selectedBunVersions,
+                            [v]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-          <div style={{ width: '12rem' }}>
-            <label>Bun Versions:</label>
-            <div>
-              {this.getBunVersions().map(v => {
-                return (
-                  <Checkbox
-                    id={v}
-                    checked={this.state.selectedBunVersions[v] ?? false}
-                    label={v}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedBunVersions: {
-                          ...this.state.selectedBunVersions,
-                          [v]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </div>
+            <fieldset class="control-group">
+              <legend>Deno</legend>
+              <div class="chip-row">
+                {this.getDenoVersions().map(v => {
+                  return (
+                    <Chip
+                      id={v}
+                      checked={this.state.selectedDenoVersions[v] ?? false}
+                      label={v}
+                      onChange={checked =>
+                        this.setState(state => ({
+                          ...state,
+                          selectedDenoVersions: {
+                            ...this.state.selectedDenoVersions,
+                            [v]: checked,
+                          },
+                        }))
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
 
-          <div style={{ width: '12rem' }}>
-            <label>Deno Versions:</label>
-            <div>
-              {this.getDenoVersions().map(v => {
-                return (
-                  <Checkbox
-                    id={v}
-                    checked={this.state.selectedDenoVersions[v] ?? false}
-                    label={v}
-                    onChange={checked =>
-                      this.setState(state => ({
-                        ...state,
-                        selectedDenoVersions: {
-                          ...this.state.selectedDenoVersions,
-                          [v]: checked,
-                        },
-                      }))
-                    }
-                  />
-                );
-              })}
-            </div>
-          </div>
-
-          <div style={{ width: '12rem' }}>
-            <label>
-              Sort:
+            <div class="control-group">
+              <span class="group-label" id="sort-label">
+                Sort
+              </span>
               <select
+                class="sort-select"
+                aria-labelledby="sort-label"
                 onChange={
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   (event: any) => {
@@ -863,81 +1021,75 @@ export class App extends Component<
                 <option value="alphabetically">Alphabetically</option>
                 <option value="popularity">Popularity</option>
               </select>
-            </label>
-          </div>
+            </div>
+          </section>
         </div>
 
-        <Graph
-          benchmarks={BENCHMARKS.filter(
-            b => this.state.selectedBenchmarks[b.name]
-          )}
-          nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
-            .sort()
-            .filter(entry => entry[1])
-            .map(entry => entry[0])}
-          bunVersions={Object.entries(this.state.selectedBunVersions)
-            .sort()
-            .filter(entry => entry[1])
-            .map(entry => entry[0])}
-          denoVersions={Object.entries(this.state.selectedDenoVersions)
-            .sort()
-            .filter(entry => entry[1])
-            .map(entry => entry[0])}
-          valuesNodeJs={this.state.valuesNodeJs}
-          valuesBun={this.state.valuesBun}
-          valuesDeno={this.state.valuesDeno}
-          sort={this.state.sortBy}
-        />
+        <main class="chart" ref={this.chartRef}>
+          <p class="chart-caption">
+            operations / sec <span>— higher is better</span>
+          </p>
+          <Graph
+            benchmarks={BENCHMARKS.filter(
+              b => this.state.selectedBenchmarks[b.name]
+            )}
+            nodeJsVersions={Object.entries(this.state.selectedNodeJsVersions)
+              .sort()
+              .filter(entry => entry[1])
+              .map(entry => entry[0])}
+            bunVersions={Object.entries(this.state.selectedBunVersions)
+              .sort()
+              .filter(entry => entry[1])
+              .map(entry => entry[0])}
+            denoVersions={Object.entries(this.state.selectedDenoVersions)
+              .sort()
+              .filter(entry => entry[1])
+              .map(entry => entry[0])}
+            valuesNodeJs={this.state.valuesNodeJs}
+            valuesBun={this.state.valuesBun}
+            valuesDeno={this.state.valuesDeno}
+            sort={this.state.sortBy}
+            dark={this.state.darkMode}
+            containerWidth={this.state.chartWidth}
+          />
+        </main>
 
-        <div>
-          <BenchmarkDescription
-            name="Safe Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseSafe')?.color}
-          >
+        <section class="bench-docs">
+          <BenchmarkDescription name="Safe Parsing" benchmark="parseSafe">
             <p>
-              Check the input object against a schema and return it.
-              <br />
-              Raise an error if the input object does not conform to the schema,
-              e.g. an attribute is a number instead of a string or an attribute
-              is missing completely.
-              <br />
-              Any extra keys in the input object that are not defined in the
-              schema must be removed.
+              Check the input object against a schema and return it. Raise an
+              error if the input object does not conform to the schema, e.g. an
+              attribute is a number instead of a string or an attribute is
+              missing completely. Any extra keys in the input object that are
+              not defined in the schema must be removed.
             </p>
           </BenchmarkDescription>
 
-          <BenchmarkDescription
-            name="Strict Parsing"
-            color={BENCHMARKS.find(x => x.name === 'parseStrict')?.color}
-          >
+          <BenchmarkDescription name="Strict Parsing" benchmark="parseStrict">
             <p>
               Like safe parsing but raise an error if input objects contain
               extra keys.
             </p>
           </BenchmarkDescription>
 
-          <BenchmarkDescription
-            name="Loose Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertLoose')?.color}
-          >
+          <BenchmarkDescription name="Loose Assertion" benchmark="assertLoose">
             <p>
               Check the input object against a schema and raise an exception if
-              it does not match.
-              <br />
-              No errors are raised when encountering extra keys.
+              it does not match. No errors are raised when encountering extra
+              keys.
             </p>
           </BenchmarkDescription>
 
           <BenchmarkDescription
             name="Strict Assertion"
-            color={BENCHMARKS.find(x => x.name === 'assertStrict')?.color}
+            benchmark="assertStrict"
           >
             <p>
               Like loose assertion but raise an error if input objects or nested
               input objects contain extra keys.
             </p>
           </BenchmarkDescription>
-        </div>
+        </section>
       </div>
     );
   }
