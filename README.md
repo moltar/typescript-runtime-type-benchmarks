@@ -16,6 +16,7 @@
 * [ajv](https://ajv.js.org/)
 * [ArkType](https://github.com/arktypeio/arktype)
 * [ata-validator](https://github.com/ata-core/ata-validator)
+* [ata-validator (ahead-of-time)](https://github.com/ata-core/ata-validator)
 * [banditypes](https://github.com/thoughtspile/banditypes)
 * [bueno](https://github.com/philipnilsson/bueno)
 * [caketype](https://github.com/justinyaodu/caketype)
