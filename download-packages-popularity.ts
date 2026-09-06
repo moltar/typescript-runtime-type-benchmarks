@@ -239,40 +239,86 @@ interface BodyWeeklyDownloads {
   package: string;
 }
 
-async function getWeeklyDownloads(packageName: string) {
-  try {
-    const response = await request(
-      `https://api.npmjs.org/downloads/point/last-week/${packageName}`,
-    ).then(response => response.body.json() as Promise<BodyWeeklyDownloads>);
+const NPM_API_URL = 'https://api.npmjs.org/downloads/point/last-week';
+const RETRY_DELAYS_MS = [1000, 5000, 15000];
 
-    return response.downloads;
-  } catch (error) {
-    console.error('Error fetching download data:', error);
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+// the npm api sits behind a rate limiter that rejects rapid request bursts, so retry with backoff instead of giving up
+async function requestWithRetry(url: string): Promise<unknown> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const response = await request(url);
+
+      if (response.statusCode !== 200) {
+        const body = await response.body.text();
+
+        throw new Error(`HTTP ${response.statusCode}: ${body}`);
+      }
+
+      return await response.body.json();
+    } catch (error) {
+      if (attempt >= RETRY_DELAYS_MS.length) {
+        throw error;
+      }
+
+      console.error(`Retrying ${url} after error:`, error);
+
+      await sleep(RETRY_DELAYS_MS[attempt]);
+    }
   }
 }
 
-const packagesData: {
-  name: string;
-  weeklyDownloads: number;
-}[] = [];
+async function getWeeklyDownloadsByPackage(): Promise<Map<string, number>> {
+  const packageNames = [...new Set(packages.map(p => p.packageName))];
+  const scoped = packageNames.filter(name => name.startsWith('@'));
+  const unscoped = packageNames.filter(name => !name.startsWith('@'));
 
-async function main() {
-  for (const { name, packageName } of packages) {
+  const downloads = new Map<string, number>();
+
+  // bulk queries don't support scoped packages
+  console.log(`Downloading ${unscoped.length} unscoped packages in bulk`);
+
+  const bulk = (await requestWithRetry(
+    `${NPM_API_URL}/${unscoped.join(',')}`,
+  )) as { [packageName: string]: BodyWeeklyDownloads | null };
+
+  for (const name of unscoped) {
+    const entry = bulk[name];
+
+    if (entry) {
+      downloads.set(name, entry.downloads);
+    }
+  }
+
+  for (const name of scoped) {
     console.log(`Downloading ${name}`);
 
-    const weeklyDownloads = await getWeeklyDownloads(packageName);
+    const entry = (await requestWithRetry(
+      `${NPM_API_URL}/${name}`,
+    )) as BodyWeeklyDownloads;
 
+    downloads.set(name, entry.downloads);
+
+    await sleep(500);
+  }
+
+  return downloads;
+}
+
+async function main() {
+  const downloads = await getWeeklyDownloadsByPackage();
+
+  const packagesData = packages.map(({ name, packageName }) => {
+    const weeklyDownloads = downloads.get(packageName);
+
+    // fail the run rather than silently publishing a file with packages missing
     if (typeof weeklyDownloads !== 'number') {
-      console.error(`No weekly downloads found for ${packageName}`);
-
-      continue;
+      throw new Error(`No weekly downloads found for ${packageName}`);
     }
 
-    packagesData.push({
-      name,
-      weeklyDownloads,
-    });
-  }
+    return { name, weeklyDownloads };
+  });
 
   fs.writeFileSync(
     './docs/packagesPopularity.json',
@@ -282,4 +328,5 @@ async function main() {
 
 main().catch(error => {
   console.error('Error:', error);
+  process.exitCode = 1;
 });
