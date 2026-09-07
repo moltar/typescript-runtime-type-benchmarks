@@ -17,6 +17,12 @@ export abstract class Benchmark<Fn> implements BenchmarkCase {
   // the function that implements the benchmark
   readonly fn: Fn;
 
+  // Each run() assigns its result here. Without that, a validator small enough
+  // for the engine to inline has its result treated as dead: V8's escape
+  // analysis then deletes the allocation the benchmark is supposed to measure,
+  // and the library is credited with work it never did.
+  protected sink: unknown;
+
   constructor(moduleName: string, fn: Fn) {
     this.moduleName = moduleName;
     this.fn = fn;

@@ -9,7 +9,7 @@ type Fn = (data: unknown) => typeof validateData;
  */
 export class ParseStrict extends Benchmark<Fn> {
   run() {
-    this.fn(validateData);
+    this.sink = this.fn(validateData);
   }
 
   test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI) {
