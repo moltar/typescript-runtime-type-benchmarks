@@ -11,7 +11,7 @@ type Fn = (data: unknown) => boolean;
  */
 export class AssertStrict extends Benchmark<Fn> {
   run() {
-    this.fn(validateData);
+    this.sink = this.fn(validateData);
   }
 
   test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI) {
