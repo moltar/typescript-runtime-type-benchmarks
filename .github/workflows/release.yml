@@ -9,6 +9,7 @@ on:
       - master
     paths:
       - .github/workflows/*.yml
+      - "benchmarks/**"
       - "cases/*.ts"
       - "*.ts"
       - package.json
