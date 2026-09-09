@@ -1,4 +1,4 @@
-import { isValidLoose, isValidStrict } from './build';
+import { isValidLoose, isValidStrict, parseSanitized } from './build';
 import { createCase } from '../../benchmarks';
 
 // Ahead-of-time counterpart to the runtime `ata` case. `ata compile` turns a
@@ -24,5 +24,19 @@ createCase('ata-(ahead-of-time)', 'assertStrict', () => {
     }
 
     return true;
+  };
+});
+
+createCase('ata-(ahead-of-time)', 'parseSafe', () => {
+  return data => parseSanitized(data);
+});
+
+createCase('ata-(ahead-of-time)', 'parseStrict', () => {
+  return data => {
+    if (!isValidStrict(data)) {
+      throw new Error('invalid');
+    }
+
+    return data;
   };
 });

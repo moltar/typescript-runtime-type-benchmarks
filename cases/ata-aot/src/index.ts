@@ -8,3 +8,8 @@ import { isValid as strictIsValid } from './generated/strict';
 
 export const isValidLoose = looseIsValid as (data: unknown) => boolean;
 export const isValidStrict = strictIsValid as (data: unknown) => boolean;
+
+// @ts-expect-error generated at build time
+import { parse as sanitizeParse } from './generated/sanitize';
+
+export const parseSanitized = sanitizeParse as (data: unknown) => unknown;

@@ -42,16 +42,21 @@ strictSchema.properties.deeplyNested.additionalProperties = false;
 // Each call emits a self-contained module with its own helpers, so the two
 // schemas are written to separate files rather than concatenated.
 const targets = [
-  { schema: looseSchema, file: 'loose.js' },
-  { schema: strictSchema, file: 'strict.js' },
+  { schema: looseSchema, file: 'loose.js', parse: false },
+  { schema: strictSchema, file: 'strict.js', parse: false },
+  // parseSafe wants the validated document back with unknown keys gone. The
+  // emitted parse() rebuilds it from the properties the schema declares, so
+  // the copy costs the schema's size rather than the input's and the caller's
+  // object is left alone.
+  { schema: looseSchema, file: 'sanitize.js', parse: true },
 ];
 
 const outDir = join(process.cwd(), 'cases', 'ata-aot', 'src', 'generated');
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 
-for (const { schema, file } of targets) {
-  const source = toStandaloneModule(schema);
+for (const { schema, file, parse } of targets) {
+  const source = toStandaloneModule(schema, { parse });
   if (typeof source !== 'string') {
     throw new Error(`ata could not compile ${file} ahead of time`);
   }

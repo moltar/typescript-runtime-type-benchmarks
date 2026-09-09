@@ -62,3 +62,42 @@ createCase('ata', 'assertStrict', () => {
     return true;
   };
 });
+
+createCase('ata', 'parseSafe', () => {
+  // removeAdditional strips unknown keys in place, at every level the schema
+  // describes, which is what this benchmark asks for. The validator is built
+  // from the loose schema: unknown keys are removed rather than rejected.
+  const schema = JSON.parse(JSON.stringify(looseSchema));
+  schema.additionalProperties = false;
+  schema.properties.deeplyNested.additionalProperties = false;
+
+  const v = new Validator(schema, { removeAdditional: true });
+
+  return data => {
+    const result = v.validate(data);
+
+    if (!result.valid) {
+      throw new Error(JSON.stringify(result.errors));
+    }
+
+    return data;
+  };
+});
+
+createCase('ata', 'parseStrict', () => {
+  const schema = JSON.parse(JSON.stringify(looseSchema));
+  schema.additionalProperties = false;
+  schema.properties.deeplyNested.additionalProperties = false;
+
+  const v = new Validator(schema);
+
+  return data => {
+    const result = v.validate(data);
+
+    if (!result.valid) {
+      throw new Error(JSON.stringify(result.errors));
+    }
+
+    return data;
+  };
+});
