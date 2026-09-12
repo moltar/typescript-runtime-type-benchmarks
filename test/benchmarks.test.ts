@@ -62,7 +62,6 @@ import '../cases/valita';
 import '../cases/vality';
 import '../cases/yup';
 import '../cases/zod';
-import '../cases/zod-compiled';
 import '../cases/zod3';
 import '../cases/deepkit';
 import '../cases/effect-schema';
