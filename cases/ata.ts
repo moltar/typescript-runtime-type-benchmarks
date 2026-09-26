@@ -1,24 +1,33 @@
 import { Validator } from 'ata-validator';
 import { createCase } from '../benchmarks';
 
+// The properties are listed in reverse. Declared in the same order as the
+// test data, the schema's `properties` objects get the same V8 hidden class as
+// the data objects, and because the schema stores objects in fields where the
+// data stores numbers and strings, V8 generalizes those fields for every
+// object of that class, the test data included. That slows everything that
+// reads the data in this process, not only the validator: the ata-(ahead-of-
+// time) validator, which checks the same data without any schema object, drops
+// by about a fifth when this literal merely exists beside it. The order does
+// not change what the schema accepts.
 const looseSchema = {
   type: 'object',
   properties: {
-    number: { type: 'number' },
-    negNumber: { type: 'number' },
-    maxNumber: { type: 'number' },
-    string: { type: 'string' },
-    longString: { type: 'string' },
-    boolean: { type: 'boolean' },
     deeplyNested: {
       type: 'object',
       properties: {
-        foo: { type: 'string' },
-        num: { type: 'number' },
         bool: { type: 'boolean' },
+        num: { type: 'number' },
+        foo: { type: 'string' },
       },
       required: ['foo', 'num', 'bool'],
     },
+    boolean: { type: 'boolean' },
+    longString: { type: 'string' },
+    string: { type: 'string' },
+    maxNumber: { type: 'number' },
+    negNumber: { type: 'number' },
+    number: { type: 'number' },
   },
   required: [
     'number',
