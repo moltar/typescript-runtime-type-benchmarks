@@ -41,7 +41,7 @@ const looseSchema = {
 } as const;
 
 createCase('ata', 'assertLoose', () => {
-  const v = new Validator(looseSchema as never);
+  const v = new Validator(looseSchema);
 
   return data => {
     const result = v.validate(data);
@@ -77,7 +77,7 @@ createCase('ata', 'parseSafe', () => {
   // schema declares, which is what this benchmark asks for; it throws on an
   // invalid value. The copy is built from the schema's key list, so unknown
   // keys are dropped without being enumerated, and the input is left alone.
-  const v = new Validator(looseSchema as never);
+  const v = new Validator(looseSchema);
 
   return data => v.parse(data);
 });
