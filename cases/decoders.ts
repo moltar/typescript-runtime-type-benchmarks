@@ -1,56 +1,34 @@
-import { boolean, exact, guard, number, object, string } from 'decoders';
-import { createCase } from '../benchmarks';
+import { boolean, exact, inexact, number, object, string } from 'decoders';
+import { addCase } from '../benchmarks';
 
-createCase('decoders', 'parseSafe', () => {
-  const dataType = object({
-    number,
-    negNumber: number,
-    maxNumber: number,
-    string,
-    longString: string,
-    boolean,
-    deeplyNested: object({
-      foo: string,
-      num: number,
-      bool: boolean,
-    }),
-  });
-
-  const dataTypeGuard = guard(dataType);
-
-  return data => {
-    return dataTypeGuard(data);
-  };
-});
-
-const dataTypeStrict = exact({
+const shape = {
   number,
   negNumber: number,
   maxNumber: number,
   string,
   longString: string,
   boolean,
-  deeplyNested: exact({
-    foo: string,
-    num: number,
-    bool: boolean,
-  }),
+};
+const nested = { foo: string, num: number, bool: boolean };
+
+const dataType = object({ ...shape, deeplyNested: object(nested) });
+const dataTypeStrict = exact({ ...shape, deeplyNested: exact(nested) });
+const dataTypeLoose = inexact({ ...shape, deeplyNested: inexact(nested) });
+
+addCase('decoders', 'parseSafe', data => {
+  return dataType.verify(data);
 });
 
-createCase('decoders', 'parseStrict', () => {
-  const dataTypeGuardStrict = guard(dataTypeStrict);
-
-  return data => {
-    return dataTypeGuardStrict(data);
-  };
+addCase('decoders', 'parseStrict', data => {
+  return dataTypeStrict.verify(data);
 });
 
-createCase('decoders', 'assertStrict', () => {
-  const dataTypeGuardStrict = guard(dataTypeStrict);
+addCase('decoders', 'assertLoose', data => {
+  dataTypeLoose.verify(data);
+  return true;
+});
 
-  return data => {
-    dataTypeGuardStrict(data);
-
-    return true;
-  };
+addCase('decoders', 'assertStrict', data => {
+  dataTypeStrict.verify(data);
+  return true;
 });
