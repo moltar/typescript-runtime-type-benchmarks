@@ -59,6 +59,10 @@ export const packages = [
     packageName: 'mol_data_all',
   },
   {
+    name: '@mionjs/run-types',
+    packageName: '@mionjs/run-types',
+  },
+  {
     name: '@mojotech/json-type-validation',
     packageName: '@mojotech/json-type-validation',
   },
