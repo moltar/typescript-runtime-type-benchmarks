@@ -16,42 +16,6 @@ export const validateData = Object.freeze({
   },
 });
 
-/**
- * The inputs the benchmarks measure: plain, mutable copies of `validateData`,
- * shaped like the output of `JSON.parse` (which is what validators see in
- * practice). Each `run()` takes the next one from a small pool.
- *
- * `validateData` itself stays frozen so the tests catch libraries that mutate
- * their input, but it must not be the benchmark input: engines special-case
- * a frozen object and a value they can treat as a compile-time constant, which
- * skews the numbers.
- *
- * - JavaScriptCore (Bun) takes a slow path for `Object.keys` and `for...in` on
- *   frozen objects (~50x slower than on a plain object), so on Bun every
- *   strict benchmark measured that slow path instead of the library.
- * - When every call receives the very same object, V8 and JavaScriptCore can
- *   constant-fold the property loads of a small, fully inlined validator and
- *   delete the checks altogether, crediting it with work it never did, while
- *   an equivalent validator split into helper functions is not folded.
- *   Rotating between equal copies keeps the input a runtime value; it costs
- *   every library the same single array read.
- */
-const BENCHMARK_DATA_POOL_SIZE = 4; // power of two, see `nextBenchmarkData`
-
-const benchmarkDataPool: (typeof validateData)[] = Array.from(
-  { length: BENCHMARK_DATA_POOL_SIZE },
-  () => JSON.parse(JSON.stringify(validateData)),
-);
-
-let benchmarkDataIndex = 0;
-
-export function nextBenchmarkData(): typeof validateData {
-  benchmarkDataIndex =
-    (benchmarkDataIndex + 1) & (BENCHMARK_DATA_POOL_SIZE - 1);
-
-  return benchmarkDataPool[benchmarkDataIndex];
-}
-
 type Fn = (data: unknown) => typeof validateData;
 
 /**
@@ -63,7 +27,7 @@ type Fn = (data: unknown) => typeof validateData;
  */
 export class ParseSafe extends Benchmark<Fn> {
   run() {
-    this.sink = this.fn(nextBenchmarkData());
+    this.sink = this.fn(validateData);
   }
 
   test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI) {

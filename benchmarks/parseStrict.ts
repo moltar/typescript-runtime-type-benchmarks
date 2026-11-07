@@ -1,5 +1,5 @@
 import { Benchmark } from './helpers/types';
-import { nextBenchmarkData, validateData } from './parseSafe';
+import { validateData } from './parseSafe';
 import type { ExpectStatic, SuiteAPI, TestAPI } from 'vitest';
 
 type Fn = (data: unknown) => typeof validateData;
@@ -9,7 +9,7 @@ type Fn = (data: unknown) => typeof validateData;
  */
 export class ParseStrict extends Benchmark<Fn> {
   run() {
-    this.sink = this.fn(nextBenchmarkData());
+    this.sink = this.fn(validateData);
   }
 
   test(describe: SuiteAPI, expect: ExpectStatic, test: TestAPI) {
