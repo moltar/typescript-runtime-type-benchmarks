@@ -37,7 +37,7 @@ jobs:
           - 24.x
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Cache node modules
         uses: actions/cache@v4
@@ -94,7 +94,7 @@ jobs:
             - 1.2.12
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Use Bun ${{ matrix.bun-version }}
         uses: oven-sh/setup-bun@v2
@@ -139,7 +139,7 @@ jobs:
             - 2.1.9
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
 
