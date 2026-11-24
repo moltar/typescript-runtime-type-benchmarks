@@ -61,8 +61,8 @@ async function main() {
               stdio: 'inherit',
             });
           }
-          if (c === 'ts-runtypes') {
-            childProcess.execSync('npm run compile:ts-runtypes', {
+          if (c === 'mionjs-run-types') {
+            childProcess.execSync('npm run compile:mionjs-run-types', {
               stdio: 'inherit',
             });
           }
